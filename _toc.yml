@@ -17,6 +17,32 @@ parts:
     chapters:
     - file: lectures_DS/core_python/python_fundamentals
     - file: lectures_DS/core_python/functions_classes
+    - file: lectures_DS/core_python/organization_and_packaging
     - file: assignments/assignment_2
+  - caption: Scientific Python Fundamentals
+    chapters:
+    - file: lectures_DS/sci_python/numpy_and_matplotlib
+    - file: lectures_DS/sci_python/more_matplotlib
+    - file: assignments/numpy_matplotlib
+    - file: assignments/more_matplotlib
+  - caption: Pandas
+    chapters:
+    - file: lectures_DS/pandas/pandas_intro
+    - file: lectures_DS/pandas/basic_pandas
+    - file: lectures_DS/pandas/pandas_groupby
+    - file: assignments/Pandas1
+    - file: assignments/Pandas2
+  - caption: Xarray
+    chapters:
+    - file: lectures_DS/xarray/xarray_intro
+    - file: lectures_DS/xarray/xarray_fundamentals
+    - file: lectures_DS/xarray/xarray_advanced
+    - file: assignments/xarray_lab
+  - caption: Other Geoscience Concepts
+    chapters:
+    - file: lectures_DS/geoscience/final_lec
+  - caption: Project
+    chapters:
+    - file: lectures_DS/project_require
 
 
