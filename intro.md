@@ -4,15 +4,27 @@ This is the online home for the first of the two summer 2026 courses:
 - *Computing and Research Methods for Climate Data Science* (CLMT5405)
 - *Machine Learning for Climate Science and Environmental Sustainability*
 
-## History and Origins of the course
-Most of the content for CLMT5405, derives from pervious versions of this course, which can be found in [this online book](https://earth-env-data-science.github.io/) from 2021 by Ryan Abernathey. A more recent update can be found in [repo](https://github.com/yutianwuldeo/GR6901) from 2024 by Yutian Wu.
+## Logistics
 
-Another excellent resource is available through [Project Pythia](https://foundations.projectpythia.org/landing-page.html).
+- **Instructor:** Dr. Dhruv Balwada (dbalwada@ldeo.columbia.edu)
+- **Teaching Assistant:** Progga Dutta (pd2816@columbia.edu)
+- **Hours and location:** TuTh 9am–10:45am, 602 Northwest Corner
+- **Office hours:** TBD
+
+## History and Origins of the course
+Most of the content for CLMT5405 derives from previous versions of this course:
+
+- [Ryan Abernathey's 2021 book](https://earth-env-data-science.github.io/) — the original incarnation.
+- [Yutian Wu's 2024 repo](https://github.com/yutianwuldeo/GR6901) — a more recent update.
+- [Project Pythia](https://foundations.projectpythia.org/landing-page.html) — a separate but excellent companion resource.
+
+The [summer 2025 version of this course](https://earth-ds-ml.github.io/summer_2025/) is also available online for reference.
+
 
 ## Motivation and Scope
 
-Computing has become an indispensable tool for nearly all Earth and Environmental Scientists, but it doesn't often appear in our curriculums.
-This material focuses on _data analysis_, a subset of computing in which the data already exist, e.g.from observations or from the output of a simulation, but have to be transformed into understanding.
+Computing has become an indispensable tool for nearly all Earth and Environmental Scientists and Practitioners, but it doesn't usually appear in our curriculums.
+This material focuses on _data analysis_, a subset of computing in which the data already exist, e.g. from observations or from the output of a simulation, but have to be transformed into understanding.
 There are many different ways to gain understanding, but most workflows often boil down to:
 
 - read data files
@@ -22,7 +34,7 @@ There are many different ways to gain understanding, but most workflows often bo
 CLMT5405 doesn't attempt to teach deep learning; its goal is to teach the basic foundations of Earth and Environmental Data Science which are often overlooked.
 The material is designed to be accessible for Earth Science graduate students in any discipline, with little to no prerequisites.
 
-This material is intended to introduce new graduate students to modern computing software, programming tools and best practices that are broadly applicable to the analysis and visualization of Earth and Environmental data.
+This material is intended to introduce students to modern computing software, programming tools and best practices that are broadly applicable to the analysis and visualization of Earth and Environmental data.
 This includes an introduction to Unix, version control, and basic programming in the open-source Python language.
 The bulk of the content is devoted to in-depth exploration of the numerical analysis and visualization packages which comprise the modern Scientific Python ecosystem, including Numpy, Scipy, Matplotlib, Pandas, Xarray, using real Earth and Environmental datasets.
 
@@ -32,7 +44,7 @@ After completing all of the material, students should have the ability to:
 
 - Use unix commands to work with files and directories
 - Navigate the JupyterHub Environment effectively
-- Identify common geoscience data formats and the python packages which can load them
+- Identify common geoscience data formats and the python packages which can load these data
 - Perform basic exploratory data analysis on Earth and Environmental data, distinguishing between
   - _Tabular data_: rows and columns
   - _Gridded data_: multidimensional numerical arrays
@@ -42,20 +54,30 @@ After completing all of the material, students should have the ability to:
 
 ## Course structure
 
-For most weeks the general idea would be to complete some lectures and one homework assignment per week.
-Generally, some of the weekly meeting time would consist of a lecture in which the instructor presents the week's lecture, with students typing along.
-The other would be used as "collaborative time," during which the students work on their assignments, ask questions, and interact with their peers.
-A final project is an important capstone experience for a semester-long course.
+Each week, students complete some lectures and one homework assignment. Class time will be split between **instruction** — the instructor walking through new material while students code along — and **practice** — students working on assignments, asking questions, and interacting with peers. The exact balance will vary week to week depending on what we're covering. A final project at the end of the course serves as a capstone.
 
-## Policy on Use of ChatGPT and AI Tools
-In this course, we recognize that tools like ChatGPT and other AI assistants can support learning, especially in exploring new concepts, debugging code, and clarifying questions. However, it is essential that you develop your own skills and understanding.
+## Using AI in This Course
 
-Permitted Use:
+AI tools like ChatGPT are now part of how people work with data. This course treats them as a tool you'll learn to use well — including where they help, where they don't, and what your own judgment still has to provide.
 
-- You may use AI tools like ChatGPT for certain assignments where explicitly allowed—such as coding practice, project brainstorming, or exploratory data analysis.
+**What to use.** For this course, the recommended chat-based AI tool is [Google Gemini](https://www.cuit.columbia.edu/content/google-gemini), which Columbia provides free to students through CUIT. Other chat tools (ChatGPT, Claude.ai) are also fine if you prefer them. Avoid editor-integrated tools like Copilot, Cursor, or Claude Code — chat keeps the "ask → read → verify" loop visible, which matters while you're still learning the underlying skills.
 
-- When you do use AI tools, you must document how and where you used them (e.g., in a code comment or footnote). A simple statement like “Used ChatGPT to help debug the plotting code in section 2” is sufficient.
+**How to use it — Socratic mode.** Default to asking the AI to *teach* you, not to *do it for you*. At the start of a working session, prime your chat with a tutor prompt. Here is one to start with — feel free to adapt it as you learn what works:
 
-Ultimately, you are responsible for understanding and being able to explain all work you submit. If you cannot explain how a piece of code or analysis works, that is a signal to revisit the material, not rely more heavily on AI.
+```
+You are acting as my Socratic Tutor for a graduate-level Climate Data Science
+course. I am going to show you bugs or ask about Python/Xarray/Git.
+
+Rules:
+1. NEVER give me corrected code blocks or direct syntax fixes.
+2. Explain the computational or data concept I am missing.
+3. Ask me ONE targeted guiding question to help me find the solution myself.
+```
+
+The goal is to use AI to build understanding, not to paste solutions you can't explain.
+
+**What AI is good at, and what it isn't.** Chat-based AI is genuinely useful for explaining error messages, suggesting matplotlib syntax, walking through an unfamiliar library API, or summarizing what a function does. It is less reliable for judging whether your scientific result is correct, picking the right analysis for *your* data, catching subtle bugs in numerical or coordinate-system code, or knowing what "looks right" for a specific geophysical field. Treat AI as a fast, broadly-read but inexperienced collaborator — useful for the syntax layer, not a substitute for your own scientific judgment.
+
+**Your responsibilities.** You're responsible for understanding and being able to explain everything you submit. If you can't explain how a piece of code or analysis works, that's a signal to revisit the material — not to lean more heavily on AI.
 
 
