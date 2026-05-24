@@ -1,0 +1,22 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: The Interactive Computing Environment
+    chapters:
+    - file: lectures_DS/computing_env/jupyterlab
+    - file: lectures_DS/computing_env/intro_to_unix
+    - file: lectures_DS/computing_env/intro_to_git
+    - file: lectures_DS/computing_env/assignment1
+  - caption: Data
+    chapters:
+    - file: lectures_DS/data/data
+  - caption: The Core Python Language
+    chapters:
+    - file: lectures_DS/core_python/python_fundamentals
+    - file: lectures_DS/core_python/functions_classes
+    - file: assignments/assignment_2
+
+
