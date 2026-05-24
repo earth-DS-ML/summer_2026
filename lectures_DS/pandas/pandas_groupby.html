@@ -1,0 +1,4460 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pandas: Groupby &#8212; Earth Data Science and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/pandas_groupby';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 1: Pandas Fundamentals with Earthquake Data" href="../../assignments/Pandas1.html" />
+    <link rel="prev" title="Pandas Fundamentals" href="basic_pandas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo_class.png" class="logo__image only-light" alt="Earth Data Science and Machine Learning - Home"/>
+    <img src="../../_static/logo_class.png" class="logo__image only-dark pst-js-only" alt="Earth Data Science and Machine Learning - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Earth Data Science and Machine Learning Course Series
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/jupyterlab.html">Intro to JupyterLab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git for Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and Github</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/data.html">All About Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organization and Packaging of Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/assignment_2.html">Assignment 2: Basic Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">Numpy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/numpy_matplotlib.html">Assignment 3a: Numpy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/more_matplotlib.html">Assignment 3b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_intro.html">Xarray for multidimensional gridded data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">Quick survey of some other important concepts in geo-data-science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/earth-DS-ML/summer_2026" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/pandas/pandas_groupby.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/pandas/pandas_groupby.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pandas: Groupby</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-method">The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-grouping">Time Grouping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-anomalies">Calculating anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas-groupby">
+<h1>Pandas: Groupby<a class="headerlink" href="#pandas-groupby" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is an amazingly powerful function in pandas. But it is also complicated to use and understand.
+The point of this lesson is to make you feel confident in using <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and its cousins, <code class="docutils literal notranslate"><span class="pre">resample</span></code> and <code class="docutils literal notranslate"><span class="pre">rolling</span></code>.</p>
+<p>These notes are loosely based on the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/groupby.html">Pandas GroupBy Documentation</a>.</p>
+<p>The “split/apply/combine” concept was first introduced in a paper by Hadley Wickham: <a class="reference external" href="https://www.jstatsoft.org/article/view/v040i01">https://www.jstatsoft.org/article/view/v040i01</a>.</p>
+<p>Imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>First we read the Earthquake data from our previous assignment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">place</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df_small</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us6000qkt1</th>
+      <td>2025-06-17 12:00:22.773000+00:00</td>
+      <td>-23.1645</td>
+      <td>-175.3549</td>
+      <td>10.000</td>
+      <td>4.9</td>
+      <td>mb</td>
+      <td>22.0</td>
+      <td>166.0</td>
+      <td>6.481</td>
+      <td>0.49</td>
+      <td>...</td>
+      <td>206 km SSW of ‘Ohonua, Tonga</td>
+      <td>earthquake</td>
+      <td>15.85</td>
+      <td>1.938</td>
+      <td>0.093</td>
+      <td>36.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Tonga</td>
+    </tr>
+    <tr>
+      <th>us6000qksf</th>
+      <td>2025-06-17 09:16:30.483000+00:00</td>
+      <td>-23.1181</td>
+      <td>-174.9129</td>
+      <td>10.000</td>
+      <td>4.8</td>
+      <td>mb</td>
+      <td>16.0</td>
+      <td>111.0</td>
+      <td>6.151</td>
+      <td>0.48</td>
+      <td>...</td>
+      <td>196 km S of ‘Ohonua, Tonga</td>
+      <td>earthquake</td>
+      <td>14.94</td>
+      <td>1.939</td>
+      <td>0.148</td>
+      <td>14.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Tonga</td>
+    </tr>
+    <tr>
+      <th>us6000qks2</th>
+      <td>2025-06-17 08:36:22.986000+00:00</td>
+      <td>8.2769</td>
+      <td>126.8035</td>
+      <td>34.840</td>
+      <td>5.3</td>
+      <td>mww</td>
+      <td>100.0</td>
+      <td>67.0</td>
+      <td>1.706</td>
+      <td>1.23</td>
+      <td>...</td>
+      <td>42 km ENE of Barcelona, Philippines</td>
+      <td>earthquake</td>
+      <td>7.91</td>
+      <td>3.994</td>
+      <td>0.062</td>
+      <td>25.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Philippines</td>
+    </tr>
+    <tr>
+      <th>us6000qkrz</th>
+      <td>2025-06-17 08:13:19.239000+00:00</td>
+      <td>50.6542</td>
+      <td>156.7597</td>
+      <td>91.831</td>
+      <td>4.7</td>
+      <td>mb</td>
+      <td>55.0</td>
+      <td>152.0</td>
+      <td>2.526</td>
+      <td>0.64</td>
+      <td>...</td>
+      <td>44 km E of Severo-Kuril’sk, Russia</td>
+      <td>earthquake</td>
+      <td>10.38</td>
+      <td>7.726</td>
+      <td>0.032</td>
+      <td>287.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Russia</td>
+    </tr>
+    <tr>
+      <th>us6000qks0</th>
+      <td>2025-06-17 08:12:55.629000+00:00</td>
+      <td>-32.8812</td>
+      <td>-13.2948</td>
+      <td>10.000</td>
+      <td>5.0</td>
+      <td>mb</td>
+      <td>44.0</td>
+      <td>59.0</td>
+      <td>4.254</td>
+      <td>0.91</td>
+      <td>...</td>
+      <td>southern Mid-Atlantic Ridge</td>
+      <td>earthquake</td>
+      <td>10.55</td>
+      <td>1.837</td>
+      <td>0.076</td>
+      <td>55.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>southern Mid-Atlantic Ridge</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5923
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;id&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/a59f63d3c0ccc06370708c698b3d20069bd1ae57e2530e58a396d7011dc3e564.png" src="../../_images/a59f63d3c0ccc06370708c698b3d20069bd1ae57e2530e58a396d7011dc3e564.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/568c53a890d24593897e4f8ba459e71b79fd874b14c7af12db5389b7fc95f021.png" src="../../_images/568c53a890d24593897e4f8ba459e71b79fd874b14c7af12db5389b7fc95f021.png" />
+</div>
+</div>
+<section id="an-example">
+<h2>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h2>
+<p>This is an example of a “one-liner” that you can accomplish with groupby.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/0510944104a9b737b449a64b1b72000019c5c9c23c60b9b71d4873ad888e5fef.png" src="../../_images/0510944104a9b737b449a64b1b72000019c5c9c23c60b9b71d4873ad888e5fef.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_small</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/40acd377422e69b72e0ef6d2dab0302f459c3f0b8b9981854020cef1a0535577.png" src="../../_images/40acd377422e69b72e0ef6d2dab0302f459c3f0b8b9981854020cef1a0535577.png" />
+</div>
+</div>
+</section>
+<section id="what-happened">
+<h2>What Happened?<a class="headerlink" href="#what-happened" title="Link to this heading">#</a></h2>
+<p>Let’s break apart this operation a bit. The workflow with <code class="docutils literal notranslate"><span class="pre">groubpy</span></code> can be divided into three general steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Split</strong>: Partition the data into different groups based on some criterion.</p></li>
+<li><p><strong>Apply</strong>: Do some caclulation within each group. Different types of “apply” steps might be</p></li>
+<li><p><em>Aggregation</em>: Get the mean or max within the group.</p></li>
+<li><p><em>Transformation</em>: Normalize all the values within a group</p></li>
+<li><p><em>Filtration</em>: Eliminate some groups based on a criterion.</p></li>
+<li><p><strong>Combine</strong>: Put the results back together into a single object.</p></li>
+</ol>
+<p><img alt="split-apply-combine" src="https://miro.medium.com/max/1840/1*JbF6nhrQsn4f-TaSF6IR9g.png" /></p>
+<section id="the-groupby-method">
+<h3>The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method<a class="headerlink" href="#the-groupby-method" title="Link to this heading">#</a></h3>
+<p>Both <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects have a groupby method. It accepts a variety of arguments, but the simplest way to think about it is that you pass another series, whose unique values are used to split the original object into different groups.</p>
+<p>via <a class="reference external" href="https://medium.com/analytics-vidhya/split-apply-combine-strategy-for-data-mining-4fd6e2a0cc99">https://medium.com/analytics-vidhya/split-apply-combine-strategy-for-data-mining-4fd6e2a0cc99</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us6000qkt1</th>
+      <td>2025-06-17 12:00:22.773000+00:00</td>
+      <td>-23.1645</td>
+      <td>-175.3549</td>
+      <td>10.000</td>
+      <td>4.9</td>
+      <td>mb</td>
+      <td>22.0</td>
+      <td>166.0</td>
+      <td>6.481</td>
+      <td>0.49</td>
+      <td>...</td>
+      <td>206 km SSW of ‘Ohonua, Tonga</td>
+      <td>earthquake</td>
+      <td>15.85</td>
+      <td>1.938</td>
+      <td>0.093</td>
+      <td>36.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Tonga</td>
+    </tr>
+    <tr>
+      <th>us6000qksf</th>
+      <td>2025-06-17 09:16:30.483000+00:00</td>
+      <td>-23.1181</td>
+      <td>-174.9129</td>
+      <td>10.000</td>
+      <td>4.8</td>
+      <td>mb</td>
+      <td>16.0</td>
+      <td>111.0</td>
+      <td>6.151</td>
+      <td>0.48</td>
+      <td>...</td>
+      <td>196 km S of ‘Ohonua, Tonga</td>
+      <td>earthquake</td>
+      <td>14.94</td>
+      <td>1.939</td>
+      <td>0.148</td>
+      <td>14.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Tonga</td>
+    </tr>
+    <tr>
+      <th>us6000qks2</th>
+      <td>2025-06-17 08:36:22.986000+00:00</td>
+      <td>8.2769</td>
+      <td>126.8035</td>
+      <td>34.840</td>
+      <td>5.3</td>
+      <td>mww</td>
+      <td>100.0</td>
+      <td>67.0</td>
+      <td>1.706</td>
+      <td>1.23</td>
+      <td>...</td>
+      <td>42 km ENE of Barcelona, Philippines</td>
+      <td>earthquake</td>
+      <td>7.91</td>
+      <td>3.994</td>
+      <td>0.062</td>
+      <td>25.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Philippines</td>
+    </tr>
+    <tr>
+      <th>us6000qkrz</th>
+      <td>2025-06-17 08:13:19.239000+00:00</td>
+      <td>50.6542</td>
+      <td>156.7597</td>
+      <td>91.831</td>
+      <td>4.7</td>
+      <td>mb</td>
+      <td>55.0</td>
+      <td>152.0</td>
+      <td>2.526</td>
+      <td>0.64</td>
+      <td>...</td>
+      <td>44 km E of Severo-Kuril’sk, Russia</td>
+      <td>earthquake</td>
+      <td>10.38</td>
+      <td>7.726</td>
+      <td>0.032</td>
+      <td>287.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Russia</td>
+    </tr>
+    <tr>
+      <th>us6000qks0</th>
+      <td>2025-06-17 08:12:55.629000+00:00</td>
+      <td>-32.8812</td>
+      <td>-13.2948</td>
+      <td>10.000</td>
+      <td>5.0</td>
+      <td>mb</td>
+      <td>44.0</td>
+      <td>59.0</td>
+      <td>4.254</td>
+      <td>0.91</td>
+      <td>...</td>
+      <td>southern Mid-Atlantic Ridge</td>
+      <td>earthquake</td>
+      <td>10.55</td>
+      <td>1.837</td>
+      <td>0.076</td>
+      <td>55.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>southern Mid-Atlantic Ridge</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">country</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id
+us6000qkt1                            Tonga
+us6000qksf                            Tonga
+us6000qks2                      Philippines
+us6000qkrz                           Russia
+us6000qks0      southern Mid-Atlantic Ridge
+                          ...              
+us6000pll8                         Ethiopia
+us6000pj3b                            Libya
+us6000pj2q                            Tonga
+us6000pll7    south of the Kermadec Islands
+us6000plld                         Ethiopia
+Name: country, Length: 5923, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a93adb0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is a shortcut for doing this with dataframes: you just pass the column name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2aeda210&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-groubby-object">
+<h3>The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object<a class="headerlink" href="#the-groubby-object" title="Link to this heading">#</a></h3>
+<p>When we call, <code class="docutils literal notranslate"><span class="pre">groupby</span></code> we get back a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
+<span class="n">gb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a931070&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The length tells us how many groups were found:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">gb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>194
+</pre></div>
+</div>
+</div>
+</div>
+<p>All of the groups are available as a dictionary via the <code class="docutils literal notranslate"><span class="pre">.groups</span></code> attribute:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">groups</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>194
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;2025 Drake Passage Earthquake&#39;, &#39;Afghanistan&#39;, &#39;Alaska&#39;, &#39;Algeria&#39;, &#39;Anguilla&#39;, &#39;Antigua and Barbuda&#39;, &#39;Arctic Ocean&#39;, &#39;Argentina&#39;, &#39;Armenia&#39;, &#39;Ascension Island region&#39;, &#39;Australia&#39;, &#39;Azerbaijan&#39;, &#39;Azores Islands region&#39;, &#39;Bahamas&#39;, &#39;Balleny Islands region&#39;, &#39;Banda Sea&#39;, &#39;Barbados&#39;, &#39;Bolivia&#39;, &#39;Bosnia and Herzegovina&#39;, &#39;Brazil&#39;, &#39;Burma&#39;, &#39;Burma (Myanmar)&#39;, &#39;Burma (Myanmar) Earthquake&#39;, &#39;CA&#39;, &#39;Canada&#39;, &#39;Carlsberg Ridge&#39;, &#39;Cayman Islands&#39;, &#39;Chad&#39;, &#39;Chagos Archipelago region&#39;, &#39;Chile&#39;, &#39;China&#39;, &#39;Colombia&#39;, &#39;Costa Rica&#39;, &#39;Croatia&#39;, &#39;Democratic Republic of the Congo&#39;, &#39;Dominica&#39;, &#39;Dominican Republic&#39;, &#39;Drake Passage&#39;, &#39;Easter Island region&#39;, &#39;Ecuador&#39;, &#39;Ecuador region&#39;, &#39;El Salvador&#39;, &#39;Eritrea&#39;, &#39;Ethiopia&#39;, &#39;Federated States of Micronesia&#39;, &#39;Federated States of Micronesia region&#39;, &#39;Fiji&#39;, &#39;Fiji region&#39;, &#39;Georgia&#39;, &#39;Greece&#39;, &#39;Greenland Sea&#39;, &#39;Guadeloupe&#39;, &#39;Guam&#39;, &#39;Guatemala&#39;, &#39;Hawaii&#39;, &#39;Honduras&#39;, &#39;Iceland&#39;, &#39;Iceland region&#39;, &#39;Idaho&#39;, &#39;India&#39;, &#39;India region&#39;, &#39;Indian Ocean Triple Junction&#39;, &#39;Indonesia&#39;, &#39;Iran&#39;, &#39;Italy&#39;, &#39;Japan&#39;, &#39;Japan region&#39;, &#39;Kazakhstan&#39;, &#39;Kermadec Islands region&#39;, &#39;Kuril Islands&#39;, &#39;Kuwait&#39;, &#39;Kyrgyzstan&#39;, &#39;Libya&#39;, &#39;MX&#39;, &#39;Macquarie Island region&#39;, &#39;Madagascar&#39;, &#39;Malawi&#39;, &#39;Mariana Islands region&#39;, &#39;Martinique&#39;, &#39;Mauritius&#39;, &#39;Mauritius - Reunion region&#39;, &#39;Mexico&#39;, &#39;Micronesia&#39;, &#39;Mid-Indian Ridge&#39;, &#39;Mongolia&#39;, &#39;Montenegro&#39;, &#39;Morocco&#39;, &#39;Nepal&#39;, &#39;New Caledonia&#39;, &#39;New Mexico&#39;, &#39;New Zealand&#39;, &#39;Nicaragua&#39;, &#39;North Atlantic Ocean&#39;, &#39;North Korea&#39;, &#39;Northern Mariana Islands&#39;, &#39;Norway&#39;, &#39;Norwegian Sea&#39;, &#39;Oman&#39;, &#39;Oregon&#39;, &#39;Owen Fracture Zone region&#39;, &#39;Pacific-Antarctic Ridge&#39;, &#39;Pakistan&#39;, &#39;Palau&#39;, &#39;Panama&#39;, &#39;Papua New Guinea&#39;, &#39;Peru&#39;, &#39;Philippines&#39;, &#39;Poland&#39;, &#39;Portugal&#39;, &#39;Prince Edward Islands region&#39;, &#39;Puerto Rico&#39;, &#39;Qatar&#39;, &#39;Revilla Gigedo Islands region&#39;, &#39;Reykjanes Ridge&#39;, &#39;Romania&#39;, &#39;Russia&#39;, &#39;Rwanda&#39;, &#39;Saint Helena&#39;, &#39;Saint Kitts and Nevis&#39;, &#39;Samoa&#39;, &#39;Saudi Arabia&#39;, &#39;Scotia Sea&#39;, &#39;Solomon Islands&#39;, &#39;Somalia&#39;, &#39;South Africa&#39;, &#39;South Atlantic Ocean&#39;, &#39;South Georgia Island region&#39;, &#39;South Indian Ocean&#39;, &#39;South Sandwich Islands region&#39;, &#39;South Shetland Islands&#39;, &#39;Southern Tibetan Plateau&#39;, &#39;Southwest Indian Ridge&#39;, &#39;Svalbard and Jan Mayen&#39;, &#39;Taiwan&#39;, &#39;Tajikistan&#39;, &#39;Tanzania&#39;, &#39;Tennessee&#39;, &#39;Texas&#39;, &#39;Thailand&#39;, &#39;Timor Leste&#39;, &#39;Tonga&#39;, &#39;Tristan da Cunha region&#39;, &#39;Tunisia&#39;, &#39;Turkey&#39;, &#39;U.S. Virgin Islands&#39;, &#39;Uganda&#39;, &#39;Ukraine&#39;, &#39;Uzbekistan&#39;, &#39;Vanuatu&#39;, &#39;Vanuatu region&#39;, &#39;Venezuela&#39;, &#39;Vietnam&#39;, &#39;Wallis and Futuna&#39;, &#39;Washington&#39;, &#39;West Chile Rise&#39;, &#39;Western Caribbean Sea&#39;, &#39;Xizang-Qinghai border region&#39;, &#39;Yemen&#39;, &#39;Zimbabwe&#39;, &#39;central East Pacific Rise&#39;, &#39;central Mid-Atlantic Ridge&#39;, &#39;east central Pacific Ocean&#39;, &#39;east of Severnaya Zemlya&#39;, &#39;east of the Kuril Islands&#39;, &#39;east of the South Sandwich Islands&#39;, &#39;north of Ascension Island&#39;, &#39;north of Franz Josef Land&#39;, &#39;north of Severnaya Zemlya&#39;, &#39;north of Svalbard&#39;, &#39;northern East Pacific Rise&#39;, &#39;northern Mid-Atlantic Ridge&#39;, &#39;northwest of New Zealand&#39;, &#39;northwest of the Kuril Islands&#39;, &#39;off the coast of Central America&#39;, &#39;off the coast of Ecuador&#39;, &#39;off the coast of Oregon&#39;, &#39;south of Africa&#39;, &#39;south of Panama&#39;, &#39;south of Tonga&#39;, &#39;south of the Fiji Islands&#39;, &#39;south of the Kermadec Islands&#39;, &#39;southeast Indian Ridge&#39;, &#39;southeast central Pacific Ocean&#39;, &#39;southeast of Easter Island&#39;, &#39;southeast of the Loyalty Islands&#39;, &#39;southern East Pacific Rise&#39;, &#39;southern Mid-Atlantic Ridge&#39;, &#39;southern Pacific Ocean&#39;, &#39;southwest of Africa&#39;, &#39;west of Macquarie Island&#39;, &#39;west of Vancouver Island&#39;, &#39;west of the Galapagos Islands&#39;, &#39;western Indian-Antarctic Ridge&#39;, &#39;western Xizang&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;2025 Drake Passage Earthquake&#39;,
+ &#39;Afghanistan&#39;,
+ &#39;Alaska&#39;,
+ &#39;Algeria&#39;,
+ &#39;Anguilla&#39;,
+ &#39;Antigua and Barbuda&#39;,
+ &#39;Arctic Ocean&#39;,
+ &#39;Argentina&#39;,
+ &#39;Armenia&#39;,
+ &#39;Ascension Island region&#39;,
+ &#39;Australia&#39;,
+ &#39;Azerbaijan&#39;,
+ &#39;Azores Islands region&#39;,
+ &#39;Bahamas&#39;,
+ &#39;Balleny Islands region&#39;,
+ &#39;Banda Sea&#39;,
+ &#39;Barbados&#39;,
+ &#39;Bolivia&#39;,
+ &#39;Bosnia and Herzegovina&#39;,
+ &#39;Brazil&#39;,
+ &#39;Burma&#39;,
+ &#39;Burma (Myanmar)&#39;,
+ &#39;Burma (Myanmar) Earthquake&#39;,
+ &#39;CA&#39;,
+ &#39;Canada&#39;,
+ &#39;Carlsberg Ridge&#39;,
+ &#39;Cayman Islands&#39;,
+ &#39;Chad&#39;,
+ &#39;Chagos Archipelago region&#39;,
+ &#39;Chile&#39;,
+ &#39;China&#39;,
+ &#39;Colombia&#39;,
+ &#39;Costa Rica&#39;,
+ &#39;Croatia&#39;,
+ &#39;Democratic Republic of the Congo&#39;,
+ &#39;Dominica&#39;,
+ &#39;Dominican Republic&#39;,
+ &#39;Drake Passage&#39;,
+ &#39;Easter Island region&#39;,
+ &#39;Ecuador&#39;,
+ &#39;Ecuador region&#39;,
+ &#39;El Salvador&#39;,
+ &#39;Eritrea&#39;,
+ &#39;Ethiopia&#39;,
+ &#39;Federated States of Micronesia&#39;,
+ &#39;Federated States of Micronesia region&#39;,
+ &#39;Fiji&#39;,
+ &#39;Fiji region&#39;,
+ &#39;Georgia&#39;,
+ &#39;Greece&#39;,
+ &#39;Greenland Sea&#39;,
+ &#39;Guadeloupe&#39;,
+ &#39;Guam&#39;,
+ &#39;Guatemala&#39;,
+ &#39;Hawaii&#39;,
+ &#39;Honduras&#39;,
+ &#39;Iceland&#39;,
+ &#39;Iceland region&#39;,
+ &#39;Idaho&#39;,
+ &#39;India&#39;,
+ &#39;India region&#39;,
+ &#39;Indian Ocean Triple Junction&#39;,
+ &#39;Indonesia&#39;,
+ &#39;Iran&#39;,
+ &#39;Italy&#39;,
+ &#39;Japan&#39;,
+ &#39;Japan region&#39;,
+ &#39;Kazakhstan&#39;,
+ &#39;Kermadec Islands region&#39;,
+ &#39;Kuril Islands&#39;,
+ &#39;Kuwait&#39;,
+ &#39;Kyrgyzstan&#39;,
+ &#39;Libya&#39;,
+ &#39;MX&#39;,
+ &#39;Macquarie Island region&#39;,
+ &#39;Madagascar&#39;,
+ &#39;Malawi&#39;,
+ &#39;Mariana Islands region&#39;,
+ &#39;Martinique&#39;,
+ &#39;Mauritius&#39;,
+ &#39;Mauritius - Reunion region&#39;,
+ &#39;Mexico&#39;,
+ &#39;Micronesia&#39;,
+ &#39;Mid-Indian Ridge&#39;,
+ &#39;Mongolia&#39;,
+ &#39;Montenegro&#39;,
+ &#39;Morocco&#39;,
+ &#39;Nepal&#39;,
+ &#39;New Caledonia&#39;,
+ &#39;New Mexico&#39;,
+ &#39;New Zealand&#39;,
+ &#39;Nicaragua&#39;,
+ &#39;North Atlantic Ocean&#39;,
+ &#39;North Korea&#39;,
+ &#39;Northern Mariana Islands&#39;,
+ &#39;Norway&#39;,
+ &#39;Norwegian Sea&#39;,
+ &#39;Oman&#39;,
+ &#39;Oregon&#39;,
+ &#39;Owen Fracture Zone region&#39;,
+ &#39;Pacific-Antarctic Ridge&#39;,
+ &#39;Pakistan&#39;,
+ &#39;Palau&#39;,
+ &#39;Panama&#39;,
+ &#39;Papua New Guinea&#39;,
+ &#39;Peru&#39;,
+ &#39;Philippines&#39;,
+ &#39;Poland&#39;,
+ &#39;Portugal&#39;,
+ &#39;Prince Edward Islands region&#39;,
+ &#39;Puerto Rico&#39;,
+ &#39;Qatar&#39;,
+ &#39;Revilla Gigedo Islands region&#39;,
+ &#39;Reykjanes Ridge&#39;,
+ &#39;Romania&#39;,
+ &#39;Russia&#39;,
+ &#39;Rwanda&#39;,
+ &#39;Saint Helena&#39;,
+ &#39;Saint Kitts and Nevis&#39;,
+ &#39;Samoa&#39;,
+ &#39;Saudi Arabia&#39;,
+ &#39;Scotia Sea&#39;,
+ &#39;Solomon Islands&#39;,
+ &#39;Somalia&#39;,
+ &#39;South Africa&#39;,
+ &#39;South Atlantic Ocean&#39;,
+ &#39;South Georgia Island region&#39;,
+ &#39;South Indian Ocean&#39;,
+ &#39;South Sandwich Islands region&#39;,
+ &#39;South Shetland Islands&#39;,
+ &#39;Southern Tibetan Plateau&#39;,
+ &#39;Southwest Indian Ridge&#39;,
+ &#39;Svalbard and Jan Mayen&#39;,
+ &#39;Taiwan&#39;,
+ &#39;Tajikistan&#39;,
+ &#39;Tanzania&#39;,
+ &#39;Tennessee&#39;,
+ &#39;Texas&#39;,
+ &#39;Thailand&#39;,
+ &#39;Timor Leste&#39;,
+ &#39;Tonga&#39;,
+ &#39;Tristan da Cunha region&#39;,
+ &#39;Tunisia&#39;,
+ &#39;Turkey&#39;,
+ &#39;U.S. Virgin Islands&#39;,
+ &#39;Uganda&#39;,
+ &#39;Ukraine&#39;,
+ &#39;Uzbekistan&#39;,
+ &#39;Vanuatu&#39;,
+ &#39;Vanuatu region&#39;,
+ &#39;Venezuela&#39;,
+ &#39;Vietnam&#39;,
+ &#39;Wallis and Futuna&#39;,
+ &#39;Washington&#39;,
+ &#39;West Chile Rise&#39;,
+ &#39;Western Caribbean Sea&#39;,
+ &#39;Xizang-Qinghai border region&#39;,
+ &#39;Yemen&#39;,
+ &#39;Zimbabwe&#39;,
+ &#39;central East Pacific Rise&#39;,
+ &#39;central Mid-Atlantic Ridge&#39;,
+ &#39;east central Pacific Ocean&#39;,
+ &#39;east of Severnaya Zemlya&#39;,
+ &#39;east of the Kuril Islands&#39;,
+ &#39;east of the South Sandwich Islands&#39;,
+ &#39;north of Ascension Island&#39;,
+ &#39;north of Franz Josef Land&#39;,
+ &#39;north of Severnaya Zemlya&#39;,
+ &#39;north of Svalbard&#39;,
+ &#39;northern East Pacific Rise&#39;,
+ &#39;northern Mid-Atlantic Ridge&#39;,
+ &#39;northwest of New Zealand&#39;,
+ &#39;northwest of the Kuril Islands&#39;,
+ &#39;off the coast of Central America&#39;,
+ &#39;off the coast of Ecuador&#39;,
+ &#39;off the coast of Oregon&#39;,
+ &#39;south of Africa&#39;,
+ &#39;south of Panama&#39;,
+ &#39;south of Tonga&#39;,
+ &#39;south of the Fiji Islands&#39;,
+ &#39;south of the Kermadec Islands&#39;,
+ &#39;southeast Indian Ridge&#39;,
+ &#39;southeast central Pacific Ocean&#39;,
+ &#39;southeast of Easter Island&#39;,
+ &#39;southeast of the Loyalty Islands&#39;,
+ &#39;southern East Pacific Rise&#39;,
+ &#39;southern Mid-Atlantic Ridge&#39;,
+ &#39;southern Pacific Ocean&#39;,
+ &#39;southwest of Africa&#39;,
+ &#39;west of Macquarie Island&#39;,
+ &#39;west of Vancouver Island&#39;,
+ &#39;west of the Galapagos Islands&#39;,
+ &#39;western Indian-Antarctic Ridge&#39;,
+ &#39;western Xizang&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="iterating-and-selecting-groups">
+<h3>Iterating and selecting groups<a class="headerlink" href="#iterating-and-selecting-groups" title="Link to this heading">#</a></h3>
+<p>You can loop through the groups if you want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">:</span><span class="mi">4</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="p">[</span><span class="s1">&#39;south of Africa&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;us6000qjkh&#39;, &#39;us7000pp10&#39;, &#39;us6000pzrv&#39;, &#39;us6000pzl1&#39;, &#39;us6000pvw6&#39;], dtype=&#39;object&#39;, name=&#39;id&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="p">[</span><span class="s1">&#39;Afghanistan&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;us6000qkkm&#39;, &#39;us6000qjhm&#39;, &#39;us6000qiif&#39;, &#39;us6000qhyi&#39;, &#39;us6000qh0s&#39;,
+       &#39;us7000q1by&#39;, &#39;us7000q0z5&#39;, &#39;us7000q0aw&#39;, &#39;us7000q05h&#39;, &#39;us7000pzz5&#39;,
+       &#39;us7000pyne&#39;, &#39;us7000pydu&#39;, &#39;us7000px78&#39;, &#39;us7000pwle&#39;, &#39;us7000pve9&#39;,
+       &#39;us7000pvcr&#39;, &#39;us7000pv82&#39;, &#39;us7000pv7x&#39;, &#39;us7000pv02&#39;, &#39;us6000q76g&#39;,
+       &#39;us6000q6fr&#39;, &#39;us7000pw58&#39;, &#39;us6000q6c3&#39;, &#39;us7000ppcq&#39;, &#39;us7000pni6&#39;,
+       &#39;us7000pni0&#39;, &#39;us7000pne1&#39;, &#39;us7000pn0e&#39;, &#39;us7000pmym&#39;, &#39;us7000plhv&#39;,
+       &#39;us7000plec&#39;, &#39;us6000pzkp&#39;, &#39;us6000pxul&#39;, &#39;us6000pwru&#39;, &#39;us6000pxge&#39;,
+       &#39;us6000pvsk&#39;, &#39;us7000pflg&#39;, &#39;us7000pfcc&#39;, &#39;us7000pfc9&#39;, &#39;us7000pefx&#39;,
+       &#39;us7000pd3k&#39;, &#39;us7000pchv&#39;, &#39;us7000pb68&#39;, &#39;us7000pb30&#39;, &#39;us6000pmd7&#39;,
+       &#39;us6000plpp&#39;, &#39;us6000pk88&#39;, &#39;us6000pk23&#39;, &#39;us6000pjtx&#39;, &#39;us6000pjpy&#39;,
+       &#39;us6000pjlp&#39;],
+      dtype=&#39;object&#39;, name=&#39;id&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">gb</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The key is &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+    <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us7000pwkn</th>
+      <td>2025-05-02 12:58:26.014000+00:00</td>
+      <td>-56.8094</td>
+      <td>-68.1019</td>
+      <td>10.0</td>
+      <td>7.4</td>
+      <td>mww</td>
+      <td>284.0</td>
+      <td>20.0</td>
+      <td>1.9</td>
+      <td>0.75</td>
+      <td>...</td>
+      <td>2025 Drake Passage Earthquake</td>
+      <td>earthquake</td>
+      <td>7.58</td>
+      <td>1.441</td>
+      <td>0.038</td>
+      <td>68.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>2025 Drake Passage Earthquake</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 22 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The key is &quot;2025 Drake Passage Earthquake&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">gb</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The key is &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us7000pwkn</th>
+      <td>2025-05-02 12:58:26.014000+00:00</td>
+      <td>-56.8094</td>
+      <td>-68.1019</td>
+      <td>10.0</td>
+      <td>7.4</td>
+      <td>mww</td>
+      <td>284.0</td>
+      <td>20.0</td>
+      <td>1.9</td>
+      <td>0.75</td>
+      <td>...</td>
+      <td>2025 Drake Passage Earthquake</td>
+      <td>earthquake</td>
+      <td>7.58</td>
+      <td>1.441</td>
+      <td>0.038</td>
+      <td>68.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>2025 Drake Passage Earthquake</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 22 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The key is &quot;2025 Drake Passage Earthquake&quot;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us6000qkkm</th>
+      <td>2025-06-16 10:34:13.071000+00:00</td>
+      <td>36.5269</td>
+      <td>70.2915</td>
+      <td>197.467</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>38.0</td>
+      <td>89.0</td>
+      <td>2.218</td>
+      <td>0.85</td>
+      <td>...</td>
+      <td>39 km E of Farkhār, Afghanistan</td>
+      <td>earthquake</td>
+      <td>7.68</td>
+      <td>9.861</td>
+      <td>0.130</td>
+      <td>17.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qjhm</th>
+      <td>2025-06-11 04:45:23.745000+00:00</td>
+      <td>36.5328</td>
+      <td>70.6591</td>
+      <td>215.471</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>72.0</td>
+      <td>139.0</td>
+      <td>2.295</td>
+      <td>0.88</td>
+      <td>...</td>
+      <td>40 km SSW of Jurm, Afghanistan</td>
+      <td>earthquake</td>
+      <td>9.25</td>
+      <td>7.628</td>
+      <td>0.058</td>
+      <td>85.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qiif</th>
+      <td>2025-06-06 19:26:58.547000+00:00</td>
+      <td>36.6295</td>
+      <td>68.0963</td>
+      <td>37.077</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>69.0</td>
+      <td>124.0</td>
+      <td>2.192</td>
+      <td>0.57</td>
+      <td>...</td>
+      <td>36 km ESE of Khulm, Afghanistan</td>
+      <td>earthquake</td>
+      <td>8.13</td>
+      <td>9.473</td>
+      <td>0.068</td>
+      <td>61.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qhyi</th>
+      <td>2025-06-04 19:29:30.379000+00:00</td>
+      <td>36.5033</td>
+      <td>71.1492</td>
+      <td>229.220</td>
+      <td>4.2</td>
+      <td>mb</td>
+      <td>69.0</td>
+      <td>79.0</td>
+      <td>2.096</td>
+      <td>0.80</td>
+      <td>...</td>
+      <td>39 km WSW of Ashkāsham, Afghanistan</td>
+      <td>earthquake</td>
+      <td>7.97</td>
+      <td>7.099</td>
+      <td>0.083</td>
+      <td>41.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qh0s</th>
+      <td>2025-05-31 02:45:35.975000+00:00</td>
+      <td>35.8044</td>
+      <td>71.1038</td>
+      <td>83.711</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>31.0</td>
+      <td>98.0</td>
+      <td>2.063</td>
+      <td>1.28</td>
+      <td>...</td>
+      <td>45 km NNE of Pārūn, Afghanistan</td>
+      <td>earthquake</td>
+      <td>8.31</td>
+      <td>7.823</td>
+      <td>0.154</td>
+      <td>12.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The key is &quot;Afghanistan&quot;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ak0257l477bi</th>
+      <td>2025-06-14 14:32:06.018000+00:00</td>
+      <td>65.7762</td>
+      <td>-145.7213</td>
+      <td>10.800</td>
+      <td>4.7</td>
+      <td>ml</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.80</td>
+      <td>...</td>
+      <td>47 km WNW of Central, Alaska</td>
+      <td>earthquake</td>
+      <td>NaN</td>
+      <td>0.200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>reviewed</td>
+      <td>ak</td>
+      <td>ak</td>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>ak0257jjjt29</th>
+      <td>2025-06-13 19:17:06.365000+00:00</td>
+      <td>60.1166</td>
+      <td>-153.4203</td>
+      <td>159.700</td>
+      <td>4.2</td>
+      <td>ml</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.67</td>
+      <td>...</td>
+      <td>50 km E of Port Alsworth, Alaska</td>
+      <td>earthquake</td>
+      <td>NaN</td>
+      <td>0.300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>reviewed</td>
+      <td>ak</td>
+      <td>ak</td>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>us6000qjn2</th>
+      <td>2025-06-11 20:36:16.744000+00:00</td>
+      <td>51.3129</td>
+      <td>-176.2917</td>
+      <td>27.118</td>
+      <td>4.7</td>
+      <td>mb</td>
+      <td>61.0</td>
+      <td>177.0</td>
+      <td>0.761</td>
+      <td>1.07</td>
+      <td>...</td>
+      <td>66 km SSE of Adak, Alaska</td>
+      <td>earthquake</td>
+      <td>6.3</td>
+      <td>6.568</td>
+      <td>0.039</td>
+      <td>206.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>ak0257egu4bq</th>
+      <td>2025-06-10 12:28:19.795000+00:00</td>
+      <td>61.9075</td>
+      <td>-150.9539</td>
+      <td>15.200</td>
+      <td>4.1</td>
+      <td>ml</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>25 km ESE of Skwentna, Alaska</td>
+      <td>earthquake</td>
+      <td>NaN</td>
+      <td>0.100</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>reviewed</td>
+      <td>ak</td>
+      <td>ak</td>
+      <td>Alaska</td>
+    </tr>
+    <tr>
+      <th>us6000qim5</th>
+      <td>2025-06-07 04:00:30.558000+00:00</td>
+      <td>51.6019</td>
+      <td>-171.8916</td>
+      <td>35.000</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>52.0</td>
+      <td>180.0</td>
+      <td>1.550</td>
+      <td>0.95</td>
+      <td>...</td>
+      <td>172 km ESE of Atka, Alaska</td>
+      <td>earthquake</td>
+      <td>8.9</td>
+      <td>1.974</td>
+      <td>0.047</td>
+      <td>127.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Alaska</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The key is &quot;Alaska&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And you can get a specific group by key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;Chile&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us6000qkjt</th>
+      <td>2025-06-16 08:19:27.151000+00:00</td>
+      <td>-22.5784</td>
+      <td>-67.9279</td>
+      <td>172.967</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>41.0</td>
+      <td>49.0</td>
+      <td>0.438</td>
+      <td>0.61</td>
+      <td>...</td>
+      <td>46 km NE of San Pedro de Atacama, Chile</td>
+      <td>earthquake</td>
+      <td>5.71</td>
+      <td>7.666</td>
+      <td>0.099</td>
+      <td>29.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>us6000qkhr</th>
+      <td>2025-06-16 00:51:17.310000+00:00</td>
+      <td>-20.3278</td>
+      <td>-70.2485</td>
+      <td>41.960</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>19.0</td>
+      <td>172.0</td>
+      <td>1.007</td>
+      <td>0.56</td>
+      <td>...</td>
+      <td>13 km WSW of La Tirana, Chile</td>
+      <td>earthquake</td>
+      <td>4.55</td>
+      <td>10.951</td>
+      <td>0.309</td>
+      <td>3.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>us6000qkfl</th>
+      <td>2025-06-15 13:30:08.837000+00:00</td>
+      <td>-22.3399</td>
+      <td>-68.6815</td>
+      <td>117.138</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>28.0</td>
+      <td>46.0</td>
+      <td>0.750</td>
+      <td>1.13</td>
+      <td>...</td>
+      <td>28 km ENE of Calama, Chile</td>
+      <td>earthquake</td>
+      <td>4.22</td>
+      <td>6.238</td>
+      <td>0.154</td>
+      <td>14.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>us6000qjpw</th>
+      <td>2025-06-11 23:53:41.988000+00:00</td>
+      <td>-21.6724</td>
+      <td>-69.1225</td>
+      <td>98.543</td>
+      <td>4.1</td>
+      <td>mb</td>
+      <td>14.0</td>
+      <td>88.0</td>
+      <td>0.166</td>
+      <td>0.71</td>
+      <td>...</td>
+      <td>89 km NNW of Calama, Chile</td>
+      <td>earthquake</td>
+      <td>7.11</td>
+      <td>10.366</td>
+      <td>0.234</td>
+      <td>5.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Chile</td>
+    </tr>
+    <tr>
+      <th>us6000qj2v</th>
+      <td>2025-06-09 00:59:17.293000+00:00</td>
+      <td>-32.2490</td>
+      <td>-71.0761</td>
+      <td>83.965</td>
+      <td>4.1</td>
+      <td>mb</td>
+      <td>28.0</td>
+      <td>131.0</td>
+      <td>0.222</td>
+      <td>0.19</td>
+      <td>...</td>
+      <td>26 km NNE of La Ligua, Chile</td>
+      <td>earthquake</td>
+      <td>4.23</td>
+      <td>6.102</td>
+      <td>0.198</td>
+      <td>7.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Chile</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;Afghanistan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+      <th>country</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>us6000qkkm</th>
+      <td>2025-06-16 10:34:13.071000+00:00</td>
+      <td>36.5269</td>
+      <td>70.2915</td>
+      <td>197.467</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>38.0</td>
+      <td>89.0</td>
+      <td>2.218</td>
+      <td>0.85</td>
+      <td>...</td>
+      <td>39 km E of Farkhār, Afghanistan</td>
+      <td>earthquake</td>
+      <td>7.68</td>
+      <td>9.861</td>
+      <td>0.130</td>
+      <td>17.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qjhm</th>
+      <td>2025-06-11 04:45:23.745000+00:00</td>
+      <td>36.5328</td>
+      <td>70.6591</td>
+      <td>215.471</td>
+      <td>4.4</td>
+      <td>mb</td>
+      <td>72.0</td>
+      <td>139.0</td>
+      <td>2.295</td>
+      <td>0.88</td>
+      <td>...</td>
+      <td>40 km SSW of Jurm, Afghanistan</td>
+      <td>earthquake</td>
+      <td>9.25</td>
+      <td>7.628</td>
+      <td>0.058</td>
+      <td>85.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qiif</th>
+      <td>2025-06-06 19:26:58.547000+00:00</td>
+      <td>36.6295</td>
+      <td>68.0963</td>
+      <td>37.077</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>69.0</td>
+      <td>124.0</td>
+      <td>2.192</td>
+      <td>0.57</td>
+      <td>...</td>
+      <td>36 km ESE of Khulm, Afghanistan</td>
+      <td>earthquake</td>
+      <td>8.13</td>
+      <td>9.473</td>
+      <td>0.068</td>
+      <td>61.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qhyi</th>
+      <td>2025-06-04 19:29:30.379000+00:00</td>
+      <td>36.5033</td>
+      <td>71.1492</td>
+      <td>229.220</td>
+      <td>4.2</td>
+      <td>mb</td>
+      <td>69.0</td>
+      <td>79.0</td>
+      <td>2.096</td>
+      <td>0.80</td>
+      <td>...</td>
+      <td>39 km WSW of Ashkāsham, Afghanistan</td>
+      <td>earthquake</td>
+      <td>7.97</td>
+      <td>7.099</td>
+      <td>0.083</td>
+      <td>41.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+    <tr>
+      <th>us6000qh0s</th>
+      <td>2025-05-31 02:45:35.975000+00:00</td>
+      <td>35.8044</td>
+      <td>71.1038</td>
+      <td>83.711</td>
+      <td>4.3</td>
+      <td>mb</td>
+      <td>31.0</td>
+      <td>98.0</td>
+      <td>2.063</td>
+      <td>1.28</td>
+      <td>...</td>
+      <td>45 km NNE of Pārūn, Afghanistan</td>
+      <td>earthquake</td>
+      <td>8.31</td>
+      <td>7.823</td>
+      <td>0.154</td>
+      <td>12.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+      <td>Afghanistan</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="aggregation">
+<h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h2>
+<p>Now that we know how to create a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object, let’s learn how to do aggregation on it.</p>
+<p>One way us to use the <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> method, which accepts another function as its argument. The result is automatically combined into a new dataframe with the group key as the index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2808193076.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using DataFrameGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.aggregate(np.max).head()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth</th>
+      <th>mag</th>
+      <th>magType</th>
+      <th>nst</th>
+      <th>gap</th>
+      <th>dmin</th>
+      <th>rms</th>
+      <th>...</th>
+      <th>updated</th>
+      <th>place</th>
+      <th>type</th>
+      <th>horizontalError</th>
+      <th>depthError</th>
+      <th>magError</th>
+      <th>magNst</th>
+      <th>status</th>
+      <th>locationSource</th>
+      <th>magSource</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2025 Drake Passage Earthquake</th>
+      <td>2025-05-02 12:58:26.014000+00:00</td>
+      <td>-56.8094</td>
+      <td>-68.1019</td>
+      <td>10.000</td>
+      <td>7.4</td>
+      <td>mww</td>
+      <td>284.0</td>
+      <td>20.0</td>
+      <td>1.900</td>
+      <td>0.75</td>
+      <td>...</td>
+      <td>2025-06-06T12:21:50.736Z</td>
+      <td>2025 Drake Passage Earthquake</td>
+      <td>earthquake</td>
+      <td>7.58</td>
+      <td>1.441</td>
+      <td>0.038</td>
+      <td>68.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+    </tr>
+    <tr>
+      <th>Afghanistan</th>
+      <td>2025-06-16 10:34:13.071000+00:00</td>
+      <td>37.4414</td>
+      <td>72.3551</td>
+      <td>230.241</td>
+      <td>5.7</td>
+      <td>mww</td>
+      <td>178.0</td>
+      <td>246.0</td>
+      <td>2.983</td>
+      <td>1.28</td>
+      <td>...</td>
+      <td>2025-06-16T11:33:01.040Z</td>
+      <td>80 km SSE of Farkhār, Afghanistan</td>
+      <td>earthquake</td>
+      <td>11.79</td>
+      <td>13.714</td>
+      <td>0.235</td>
+      <td>154.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+    </tr>
+    <tr>
+      <th>Alaska</th>
+      <td>2025-06-14 14:32:06.018000+00:00</td>
+      <td>67.8223</td>
+      <td>178.6746</td>
+      <td>205.536</td>
+      <td>6.2</td>
+      <td>mww</td>
+      <td>287.0</td>
+      <td>219.0</td>
+      <td>2.579</td>
+      <td>1.37</td>
+      <td>...</td>
+      <td>2025-06-17T12:05:18.488Z</td>
+      <td>Rat Islands, Aleutian Islands, Alaska</td>
+      <td>earthquake</td>
+      <td>11.37</td>
+      <td>13.318</td>
+      <td>0.197</td>
+      <td>715.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>2025-03-18 09:50:26.946000+00:00</td>
+      <td>36.4349</td>
+      <td>3.4384</td>
+      <td>10.000</td>
+      <td>4.8</td>
+      <td>mww</td>
+      <td>167.0</td>
+      <td>55.0</td>
+      <td>3.516</td>
+      <td>0.51</td>
+      <td>...</td>
+      <td>2025-05-17T19:20:00.040Z</td>
+      <td>19 km SW of Lakhdaria, Algeria</td>
+      <td>earthquake</td>
+      <td>7.35</td>
+      <td>1.800</td>
+      <td>0.083</td>
+      <td>14.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+    </tr>
+    <tr>
+      <th>Anguilla</th>
+      <td>2025-05-27 02:55:33.363000+00:00</td>
+      <td>19.3269</td>
+      <td>-63.1485</td>
+      <td>94.968</td>
+      <td>4.5</td>
+      <td>mb</td>
+      <td>75.0</td>
+      <td>138.0</td>
+      <td>1.427</td>
+      <td>0.72</td>
+      <td>...</td>
+      <td>2025-06-06T21:12:26.040Z</td>
+      <td>52 km NNW of Sandy Ground Village, Anguilla</td>
+      <td>earthquake</td>
+      <td>6.88</td>
+      <td>8.063</td>
+      <td>0.124</td>
+      <td>44.0</td>
+      <td>reviewed</td>
+      <td>us</td>
+      <td>us</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p>By default, the operation is applied to every column. That’s usually not what we want. We can use both <code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code> syntax to select a specific column to operate on. Then we get back a series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a931070&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7daf2a933da0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2229133186.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.mag.aggregate(np.max)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+2025 Drake Passage Earthquake     7.4
+Afghanistan                       5.7
+Alaska                            6.2
+Algeria                           4.8
+Anguilla                          4.5
+                                 ... 
+west of Macquarie Island          6.1
+west of Vancouver Island          4.2
+west of the Galapagos Islands     5.3
+western Indian-Antarctic Ridge    6.2
+western Xizang                    5.3
+Name: mag, Length: 194, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2970731060.py:1: FutureWarning: The provided callable &lt;function sum at 0x7daf3a13ef20&gt; is currently using SeriesGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+  gb.mag.aggregate(np.sum)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+2025 Drake Passage Earthquake       7.4
+Afghanistan                       221.7
+Alaska                            583.3
+Algeria                             4.8
+Anguilla                           13.1
+                                  ...  
+west of Macquarie Island           75.3
+west of Vancouver Island            4.2
+west of the Galapagos Islands      46.1
+western Indian-Antarctic Ridge    137.5
+western Xizang                     40.5
+Name: mag, Length: 194, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/480462825.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  gb.mag.aggregate(np.mean)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+2025 Drake Passage Earthquake     7.400000
+Afghanistan                       4.347059
+Alaska                            4.557031
+Algeria                           4.800000
+Anguilla                          4.366667
+                                    ...   
+west of Macquarie Island          4.706250
+west of Vancouver Island          4.200000
+west of the Galapagos Islands     4.610000
+western Indian-Antarctic Ridge    4.741379
+western Xizang                    4.500000
+Name: mag, Length: 194, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2287653877.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.mag.aggregate(np.max).head()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+2025 Drake Passage Earthquake    7.4
+Afghanistan                      5.7
+Alaska                           6.2
+Algeria                          4.8
+Anguilla                         4.5
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2071493650.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.mag.aggregate(np.max).nlargest(10)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Burma (Myanmar) Earthquake       7.7
+Cayman Islands                   7.6
+2025 Drake Passage Earthquake    7.4
+Tonga                            7.0
+Papua New Guinea                 6.9
+Reykjanes Ridge                  6.9
+Japan                            6.8
+Macquarie Island region          6.8
+Burma (Myanmar)                  6.7
+New Zealand                      6.7
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are shortcuts for common aggregation functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Burma (Myanmar) Earthquake       7.7
+Cayman Islands                   7.6
+2025 Drake Passage Earthquake    7.4
+Tonga                            7.0
+Papua New Guinea                 6.9
+Reykjanes Ridge                  6.9
+Japan                            6.8
+Macquarie Island region          6.8
+Burma (Myanmar)                  6.7
+New Zealand                      6.7
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Puerto Rico            4.02
+U.S. Virgin Islands    4.05
+CA                     4.06
+Dominican Republic     4.06
+Afghanistan            4.10
+Alaska                 4.10
+Argentina              4.10
+Australia              4.10
+Bahamas                4.10
+Bolivia                4.10
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Burma (Myanmar) Earthquake            7.700000
+2025 Drake Passage Earthquake         7.400000
+Western Caribbean Sea                 5.400000
+north of Franz Josef Land             5.300000
+Macquarie Island region               5.233333
+southeast central Pacific Ocean       5.200000
+Morocco                               5.100000
+Pacific-Antarctic Ridge               5.070588
+South Atlantic Ocean                  5.050000
+east of the South Sandwich Islands    5.000000
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
+Cayman Islands                    0.978713
+U.S. Virgin Islands               0.909340
+Macquarie Island region           0.895917
+southwest of Africa               0.760263
+Revilla Gigedo Islands region     0.726024
+Svalbard and Jan Mayen            0.680241
+India region                      0.643774
+northwest of the Kuril Islands    0.643169
+Panama                            0.621435
+Reykjanes Ridge                   0.605769
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also apply multiple functions at once:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function min at 0x7daf3a13fa60&gt; is currently using SeriesGroupBy.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).head()
+/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).head()
+/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).head()
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min</th>
+      <th>max</th>
+      <th>mean</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2025 Drake Passage Earthquake</th>
+      <td>7.4</td>
+      <td>7.4</td>
+      <td>7.400000</td>
+    </tr>
+    <tr>
+      <th>Afghanistan</th>
+      <td>4.1</td>
+      <td>5.7</td>
+      <td>4.347059</td>
+    </tr>
+    <tr>
+      <th>Alaska</th>
+      <td>4.1</td>
+      <td>6.2</td>
+      <td>4.557031</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>4.8</td>
+      <td>4.8</td>
+      <td>4.800000</td>
+    </tr>
+    <tr>
+      <th>Anguilla</th>
+      <td>4.2</td>
+      <td>4.5</td>
+      <td>4.366667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function min at 0x7daf3a13fa60&gt; is currently using SeriesGroupBy.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
+/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
+/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" src="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" />
+</div>
+</div>
+</section>
+<section id="transformation">
+<h2>Transformation<a class="headerlink" href="#transformation" title="Link to this heading">#</a></h2>
+<p>The key difference between aggregation and transformation is that aggregation returns a <em>smaller</em> object than the original, indexed by the group keys, while <em>transformation</em> returns an object with the same index (and same size) as the original object. Groupby + transformation is used when applying an operation that requires information about the whole group.</p>
+<p>In this example, we standardize the earthquakes in each country so that the distribution has zero mean and unit variance. We do this by first defining a function called <code class="docutils literal notranslate"><span class="pre">standardize</span></code> and then passing it to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p>
+<p>I admit that I don’t know why you would want to do this. <code class="docutils literal notranslate"><span class="pre">transform</span></code> makes more sense to me in the context of time grouping operation. See below for another example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">mag_standardized_by_country</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
+<span class="n">mag_standardized_by_country</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id
+us6000qkt1    0.668464
+us6000qksf    0.419407
+us6000qks2    2.157996
+us6000qkrz    0.642692
+us6000qks0    0.909743
+Name: mag, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="time-grouping">
+<h2>Time Grouping<a class="headerlink" href="#time-grouping" title="Link to this heading">#</a></h2>
+<p>We already saw how pandas has a strong built-in understanding of time. This capability is even more powerful in the context of <code class="docutils literal notranslate"><span class="pre">groupby</span></code>. With datasets indexed by a pandas <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code>, we can easily group and resample the data using common time units.</p>
+<p>To get started, let’s load the timeseries data we already explored in past lessons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">header_url</span> <span class="o">=</span> <span class="s1">&#39;ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/HEADERS.txt&#39;</span>
+<span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">header_url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="n">ftp_base</span> <span class="o">=</span> <span class="s1">&#39;ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/&#39;</span>
+<span class="n">dframes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">):</span>
+    <span class="n">data_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">/CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-NY_Millbrook_3_W.txt&#39;</span>               
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ftp_base</span> <span class="o">+</span> <span class="n">data_url</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+                     <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
+    <span class="n">dframes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dframes</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
+&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
+/tmp/ipykernel_6529/2092298281.py:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
+  names=headers, header=None, sep=&#39;\s+&#39;,
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WBANNO</th>
+      <th>CRX_VN</th>
+      <th>LONGITUDE</th>
+      <th>LATITUDE</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_AVG</th>
+      <th>P_DAILY_CALC</th>
+      <th>SOLARAD_DAILY</th>
+      <th>...</th>
+      <th>SOIL_MOISTURE_10_DAILY</th>
+      <th>SOIL_MOISTURE_20_DAILY</th>
+      <th>SOIL_MOISTURE_50_DAILY</th>
+      <th>SOIL_MOISTURE_100_DAILY</th>
+      <th>SOIL_TEMP_5_DAILY</th>
+      <th>SOIL_TEMP_10_DAILY</th>
+      <th>SOIL_TEMP_20_DAILY</th>
+      <th>SOIL_TEMP_50_DAILY</th>
+      <th>SOIL_TEMP_100_DAILY</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2016-01-01</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>3.4</td>
+      <td>-0.5</td>
+      <td>1.5</td>
+      <td>1.3</td>
+      <td>0.0</td>
+      <td>1.69</td>
+      <td>...</td>
+      <td>0.233</td>
+      <td>0.204</td>
+      <td>0.155</td>
+      <td>0.147</td>
+      <td>4.2</td>
+      <td>4.4</td>
+      <td>5.1</td>
+      <td>6.0</td>
+      <td>7.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-02</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>2.9</td>
+      <td>-3.6</td>
+      <td>-0.4</td>
+      <td>-0.3</td>
+      <td>0.0</td>
+      <td>6.25</td>
+      <td>...</td>
+      <td>0.227</td>
+      <td>0.199</td>
+      <td>0.152</td>
+      <td>0.144</td>
+      <td>2.8</td>
+      <td>3.1</td>
+      <td>4.2</td>
+      <td>5.7</td>
+      <td>7.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-03</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>5.1</td>
+      <td>-1.8</td>
+      <td>1.6</td>
+      <td>1.1</td>
+      <td>0.0</td>
+      <td>5.69</td>
+      <td>...</td>
+      <td>0.223</td>
+      <td>0.196</td>
+      <td>0.151</td>
+      <td>0.141</td>
+      <td>2.6</td>
+      <td>2.8</td>
+      <td>3.8</td>
+      <td>5.2</td>
+      <td>7.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-04</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>0.5</td>
+      <td>-14.4</td>
+      <td>-6.9</td>
+      <td>-7.5</td>
+      <td>0.0</td>
+      <td>9.17</td>
+      <td>...</td>
+      <td>0.220</td>
+      <td>0.194</td>
+      <td>0.148</td>
+      <td>0.139</td>
+      <td>1.7</td>
+      <td>2.1</td>
+      <td>3.4</td>
+      <td>4.9</td>
+      <td>6.9</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-05</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>-5.2</td>
+      <td>-15.5</td>
+      <td>-10.3</td>
+      <td>-11.7</td>
+      <td>0.0</td>
+      <td>9.34</td>
+      <td>...</td>
+      <td>0.213</td>
+      <td>0.191</td>
+      <td>0.148</td>
+      <td>0.138</td>
+      <td>0.4</td>
+      <td>0.9</td>
+      <td>2.4</td>
+      <td>4.3</td>
+      <td>6.6</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 28 columns</p>
+</div></div></div>
+</div>
+<p>This timeseries has daily resolution, and the daily plots are somewhat noisy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/ed4383b447bcc4bd3940ef7461bf60523dcb5932b421abac787359230ff75a4e.png" src="../../_images/ed4383b447bcc4bd3940ef7461bf60523dcb5932b421abac787359230ff75a4e.png" />
+</div>
+</div>
+<p>A common way to analyze such data in climate science is to create a “climatology,” which contains the average values in each month or day of the year. We can do this easily with groupby. Recall that <code class="docutils literal notranslate"><span class="pre">df.index</span></code> is a pandas <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2016-01-01&#39;, &#39;2016-01-02&#39;, &#39;2016-01-03&#39;, &#39;2016-01-04&#39;,
+               &#39;2016-01-05&#39;, &#39;2016-01-06&#39;, &#39;2016-01-07&#39;, &#39;2016-01-08&#39;,
+               &#39;2016-01-09&#39;, &#39;2016-01-10&#39;,
+               ...
+               &#39;2018-12-22&#39;, &#39;2018-12-23&#39;, &#39;2018-12-24&#39;, &#39;2018-12-25&#39;,
+               &#39;2018-12-26&#39;, &#39;2018-12-27&#39;, &#39;2018-12-28&#39;, &#39;2018-12-29&#39;,
+               &#39;2018-12-30&#39;, &#39;2018-12-31&#39;],
+              dtype=&#39;datetime64[ns]&#39;, name=&#39;LST_DATE&#39;, length=1096, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+       ...
+       12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+      dtype=&#39;int32&#39;, name=&#39;LST_DATE&#39;, length=1096)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">monthly_climatology</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WBANNO</th>
+      <th>CRX_VN</th>
+      <th>LONGITUDE</th>
+      <th>LATITUDE</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_AVG</th>
+      <th>P_DAILY_CALC</th>
+      <th>SOLARAD_DAILY</th>
+      <th>...</th>
+      <th>SOIL_MOISTURE_10_DAILY</th>
+      <th>SOIL_MOISTURE_20_DAILY</th>
+      <th>SOIL_MOISTURE_50_DAILY</th>
+      <th>SOIL_MOISTURE_100_DAILY</th>
+      <th>SOIL_TEMP_5_DAILY</th>
+      <th>SOIL_TEMP_10_DAILY</th>
+      <th>SOIL_TEMP_20_DAILY</th>
+      <th>SOIL_TEMP_50_DAILY</th>
+      <th>SOIL_TEMP_100_DAILY</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>2.924731</td>
+      <td>-7.122581</td>
+      <td>-2.100000</td>
+      <td>-1.905376</td>
+      <td>2.478495</td>
+      <td>5.812258</td>
+      <td>...</td>
+      <td>0.240250</td>
+      <td>0.200698</td>
+      <td>0.153645</td>
+      <td>0.160859</td>
+      <td>0.150538</td>
+      <td>0.248387</td>
+      <td>0.788172</td>
+      <td>1.766667</td>
+      <td>3.364516</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>64756.0</td>
+      <td>2.487882</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>6.431765</td>
+      <td>-5.015294</td>
+      <td>0.712941</td>
+      <td>1.022353</td>
+      <td>4.077647</td>
+      <td>8.495882</td>
+      <td>...</td>
+      <td>0.247714</td>
+      <td>0.210044</td>
+      <td>0.159153</td>
+      <td>0.163889</td>
+      <td>1.216471</td>
+      <td>1.169412</td>
+      <td>1.278824</td>
+      <td>1.617647</td>
+      <td>2.442353</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>7.953763</td>
+      <td>-3.035484</td>
+      <td>2.455914</td>
+      <td>2.643011</td>
+      <td>2.788172</td>
+      <td>13.211290</td>
+      <td>...</td>
+      <td>0.228612</td>
+      <td>0.203634</td>
+      <td>0.157796</td>
+      <td>0.160366</td>
+      <td>3.450538</td>
+      <td>3.400000</td>
+      <td>3.372043</td>
+      <td>3.480645</td>
+      <td>3.777419</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>14.793333</td>
+      <td>1.816667</td>
+      <td>8.302222</td>
+      <td>8.574444</td>
+      <td>2.396667</td>
+      <td>15.295889</td>
+      <td>...</td>
+      <td>0.214067</td>
+      <td>0.195844</td>
+      <td>0.153878</td>
+      <td>0.158100</td>
+      <td>9.415556</td>
+      <td>9.117778</td>
+      <td>8.455556</td>
+      <td>7.618889</td>
+      <td>6.670000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>21.235484</td>
+      <td>8.460215</td>
+      <td>14.850538</td>
+      <td>15.121505</td>
+      <td>3.015054</td>
+      <td>17.288602</td>
+      <td>...</td>
+      <td>0.204796</td>
+      <td>0.187097</td>
+      <td>0.148871</td>
+      <td>0.155720</td>
+      <td>16.934409</td>
+      <td>16.640860</td>
+      <td>15.612903</td>
+      <td>14.208602</td>
+      <td>12.455914</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>25.627778</td>
+      <td>11.837778</td>
+      <td>18.733333</td>
+      <td>19.026667</td>
+      <td>3.053333</td>
+      <td>21.913333</td>
+      <td>...</td>
+      <td>0.136911</td>
+      <td>0.135211</td>
+      <td>0.129422</td>
+      <td>0.152711</td>
+      <td>22.403333</td>
+      <td>22.126667</td>
+      <td>20.956667</td>
+      <td>19.448889</td>
+      <td>17.552222</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>28.568817</td>
+      <td>15.536559</td>
+      <td>22.054839</td>
+      <td>22.012903</td>
+      <td>3.865591</td>
+      <td>21.570645</td>
+      <td>...</td>
+      <td>0.105806</td>
+      <td>0.095204</td>
+      <td>0.114419</td>
+      <td>0.150000</td>
+      <td>25.448387</td>
+      <td>25.318280</td>
+      <td>24.163441</td>
+      <td>22.746237</td>
+      <td>21.068817</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>27.473118</td>
+      <td>15.351613</td>
+      <td>21.410753</td>
+      <td>21.378495</td>
+      <td>4.480645</td>
+      <td>18.493333</td>
+      <td>...</td>
+      <td>0.156161</td>
+      <td>0.132333</td>
+      <td>0.128796</td>
+      <td>0.158750</td>
+      <td>24.758065</td>
+      <td>24.829032</td>
+      <td>24.116129</td>
+      <td>23.325806</td>
+      <td>22.301075</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>64756.0</td>
+      <td>2.488667</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>24.084444</td>
+      <td>12.032222</td>
+      <td>18.057778</td>
+      <td>17.866667</td>
+      <td>3.730000</td>
+      <td>13.625667</td>
+      <td>...</td>
+      <td>0.136900</td>
+      <td>0.126422</td>
+      <td>0.121356</td>
+      <td>0.154000</td>
+      <td>21.028889</td>
+      <td>21.168889</td>
+      <td>20.921111</td>
+      <td>20.834444</td>
+      <td>20.707778</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>64756.0</td>
+      <td>2.548882</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>18.127473</td>
+      <td>5.757143</td>
+      <td>11.938462</td>
+      <td>11.952747</td>
+      <td>3.228261</td>
+      <td>9.442527</td>
+      <td>...</td>
+      <td>0.155275</td>
+      <td>0.128462</td>
+      <td>0.120187</td>
+      <td>0.144588</td>
+      <td>14.872527</td>
+      <td>15.056044</td>
+      <td>15.379121</td>
+      <td>16.159341</td>
+      <td>17.059341</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>64756.0</td>
+      <td>2.555333</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>9.586667</td>
+      <td>-1.375556</td>
+      <td>4.097778</td>
+      <td>4.277778</td>
+      <td>3.991111</td>
+      <td>6.350111</td>
+      <td>...</td>
+      <td>0.226111</td>
+      <td>0.212200</td>
+      <td>0.164778</td>
+      <td>0.163078</td>
+      <td>6.777778</td>
+      <td>6.975556</td>
+      <td>7.658889</td>
+      <td>9.048889</td>
+      <td>10.864444</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>64756.0</td>
+      <td>2.555333</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>3.569892</td>
+      <td>-5.704301</td>
+      <td>-1.069892</td>
+      <td>-0.850538</td>
+      <td>2.791398</td>
+      <td>4.708602</td>
+      <td>...</td>
+      <td>0.259527</td>
+      <td>0.221280</td>
+      <td>0.171817</td>
+      <td>0.177172</td>
+      <td>1.831183</td>
+      <td>2.009677</td>
+      <td>2.647312</td>
+      <td>3.910753</td>
+      <td>5.710753</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12 rows × 27 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_climatology</span><span class="o">.</span><span class="n">T_DAILY_MAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/04bb90fec3cbcc4f8f702a38bd4eaa674261cb3e96f005c40d6041cd3c0fae3a.png" src="../../_images/04bb90fec3cbcc4f8f702a38bd4eaa674261cb3e96f005c40d6041cd3c0fae3a.png" />
+</div>
+</div>
+<p>Each row in this new dataframe respresents the average values for the months (1=January, 2=February, etc.)</p>
+<p>We can apply more customized aggregations, as with any groupby operation. Below we keep the mean of the mean, max of the max, and min of the min for the temperature measurements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_T_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+                                                              <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+                                                              <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="s1">&#39;min&#39;</span><span class="p">})</span>
+<span class="n">monthly_T_climatology</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>-2.100000</td>
+      <td>16.9</td>
+      <td>-26.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.712941</td>
+      <td>24.9</td>
+      <td>-24.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.455914</td>
+      <td>26.8</td>
+      <td>-16.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.302222</td>
+      <td>30.6</td>
+      <td>-11.3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>14.850538</td>
+      <td>33.4</td>
+      <td>-1.6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>18.733333</td>
+      <td>33.8</td>
+      <td>3.4</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>22.054839</td>
+      <td>35.7</td>
+      <td>8.2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>21.410753</td>
+      <td>34.5</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>18.057778</td>
+      <td>32.7</td>
+      <td>0.3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11.938462</td>
+      <td>29.4</td>
+      <td>-4.1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4.097778</td>
+      <td>22.2</td>
+      <td>-15.9</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-1.069892</td>
+      <td>16.9</td>
+      <td>-21.8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_T_climatology</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/033551592df0d741a75e1a16ad93b170bf12822724db5963a1bd59f8cf15a1e9.png" src="../../_images/033551592df0d741a75e1a16ad93b170bf12822724db5963a1bd59f8cf15a1e9.png" />
+</div>
+</div>
+<p>If we want to do it on a finer scale, we can group by day of year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daily_T_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+                                                            <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+                                                            <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="s1">&#39;min&#39;</span><span class="p">})</span>
+<span class="n">daily_T_climatology</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/14b0b0394d66744dfd1398ca5176b7714bce165c299de8164f868fb7f1ea3ccb.png" src="../../_images/14b0b0394d66744dfd1398ca5176b7714bce165c299de8164f868fb7f1ea3ccb.png" />
+</div>
+</div>
+<section id="calculating-anomalies">
+<h3>Calculating anomalies<a class="headerlink" href="#calculating-anomalies" title="Link to this heading">#</a></h3>
+<p>A common mode of analysis in climate science is to remove the climatology from a signal to focus only on the “anomaly” values. This can be accomplished with transformation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WBANNO</th>
+      <th>CRX_VN</th>
+      <th>LONGITUDE</th>
+      <th>LATITUDE</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_AVG</th>
+      <th>P_DAILY_CALC</th>
+      <th>SOLARAD_DAILY</th>
+      <th>...</th>
+      <th>SOIL_MOISTURE_10_DAILY</th>
+      <th>SOIL_MOISTURE_20_DAILY</th>
+      <th>SOIL_MOISTURE_50_DAILY</th>
+      <th>SOIL_MOISTURE_100_DAILY</th>
+      <th>SOIL_TEMP_5_DAILY</th>
+      <th>SOIL_TEMP_10_DAILY</th>
+      <th>SOIL_TEMP_20_DAILY</th>
+      <th>SOIL_TEMP_50_DAILY</th>
+      <th>SOIL_TEMP_100_DAILY</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2016-01-01</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>3.4</td>
+      <td>-0.5</td>
+      <td>1.5</td>
+      <td>1.3</td>
+      <td>0.0</td>
+      <td>1.69</td>
+      <td>...</td>
+      <td>0.233</td>
+      <td>0.204</td>
+      <td>0.155</td>
+      <td>0.147</td>
+      <td>4.2</td>
+      <td>4.4</td>
+      <td>5.1</td>
+      <td>6.0</td>
+      <td>7.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-02</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>2.9</td>
+      <td>-3.6</td>
+      <td>-0.4</td>
+      <td>-0.3</td>
+      <td>0.0</td>
+      <td>6.25</td>
+      <td>...</td>
+      <td>0.227</td>
+      <td>0.199</td>
+      <td>0.152</td>
+      <td>0.144</td>
+      <td>2.8</td>
+      <td>3.1</td>
+      <td>4.2</td>
+      <td>5.7</td>
+      <td>7.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-03</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>5.1</td>
+      <td>-1.8</td>
+      <td>1.6</td>
+      <td>1.1</td>
+      <td>0.0</td>
+      <td>5.69</td>
+      <td>...</td>
+      <td>0.223</td>
+      <td>0.196</td>
+      <td>0.151</td>
+      <td>0.141</td>
+      <td>2.6</td>
+      <td>2.8</td>
+      <td>3.8</td>
+      <td>5.2</td>
+      <td>7.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-04</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>0.5</td>
+      <td>-14.4</td>
+      <td>-6.9</td>
+      <td>-7.5</td>
+      <td>0.0</td>
+      <td>9.17</td>
+      <td>...</td>
+      <td>0.220</td>
+      <td>0.194</td>
+      <td>0.148</td>
+      <td>0.139</td>
+      <td>1.7</td>
+      <td>2.1</td>
+      <td>3.4</td>
+      <td>4.9</td>
+      <td>6.9</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-05</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>-5.2</td>
+      <td>-15.5</td>
+      <td>-10.3</td>
+      <td>-11.7</td>
+      <td>0.0</td>
+      <td>9.34</td>
+      <td>...</td>
+      <td>0.213</td>
+      <td>0.191</td>
+      <td>0.148</td>
+      <td>0.138</td>
+      <td>0.4</td>
+      <td>0.9</td>
+      <td>2.4</td>
+      <td>4.3</td>
+      <td>6.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2018-12-27</th>
+      <td>64756</td>
+      <td>2.622</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>2.5</td>
+      <td>-2.1</td>
+      <td>0.2</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>7.50</td>
+      <td>...</td>
+      <td>0.275</td>
+      <td>0.248</td>
+      <td>0.191</td>
+      <td>0.192</td>
+      <td>1.3</td>
+      <td>1.4</td>
+      <td>1.9</td>
+      <td>3.2</td>
+      <td>4.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2018-12-28</th>
+      <td>64756</td>
+      <td>2.622</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>11.6</td>
+      <td>1.9</td>
+      <td>6.8</td>
+      <td>7.6</td>
+      <td>11.5</td>
+      <td>0.45</td>
+      <td>...</td>
+      <td>0.295</td>
+      <td>0.261</td>
+      <td>0.193</td>
+      <td>0.191</td>
+      <td>2.9</td>
+      <td>2.7</td>
+      <td>2.5</td>
+      <td>3.1</td>
+      <td>4.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2018-12-29</th>
+      <td>64756</td>
+      <td>2.622</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>11.3</td>
+      <td>-2.1</td>
+      <td>4.6</td>
+      <td>6.3</td>
+      <td>0.0</td>
+      <td>4.89</td>
+      <td>...</td>
+      <td>0.295</td>
+      <td>0.270</td>
+      <td>0.208</td>
+      <td>0.191</td>
+      <td>4.5</td>
+      <td>4.4</td>
+      <td>4.0</td>
+      <td>3.8</td>
+      <td>4.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2018-12-30</th>
+      <td>64756</td>
+      <td>2.622</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>0.4</td>
+      <td>-4.1</td>
+      <td>-1.9</td>
+      <td>-1.5</td>
+      <td>0.2</td>
+      <td>3.32</td>
+      <td>...</td>
+      <td>0.286</td>
+      <td>0.261</td>
+      <td>0.204</td>
+      <td>0.194</td>
+      <td>2.6</td>
+      <td>2.8</td>
+      <td>3.3</td>
+      <td>4.0</td>
+      <td>4.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2018-12-31</th>
+      <td>64756</td>
+      <td>2.622</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>5.0</td>
+      <td>-2.8</td>
+      <td>1.1</td>
+      <td>2.0</td>
+      <td>17.4</td>
+      <td>2.13</td>
+      <td>...</td>
+      <td>0.291</td>
+      <td>0.261</td>
+      <td>0.200</td>
+      <td>0.193</td>
+      <td>2.6</td>
+      <td>2.6</td>
+      <td>2.9</td>
+      <td>3.8</td>
+      <td>4.8</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>1096 rows × 28 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_T_climatology</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>-2.100000</td>
+      <td>16.9</td>
+      <td>-26.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.712941</td>
+      <td>24.9</td>
+      <td>-24.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.455914</td>
+      <td>26.8</td>
+      <td>-16.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.302222</td>
+      <td>30.6</td>
+      <td>-11.3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>14.850538</td>
+      <td>33.4</td>
+      <td>-1.6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>18.733333</td>
+      <td>33.8</td>
+      <td>3.4</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>22.054839</td>
+      <td>35.7</td>
+      <td>8.2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>21.410753</td>
+      <td>34.5</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>18.057778</td>
+      <td>32.7</td>
+      <td>0.3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11.938462</td>
+      <td>29.4</td>
+      <td>-4.1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4.097778</td>
+      <td>22.2</td>
+      <td>-15.9</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-1.069892</td>
+      <td>16.9</td>
+      <td>-21.8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">57</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">anomaly</span>
+
+<span class="ne">NameError</span>: name &#39;anomaly&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="c1">#(x - x.mean())#/x.std()</span>
+
+<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
+<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="c1">#/x.std()</span>
+
+<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
+<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
+<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="resampling">
+<h3>Resampling<a class="headerlink" href="#resampling" title="Link to this heading">#</a></h3>
+<p>Another common operation is to change the resolution of a dataset by resampling in time. Pandas exposes this through the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#resampling">resample</a> function. The resample periods are specified using pandas <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">offset index</a> syntax.</p>
+<p>Below we resample the dataset by taking the mean over each month.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like with <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we can apply any aggregation function to our <code class="docutils literal notranslate"><span class="pre">resample</span></code> operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rolling-operations">
+<h3>Rolling Operations<a class="headerlink" href="#rolling-operations" title="Link to this heading">#</a></h3>
+<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">centered</span></code> to tell pandas whether to center the operation around the midpoint of the window.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;triang&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="basic_pandas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pandas Fundamentals</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../assignments/Pandas1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 1: Pandas Fundamentals with Earthquake Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-method">The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-grouping">Time Grouping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-anomalies">Calculating anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dhruv Balwada & Kara Lamb
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
