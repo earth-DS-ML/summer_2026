@@ -10,8 +10,12 @@ An introduction to basic Unix commands and the file system.
 
 Several commands are frequently used to create, inspect, rename, and delete files and directories.
 
-To get started, open a terminal using the JupyterLab launcher. You will see
-something like this.
+To get started, open a terminal in your environment:
+
+- **On the LEAP JupyterHub**: use the JupyterLab launcher (or *File → New → Terminal*).
+- **On Google Colab**: open the file browser sidebar (folder icon), then click the terminal icon at the bottom.
+
+You will see something like this.
 
 ~~~
 (notebook) jovyan@jupyter-dhruvbalwada:~$

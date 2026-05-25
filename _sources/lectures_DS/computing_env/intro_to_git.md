@@ -28,6 +28,8 @@ Here we simply enumerate the most common git commands.
 
 ## Summary of useful Git commands
 
+These commands are run in a terminal — JupyterLab's terminal on LEAP, or Colab's terminal (open the file browser sidebar → click the terminal icon at the bottom).
+
 Set up your username and email
 
     git config --global user.name "Ryan Abernathey"
@@ -59,16 +61,17 @@ Revert a file to an earlier version:
 
     git checkout <commit tag> <filenames>
 
-## Using Git / GitHub from remote JupyterHub
+## Pushing to GitHub from your environment
 
-The recommended way to move code in and out of a remote hub is via git / GitHub.
-You should clone your project repo from the terminal and use git pull / git push to update and push changes.
-In order to push data to GitHub from the hub, you will need to set up GitHub authentication.
-[gh-scoped-creds](https://github.com/yuvipanda/gh-scoped-creds/) should be already setup
-on your 2i2c managed LEAP JupyterHub, and we shall use that to authenticate to GitHub for
-push / pull access.
+The recommended way to move code between your working environment (the LEAP JupyterHub or Colab) and GitHub is via git. You should clone your project repos with `git clone` and use `git pull` / `git push` to keep things in sync.
 
-Open a terminal in JupyterHub, run `gh-scoped-creds` and follow the prompts.
+GitHub requires authentication for `git push` (and for `git clone` on private repos). The exact setup depends on which environment you're working in.
+
+### From the LEAP JupyterHub: `gh-scoped-creds`
+
+[gh-scoped-creds](https://github.com/yuvipanda/gh-scoped-creds/) is preconfigured on the 2i2c-managed LEAP JupyterHub.
+
+Open a terminal in JupyterHub, run `gh-scoped-creds`, and follow the prompts.
 
 Alternatively, in a notebook, run the following code and follow the prompts:
 
@@ -77,15 +80,46 @@ import gh_scoped_creds
 %gh_scoped_creds
 ```
 
-You should now be able to push to GitHub from the hub! These credentials will expire after
-8 hours (or whenever your JupyterHub server stops), and you'll have to repeat these steps
-to fetch a fresh set of credentials. Once you authenticate, you'll be provided with a link
-to a [GitHub App](https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps)
-that you have to [install](https://docs.github.com/en/developers/apps/managing-github-apps/installing-github-apps)
-on the repositories you want to be able to push to from this particular JupyterHub. You only
-need to do this once per JupyterHub, and can revoke access any time. You can always provide
-access to your own personal repositories, but might need approval from admins of GitHub
-organizations if you want to push to repos in that organization.
+You should now be able to push to GitHub from the hub. These credentials will expire after 8 hours (or whenever your JupyterHub server stops), and you'll have to repeat these steps to fetch a fresh set of credentials. Once you authenticate, you'll be provided with a link to a [GitHub App](https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps) that you have to [install](https://docs.github.com/en/developers/apps/managing-github-apps/installing-github-apps) on the repositories you want to be able to push to from this particular JupyterHub. You only need to do this once per JupyterHub, and can revoke access any time. You can always provide access to your own personal repositories, but might need approval from admins of GitHub organizations if you want to push to repos in that organization.
+
+### From Google Colab: Personal Access Tokens
+
+```{warning}
+The Colab auth steps below are a working draft. Walk through them in a real Colab session and confirm each step still works before relying on them — GitHub's settings UI changes occasionally, and so do Colab's defaults.
+```
+
+On Colab, the `gh-scoped-creds` flow isn't available. Instead, you'll generate a **Personal Access Token (PAT)** once on GitHub and use it as your password when git asks for one.
+
+**One-time setup on GitHub:**
+
+1. Go to [github.com/settings/tokens](https://github.com/settings/tokens) (*Settings → Developer settings → Personal access tokens → Tokens (classic)*).
+2. Click *Generate new token (classic)*.
+3. Give it a name like `colab-clmt5405`, set an expiration (e.g., 90 days), and check the `repo` scope.
+4. Click *Generate token* and **copy the token immediately** — GitHub will only show it to you once.
+5. Save it in a password manager or another safe place.
+
+**Using it in Colab:**
+
+After cloning your repo with the HTTPS URL, when you run `!git push origin main`, Colab will prompt:
+
+```
+Username for 'https://github.com': <your-github-username>
+Password for 'https://...github.com': <paste your PAT>
+```
+
+Use your **GitHub username** as the username and **paste the PAT** as the password.
+
+To avoid pasting on every push within the same Colab session, run once:
+
+```
+!git config --global credential.helper store
+```
+
+This caches credentials to a plaintext file on the Colab runtime, which is erased when the runtime dies — so you'll re-paste once per new Colab session.
+
+```{warning}
+**Never commit your PAT to a public repo.** Treat it like a password — if it appears in any committed file, GitHub will detect and revoke it.
+```
 
 
 ## Collaborating with Git and Github

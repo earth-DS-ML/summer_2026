@@ -170,7 +170,8 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="jupyterlab.html">Intro to JupyterLab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to Git for Version Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assignment1.html">Assignment 1: Files, Git, and Github</a></li>
@@ -409,7 +410,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-useful-git-commands">Summary of useful Git commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-github-from-remote-jupyterhub">Using Git / GitHub from remote JupyterHub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-to-github-from-your-environment">Pushing to GitHub from your environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-leap-jupyterhub-gh-scoped-creds">From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-google-colab-personal-access-tokens">From Google Colab: Personal Access Tokens</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-git-and-github">Collaborating with Git and Github</a></li>
 </ul>
             </nav>
@@ -448,6 +453,7 @@ Here we simply enumerate the most common git commands.</p>
 </section>
 <section id="summary-of-useful-git-commands">
 <h2>Summary of useful Git commands<a class="headerlink" href="#summary-of-useful-git-commands" title="Link to this heading">#</a></h2>
+<p>These commands are run in a terminal — JupyterLab’s terminal on LEAP, or Colab’s terminal (open the file browser sidebar → click the terminal icon at the bottom).</p>
 <p>Set up your username and email</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global user.name &quot;Ryan Abernathey&quot;
 git config --global user.email &quot;rpa@ldeo.columbia.edu&quot;
@@ -477,29 +483,53 @@ git diff      # view file content differences
 </pre></div>
 </div>
 </section>
-<section id="using-git-github-from-remote-jupyterhub">
-<h2>Using Git / GitHub from remote JupyterHub<a class="headerlink" href="#using-git-github-from-remote-jupyterhub" title="Link to this heading">#</a></h2>
-<p>The recommended way to move code in and out of a remote hub is via git / GitHub.
-You should clone your project repo from the terminal and use git pull / git push to update and push changes.
-In order to push data to GitHub from the hub, you will need to set up GitHub authentication.
-<a class="reference external" href="https://github.com/yuvipanda/gh-scoped-creds/">gh-scoped-creds</a> should be already setup
-on your 2i2c managed LEAP JupyterHub, and we shall use that to authenticate to GitHub for
-push / pull access.</p>
-<p>Open a terminal in JupyterHub, run <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code> and follow the prompts.</p>
+<section id="pushing-to-github-from-your-environment">
+<h2>Pushing to GitHub from your environment<a class="headerlink" href="#pushing-to-github-from-your-environment" title="Link to this heading">#</a></h2>
+<p>The recommended way to move code between your working environment (the LEAP JupyterHub or Colab) and GitHub is via git. You should clone your project repos with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> and use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> to keep things in sync.</p>
+<p>GitHub requires authentication for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (and for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> on private repos). The exact setup depends on which environment you’re working in.</p>
+<section id="from-the-leap-jupyterhub-gh-scoped-creds">
+<h3>From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code><a class="headerlink" href="#from-the-leap-jupyterhub-gh-scoped-creds" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://github.com/yuvipanda/gh-scoped-creds/">gh-scoped-creds</a> is preconfigured on the 2i2c-managed LEAP JupyterHub.</p>
+<p>Open a terminal in JupyterHub, run <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code>, and follow the prompts.</p>
 <p>Alternatively, in a notebook, run the following code and follow the prompts:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gh_scoped_creds</span>
 <span class="o">%</span><span class="n">gh_scoped_creds</span>
 </pre></div>
 </div>
-<p>You should now be able to push to GitHub from the hub! These credentials will expire after
-8 hours (or whenever your JupyterHub server stops), and you’ll have to repeat these steps
-to fetch a fresh set of credentials. Once you authenticate, you’ll be provided with a link
-to a <a class="reference external" href="https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps">GitHub App</a>
-that you have to <a class="reference external" href="https://docs.github.com/en/developers/apps/managing-github-apps/installing-github-apps">install</a>
-on the repositories you want to be able to push to from this particular JupyterHub. You only
-need to do this once per JupyterHub, and can revoke access any time. You can always provide
-access to your own personal repositories, but might need approval from admins of GitHub
-organizations if you want to push to repos in that organization.</p>
+<p>You should now be able to push to GitHub from the hub. These credentials will expire after 8 hours (or whenever your JupyterHub server stops), and you’ll have to repeat these steps to fetch a fresh set of credentials. Once you authenticate, you’ll be provided with a link to a <a class="reference external" href="https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps">GitHub App</a> that you have to <a class="reference external" href="https://docs.github.com/en/developers/apps/managing-github-apps/installing-github-apps">install</a> on the repositories you want to be able to push to from this particular JupyterHub. You only need to do this once per JupyterHub, and can revoke access any time. You can always provide access to your own personal repositories, but might need approval from admins of GitHub organizations if you want to push to repos in that organization.</p>
+</section>
+<section id="from-google-colab-personal-access-tokens">
+<h3>From Google Colab: Personal Access Tokens<a class="headerlink" href="#from-google-colab-personal-access-tokens" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Colab auth steps below are a working draft. Walk through them in a real Colab session and confirm each step still works before relying on them — GitHub’s settings UI changes occasionally, and so do Colab’s defaults.</p>
+</div>
+<p>On Colab, the <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code> flow isn’t available. Instead, you’ll generate a <strong>Personal Access Token (PAT)</strong> once on GitHub and use it as your password when git asks for one.</p>
+<p><strong>One-time setup on GitHub:</strong></p>
+<ol class="arabic simple">
+<li><p>Go to <a class="reference external" href="https://github.com/settings/tokens">github.com/settings/tokens</a> (<em>Settings → Developer settings → Personal access tokens → Tokens (classic)</em>).</p></li>
+<li><p>Click <em>Generate new token (classic)</em>.</p></li>
+<li><p>Give it a name like <code class="docutils literal notranslate"><span class="pre">colab-clmt5405</span></code>, set an expiration (e.g., 90 days), and check the <code class="docutils literal notranslate"><span class="pre">repo</span></code> scope.</p></li>
+<li><p>Click <em>Generate token</em> and <strong>copy the token immediately</strong> — GitHub will only show it to you once.</p></li>
+<li><p>Save it in a password manager or another safe place.</p></li>
+</ol>
+<p><strong>Using it in Colab:</strong></p>
+<p>After cloning your repo with the HTTPS URL, when you run <code class="docutils literal notranslate"><span class="pre">!git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">main</span></code>, Colab will prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Username</span> <span class="k">for</span> <span class="s1">&#39;https://github.com&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">github</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;</span>
+<span class="n">Password</span> <span class="k">for</span> <span class="s1">&#39;https://...github.com&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">paste</span> <span class="n">your</span> <span class="n">PAT</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Use your <strong>GitHub username</strong> as the username and <strong>paste the PAT</strong> as the password.</p>
+<p>To avoid pasting on every push within the same Colab session, run once:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!git config --global credential.helper store
+</pre></div>
+</div>
+<p>This caches credentials to a plaintext file on the Colab runtime, which is erased when the runtime dies — so you’ll re-paste once per new Colab session.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Never commit your PAT to a public repo.</strong> Treat it like a password — if it appears in any committed file, GitHub will detect and revoke it.</p>
+</div>
+</section>
 </section>
 <section id="collaborating-with-git-and-github">
 <h2>Collaborating with Git and Github<a class="headerlink" href="#collaborating-with-git-and-github" title="Link to this heading">#</a></h2>
@@ -598,7 +628,11 @@ This is an excellent way to move code in and out of your cloud-based environment
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-useful-git-commands">Summary of useful Git commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-github-from-remote-jupyterhub">Using Git / GitHub from remote JupyterHub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-to-github-from-your-environment">Pushing to GitHub from your environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-leap-jupyterhub-gh-scoped-creds">From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-google-colab-personal-access-tokens">From Google Colab: Personal Access Tokens</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-git-and-github">Collaborating with Git and Github</a></li>
 </ul>
   </nav></div>
