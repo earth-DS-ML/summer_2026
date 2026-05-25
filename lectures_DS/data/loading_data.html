@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; Earth Data Science and Machine Learning</title>
+    <title>Loading data &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/computing_env/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/data/loading_data';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Intro to JupyterLab and Colab" href="jupyterlab_and_colab.html" />
-    <link rel="prev" title="Welcome to Earth Data Science and Machine Learning Course Series" href="../../intro.html" />
+    <link rel="next" title="Assignment 2: Explore a climate dataset" href="assignment2.html" />
+    <link rel="prev" title="Formats and metadata" href="formats_and_metadata.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -169,19 +169,19 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_git.html">Intro to Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment2.html">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
@@ -295,7 +295,7 @@
       
       
       
-      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/computing_env/overview.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/data/loading_data.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -325,7 +325,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/computing_env/overview.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/data/loading_data.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -401,7 +401,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
+    <h1>Loading data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,8 +411,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-over-http-pandas-read-csv">1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-over-opendap-xarray-open-dataset">2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file-from-zenodo-by-doi-pooch">3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-else-to-find-data">Where else to find data</a></li>
 </ul>
             </nav>
         </div>
@@ -424,31 +427,118 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>Here you’ll set up the tools you’ll use for the rest of the course: the cloud-based JupyterHub where you’ll do most of your work, the Unix shell for navigating files and running commands, and Git/GitHub for version control and assignment submission.</p>
-<section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p>By the end of this module, you should be able to:</p>
-<ol class="arabic simple">
-<li><p><strong>Use the course’s working environment</strong> — JupyterLab on the LEAP hub (primary) or Google Colab as a fallback — to create and edit notebooks.</p></li>
-<li><p><strong>Navigate the file system</strong> using shell commands — <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, and paths (relative, absolute, <code class="docutils literal notranslate"><span class="pre">~</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">..</span></code>).</p></li>
-<li><p><strong>Create, modify, and remove files and directories</strong> using <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>, and <code class="docutils literal notranslate"><span class="pre">rm</span></code> — and understand why “deleted is forever” on the shell.</p></li>
-<li><p><strong>Explain why version control exists</strong> and what problem it solves.</p></li>
-<li><p><strong>Track changes with git</strong> — <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code>, and inspect history with <code class="docutils literal notranslate"><span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">log</span></code>.</p></li>
-<li><p><strong>Push code to GitHub</strong> from your environment.</p></li>
-<li><p><strong>Set up your assignments repository</strong> and submit work using the course’s week-folder pattern.</p></li>
-</ol>
-<p>Use this list to check your understanding before moving on. If any item feels uncertain, the page that covers it is linked below.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="loading-data">
+<h1>Loading data<a class="headerlink" href="#loading-data" title="Link to this heading">#</a></h1>
+<p>This page walks through <strong>three different ways to get data into Python</strong>, each suited to a different kind of source. The point isn’t to learn the API of any one tool — you’ll meet <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">xarray</span></code> properly in later modules — but to see that “data access” is not one thing. Different sources call for different approaches.</p>
+<p>Why programmatic access matters: <strong>manual download steps break reproducibility</strong>. If your code loads data from a URL or DOI directly, anyone running it (including future-you) gets the same data — no guessing about which file you used or where you stored it.</p>
+<p>For each example below, <strong>open a new notebook in your environment</strong> and copy-paste the code into a cell to run it. Watch what comes back.</p>
+<section id="csv-over-http-pandas-read-csv">
+<h2>1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code><a class="headerlink" href="#csv-over-http-pandas-read-csv" title="Link to this heading">#</a></h2>
+<p>The simplest case: a CSV file sitting at a public URL. <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code> can read directly from a URL without you having to download it first.</p>
+<p>We’ll use the <a class="reference external" href="https://scrippsco2.ucsd.edu/">Scripps CO2 dataset</a> — atmospheric CO2 measurements from Mauna Loa, going back to 1958.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a code cell, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://scrippsco2.ucsd.edu/assets/data/atmospheric/stations/in_situ_co2/monthly/monthly_in_situ_co2_mlo.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">61</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You should see a table with year, month, date, and CO2 columns. Notice that you didn’t have to download anything to your computer — <code class="docutils literal notranslate"><span class="pre">pandas</span></code> streamed the data from the URL directly into memory.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">skiprows=61</span></code> argument tells pandas to skip the file’s 61-line header (which contains metadata and column descriptions, not data). Without it, pandas would try to parse the header as rows.</p>
+<blockquote>
+<div><p><em>Reference:</em> Why this works — most HTTP-served files are public and don’t require authentication, so <code class="docutils literal notranslate"><span class="pre">pandas</span></code> can fetch them with a plain GET request. For files behind logins or paywalls, you’d need additional setup.</p>
+</div></blockquote>
 </section>
-<section id="pages-in-this-section">
-<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
+<section id="netcdf-over-opendap-xarray-open-dataset">
+<h2>2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code><a class="headerlink" href="#netcdf-over-opendap-xarray-open-dataset" title="Link to this heading">#</a></h2>
+<p>For gridded scientific data (temperature, precipitation, sea-surface height, etc.), the standard format is <strong>NetCDF</strong>. The standard <em>protocol</em> for serving NetCDF files over the network is <strong>OPeNDAP</strong> — it lets you access just the parts of a large dataset you need, without downloading the whole file.</p>
+<p>We’ll use the <a class="reference external" href="https://iridl.ldeo.columbia.edu/">IRI Data Library</a>’s precipitation dataset — global monthly rain estimates.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a code cell, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://iridl.ldeo.columbia.edu/expert/SOURCES/.NOAA/.NCEP/.CPC/.UNIFIED_PRCP/.GAUGE_BASED/.GLOBAL/.v1p0/.Monthly/.RETRO/.rain/dods&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+<p>You’ll see a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object with dimensions <code class="docutils literal notranslate"><span class="pre">Y</span></code> (latitude), <code class="docutils literal notranslate"><span class="pre">X</span></code> (longitude), and <code class="docutils literal notranslate"><span class="pre">T</span></code> (time). This is <strong>a lot richer</strong> than a pandas DataFrame — it carries coordinates, units, and other metadata along with the data values.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">decode_times=False</span></code> argument is a workaround — the IRI server uses non-standard time encoding that xarray can’t auto-parse. You’ll see this kind of one-off fix often when working with real scientific datasets.</p>
+<blockquote>
+<div><p><em>Reference:</em> OPeNDAP is widely supported by NetCDF tools (xarray, the <code class="docutils literal notranslate"><span class="pre">netCDF4</span></code> library, ncview, etc.). Most major climate data providers (NOAA, NASA, ECMWF, IRI, …) serve their datasets over OPeNDAP.</p>
+</div></blockquote>
+</section>
+<section id="a-file-from-zenodo-by-doi-pooch">
+<h2>3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code><a class="headerlink" href="#a-file-from-zenodo-by-doi-pooch" title="Link to this heading">#</a></h2>
+<p>Sometimes you need to <strong>download</strong> the actual file — for example, to use it with a tool that doesn’t speak HTTP, or to work offline. The <a class="reference external" href="https://www.fatiando.org/pooch/">Pooch</a> library is the recommended tool for this — it caches the file locally, checks it against a hash to detect corruption, and re-uses the cached copy on later runs.</p>
+<p>The interesting case: pulling a file from a Zenodo dataset using its DOI. This is the FAIR-canonical way to access a published dataset.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a code cell, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">doi</span> <span class="o">=</span> <span class="s2">&quot;doi:10.5281/zenodo.5739406&quot;</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;wind_po_hrly.csv&quot;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">doi</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">known_hash</span><span class="o">=</span><span class="s2">&quot;md5:cf059b73d6831282c5580776ac07309a&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse the cached copy (and verify it hasn’t been corrupted). Notice the DOI in the URL — the dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>
+</div>
+<blockquote>
+<div><p><em>Reference:</em> Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3 buckets, FTP, etc.) and is the standard download manager in many scientific Python packages. See its <a class="reference external" href="https://www.fatiando.org/pooch/">documentation</a> for details.</p>
+</div></blockquote>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now seen three styles of data access:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Use it for</p></th>
+<th class="head"><p>Python tool</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pandas.read_csv(url)</span></code></p></td>
+<td><p>Small public CSVs over HTTP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xarray.open_dataset(opendap_url)</span></code></p></td>
+<td><p>Large gridded scientific data (NetCDF) over the network</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xarray</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pooch.retrieve(...)</span></code></p></td>
+<td><p>Downloading specific files (e.g., by DOI from Zenodo)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pooch</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Most real workflows mix and match — you might use OPeNDAP to inspect a dataset, then Pooch to download a specific subset you need offline.</p>
+</section>
+<section id="where-else-to-find-data">
+<h2>Where else to find data<a class="headerlink" href="#where-else-to-find-data" title="Link to this heading">#</a></h2>
+<p>The three patterns above cover most situations you’ll meet in this course, but the data-access landscape has been changing fast. A lot of newer climate datasets are now hosted on <strong>cloud object storage</strong> (S3, GCS, Azure) rather than traditional HTTP or OPeNDAP servers. The cloud-native equivalent of NetCDF + OPeNDAP is <strong>Zarr</strong> stored on a cloud bucket, accessed with <code class="docutils literal notranslate"><span class="pre">xarray.open_zarr(...)</span></code> (with <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a> doing the network plumbing).</p>
+<p>You don’t need to use any of these for the course, but they’re worth knowing about — especially when you’re looking for project data:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="jupyterlab_and_colab.html"><span class="std std-doc">JupyterLab and Colab</span></a> — environments for running Python in your browser</p></li>
-<li><p><a class="reference internal" href="intro_to_unix.html"><span class="std std-doc">Intro to Unix</span></a> — navigating the file system and basic file operations</p></li>
-<li><p><a class="reference internal" href="intro_to_git.html"><span class="std std-doc">Intro to Git</span></a> — version control, GitHub workflow, and authentication for both environments</p></li>
-<li><p><a class="reference internal" href="assignment1.html"><span class="std std-doc">Assignment 1</span></a> — set up your assignments repository and submit your first week-folder</p></li>
+<li><p><strong><a class="reference external" href="https://app.earthmover.io/marketplace">Earthmover Marketplace</a></strong> — curated cloud-hosted climate datasets in Zarr / Icechunk format, designed for fast analysis-ready access.</p></li>
+<li><p><strong><a class="reference external" href="https://catalog.leap.columbia.edu/">LEAP Pangeo Catalog</a></strong> — datasets curated by the NSF LEAP STC (the same group that runs our course JupyterHub); often already on the hub for low-latency access.</p></li>
+<li><p><strong><a class="reference external" href="https://planetarycomputer.microsoft.com/">Microsoft Planetary Computer</a></strong> — large catalog of satellite imagery and climate datasets hosted on Azure, indexed via the <a class="reference external" href="https://stacspec.org/">STAC</a> spec.</p></li>
+<li><p><strong><a class="reference external" href="https://earthaccess.readthedocs.io/">NASA <code class="docutils literal notranslate"><span class="pre">earthaccess</span></code></a></strong> — Python package that handles auth + S3 access for NASA’s Earthdata Cloud.</p></li>
 </ul>
+<p>When you start looking for data for your final project, browsing these catalogs is often the fastest way to find something good — each comes with its own setup (a Python package, sometimes an account).</p>
 </section>
 </section>
 
@@ -465,7 +555,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures_DS/computing_env"
+            path: "./lectures_DS/data"
         },
         predefinedOutput: true
     }
@@ -483,20 +573,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../intro.html"
+       href="formats_and_metadata.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to Earth Data Science and Machine Learning Course Series</p>
+        <p class="prev-next-title">Formats and metadata</p>
       </div>
     </a>
     <a class="right-next"
-       href="jupyterlab_and_colab.html"
+       href="assignment2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Intro to JupyterLab and Colab</p>
+        <p class="prev-next-title">Assignment 2: Explore a climate dataset</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -518,8 +608,11 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-over-http-pandas-read-csv">1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-over-opendap-xarray-open-dataset">2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file-from-zenodo-by-doi-pooch">3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-else-to-find-data">Where else to find data</a></li>
 </ul>
   </nav></div>
 
