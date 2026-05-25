@@ -1,51 +1,96 @@
-# Assignment 1: Files, Git, and Github
+# Assignment 1: Files, Git, and GitHub
 
-## Create a Dummy Resume Repository
+The main goal of this assignment is to set up the GitHub repository where you'll submit every assignment in this course (Part 1), and to submit your first piece of work to it (Part 2). Every weekly assignment will live in its own folder inside that repo.
 
-Use JupyterLab to launch a terminal and use the terminal to do the following tasks:
+## Prerequisites
 
-1. Create a new directory called `resume` within your home directory
-2. Create an empty file within this directory called `Readme.md`
+Before starting, make sure you've worked through:
 
-Now use JupyterLab to edit the file:
+- [JupyterLab and Colab](./jupyterlab_and_colab.md) — you have a working environment.
+- [Intro to Unix](./intro_to_unix.md) — you're comfortable with `mkdir`, `cd`, `touch`.
+- [Intro to Git](./intro_to_git.md) — you've run the `git config` setup and authentication is working (`gh-scoped-creds` on LEAP, or a PAT on Colab).
 
-1. Navigate to the directory in the file browser
-1. Open `Readme.md` in the text editor
-1. Open `Readme.md` in in Markdown Preview
-1. Arrange these files side-by-side so you can see your document rendered
-1. Edit the file in the editor. Add the following information:
+## Part 1: Set up your assignments repository
 
-    1. Top level heading with your name
-    1. An image. It can be a photo of you or, if you prefer, a photo of your spirit animal.
-    1. Secondary heading entitled "Education"
-    1. A list of schools you attended, hyperlinked to the websites of those insitutions
+Every assignment you submit in this course will live in one private GitHub repository. Set it up now.
 
-1. Save the file
-    
-Now go back to the terminal and do the following:
+1. **Create a local directory and initialize git:**
 
-1. Initialize a new git repository in the `resume` directory
-1. Add the `Readme.md` file to the repository
-1. Create a new commit with a commit message
-1. Check the git log to see your commit history
-1. Go to GitHub and create a [new public repository](https://github.com/new) entitled `resume`
-1. Push your local resume repository to GitHub following the instructions.
-1. View your online resume at `http://github.com/<your github username>/resume`
+   ~~~
+   mkdir clmt5405-assignments
+   cd clmt5405-assignments
+   git init
+   ~~~
 
-Finally, go back to the editor and add a new subsection called "Research Interests" to your `Readme.md` file. Update your local git repository and push your changes to GitHub. Verify that the remote repository is updated.
+2. **Add a Readme and make a first commit:**
 
-To "hand in" this part of the assignment, put a link to it in the `Readme.md` file in the next part.
+   ~~~
+   echo "# My CLMT5405 assignments" > Readme.md
+   git add Readme.md
+   git commit -m "Initial commit"
+   ~~~
 
+3. **Create a private repository on GitHub:**
+   - Go to [github.com/new](https://github.com/new).
+   - Name it `clmt5405-assignments` (use exactly this name — don't vary the capitalization or punctuation).
+   - Choose **Private**.
+   - Don't initialize it with a README — leave it empty.
 
-## Create your Assignments Repository
+4. **Connect your local repo to GitHub and push:**
 
-Now that you know how to create a git repository, you should create your assignments repository.
+   ~~~
+   git remote add origin https://github.com/<your-username>/clmt5405-assignments.git
+   git push -u origin main
+   ~~~
 
-- Create a new directory called `rces-assignments` in your home directory.
-- Create a `Readme.md` markdown file that contains your name and a link to your "resume" repo.
-- Initialize a new git repository 
-- Add the file and make your first commit
-- Create a new **private** repository on GitHub called `rces-assignments`. (Call it exactly like that. Do not vary the spelling, capitalization, or punctuation.)
-- Push your `rces-assignments` repository to GitHub
-- On GitHub, go to "settings" -> "collaborators" and add `dhruvbalwada` and `ChhaviDixit`.
-- Push new commits to this repository whenever you are ready to hand in your assignments
+5. **Add the instructors as collaborators.** On GitHub, go to your repo → **Settings** → **Collaborators and teams** → **Add people**. Add:
+   - `dhruvbalwada` (Dhruv, instructor)
+   - `progga004` (Progga, TA)
+
+   They'll receive invitations to accept so they can see and grade your work.
+
+That's it for Part 1 — your assignments repo is ready, and you'll push commits to it to submit future assignments.
+
+## Part 2: Submit a "week 1" assignment to your repo
+
+Every week, you'll submit your assignment as a folder inside your `clmt5405-assignments` repo. Set up the pattern now by putting a small markdown resume into a `week1/` folder.
+
+1. **From inside your `clmt5405-assignments` repo, create the `week1` folder and an empty resume file:**
+
+   ~~~
+   mkdir week1
+   cd week1
+   touch resume.md
+   ~~~
+
+2. **Edit `resume.md`** to include:
+   - A top-level heading with your name.
+   - An image (a photo of you, or your spirit animal).
+   - A secondary heading `## Education`.
+   - A bulleted list of schools you attended, with each name hyperlinked to that institution's website.
+
+   Use whatever editor works in your environment — JupyterLab's text editor on LEAP (you can open Markdown Preview alongside to see the rendering), or `nano` / GitHub's web UI on Colab.
+
+3. **Commit and push:**
+
+   ~~~
+   cd ..
+   git status
+   git add week1/resume.md
+   git commit -m "Add week 1 assignment"
+   git push
+   ~~~
+
+4. **Verify on GitHub.** Refresh your `clmt5405-assignments` repo page. You should see a `week1/` folder; click into it to see your rendered `resume.md`.
+
+5. **Practice the iterative loop.** Add a `## Project Interests` section to `week1/resume.md` — some potential ideas of climate-data projects you might want to work on for this course. These are just starting thoughts; you can absolutely change your mind or refine them as the term goes on. Commit and push:
+
+   ~~~
+   git add week1/resume.md
+   git commit -m "Add Project Interests to week 1"
+   git push
+   ~~~
+
+   Refresh the GitHub page and confirm the new section appears.
+
+This is the pattern for every assignment in this course: make a week folder, add your work, commit, push.
