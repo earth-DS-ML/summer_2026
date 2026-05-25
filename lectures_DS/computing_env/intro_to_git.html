@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Intro to Git for Version Control &#8212; Earth Data Science and Machine Learning</title>
+    <title>Intro to Git &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -173,7 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to Git for Version Control</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assignment1.html">Assignment 1: Files, Git, and Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
@@ -398,7 +398,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Intro to Git for Version Control</h1>
+    <h1>Intro to Git</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,14 +408,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-useful-git-commands">Summary of useful Git commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-to-github-from-your-environment">Pushing to GitHub from your environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-version-control">Why version control?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-git">Setting up git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-changes-in-a-local-repo">Tracking changes in a local repo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-a-repo-git-init">Initialize a repo — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-state-git-status">Check the state — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stage-and-commit-a-file-git-add-and-git-commit">Stage and commit a file — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-change-and-commit-again">Make a change and commit again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-the-history-git-log">View the history — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-github">Connecting to GitHub</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-leap-jupyterhub-gh-scoped-creds">From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-google-colab-personal-access-tokens">From Google Colab: Personal Access Tokens</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-git-and-github">Collaborating with Git and Github</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-and-pulling">Pushing and pulling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -427,75 +436,149 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-git-for-version-control">
-<h1>Intro to Git for Version Control<a class="headerlink" href="#intro-to-git-for-version-control" title="Link to this heading">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Version_control"><em>Version control</em></a> is a powerful way to organize, back up, and share with collaborators your research computing code.
-A Verson control system keeps track of a set of files and saves snapshots (i.e. <em>versions</em>, <em>commits</em>) of the files at any point in time.
-Using version control allows you to confidently make changes to your code (any any other files), with the ability to roll back to any previous state. This help avoid filling our directories up with files that look like this:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>my_code.py
-my_code_version2.py
-my_code_version2B-RPA-edit.py
-my_code_FINAL_VERSION.py
-my_code_THIS_IS_ACTUALLY_THE FINAL VERSION.py
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-git">
+<h1>Intro to Git<a class="headerlink" href="#intro-to-git" title="Link to this heading">#</a></h1>
+<section id="why-version-control">
+<h2>Why version control?<a class="headerlink" href="#why-version-control" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Version_control"><em>Version control</em></a> is a way to keep track of changes to a set of files over time. A version control system takes <strong>snapshots</strong> of your project at points you choose, and lets you go back to any earlier snapshot — or compare two snapshots to see exactly what changed.</p>
+<p>Without version control, projects tend to grow tails like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_code</span><span class="o">.</span><span class="n">py</span>
+<span class="n">my_code_version2</span><span class="o">.</span><span class="n">py</span>
+<span class="n">my_code_version2B</span><span class="o">-</span><span class="n">RPA</span><span class="o">-</span><span class="n">edit</span><span class="o">.</span><span class="n">py</span>
+<span class="n">my_code_FINAL_VERSION</span><span class="o">.</span><span class="n">py</span>
+<span class="n">my_code_THIS_IS_ACTUALLY_THE_FINAL_VERSION</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>Version control also allows you to share code with collaborators, make simultaneous edits, and merge your changes in a systematic, controlled way.</p>
-<p>Version control has been used for a long time in software development.
-More recently, it has become an essential part of modern data and computational science.
-Our strong recommendation is that <em>all of your research code be stored in a version control system</em>.</p>
-<p>The tool we will be using for version control is called <a class="reference external" href="https://git-scm.com">Git</a>.
-Git is incredibly powerful–it also has a somewhat steep learning curve.
-Fortunately, in this class, we will only be using a small subset of what git can do, avoiding the more complex aspects.</p>
-<p>For a full-length tutorial, we recommend the article <a class="reference external" href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> on Software Carpentry website.
-Here we simply enumerate the most common git commands.</p>
+<p>Version control replaces all of that with a single file you keep editing, while the history of every change is recorded behind the scenes. It also lets you share code with collaborators, make simultaneous edits, and merge changes in a controlled way.</p>
+<p>The tool we’ll use is called <a class="reference external" href="https://git-scm.com">Git</a>. Git is powerful and has a somewhat steep learning curve, but in this class we’ll only use a small subset of it. That subset will get you very far.</p>
+<blockquote>
+<div><p><em>Reference:</em> For a deeper tutorial, see <a class="reference external" href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> on Software Carpentry.</p>
+</div></blockquote>
 </section>
-<section id="summary-of-useful-git-commands">
-<h2>Summary of useful Git commands<a class="headerlink" href="#summary-of-useful-git-commands" title="Link to this heading">#</a></h2>
-<p>These commands are run in a terminal — JupyterLab’s terminal on LEAP, or Colab’s terminal (open the file browser sidebar → click the terminal icon at the bottom).</p>
-<p>Set up your username and email</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global user.name &quot;Ryan Abernathey&quot;
-git config --global user.email &quot;rpa@ldeo.columbia.edu&quot;
+<section id="setting-up-git">
+<h2>Setting up git<a class="headerlink" href="#setting-up-git" title="Link to this heading">#</a></h2>
+<p>The first time you use git on a new machine (or a new LEAP or Colab session), tell git who you are. This name and email get attached to every snapshot you make.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Open a terminal and run these three commands, replacing the placeholders with your own name and the email associated with your GitHub account:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;you@example.com&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">init</span><span class="o">.</span><span class="n">defaultBranch</span> <span class="n">main</span>
 </pre></div>
 </div>
-<p>Create a new repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd my_project
-git init      
-</pre></div>
+<p>The last line tells git to call the default branch <code class="docutils literal notranslate"><span class="pre">main</span></code> (matching GitHub’s convention).</p>
 </div>
-<p>Stage files for addition to the repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git add &lt;filenames&gt;  
-</pre></div>
-</div>
-<p>Commit staged files:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git commit -m &quot;your brief commit message goes here&quot;
-</pre></div>
-</div>
-<p>Get information about your repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git status    # tells you what files are staged, which ones have been modified, are new,... )
-git log       # view the commit log
-git diff      # view file content differences
-</pre></div>
-</div>
-<p>Revert a file to an earlier version:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git checkout &lt;commit tag&gt; &lt;filenames&gt;
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On LEAP this setup persists across sessions, so you’ll only need to do it once. On Colab the runtime is ephemeral — your config disappears with the session — so you’ll need to re-run these commands each new Colab session.</p>
 </div>
 </section>
-<section id="pushing-to-github-from-your-environment">
-<h2>Pushing to GitHub from your environment<a class="headerlink" href="#pushing-to-github-from-your-environment" title="Link to this heading">#</a></h2>
-<p>The recommended way to move code between your working environment (the LEAP JupyterHub or Colab) and GitHub is via git. You should clone your project repos with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> and use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> to keep things in sync.</p>
-<p>GitHub requires authentication for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (and for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> on private repos). The exact setup depends on which environment you’re working in.</p>
+<section id="tracking-changes-in-a-local-repo">
+<h2>Tracking changes in a local repo<a class="headerlink" href="#tracking-changes-in-a-local-repo" title="Link to this heading">#</a></h2>
+<p>The basic git workflow has three “places” where files live:</p>
+<ol class="arabic simple">
+<li><p><strong>Working directory</strong> — your project files as they actually are right now.</p></li>
+<li><p><strong>Staging area</strong> — files you’ve marked as “ready to be committed” (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>).</p></li>
+<li><p><strong>Repository</strong> — the recorded history of committed snapshots (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>).</p></li>
+</ol>
+<p>You move files from working → staging with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, and from staging → repository with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>. Let’s walk through the full cycle on a small practice repo.</p>
+<section id="initialize-a-repo-git-init">
+<h3>Initialize a repo — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code><a class="headerlink" href="#initialize-a-repo-git-init" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> turns a regular directory into a git repository. It creates a hidden <code class="docutils literal notranslate"><span class="pre">.git</span></code> folder where the history is stored.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create a fresh directory to play with, then initialize it as a git repo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">git_practice</span>
+<span class="n">cd</span> <span class="n">git_practice</span>
+<span class="n">git</span> <span class="n">init</span>
+</pre></div>
+</div>
+<p>You should see a message like <code class="docutils literal notranslate"><span class="pre">Initialized</span> <span class="pre">empty</span> <span class="pre">Git</span> <span class="pre">repository</span> <span class="pre">in</span> <span class="pre">/.../git_practice/.git/</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> reports <code class="docutils literal notranslate"><span class="pre">master</span></code> as the initial branch name (instead of <code class="docutils literal notranslate"><span class="pre">main</span></code>), it means <code class="docutils literal notranslate"><span class="pre">init.defaultBranch</span></code> wasn’t set in your session — common on Colab if you didn’t run the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> commands above. Either re-run those config commands and rename the branch with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-m</span> <span class="pre">main</span></code>, or just continue using <code class="docutils literal notranslate"><span class="pre">master</span></code> (the workflow is identical, but our examples below say <code class="docutils literal notranslate"><span class="pre">main</span></code>).</p>
+</div>
+</section>
+<section id="check-the-state-git-status">
+<h3>Check the state — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code><a class="headerlink" href="#check-the-state-git-status" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> tells you what’s in your working directory, what’s staged, and what’s already committed. It’s the command you’ll run most often — whenever you’re unsure where you stand.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> in <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. You should see “On branch main” and “No commits yet” — the repo exists but you haven’t put anything in it yet.</p>
+</div>
+</section>
+<section id="stage-and-commit-a-file-git-add-and-git-commit">
+<h3>Stage and commit a file — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code><a class="headerlink" href="#stage-and-commit-a-file-git-add-and-git-commit" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;filename&gt;</span></code> stages a file for the next commit. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;message&quot;</span></code> records the staged files as a snapshot, with a short message describing the change.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>We’ll create a file, stage it, and commit it — in three steps. <strong>Run each command, then look at the output before moving on.</strong></p>
+<p><strong>1. Create the file:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>You should see <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> listed as <strong>untracked</strong> — git knows it’s there but isn’t tracking it yet.</p>
+<p><strong>2. Stage it:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> shows up as a <strong>staged change</strong>, ready to be committed.</p>
+<p><strong>3. Commit it:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add an empty hello file&quot;</span>
+<span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>The output should say “nothing to commit, working tree clean” — your snapshot is now part of the repo’s history.</p>
+</div>
+</section>
+<section id="make-a-change-and-commit-again">
+<h3>Make a change and commit again<a class="headerlink" href="#make-a-change-and-commit-again" title="Link to this heading">#</a></h3>
+<p>The real value of git shows up once you have a history of commits, not just one.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Add some content to <code class="docutils literal notranslate"><span class="pre">hello.md</span></code>. The quickest way that works in any environment is shell redirection — the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol sends a command’s output into a file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;# My first file&quot;</span> <span class="o">&gt;</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+<p>(On LEAP you can also open <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> in JupyterLab’s text editor if you prefer.)</p>
+<p>To check that the line was written, you can print the file’s contents in the terminal with <code class="docutils literal notranslate"><span class="pre">more</span> <span class="pre">hello.md</span></code> (or <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">hello.md</span></code>).</p>
+<p>Then stage and commit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add a heading&quot;</span>
+</pre></div>
+</div>
+<p>You now have two commits recording the file’s history.</p>
+</div>
+</section>
+<section id="view-the-history-git-log">
+<h3>View the history — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code><a class="headerlink" href="#view-the-history-git-log" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> shows the sequence of commits, newest first.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> in <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. You should see your two commits with their messages, timestamps, and author info (the name and email you set with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>). If the output opens in a pager, press <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit.</p>
+</div>
+<blockquote>
+<div><p><em>Reference:</em> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> shows exactly which lines changed between commits, or between your working directory and the last commit. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;commit-hash&gt;</span> <span class="pre">&lt;filename&gt;</span></code> restores a file to an earlier version. You won’t need these often at first, but they exist when you want to dig into changes or roll back.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="connecting-to-github">
+<h2>Connecting to GitHub<a class="headerlink" href="#connecting-to-github" title="Link to this heading">#</a></h2>
+<p><strong>Git</strong> is the version-control tool itself — it runs entirely on your local machine. <strong>GitHub</strong> is a separate service that hosts git repositories online and adds collaboration features (a web interface, issue tracking, code review). Git works fine without GitHub, but GitHub gives you a place to back up your work, share it, and collaborate. Other similar services exist (GitLab, Bitbucket); GitHub is the most common in research and open source.</p>
+<p>So far your commits have lived only in the <code class="docutils literal notranslate"><span class="pre">git_practice</span></code> directory on this machine. A <strong>remote</strong> is a copy of your repository hosted elsewhere — typically on GitHub. Pushing sends your local commits to the remote, and pulling brings new commits from the remote down to your local copy. This is how you back up your work, share it, and collaborate.</p>
+<p>Before you can push, you need to authenticate to GitHub. The authentication setup depends on your environment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both authentication methods below assume you already have a GitHub account — you would have needed one for the LEAP JupyterHub anyway. If you don’t have one, sign up free at <a class="reference external" href="https://github.com">github.com</a> (use an email you’ll keep access to).</p>
+</div>
 <section id="from-the-leap-jupyterhub-gh-scoped-creds">
 <h3>From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code><a class="headerlink" href="#from-the-leap-jupyterhub-gh-scoped-creds" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="https://github.com/yuvipanda/gh-scoped-creds/">gh-scoped-creds</a> is preconfigured on the 2i2c-managed LEAP JupyterHub.</p>
 <p>Open a terminal in JupyterHub, run <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code>, and follow the prompts.</p>
-<p>Alternatively, in a notebook, run the following code and follow the prompts:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gh_scoped_creds</span>
-<span class="o">%</span><span class="n">gh_scoped_creds</span>
-</pre></div>
-</div>
 <p>You should now be able to push to GitHub from the hub. These credentials will expire after 8 hours (or whenever your JupyterHub server stops), and you’ll have to repeat these steps to fetch a fresh set of credentials. Once you authenticate, you’ll be provided with a link to a <a class="reference external" href="https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps">GitHub App</a> that you have to <a class="reference external" href="https://docs.github.com/en/developers/apps/managing-github-apps/installing-github-apps">install</a> on the repositories you want to be able to push to from this particular JupyterHub. You only need to do this once per JupyterHub, and can revoke access any time. You can always provide access to your own personal repositories, but might need approval from admins of GitHub organizations if you want to push to repos in that organization.</p>
 </section>
 <section id="from-google-colab-personal-access-tokens">
@@ -531,32 +614,54 @@ git diff      # view file content differences
 </div>
 </section>
 </section>
-<section id="collaborating-with-git-and-github">
-<h2>Collaborating with Git and Github<a class="headerlink" href="#collaborating-with-git-and-github" title="Link to this heading">#</a></h2>
-<ul>
-<li><p>Create a new repository on GitHub</p></li>
-<li><p>Follow the instructions and run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">&lt;repo</span> <span class="pre">url&gt;</span></code> on your local repo</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In order to authenticate with your SSH key from the previous section, you need use SSH-style GitHub urls.
-When setting up a new repo, underneath where it says “Quick setup — if you’ve done this kind of thing before”,
-make sure you click the SSH box. The repo URL should look something like <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:rabernat/planets.git</span></code>
-(NOT <code class="docutils literal notranslate"><span class="pre">https://github.com/rabernat/planets.git</span></code>).</p>
-<p>If you already added a remote with <code class="docutils literal notranslate"><span class="pre">http://</span></code>, you can remove it by typing</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">rm</span> <span class="n">origin</span>
+<section id="pushing-and-pulling">
+<h2>Pushing and pulling<a class="headerlink" href="#pushing-and-pulling" title="Link to this heading">#</a></h2>
+<p>Once authentication is set up, you can connect your local <code class="docutils literal notranslate"><span class="pre">git_practice</span></code> repo to a GitHub repository.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<ol class="arabic">
+<li><p>On GitHub, <a class="reference external" href="https://github.com/new">create a new empty repository</a> called <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. Don’t add a README or any other files — leave it completely empty.</p></li>
+<li><p>In your terminal, in the <code class="docutils literal notranslate"><span class="pre">git_practice</span></code> directory, add the GitHub repo as a remote (replace <code class="docutils literal notranslate"><span class="pre">your-username</span></code> with your GitHub username):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">/</span><span class="n">git_practice</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p>(assuming the name of your remote is indeed <code class="docutils literal notranslate"><span class="pre">origin</span></code>.)</p>
-</div>
 </li>
-<li><p>make your changes and stage them with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>,</p></li>
-<li><p>commit your changes with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span></code>, and</p></li>
-<li><p>upload the changes to GitHub with<code class="docutils literal notranslate"> <span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">main</span></code></p></li>
-<li><p>update your local repo with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">main</span></code></p></li>
+<li><p>Push your commits to GitHub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">main</span></code> part tells git to remember this remote and branch as the default, so future <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> work without arguments.</p>
+</li>
+<li><p>Refresh your GitHub repo page — you should see <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> and your two commits.</p></li>
+</ol>
+</div>
+<p>To bring changes from the remote back down (e.g., a collaborator pushed something, or you edited the file directly on GitHub), use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>:</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>On the GitHub website, open <code class="docutils literal notranslate"><span class="pre">hello.md</span></code>, edit it (add a new line), and commit the change through the web UI. Then back in your terminal, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+<p>Your local copy should now have the change you made on GitHub.</p>
+</div>
+<blockquote>
+<div><p><em>Reference:</em> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;repo-url&gt;</span></code> copies an existing GitHub repository down to your local machine. You’ll use this for any repo someone else (or a past version of yourself) created on GitHub — including the assignments repo you’ll set up next.</p>
+</div></blockquote>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>You’ve now used the basic git workflow:</p>
+<ul class="simple">
+<li><p><strong>One-time setup:</strong> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code></p></li>
+<li><p><strong>Local tracking:</strong> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></p></li>
+<li><p><strong>Remote sync:</strong> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> (with authentication via <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code> on LEAP or PAT on Colab)</p></li>
 </ul>
-<p>All of the above commands are available from our course’s cloud-based JupyterHub.
-This is an excellent way to move code in and out of your cloud-based environment
-(while simultaneously backing it up.)</p>
+<p>This is enough to put any project under version control and share it through GitHub. There’s much more to git — branching, merging, rebasing, conflict resolution — but you’ll learn those when you need them. For a fuller tutorial, see the <a class="reference external" href="http://swcarpentry.github.io/git-novice/">Software Carpentry Git Lesson</a> this material is based on.</p>
+<p>When you’ve finished the exercises, you can clean up:</p>
+<ul class="simple">
+<li><p><strong>Locally</strong>: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code> out of <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>, then <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">git_practice</span></code>.</p></li>
+<li><p><strong>On GitHub</strong>: go to your <code class="docutils literal notranslate"><span class="pre">git_practice</span></code> repo’s page, click the <strong>Settings</strong> tab, scroll to the bottom of the General page to the “Danger Zone,” click <strong>Delete this repository</strong>, and type the repo name to confirm.</p></li>
+</ul>
 </section>
 </section>
 
@@ -626,14 +731,23 @@ This is an excellent way to move code in and out of your cloud-based environment
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-useful-git-commands">Summary of useful Git commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-to-github-from-your-environment">Pushing to GitHub from your environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-version-control">Why version control?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-git">Setting up git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-changes-in-a-local-repo">Tracking changes in a local repo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-a-repo-git-init">Initialize a repo — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-state-git-status">Check the state — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stage-and-commit-a-file-git-add-and-git-commit">Stage and commit a file — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-change-and-commit-again">Make a change and commit again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-the-history-git-log">View the history — <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-github">Connecting to GitHub</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-leap-jupyterhub-gh-scoped-creds">From the LEAP JupyterHub: <code class="docutils literal notranslate"><span class="pre">gh-scoped-creds</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-google-colab-personal-access-tokens">From Google Colab: Personal Access Tokens</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-git-and-github">Collaborating with Git and Github</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-and-pulling">Pushing and pulling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
