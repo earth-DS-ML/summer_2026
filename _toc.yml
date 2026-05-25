@@ -13,7 +13,10 @@ parts:
     - file: lectures_DS/computing_env/assignment1
   - caption: Data
     chapters:
-    - file: lectures_DS/data/data
+    - file: lectures_DS/data/overview
+    - file: lectures_DS/data/formats_and_metadata
+    - file: lectures_DS/data/loading_data
+    - file: lectures_DS/data/assignment2
   - caption: The Core Python Language
     chapters:
     - file: lectures_DS/core_python/python_fundamentals
