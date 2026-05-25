@@ -11,16 +11,6 @@ This is the online home for the first of the two summer 2026 courses:
 - **Hours and location:** TuTh 9am–10:45am, 602 Northwest Corner
 - **Office hours:** TBD
 
-## History and Origins of the course
-Most of the content for CLMT5405 derives from previous versions of this course:
-
-- [Ryan Abernathey's 2021 book](https://earth-env-data-science.github.io/) — the original incarnation.
-- [Yutian Wu's 2024 repo](https://github.com/yutianwuldeo/GR6901) — a more recent update.
-- [Project Pythia](https://foundations.projectpythia.org/landing-page.html) — a separate but excellent companion resource.
-
-The [summer 2025 version of this course](https://earth-ds-ml.github.io/summer_2025/) is also available online for reference.
-
-
 ## Motivation and Scope
 
 Computing has become an indispensable tool for nearly all Earth and Environmental Scientists and Practitioners, but it doesn't usually appear in our curriculums.
@@ -96,5 +86,15 @@ The goal is to use AI to build understanding, not to paste solutions you can't e
 **What AI is good at, and what it isn't.** Chat-based AI is genuinely useful for explaining error messages, suggesting matplotlib syntax, walking through an unfamiliar library API, or summarizing what a function does. It is less reliable for judging whether your scientific result is correct, picking the right analysis for *your* data, catching subtle bugs in numerical or coordinate-system code, or knowing what "looks right" for a specific geophysical field. Treat AI as a fast, broadly-read but inexperienced collaborator — useful for the syntax layer, not a substitute for your own scientific judgment.
 
 **Your responsibilities.** You're responsible for understanding and being able to explain everything you submit. If you can't explain how a piece of code or analysis works, that's a signal to revisit the material — not to lean more heavily on AI.
+
+## History and Origins of the course
+
+Most of the content for CLMT5405 derives from previous versions of this course:
+
+- [Ryan Abernathey's 2021 book](https://earth-env-data-science.github.io/) — the original incarnation.
+- [Yutian Wu's 2024 repo](https://github.com/yutianwuldeo/GR6901) — a more recent update.
+- [Project Pythia](https://foundations.projectpythia.org/landing-page.html) — a separate but excellent companion resource.
+
+The [summer 2025 version of this course](https://earth-ds-ml.github.io/summer_2025/) is also available online for reference.
 
 
