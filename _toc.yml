@@ -6,7 +6,8 @@ root: intro
 parts:
   - caption: The Interactive Computing Environment
     chapters:
-    - file: lectures_DS/computing_env/jupyterlab
+    - file: lectures_DS/computing_env/overview
+    - file: lectures_DS/computing_env/jupyterlab_and_colab
     - file: lectures_DS/computing_env/intro_to_unix
     - file: lectures_DS/computing_env/intro_to_git
     - file: lectures_DS/computing_env/assignment1
