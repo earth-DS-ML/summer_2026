@@ -56,6 +56,17 @@ After completing all of the material, students should have the ability to:
 
 Each week, students complete some lectures and one homework assignment. Class time will be split between **instruction** — the instructor walking through new material while students code along — and **practice** — students working on assignments, asking questions, and interacting with peers. The exact balance will vary week to week depending on what we're covering. A final project at the end of the course serves as a capstone.
 
+## Assignments and grading
+
+Your grade in this course is based on:
+
+- **60%** — final project
+- **40%** — weekly assignments (both in-class and at-home)
+
+You'll submit each week's assignment as a folder (e.g., `week1/`, `week2/`) inside a private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md). Hand in by pushing commits to that repo.
+
+**Late policy:** assignments not turned in by the end of Monday night of the following week will receive a zero.
+
 ## Using AI in This Course
 
 AI tools like ChatGPT are now part of how people work with data. This course treats them as a tool you'll learn to use well — including where they help, where they don't, and what your own judgment still has to provide.

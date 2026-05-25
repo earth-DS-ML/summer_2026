@@ -195,18 +195,18 @@ On Colab, the `gh-scoped-creds` flow isn't available. Instead, you'll generate a
 
 After cloning your repo with the HTTPS URL, when you run `!git push origin main`, Colab will prompt:
 
-```
+~~~
 Username for 'https://github.com': <your-github-username>
 Password for 'https://...github.com': <paste your PAT>
-```
+~~~
 
 Use your **GitHub username** as the username and **paste the PAT** as the password.
 
 To avoid pasting on every push within the same Colab session, run once:
 
-```
+~~~
 !git config --global credential.helper store
-```
+~~~
 
 This caches credentials to a plaintext file on the Colab runtime, which is erased when the runtime dies — so you'll re-paste once per new Colab session.
 
@@ -251,7 +251,7 @@ git pull
 Your local copy should now have the change you made on GitHub.
 :::
 
-> *Reference:* `git clone <repo-url>` copies an existing GitHub repository down to your local machine. You'll use this for any repo someone else (or a past version of yourself) created on GitHub — including the assignments repo you'll set up next.
+> *Reference:* `git clone <repo-url>` copies an existing GitHub repository down to your local machine. You'll use this any time you want a local copy of a repo that already exists on GitHub.
 
 ## Summary
 
