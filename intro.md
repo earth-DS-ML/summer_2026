@@ -54,7 +54,7 @@ After completing all of the material, students should have the ability to:
 
 ## Course structure
 
-Each week, students complete some lectures and one homework assignment. Class time will be split between **instruction** — the instructor walking through new material while students code along — and **practice** — students working on assignments, asking questions, and interacting with peers. The exact balance will vary week to week depending on what we're covering. A final project at the end of the course serves as a capstone.
+Each week, students complete some lecture material and one homework assignment. Class time is **mostly hands-on practice**: students read the lecture material and work through exercises in their own environment, while the instructor and TA roam to answer questions and provide guidance. The instructor opens each session with a brief overview, and gives additional overviews mid-session when the material calls for it. The balance is intentionally weighted toward practice — you'll spend more class time doing things than listening.
 
 ## Assignments and grading
 
@@ -65,7 +65,13 @@ Your grade in this course is based on:
 
 You'll submit each week's assignment as a folder (e.g., `week1/`, `week2/`) inside a private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md). Hand in by pushing commits to that repo.
 
-**Late policy:** assignments not turned in by the end of Monday night of the following week will receive a zero.
+**Late policy:** all weekly assignments are due by the end of Sunday night of the following week — assignments not in by then receive a zero.
+
+## Final project
+
+A final project at the end of the course serves as a capstone, and counts for 60% of your grade. The [project requirements](./lectures_DS/project_require.md) page has the details.
+
+You don't need to worry about the project right away — Assignment 1 already nudges you to jot down some early ideas. Starting in week 2 we'll begin discussing projects more formally, and firm up a timeline (proposal, milestones, presentation) as the term progresses.
 
 ## Using AI in This Course
 
