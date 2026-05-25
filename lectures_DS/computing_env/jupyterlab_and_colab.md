@@ -1,6 +1,6 @@
 # Intro to JupyterLab and Colab
 
-This course gives you two browser-based environments for running Python and working with files: **JupyterLab** (via our cloud-based JupyterHub) and **Google Colab**. JupyterLab on the hub is the primary environment; Colab is a free fallback you can use any time — particularly useful in the first week before your hub account is provisioned, or if your laptop doesn't have a Unix shell (e.g., Windows without WSL).
+This course gives you two browser-based environments for running Python and working with files: **JupyterLab** (via our cloud-based JupyterHub) and **Google Colab**. JupyterLab on the hub is the primary environment; Colab is a free fallback you can use any time — particularly useful in the first few days before your hub account is provisioned, or if your laptop doesn't have a Unix shell (e.g., Windows without WSL).
 
 ## What is a Jupyter notebook?
 
@@ -54,9 +54,7 @@ One gotcha to keep in mind: the Colab runtime is ephemeral — files and install
 
 ## Python Environments
 
-On the LEAP hub everyone uses a common environment, which is inherited from these [docker images](https://github.com/pangeo-data/pangeo-docker-images/). Colab also provides a pre-installed scientific Python stack.
-
-A thorough description of how to manage your own environment when needed can be found in: https://earth-env-data-science.github.io/lectures/environment/python_environments.html
+You don't need to install or configure anything for this course — both LEAP and Colab come with a scientific Python stack already set up. If you continue using Python after this course, you'll want to learn how to manage your own environments; [this guide](https://earth-env-data-science.github.io/lectures/environment/python_environments.html) is a thorough introduction.
 
 ## In-class practice
 
@@ -66,7 +64,7 @@ Work through these in your environment of choice — LEAP if you have access, Co
 
 2. **Create a notebook.** Make a new Python notebook named `hello.ipynb`.
 
-3. **Run a code cell.** Type `print("Hello from " + "your environment here")` into a code cell and run it. Confirm the output appears beneath the cell.
+3. **Run a code cell.** Type `print("Hello, world!")` into a code cell and run it. Confirm the output appears beneath the cell.
 
 4. **Add a Markdown cell.** Insert a Markdown cell, write a top-level heading (e.g., `# My first notebook`) and a short paragraph below it. Render the cell and confirm the heading appears larger than the paragraph.
 
