@@ -188,8 +188,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organization and Packaging of Python Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 2: Basic Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
 <ul class="nav bd-sidenav">
@@ -213,9 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assignments/xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience Concepts</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience and Advanced Concepts</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">Quick survey of some other important concepts in geo-data-science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Packaging Python Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
 <ul class="nav bd-sidenav">
@@ -428,6 +429,16 @@
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-2-explore-a-climate-dataset">
 <h1>Assignment 2: Explore a climate dataset<a class="headerlink" href="#assignment-2-explore-a-climate-dataset" title="Link to this heading">#</a></h1>
 <p>Pick any climate-related dataset that interests you — could be something you’re considering for your final project, or just something you’re curious about. The point here is <strong>practice with the FAIR + access workflow</strong>, not a commitment to a specific project.</p>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the data-discovery and access skills from this section:</p>
+<ul class="simple">
+<li><p>Locate a dataset in a public scientific repository (Zenodo, NOAA, NASA, IRI, etc.)</p></li>
+<li><p>Document a dataset’s format, license, provenance, and FAIR-ness</p></li>
+<li><p>Load data into Python using <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code>, or <code class="docutils literal notranslate"><span class="pre">pooch.retrieve</span></code></p></li>
+<li><p>Submit work via the week-folder pattern in your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo</p></li>
+</ul>
+</div>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -553,7 +564,7 @@
   <div class="footer-item">
     
 <p class="component-author">
-By Dhruv Balwada
+By Dhruv Balwada & Kara Lamb
 </p>
 
   </div>
@@ -563,7 +574,7 @@ By Dhruv Balwada
 
   <p class="copyright">
     
-      © Copyright 2026, Dhruv Balwada.
+      © Copyright 2026, Dhruv Balwada &amp; Kara Lamb.
       <br/>
     
   </p>

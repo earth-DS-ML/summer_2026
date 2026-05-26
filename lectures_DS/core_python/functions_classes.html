@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/core_python/functions_classes';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Organization and Packaging of Python Projects" href="organization_and_packaging.html" />
+    <link rel="next" title="Organizing Python Projects" href="organization_and_packaging.html" />
     <link rel="prev" title="Python Fundamentals" href="python_fundamentals.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,8 +188,8 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Python Functions and Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="organization_and_packaging.html">Organization and Packaging of Python Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment3.html">Assignment 2: Basic Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
 <ul class="nav bd-sidenav">
@@ -213,9 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assignments/xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience Concepts</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience and Advanced Concepts</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">Quick survey of some other important concepts in geo-data-science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Packaging Python Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
 <ul class="nav bd-sidenav">
@@ -414,7 +415,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-vs-impure-functions">Pure vs. Impure Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces-and-scope">Namespaces and scope</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complex-function-fibonacci-sequence">A more complex function: Fibonacci Sequence</a></li>
 </ul>
 </li>
@@ -441,10 +442,14 @@ For example, if you find yourself cutting and pasting the same or similar lines 
 you probably need to define a <em>function</em> to encapsulate that code and make it reusable.
 An important principle in programming in <strong>DRY</strong>: “don’t repeat yourself”.
 Repetition is tedious and opens you up to errors. Strive for elegance and simplicity in your programs.</p>
+<div class="tip admonition">
+<p class="admonition-title">Working through this notebook</p>
+<p>This page is a Jupyter notebook. <strong>Download it</strong> using the ⬇ button in the top-right of the page, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. When you reach a <strong>Try it</strong> admonition, experiment in your own cells before moving on.</p>
+</div>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
-<p>Functions are a central part of advanced python programming. Functions take some inputs (“arguments”) and do something in response.
-Usually functions return something, but not always.</p>
+<p>A <strong>function</strong> is a named block of code that takes some inputs (called <strong>arguments</strong>), does something, and usually gives back a result (called the <strong>return value</strong>). Once you’ve defined a function, you can call it as many times as you like with different inputs, instead of copy-pasting the same code (the DRY principle from above).</p>
+<p>Defining a function uses the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword; calling it uses the function name followed by parentheses with the arguments inside.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function</span>
@@ -503,6 +508,7 @@ say_hello<span class="o">?</span>
 </div>
 </div>
 </div>
+<p>Functions get more useful when they take <strong>arguments</strong> — values passed in that the function can use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># take some arguments</span>
@@ -526,7 +532,8 @@ say_hello<span class="o">?</span>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<p>If we call this with a non-string argument like an integer, Python can’t concatenate it to <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">'</span></code> and raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>:</p>
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">say_hello_to</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -570,6 +577,8 @@ say_hello<span class="o">?</span>
 </div>
 </div>
 </div>
+<p>Wrapping the argument in <code class="docutils literal notranslate"><span class="pre">str(...)</span></code> converts whatever the caller passes into a string before concatenation, so the function now works regardless of the input type.</p>
+<p>Arguments can have <strong>default values</strong>, making them <strong>keyword arguments</strong>. The caller can leave them out (and get the default) or specify them by name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># take an optional keyword argument</span>
@@ -598,6 +607,7 @@ Hola Juan
 </div>
 </div>
 </div>
+<p>A function can also accept a flexible number of arguments using <code class="docutils literal notranslate"><span class="pre">*args</span></code> — the leading <code class="docutils literal notranslate"><span class="pre">*</span></code> tells Python to collect any extra positional arguments into a tuple:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># flexible number of arguments</span>
@@ -618,6 +628,10 @@ Hola Juan
 </pre></div>
 </div>
 </div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a fresh code cell, write a function <code class="docutils literal notranslate"><span class="pre">square(x)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">x</span></code> squared, and call it with a few numbers. Then extend it: define a function <code class="docutils literal notranslate"><span class="pre">power(x,</span> <span class="pre">n=2)</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span></code> as an optional keyword argument so the user can compute other powers. Verify that <code class="docutils literal notranslate"><span class="pre">power(3)</span></code> gives <code class="docutils literal notranslate"><span class="pre">9</span></code> and <code class="docutils literal notranslate"><span class="pre">power(3,</span> <span class="pre">n=3)</span></code> gives <code class="docutils literal notranslate"><span class="pre">27</span></code>.</p>
 </div>
 <section id="pure-vs-impure-functions">
 <h3>Pure vs. Impure Functions<a class="headerlink" href="#pure-vs-impure-functions" title="Link to this heading">#</a></h3>
@@ -649,8 +663,8 @@ Hola Juan
 </div>
 </div>
 </div>
-<p>We can do something similar with a pure function.</p>
-<p>In general, pure functions are safer and more reliable.</p>
+<p>Notice what happened: each call to <code class="docutils literal notranslate"><span class="pre">remove_last_from_list(names)</span></code> modified the <strong>same <code class="docutils literal notranslate"><span class="pre">names</span></code> list outside the function</strong>. After the first call it dropped to <code class="docutils literal notranslate"><span class="pre">['Ryan',</span> <span class="pre">'Juan']</span></code>; after the second, to <code class="docutils literal notranslate"><span class="pre">['Ryan']</span></code>. The function had a <strong>side effect</strong> — calling it silently changed the input. That’s what makes it impure.</p>
+<p>Here’s a <strong>pure</strong> version that does the same conceptual job (remove the last item) without modifying the original. It makes a copy of the input, modifies the copy, and returns it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_last_from_list_pure</span><span class="p">(</span><span class="n">input_list</span><span class="p">):</span>
@@ -677,12 +691,12 @@ Hola Juan
 </div>
 </div>
 </div>
-<p>We could spend the rest of the day talking about functions, but we have to move on.</p>
+<p>Notice the difference: this time <code class="docutils literal notranslate"><span class="pre">names</span></code> is <strong>unchanged</strong> after the call — the function returned a new list (<code class="docutils literal notranslate"><span class="pre">new_names</span></code>) instead of mutating the input. Pure functions are usually safer and easier to reason about, because the inputs you pass in won’t be silently altered somewhere down the line.</p>
 </section>
-<section id="namespaces">
-<h3>Namespaces<a class="headerlink" href="#namespaces" title="Link to this heading">#</a></h3>
-<p>In python, a <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces">namespace</a> is a mapping between variable names and python object. You can think of it like a dictionary.</p>
-<p>The namespace can change depending on where you are in your program. Functions can “see” the variables in the parent namespace, but they can also redefine them in a private scope.</p>
+<section id="namespaces-and-scope">
+<h3>Namespaces and scope<a class="headerlink" href="#namespaces-and-scope" title="Link to this heading">#</a></h3>
+<p>When you create a variable inside a function, it’s <strong>local</strong> to that function — it doesn’t affect variables of the same name outside. Functions can <em>read</em> variables from the outer (parent) scope, but assigning to a name inside a function creates a fresh local variable that shadows any outer one. This is called <strong>scoping</strong>, and it’s a common source of confusion for new programmers.</p>
+<p>The example below illustrates: <code class="docutils literal notranslate"><span class="pre">print_name_v2</span></code> changes <code class="docutils literal notranslate"><span class="pre">name</span></code> locally without affecting the outer <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Ryan&#39;</span>
@@ -711,7 +725,7 @@ Ryan
 </section>
 <section id="a-more-complex-function-fibonacci-sequence">
 <h3>A more complex function: Fibonacci Sequence<a class="headerlink" href="#a-more-complex-function-fibonacci-sequence" title="Link to this heading">#</a></h3>
-<p>The Fibonacci sequence is the 1,1,2,3,5,8…, the sum of each number with the preceding one. Write a function to compute the Fibonacci sequence of length n. (Hint, use some list methods.)</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a> is <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">…</span></code> — each number is the sum of the previous two. Here’s a function that returns the first <code class="docutils literal notranslate"><span class="pre">n</span></code> Fibonacci numbers as a list. It uses list methods (<code class="docutils literal notranslate"><span class="pre">append</span></code>) and negative indexing (<code class="docutils literal notranslate"><span class="pre">[-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">[-2]</span></code>) to build the sequence step by step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -735,14 +749,26 @@ Ryan
 </div>
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a fresh code cell, write a function that takes a temperature in Celsius and returns it in Fahrenheit (formula: <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">=</span> <span class="pre">C</span> <span class="pre">*</span> <span class="pre">9/5</span> <span class="pre">+</span> <span class="pre">32</span></code>). Then add an optional keyword argument so the user can choose Kelvin output instead (<code class="docutils literal notranslate"><span class="pre">K</span> <span class="pre">=</span> <span class="pre">C</span> <span class="pre">+</span> <span class="pre">273.15</span></code>). Call your function with a few different inputs.</p>
+<p>(This problem will come back in Assignment 3.)</p>
+</div>
 </section>
 </section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
-<p>We have worked with many different types of python objects so far: strings, lists, dictionaries, etc. These objects have different attributes and respond in different ways to the built-in functions (<code class="docutils literal notranslate"><span class="pre">len</span></code>, etc.)</p>
-<p><em>How can we make our own, custom objects?</em> Answer: by defining classes.</p>
+<p>You’ve worked with many built-in object types — strings, lists, dictionaries, and later NumPy arrays and pandas DataFrames. Each has its own attributes and methods.</p>
+<p>A <strong>class</strong> is a <em>template</em> for creating your own kind of object — like a custom version of <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code>, tailored to whatever you’re modeling. The class definition specifies what data each object carries (its <strong>attributes</strong>) and what it can do (its <strong>methods</strong>). Each object created from the class is called an <strong>instance</strong>; you can create as many instances as you want, each with its own values.</p>
+<p>You might not write many classes early on, but you’ll see them in almost every codebase you read, and as your projects grow you’ll occasionally want to write your own to bundle related data and behavior together. The example below walks through a small <code class="docutils literal notranslate"><span class="pre">Hurricane</span></code> class so you can follow what’s going on when you meet one in the wild.</p>
 <section id="a-class-to-represent-a-hurricane">
 <h3>A class to represent a hurricane<a class="headerlink" href="#a-class-to-represent-a-hurricane" title="Link to this heading">#</a></h3>
+<p>Three things to notice in the code below:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Hurricane:</span></code> line <strong>defines the class</strong>. Everything indented under it is part of the class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> is a <strong>special method</strong> that runs automatically every time you make a new <code class="docutils literal notranslate"><span class="pre">Hurricane</span></code> — for example, when you write <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">Hurricane('florence')</span></code> in the next cell. The arguments after <code class="docutils literal notranslate"><span class="pre">self</span></code> (here, just <code class="docutils literal notranslate"><span class="pre">name</span></code>) are the values you put inside those parentheses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self</span></code> refers to the new object being built. The line <code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code> says: <em>store the <code class="docutils literal notranslate"><span class="pre">name</span></code> you passed in as an attribute on this object</em>, so later you can read it back as <code class="docutils literal notranslate"><span class="pre">h.name</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
@@ -761,11 +787,12 @@ Ryan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x108680940&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7fe8103f1390&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>Notice that printing <code class="docutils literal notranslate"><span class="pre">h</span></code> just shows the class name and a memory address — not very useful. We’ll fix this later by adding a <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method.</p>
 <p>Our class only has a single attribute so far:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -779,7 +806,7 @@ Ryan
 </div>
 </div>
 </div>
-<p>Let’s add more, along with some input validation:</p>
+<p>Let’s grow the class. We’ll add two more attributes (<code class="docutils literal notranslate"><span class="pre">category</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code>), uppercase the <code class="docutils literal notranslate"><span class="pre">name</span></code> as it’s stored, and add <strong>input validation</strong> — a check that raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if the longitude is outside the valid range.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
@@ -804,7 +831,7 @@ Ryan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x1086966a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7fe8103f0050&gt;
 </pre></div>
 </div>
 </div>
@@ -821,7 +848,8 @@ Ryan
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<p>Notice the name came back as <code class="docutils literal notranslate"><span class="pre">'FLORENCE'</span></code>, not <code class="docutils literal notranslate"><span class="pre">'florence'</span></code> — that’s because <code class="docutils literal notranslate"><span class="pre">__init__</span></code> ran <code class="docutils literal notranslate"><span class="pre">name.upper()</span></code> and stored the uppercased version as the attribute.</p>
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;ryan&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 </pre></div>
@@ -830,21 +858,23 @@ Ryan
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-28-88629bebad1a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">h</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;ryan&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-25-24766bacf597&gt;</span> in <span class="ni">__init__</span><span class="nt">(self, name, category, lon)</span>
+<span class="nn">Cell In[25], line 8,</span> in <span class="ni">Hurricane.__init__</span><span class="nt">(self, name, category, lon)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> 
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="n">lon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="ow">or</span> <span class="n">lon</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">180</span><span class="p">:</span>
 <span class="ne">----&gt; </span><span class="mi">8</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid lon </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="bp">self</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">lon</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
 
 <span class="ne">ValueError</span>: Invalid lon 300
 </pre></div>
 </div>
 </div>
 </div>
+<p>The validation check inside <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">lon</span> <span class="pre">&gt;</span> <span class="pre">180</span> <span class="pre">or</span> <span class="pre">lon</span> <span class="pre">&lt;</span> <span class="pre">-180:</span> <span class="pre">raise</span> <span class="pre">ValueError(...)</span></code>) caught the bad longitude and stopped construction with a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. The instance was never created.</p>
 <p>Now let’s add a custom method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -877,10 +907,11 @@ Ryan
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">f</span></code> was created with <code class="docutils literal notranslate"><span class="pre">category=4</span></code>, so <code class="docutils literal notranslate"><span class="pre">self.category</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and the method returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </section>
 <section id="magic-dunder-methods">
 <h3>Magic / dunder methods<a class="headerlink" href="#magic-dunder-methods" title="Link to this heading">#</a></h3>
-<p>We can implement special methods that begin with double-underscores (i.e. “dunder” methods), which allow us to customize the behavior of our classes. (<a class="reference external" href="https://www.python-course.eu/python3_magic_methods.php">Read more here</a>). We have already learned one: <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Let’s implement the <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method to make our class display something pretty.</p>
+<p>Methods whose names begin and end with double underscores (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, etc.) — pronounced “dunder” for <em>double-underscore</em> — are special: Python calls them automatically in particular situations. We’ve already met <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, which Python calls when you create an instance. Another useful one is <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, which Python calls when it needs to display the object (e.g., when you type the variable name alone in a cell). By default <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> returns the ugly memory address we saw earlier; defining your own gives a nicer display.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
@@ -914,6 +945,11 @@ Ryan
 </pre></div>
 </div>
 </div>
+</div>
+<p>Now printing <code class="docutils literal notranslate"><span class="pre">f</span></code> shows the formatted string from our <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> (<code class="docutils literal notranslate"><span class="pre">&lt;Hurricane</span> <span class="pre">FLORENCE</span> <span class="pre">(cat</span> <span class="pre">4)&gt;</span></code>) instead of the memory-address gibberish we saw earlier. That’s the point of <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a fresh code cell, define a minimal class of your own — pick a domain (e.g. a <code class="docutils literal notranslate"><span class="pre">Station</span></code> for a weather station, or a <code class="docutils literal notranslate"><span class="pre">Reading</span></code> for a measurement). Give it an <code class="docutils literal notranslate"><span class="pre">__init__</span></code> that takes 2–3 arguments and stores them as attributes. Create an instance and access its attributes. The goal is to build enough familiarity that you can read class definitions confidently when you encounter them.</p>
 </div>
 </section>
 </section>
@@ -963,7 +999,7 @@ Ryan
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Organization and Packaging of Python Projects</p>
+        <p class="prev-next-title">Organizing Python Projects</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -987,7 +1023,7 @@ Ryan
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-vs-impure-functions">Pure vs. Impure Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces-and-scope">Namespaces and scope</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complex-function-fibonacci-sequence">A more complex function: Fibonacci Sequence</a></li>
 </ul>
 </li>
@@ -1010,7 +1046,7 @@ Ryan
   <div class="footer-item">
     
 <p class="component-author">
-By Dhruv Balwada
+By Dhruv Balwada & Kara Lamb
 </p>
 
   </div>
@@ -1020,7 +1056,7 @@ By Dhruv Balwada
 
   <p class="copyright">
     
-      © Copyright 2026, Dhruv Balwada.
+      © Copyright 2026, Dhruv Balwada &amp; Kara Lamb.
       <br/>
     
   </p>

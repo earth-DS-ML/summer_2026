@@ -2,7 +2,7 @@
 
 This is the online home for the first of the two summer 2026 courses:
 - *Computing and Research Methods for Climate Data Science* (CLMT5405)
-- *Machine Learning for Climate Science and Environmental Sustainability*
+- *Machine Learning for Climate Science and Environmental Sustainability* — taught by Dr. Kara Lamb
 
 ## Logistics
 

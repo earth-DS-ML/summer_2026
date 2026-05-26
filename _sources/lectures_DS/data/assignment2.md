@@ -2,6 +2,16 @@
 
 Pick any climate-related dataset that interests you — could be something you're considering for your final project, or just something you're curious about. The point here is **practice with the FAIR + access workflow**, not a commitment to a specific project.
 
+:::{admonition} Learning goals
+:class: tip
+This assignment exercises the data-discovery and access skills from this section:
+
+- Locate a dataset in a public scientific repository (Zenodo, NOAA, NASA, IRI, etc.)
+- Document a dataset's format, license, provenance, and FAIR-ness
+- Load data into Python using `pandas.read_csv`, `xarray.open_dataset`, or `pooch.retrieve`
+- Submit work via the week-folder pattern in your `clmt5405-assignments` repo
+:::
+
 ## Prerequisites
 
 - You've worked through [Formats and metadata](./formats_and_metadata.md) and [Loading data](./loading_data.md).
