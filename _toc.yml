@@ -19,10 +19,11 @@ parts:
     - file: lectures_DS/data/assignment2
   - caption: The Core Python Language
     chapters:
+    - file: lectures_DS/core_python/overview
     - file: lectures_DS/core_python/python_fundamentals
     - file: lectures_DS/core_python/functions_classes
     - file: lectures_DS/core_python/organization_and_packaging
-    - file: assignments/assignment_2
+    - file: lectures_DS/core_python/assignment3
   - caption: Scientific Python Fundamentals
     chapters:
     - file: lectures_DS/sci_python/numpy_and_matplotlib
