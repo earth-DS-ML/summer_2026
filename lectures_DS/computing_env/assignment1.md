@@ -2,6 +2,17 @@
 
 The main goal of this assignment is to set up the GitHub repository where you'll submit every assignment in this course (Part 1), and to submit your first piece of work to it (Part 2). Every weekly assignment will live in its own folder inside that repo.
 
+:::{admonition} Learning goals
+:class: tip
+This assignment exercises the environment-setup skills from this section:
+
+- Use Unix commands (`mkdir`, `cd`, `touch`) to create folders and files
+- Initialize a local Git repository and make commits
+- Connect a local repository to a GitHub remote and push
+- Write basic Markdown (headings, lists, images, links)
+- Practice the edit → add → commit → push loop
+:::
+
 ## Prerequisites
 
 Before starting, make sure you've worked through:
