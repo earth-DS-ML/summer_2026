@@ -93,7 +93,7 @@ Most of the content for CLMT5405 derives from previous versions of this course:
 
 - [Ryan Abernathey's 2021 book](https://earth-env-data-science.github.io/) — the original incarnation.
 - [Yutian Wu's 2024 repo](https://github.com/yutianwuldeo/GR6901) — a more recent update.
-- [Project Pythia](https://foundations.projectpythia.org/landing-page.html) — a separate but excellent companion resource.
+- [Project Pythia](https://foundations.projectpythia.org/) — a separate but excellent companion resource.
 
 The [summer 2025 version of this course](https://earth-ds-ml.github.io/summer_2025/) is also available online for reference.
 
