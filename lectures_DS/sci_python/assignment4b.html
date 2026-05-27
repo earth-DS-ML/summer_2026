@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Assignment 3b: More Matplotlib &#8212; Earth Data Science and Machine Learning</title>
+    <title>Assignment 4b: More Matplotlib &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -27,46 +27,46 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'assignments/more_matplotlib';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pandas" href="../lectures_DS/pandas/pandas_intro.html" />
-    <link rel="prev" title="Assignment 3a: Numpy and Matplotlib" href="numpy_matplotlib.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/assignment4b';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pandas" href="../pandas/pandas_intro.html" />
+    <link rel="prev" title="Assignment 4a: NumPy and Matplotlib" href="assignment4a.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -88,7 +88,7 @@
   <dialog id="pst-search-dialog">
     
 <form class="bd-search d-flex align-items-center"
-      action="../search.html"
+      action="../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -137,7 +137,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../../intro.html">
   
   
   
@@ -148,8 +148,8 @@
       
     
     
-    <img src="../_static/logo_class.png" class="logo__image only-light" alt="Earth Data Science and Machine Learning - Home"/>
-    <img src="../_static/logo_class.png" class="logo__image only-dark pst-js-only" alt="Earth Data Science and Machine Learning - Home"/>
+    <img src="../../_static/logo_class.png" class="logo__image only-light" alt="Earth Data Science and Machine Learning - Home"/>
+    <img src="../../_static/logo_class.png" class="logo__image only-dark pst-js-only" alt="Earth Data Science and Machine Learning - Home"/>
   
   
 </a></div>
@@ -165,64 +165,65 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
+                <a class="reference internal" href="../../intro.html">
                     Welcome to Earth Data Science and Machine Learning Course Series
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/computing_env/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/computing_env/jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/computing_env/intro_to_unix.html">Intro to Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/computing_env/intro_to_git.html">Intro to Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/jupyterlab_and_colab.html">Intro to JupyterLab and Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/data/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/data/formats_and_metadata.html">Formats and metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/data/loading_data.html">Loading data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/core_python/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/core_python/python_fundamentals.html">Python Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/core_python/functions_classes.html">Python Functions and Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/core_python/assignment3.html">Assignment 3: Core Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/sci_python/numpy_and_matplotlib.html">Numpy and Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/sci_python/more_matplotlib.html">More Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numpy_matplotlib.html">Assignment 3a: Numpy and Matplotlib</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 3b: More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 4b: More Matplotlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_intro.html">Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/basic_pandas.html">Pandas Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/xarray/xarray_intro.html">Xarray for multidimensional gridded data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/xarray/xarray_advanced.html">Xarray Advanced</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_intro.html">Xarray for multidimensional gridded data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assignments/xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience and Advanced Concepts</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/geoscience/final_lec.html">Quick survey of some other important concepts in geo-data-science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/advanced/packaging.html">Packaging Python Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">Quick survey of some other important concepts in geo-data-science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Packaging Python Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/project_require.html">Final Project Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
 </ul>
 
     </div>
@@ -299,7 +300,7 @@
       
       
       
-      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Fassignments/more_matplotlib.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/sci_python/assignment4b.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -329,7 +330,7 @@
       
       
       
-      <li><a href="../_sources/assignments/more_matplotlib.ipynb" target="_blank"
+      <li><a href="../../_sources/lectures_DS/sci_python/assignment4b.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -405,7 +406,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assignment 3b: More Matplotlib</h1>
+    <h1>Assignment 4b: More Matplotlib</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -418,6 +419,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-line-plots">Problem 1: Line plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-contour-plots">Problem 2: Contour Plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-scatter-plots">Problem 3: Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
 </ul>
             </nav>
         </div>
@@ -429,10 +431,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assignment-3b-more-matplotlib">
-<h1>Assignment 3b: More Matplotlib<a class="headerlink" href="#assignment-3b-more-matplotlib" title="Link to this heading">#</a></h1>
-<p>The goal here is to replicate the figures you see as closely as possible.</p>
-<p>In order to get some data, you will have to run the code in the cells below. <strong>Don’t worry about how this code works.</strong> In the end, it will give you some numpy arrays, which you will use in your plots. You are not allowed to use any packages other than numpy and matplotlib to complete your assignment.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-4b-more-matplotlib">
+<h1>Assignment 4b: More Matplotlib<a class="headerlink" href="#assignment-4b-more-matplotlib" title="Link to this heading">#</a></h1>
+<p>The goal here is to <strong>replicate the figures you see as closely as possible</strong>, using only numpy and matplotlib.</p>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises matplotlib customization skills from this section:</p>
+<ul class="simple">
+<li><p>Build figures with the explicit Figure / Axes (<code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots(...)</span></code>) pattern</p></li>
+<li><p>Customize line styles, colors, markers, and legends</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">contourf</span></code> and colorbars to visualize 2D scalar data</p></li>
+<li><p>Use scatter plots with color and size to encode multiple variables on a 2D plane</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Working through this notebook</p>
+<p><strong>Download</strong> this notebook using the ⬇ button in the top-right (or copy-paste the cells into a fresh notebook), open it in your environment (JupyterLab on LEAP or Colab), and fill in your solution under each problem.</p>
+<p>For each problem, the cell below the problem statement downloads / prepares the data into numpy arrays. <strong>Don’t worry about how that code works</strong> — just run it and use the resulting arrays in your plots. You are not allowed to use any packages other than numpy and matplotlib.</p>
+<p>When you’re done, follow the <a class="reference internal" href="#submission-instructions"><span class="xref myst">submission instructions</span></a> at the bottom of the page.</p>
+</div>
 <section id="problem-1-line-plots">
 <h2>Problem 1: Line plots<a class="headerlink" href="#problem-1-line-plots" title="Link to this heading">#</a></h2>
 <p>In this problem, we will plot some daily weather data from a NOAA station in <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:US1NYDT0008/detail">Millbrook, NY</a>. A full description of this dataset is available at: <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data">https://www.ncdc.noaa.gov/data-access/land-based-station-data</a></p>
@@ -466,7 +483,7 @@
 <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">):</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-NY_Millbrook_3_W.txt&#39;</span>               
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
                      <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
     <span class="n">dframes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
@@ -549,7 +566,7 @@ SOIL_TEMP_100_DAILY: Celsius
 </div>
 </div>
 </div>
-<p><img alt="figure" src="../_images/fig1.png" /></p>
+<p><img alt="figure" src="../../_images/fig1.png" /></p>
 </section>
 <section id="problem-2-contour-plots">
 <h2>Problem 2: Contour Plots<a class="headerlink" href="#problem-2-contour-plots" title="Link to this heading">#</a></h2>
@@ -573,11 +590,11 @@ SOIL_TEMP_100_DAILY: Celsius
 </div>
 </div>
 </div>
-<p><img alt="fig2" src="../_images/fig2.png" /></p>
+<p><img alt="fig2" src="../../_images/fig2.png" /></p>
 </section>
 <section id="problem-3-scatter-plots">
 <h2>Problem 3: Scatter plots<a class="headerlink" href="#problem-3-scatter-plots" title="Link to this heading">#</a></h2>
-<p>Here we will make a map plot of earthquakes from a USGS catalog of historic large earthquakes. Color the earthquakes by log10(depth) and adjust the marker size to be magntiude<span class="math notranslate nohighlight">\(^4\)</span>/100</p>
+<p>Here we will make a map plot of earthquakes from a USGS catalog of historic large earthquakes. Color the earthquakes by log10(depth) and adjust the marker size to be magnitude<span class="math notranslate nohighlight">\(^4\)</span>/100</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -620,7 +637,17 @@ SOIL_TEMP_100_DAILY: Celsius
 </div>
 </div>
 </div>
-<p><img alt="fig3" src="../_images/fig3.png" /></p>
+<p><img alt="fig3" src="../../_images/fig3.png" /></p>
+</section>
+<section id="submission-instructions">
+<h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your completed notebook as <code class="docutils literal notranslate"><span class="pre">assignment4b.ipynb</span></code> inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo. Then push the commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>&lt;weekN&gt;/assignment4b.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit assignment 4b&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Due Sunday night.</p>
 </section>
 </section>
 
@@ -637,7 +664,7 @@ SOIL_TEMP_100_DAILY: Celsius
         },
         kernelOptions: {
             name: "python3",
-            path: "./assignments"
+            path: "./lectures_DS/sci_python"
         },
         predefinedOutput: true
     }
@@ -655,16 +682,16 @@ SOIL_TEMP_100_DAILY: Celsius
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="numpy_matplotlib.html"
+       href="assignment4a.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assignment 3a: Numpy and Matplotlib</p>
+        <p class="prev-next-title">Assignment 4a: NumPy and Matplotlib</p>
       </div>
     </a>
     <a class="right-next"
-       href="../lectures_DS/pandas/pandas_intro.html"
+       href="../pandas/pandas_intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -693,6 +720,7 @@ SOIL_TEMP_100_DAILY: Celsius
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-line-plots">Problem 1: Line plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-contour-plots">Problem 2: Contour Plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-scatter-plots">Problem 3: Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
 </ul>
   </nav></div>
 
@@ -741,8 +769,8 @@ By Dhruv Balwada & Kara Lamb
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

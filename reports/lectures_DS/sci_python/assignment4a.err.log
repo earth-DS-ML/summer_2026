@@ -19,7 +19,7 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import pooch
-url = "https://github.com/earth-DS-ML/summer_2025/raw/refs/heads/main/assignments/more_matplotlib_data/argo_data_example.zip"
+url = "https://github.com/earth-DS-ML/summer_2026/raw/refs/heads/main/assignments/more_matplotlib_data/argo_data_example.zip"
 files = pooch.retrieve(url, processor=pooch.Unzip(), known_hash="650948c4b84690d370ad6f8aa9279c165f5302d3d9a7d330d3c0232b9d244e13")
 files
 ------------------
@@ -29,7 +29,7 @@ files
 [31mModuleNotFoundError[39m                       Traceback (most recent call last)
 [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
 [32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m pooch
-[32m      2[39m url = [33m"https://github.com/earth-DS-ML/summer_2025/raw/refs/heads/main/assignments/more_matplotlib_data/argo_data_example.zip"[39m
+[32m      2[39m url = [33m"https://github.com/earth-DS-ML/summer_2026/raw/refs/heads/main/assignments/more_matplotlib_data/argo_data_example.zip"[39m
 [32m      3[39m files = pooch.retrieve(url, processor=pooch.Unzip(), known_hash=[33m"650948c4b84690d370ad6f8aa9279c165f5302d3d9a7d330d3c0232b9d244e13"[39m)
 [32m      4[39m files
 

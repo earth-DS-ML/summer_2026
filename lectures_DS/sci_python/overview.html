@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Assignment 2: Explore a climate dataset &#8212; Earth Data Science and Machine Learning</title>
+    <title>Overview &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/data/assignment2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Overview" href="../core_python/overview.html" />
-    <link rel="prev" title="Loading data" href="loading_data.html" />
+    <link rel="next" title="NumPy and Matplotlib" href="numpy_and_matplotlib.html" />
+    <link rel="prev" title="Assignment 3: Core Python" href="../core_python/assignment3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -177,11 +177,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="formats_and_metadata.html">Formats and metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="loading_data.html">Loading data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 2: Explore a climate dataset</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
@@ -192,12 +192,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment4b.html">Assignment 4b: More Matplotlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -298,7 +298,7 @@
       
       
       
-      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/data/assignment2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/sci_python/overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -328,7 +328,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/data/assignment2.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/sci_python/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -404,7 +404,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assignment 2: Explore a climate dataset</h1>
+    <h1>Overview</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,8 +414,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-do">What to do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
             </nav>
         </div>
@@ -427,59 +428,34 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="assignment-2-explore-a-climate-dataset">
-<h1>Assignment 2: Explore a climate dataset<a class="headerlink" href="#assignment-2-explore-a-climate-dataset" title="Link to this heading">#</a></h1>
-<p>Pick any climate-related dataset that interests you — could be something you’re considering for your final project, or just something you’re curious about. The point here is <strong>practice with the FAIR + access workflow</strong>, not a commitment to a specific project.</p>
-<div class="tip admonition">
-<p class="admonition-title">Learning goals</p>
-<p>This assignment exercises the data-discovery and access skills from this section:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>This section introduces the <strong>scientific Python ecosystem</strong> that powers most data analysis in earth and environmental science: <strong>NumPy</strong> for numerical arrays, and <strong>Matplotlib</strong> for visualization. Both libraries underpin everything that comes after (pandas, xarray, scikit-learn, …), so spending time on the fundamentals here pays off across the rest of the course.</p>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this section, you should be able to:</p>
+<ol class="arabic simple">
+<li><p><strong>Create and inspect NumPy arrays</strong> — using <code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>, <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>, <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">np.ones</span></code>, and check shape and dtype.</p></li>
+<li><p><strong>Index and slice arrays</strong> — basic indexing, slicing, fancy indexing, and boolean masks; on both 1D and 2D arrays.</p></li>
+<li><p><strong>Vectorize operations</strong> — apply element-wise math and reductions (<code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>) along specific axes.</p></li>
+<li><p><strong>Reshape and combine arrays</strong> — using <code class="docutils literal notranslate"><span class="pre">reshape</span></code>, <code class="docutils literal notranslate"><span class="pre">transpose</span></code>, <code class="docutils literal notranslate"><span class="pre">tile</span></code>, and adding new axes via <code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">:]</span></code>.</p></li>
+<li><p><strong>Understand broadcasting</strong> — the rules and common gotchas.</p></li>
+<li><p><strong>Build a Matplotlib figure</strong> — using the explicit Figure / Axes mental model (<code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code>).</p></li>
+<li><p><strong>Make and customize common plots</strong> — line, scatter, bar, pcolormesh, contour, quiver — with labels, legends, colors, and annotations.</p></li>
+</ol>
+</section>
+<section id="pages-in-this-section">
+<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Locate a dataset in a public scientific repository (Zenodo, NOAA, NASA, IRI, etc.)</p></li>
-<li><p>Document a dataset’s format, license, provenance, and FAIR-ness</p></li>
-<li><p>Load data into Python using <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code>, or <code class="docutils literal notranslate"><span class="pre">pooch.retrieve</span></code></p></li>
-<li><p>Submit work via the week-folder pattern in your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo</p></li>
-</ul>
-</div>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>You’ve worked through <a class="reference internal" href="formats_and_metadata.html"><span class="std std-doc">Formats and metadata</span></a> and <a class="reference internal" href="loading_data.html"><span class="std std-doc">Loading data</span></a>.</p></li>
-<li><p>You have your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo set up from Assignment 1, and can push to it.</p></li>
+<li><p><a class="reference internal" href="numpy_and_matplotlib.html"><span class="std std-doc">NumPy and Matplotlib</span></a> — array creation and operations, paired with light Matplotlib usage for visualization.</p></li>
+<li><p><a class="reference internal" href="more_matplotlib.html"><span class="std std-doc">More Matplotlib</span></a> — the Figure/Axes mental model, customization, and 2D plot types.</p></li>
+<li><p><a class="reference internal" href="assignment4a.html"><span class="std std-doc">Assignment 4a</span></a> — numpy reductions, broadcasting, and matplotlib on real ARGO float data.</p></li>
+<li><p><a class="reference internal" href="assignment4b.html"><span class="std std-doc">Assignment 4b</span></a> — replicate three target figures using only numpy and matplotlib.</p></li>
 </ul>
 </section>
-<section id="what-to-do">
-<h2>What to do<a class="headerlink" href="#what-to-do" title="Link to this heading">#</a></h2>
-<p>Throughout the steps below, replace <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;</span></code> with the current week’s folder name (e.g., <code class="docutils literal notranslate"><span class="pre">week1</span></code>, <code class="docutils literal notranslate"><span class="pre">week2</span></code>, etc).</p>
-<ol class="arabic">
-<li><p><strong>Find a dataset.</strong> Look on <a class="reference external" href="https://zenodo.org/">Zenodo</a>, a NOAA or NASA portal, the <a class="reference external" href="https://iridl.ldeo.columbia.edu/">IRI Data Library</a>, or anywhere else scientific data lives. Pick something with a clear source page that you can document.</p></li>
-<li><p><strong>Create a <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;</span></code> folder inside your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo.</strong> (On Colab, first <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> your repo down if you don’t already have it locally.)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;</span>
-<span class="n">cd</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Write <code class="docutils literal notranslate"><span class="pre">dataset.md</span></code></strong> inside <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code> describing:</p>
-<ul class="simple">
-<li><p><strong>What it is</strong> — one sentence about the dataset (variable, region, time period).</p></li>
-<li><p><strong>Where it lives</strong> — the URL or DOI.</p></li>
-<li><p><strong>Format</strong> — CSV? NetCDF? Zarr? GeoTIFF?</p></li>
-<li><p><strong>License</strong> — what does the source page say? (CC-BY, public domain, “no restrictions,” etc.)</p></li>
-<li><p><strong>Provenance</strong> — who created it?</p></li>
-<li><p><strong>FAIR check</strong> — does it have a persistent identifier? Is the metadata clear? Is the format machine-readable? Is the license open?</p></li>
-</ul>
-</li>
-<li><p><strong>Create <code class="docutils literal notranslate"><span class="pre">dataset_load.ipynb</span></code></strong> in the same <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code> folder. Add one code cell that loads the dataset using whichever of the three patterns from the <a class="reference internal" href="loading_data.html"><span class="std std-doc">loading lecture</span></a> fits its format (<code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code>, or <code class="docutils literal notranslate"><span class="pre">pooch.retrieve</span></code>). Run it — you should see <em>something</em> (a DataFrame, a Dataset, or a file path). No analysis needed; this just confirms the access works.</p></li>
-<li><p><strong>Commit and push:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
-<span class="n">git</span> <span class="n">status</span>
-<span class="n">git</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;/</span><span class="n">dataset</span><span class="o">.</span><span class="n">md</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;/</span><span class="n">dataset_load</span><span class="o">.</span><span class="n">ipynb</span>
-<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add &lt;weekN&gt; assignment&quot;</span>
-<span class="n">git</span> <span class="n">push</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p>Refresh your repo page on GitHub and confirm both files appear in <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code>.</p>
+<section id="working-through-the-lectures">
+<h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
+<p>Both lecture pages are <strong>Jupyter notebooks</strong>. Use the download button in the top-right (⬇ icon) to grab the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. For the shorter notebooks you can also just copy-paste the cells into a fresh notebook. The <strong>Try it</strong> admonitions invite you to experiment in your own cells before moving on.</p>
 </section>
 </section>
 
@@ -496,7 +472,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures_DS/data"
+            path: "./lectures_DS/sci_python"
         },
         predefinedOutput: true
     }
@@ -514,20 +490,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="loading_data.html"
+       href="../core_python/assignment3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Loading data</p>
+        <p class="prev-next-title">Assignment 3: Core Python</p>
       </div>
     </a>
     <a class="right-next"
-       href="../core_python/overview.html"
+       href="numpy_and_matplotlib.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">NumPy and Matplotlib</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -549,8 +525,9 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-do">What to do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
   </nav></div>
 

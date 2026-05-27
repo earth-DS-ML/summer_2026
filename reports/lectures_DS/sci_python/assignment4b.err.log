@@ -45,7 +45,7 @@ dframes = []
 for year in range(2016, 2019):
     fname = f'CRND0103-{year}-NY_Millbrook_3_W.txt'               
     df = pd.read_csv(POOCH.fetch(fname), parse_dates=[1],
-                     names=headers, header=None, sep='\s+',
+                     names=headers, header=None, sep=r'\s+',
                      na_values=[-9999.0, -99.0])
     dframes.append(df)
 
