@@ -26,10 +26,11 @@ parts:
     - file: lectures_DS/core_python/assignment3
   - caption: Scientific Python Fundamentals
     chapters:
+    - file: lectures_DS/sci_python/overview
     - file: lectures_DS/sci_python/numpy_and_matplotlib
     - file: lectures_DS/sci_python/more_matplotlib
-    - file: assignments/numpy_matplotlib
-    - file: assignments/more_matplotlib
+    - file: lectures_DS/sci_python/assignment4a
+    - file: lectures_DS/sci_python/assignment4b
   - caption: Pandas
     chapters:
     - file: lectures_DS/pandas/pandas_intro
