@@ -35,3 +35,5 @@ html:
 sphinx:
   config:
     copyright: "2026, Dhruv Balwada & Kara Lamb"
+    # Open all external links in a new browser tab
+    myst_links_external_new_tab: true
