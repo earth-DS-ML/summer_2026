@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Pandas: Groupby" href="pandas_groupby.html" />
-    <link rel="prev" title="Pandas" href="pandas_intro.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -414,11 +414,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-data-structures-series">Pandas Data Structures: Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-data-structures-dataframe">Pandas Data Structures: DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
 </ul>
@@ -444,6 +444,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pandas-fundamentals">
 <h1>Pandas Fundamentals<a class="headerlink" href="#pandas-fundamentals" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Working through this notebook</p>
+<p>This page is a Jupyter notebook. <strong>Download it</strong> using the ⬇ button in the top-right (or copy-paste the cells into a fresh notebook), open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. When you reach a <strong>Try it</strong> admonition, experiment in your own cells before moving on.</p>
+</div>
+<p>Let’s start by importing the libraries we’ll use throughout this lecture: <strong>pandas</strong> (conventionally imported as <code class="docutils literal notranslate"><span class="pre">pd</span></code>), NumPy, and matplotlib’s <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -467,11 +472,12 @@
 </div>
 </div>
 </div>
-<section id="pandas-data-structures-series">
-<h2>Pandas Data Structures: Series<a class="headerlink" href="#pandas-data-structures-series" title="Link to this heading">#</a></h2>
-<p>A Series represents a one-dimensional array of data. The main difference between a Series and numpy array is that a Series has an <em>index</em>. The index contains the labels that we use to access the data.</p>
-<p>There are many ways to <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/dsintro.html#series">create a Series</a>. We will just show a few.</p>
-<p>(Data are from the NASA <a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/">Planetary Fact Sheet</a>.)</p>
+<section id="series">
+<h2>Series<a class="headerlink" href="#series" title="Link to this heading">#</a></h2>
+<p>Pandas gives you two main objects to work with: a <strong>Series</strong> (one-dimensional, like a single column of labelled data) and a <strong>DataFrame</strong> (two-dimensional, like a table or spreadsheet). DataFrames are built up from Series — each column of a DataFrame is itself a Series — so we’ll start with Series and then build up to DataFrame.</p>
+<p>A Series is a one-dimensional array of data with an <em>index</em>: labels we use to access each value.</p>
+<p>There are many ways to <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html" rel="noreferer noopener" target="_blank">create a Series</a>. Let’s start with a simple example using planet names and masses.</p>
+<p>To create a Series, we pass two lists to <code class="docutils literal notranslate"><span class="pre">pd.Series(...)</span></code>: the data <strong>values</strong>, and an <code class="docutils literal notranslate"><span class="pre">index</span></code> containing the <strong>labels</strong> for those values. The output below will show the labels on the left and the values on the right:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">]</span>
@@ -632,16 +638,20 @@ dtype: float64
 </div>
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a fresh code cell, build your own <code class="docutils literal notranslate"><span class="pre">Series</span></code> from a Python list of values and a list of labels (any topic of your choice — e.g., capital cities mapped to populations). Use <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> to access one element by label, and <code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code> to access the same element by position. Then slice with <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> over a <em>label</em> range — note that both the start and end labels are included (unlike Python list slicing).</p>
+</div>
 </section>
 </section>
-<section id="pandas-data-structures-dataframe">
-<h2>Pandas Data Structures: DataFrame<a class="headerlink" href="#pandas-data-structures-dataframe" title="Link to this heading">#</a></h2>
+<section id="dataframe">
+<h2>DataFrame<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h2>
 <p>There is a lot more to Series, but they are limit to a single “column”. A more useful Pandas data structure is the DataFrame. A DataFrame is basically a bunch of series that share the same index. It’s a lot like a table in a spreadsheet.</p>
 <p>Below we create a DataFrame.</p>
+<p>Now let’s build a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. The most common pattern is to start with a Python dictionary mapping column names to lists of values, then pass it to <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first we create a dictionary</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3e24</span><span class="p">,</span> <span class="mf">4.87e24</span><span class="p">,</span> <span class="mf">5.97e24</span><span class="p">],</span>       <span class="c1"># kg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3e24</span><span class="p">,</span> <span class="mf">4.87e24</span><span class="p">,</span> <span class="mf">5.97e24</span><span class="p">],</span>       <span class="c1"># kg</span>
         <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">4879e3</span><span class="p">,</span> <span class="mf">12_104e3</span><span class="p">,</span> <span class="mf">12_756e3</span><span class="p">],</span> <span class="c1"># m</span>
         <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1407.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">23.9</span><span class="p">]</span> <span class="c1"># h</span>
        <span class="p">}</span>
@@ -698,6 +708,7 @@ dtype: float64
 </div></div></div>
 </div>
 <p>Pandas handles missing data very elegantly, keeping track of it through all calculations.</p>
+<p>DataFrames come with a lot of built-in inspection and summary methods. A few of the most useful:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1017,7 +1028,8 @@ dtype: float64
 </section>
 <section id="merging-data">
 <h2>Merging Data<a class="headerlink" href="#merging-data" title="Link to this heading">#</a></h2>
-<p>Pandas supports a wide range of methods for merging different datasets. These are described extensively in the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/merging.html">documentation</a>. Here we just give a few examples.</p>
+<p>Pandas supports a wide range of methods for merging different datasets. These are described extensively in the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/merging.html" rel="noreferer noopener" target="_blank">documentation</a>. Here we just give a few examples.</p>
+<p>Pandas can merge DataFrames and Series intelligently along their shared index. Let’s create a separate <code class="docutils literal notranslate"><span class="pre">Series</span></code> of planet temperatures and combine it with our existing DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">167</span><span class="p">,</span> <span class="mi">464</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">],</span>
@@ -1039,8 +1051,7 @@ Name: temperature, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># returns a new DataFrame</span>
-<span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1101,8 +1112,7 @@ Name: temperature, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># returns a new DataFrame</span>
-<span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1171,8 +1181,7 @@ Name: temperature, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># returns a new DataFrame</span>
-<span class="n">everyone</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;Mars&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">everyone</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;Mars&#39;</span><span class="p">])</span>
 <span class="n">everyone</span>
 </pre></div>
 </div>
@@ -1354,7 +1363,7 @@ Name: temperature, dtype: int64
 <p>We often want to modify values in a dataframe based on some rule. To modify values, we need to use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">.iloc</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;mass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.98</span><span class="o">+</span><span class="mi">24</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;mass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.98e+24</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="n">df</span>
 </pre></div>
@@ -1415,11 +1424,15 @@ Name: temperature, dtype: int64
 </table>
 </div></div></div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take the planets DataFrame from above. Use <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> to get all of Earth’s data, then <code class="docutils literal notranslate"><span class="pre">.iloc[:3]</span></code> to get the first three rows. Add a new column called <code class="docutils literal notranslate"><span class="pre">density_check</span></code> computed as <code class="docutils literal notranslate"><span class="pre">df.mass</span> <span class="pre">/</span> <span class="pre">(4/3</span> <span class="pre">*</span> <span class="pre">np.pi</span> <span class="pre">*</span> <span class="pre">(df.diameter/2)**3)</span></code>, then filter the DataFrame to planets with mass greater than 1e24.</p>
+</div>
 </section>
 </section>
 <section id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
-<p>DataFrames have all kinds of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/visualization.html">useful plotting</a> built in.</p>
+<p>DataFrames have all kinds of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/visualization.html" rel="noreferer noopener" target="_blank">useful plotting</a> built in.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1445,6 +1458,10 @@ Name: temperature, dtype: int64
 </div>
 <img alt="../../_images/7e18433d598769e583b7fb994991c6b8286197ee01427cca284845bd5dd10e97.png" src="../../_images/7e18433d598769e583b7fb994991c6b8286197ee01427cca284845bd5dd10e97.png" />
 </div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Make a scatter plot of <code class="docutils literal notranslate"><span class="pre">diameter</span></code> vs <code class="docutils literal notranslate"><span class="pre">mass</span></code> from the planets DataFrame. Then make a bar chart of each planet’s mass. (You can stay with <code class="docutils literal notranslate"><span class="pre">df.plot(kind='...')</span></code>, or use <code class="docutils literal notranslate"><span class="pre">df.plot.scatter(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">df.plot.bar(...)</span></code> — both work.)</p>
 </div>
 </section>
 <section id="time-indexes">
@@ -1511,11 +1528,15 @@ Name: temperature, dtype: int64
 </div>
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pd.date_range(start='2023-01-01',</span> <span class="pre">end='2023-12-31',</span> <span class="pre">freq='D')</span></code> to create a year of daily timestamps. Wrap them in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> whose values are <code class="docutils literal notranslate"><span class="pre">np.random.randn(len(...))</span></code>. Slice it to get just March through May 2023 (use <code class="docutils literal notranslate"><span class="pre">.loc['2023-03':'2023-05']</span></code>), then call <code class="docutils literal notranslate"><span class="pre">.plot()</span></code>.</p>
+</div>
 </section>
 <section id="reading-data-files-weather-station-data">
 <h2>Reading Data Files: Weather Station Data<a class="headerlink" href="#reading-data-files-weather-station-data" title="Link to this heading">#</a></h2>
-<p>In this example, we will use NOAA weather station data from <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data">https://www.ncdc.noaa.gov/data-access/land-based-station-data</a>.</p>
-<p>The details of files we are going to read are described in this <a class="reference internal" href="#ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt"><span class="xref myst">README file</span></a>.</p>
+<p>In this example, we will use NOAA weather station data from <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data" rel="noreferer noopener" target="_blank">https://www.ncdc.noaa.gov/data-access/land-based-station-data</a>.</p>
+<p>The details of files we are going to read are described in this README file (<a class="reference external" href="ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt" rel="noreferer noopener" target="_blank">ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
@@ -1559,7 +1580,7 @@ Name: temperature, dtype: int64
 </div>
 </div>
 <p>We now have a text file on our hard drive called <code class="docutils literal notranslate"><span class="pre">data.txt</span></code>. Examine it.</p>
-<p>To read it into pandas, we will use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html">read_csv</a> function. This function is incredibly complex and powerful. You can use it to extract data from almost any text file. However, you need to understand how to use its various options.</p>
+<p>To read it into pandas, we will use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html" rel="noreferer noopener" target="_blank">read_csv</a> function. This function is incredibly complex and powerful. You can use it to extract data from almost any text file. However, you need to understand how to use its various options.</p>
 <p>With no options, this is what we get.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1618,7 +1639,7 @@ Name: temperature, dtype: int64
 <p>Pandas failed to identify the different columns. This is because it was expecting standard CSV (comma-separated values) file. In our file, instead, the values are separated by whitespace. And not a single whilespace–the amount of whitespace between values varies. We can tell pandas this using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> keyword.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1798,10 +1819,10 @@ Name: temperature, dtype: int64
 </div></div></div>
 </div>
 <p>Great! It worked.</p>
-<p>If we look closely, we will see there are lots of -99 and -9999 values in the file. The <a class="reference internal" href="#ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt"><span class="xref myst">README file</span></a> tells us that these are values used to represent missing data. Let’s tell this to pandas.</p>
+<p>If we look closely, we will see there are lots of -99 and -9999 values in the file. The README file (<a class="reference external" href="ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt" rel="noreferer noopener" target="_blank">ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt</a>) tells us that these are values used to represent missing data. Let’s tell this to pandas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2031,7 +2052,7 @@ memory usage: 80.0+ KB
 <p>One problem here is that pandas did not recognize the <code class="docutils literal notranslate"><span class="pre">LST_DATE</span></code> column as a date. Let’s help it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
                  <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">],</span>
                  <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -3460,14 +3481,18 @@ Name: 2017-08-07 00:00:00, dtype: object
 <img alt="../../_images/ec9e1105e58ba7affd1881fb488d16a4f7e321b6879814e9d02e2247c01236d3.png" src="../../_images/ec9e1105e58ba7affd1881fb488d16a4f7e321b6879814e9d02e2247c01236d3.png" />
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Slice the NOAA <code class="docutils literal notranslate"><span class="pre">df</span></code> to a single month of your choice (e.g., <code class="docutils literal notranslate"><span class="pre">df.loc['2018-06']</span></code>). Call <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> on that subset to get summary stats. Then plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MEAN</span></code> against the index for that month.</p>
+</div>
 </section>
 <section id="resampling">
 <h3>Resampling<a class="headerlink" href="#resampling" title="Link to this heading">#</a></h3>
 <p>Since pandas understands time, we can use it to do resampling.</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">.resample(...)</span></code> returns a <em>resampler object</em> — a grouping by time frequency. Apply an aggregation (like <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>) to actually get a smaller DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># monthly reampler object</span>
-<span class="n">rs_obj</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs_obj</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
 <span class="n">rs_obj</span>
 </pre></div>
 </div>
@@ -3860,6 +3885,10 @@ Name: 2017-08-07 00:00:00, dtype: object
 </div>
 </div>
 <p>Next time we will dig deeper into resampling, rolling means, and grouping operations (groupby).</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.resample('YE').mean()</span></code> to get yearly means and plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MAX</span></code> against the resulting index as a line chart. Then do the same with <code class="docutils literal notranslate"><span class="pre">'10D'</span></code> (10-day bins) — the lower-frequency series should look smoother.</p>
+</div>
 </section>
 </section>
 </section>
@@ -3895,12 +3924,12 @@ Name: 2017-08-07 00:00:00, dtype: object
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pandas_intro.html"
+       href="overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pandas</p>
+        <p class="prev-next-title">Overview</p>
       </div>
     </a>
     <a class="right-next"
@@ -3930,11 +3959,11 @@ Name: 2017-08-07 00:00:00, dtype: object
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-data-structures-series">Pandas Data Structures: Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-data-structures-dataframe">Pandas Data Structures: DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
 </ul>

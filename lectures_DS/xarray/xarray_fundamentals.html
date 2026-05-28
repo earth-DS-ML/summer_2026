@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="current nav bd-sidenav">
@@ -2154,7 +2154,7 @@ Coordinates:
 <img alt="../../_images/b4f492acd8f4f4143abff523814b82050442a289f5d35c7eee6f4182fbee39ca.png" src="../../_images/b4f492acd8f4f4143abff523814b82050442a289f5d35c7eee6f4182fbee39ca.png" />
 </div>
 </div>
-<p>Attributes can be used to store metadata. What metadata should you store? The <a class="reference external" href="http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#_description_of_the_data">CF Conventions</a> are a great resource for thinking about climate metadata. Below we define two of the required CF-conventions attributes.</p>
+<p>Attributes can be used to store metadata. What metadata should you store? The <a class="reference external" href="http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#_description_of_the_data" rel="noreferer noopener" target="_blank">CF Conventions</a> are a great resource for thinking about climate metadata. Below we define two of the required CF-conventions attributes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">da_salinity</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;PSU&#39;</span>
@@ -13976,7 +13976,7 @@ Data variables:
 <section id="weighted-reductions">
 <h3>Weighted Reductions<a class="headerlink" href="#weighted-reductions" title="Link to this heading">#</a></h3>
 <p>Sometimes we want to perform a reduction (e.g. a mean) where we assign different weight factors to each point in the array.
-Xarray supports this via <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/computation.html#weighted-array-reductions">weighted array reductions</a>.</p>
+Xarray supports this via <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/computation.html#weighted-array-reductions" rel="noreferer noopener" target="_blank">weighted array reductions</a>.</p>
 <p>As a toy example, imagine we want to weight values in the upper ocean more than the lower ocean.
 We could imagine creating a weight array exponentially proportional to pressure as follows:</p>
 <div class="cell docutils container">
@@ -14023,8 +14023,8 @@ We could imagine creating a weight array exponentially proportional to pressure 
 </section>
 <section id="loading-data-from-netcdf-files">
 <h2>Loading Data from netCDF Files<a class="headerlink" href="#loading-data-from-netcdf-files" title="Link to this heading">#</a></h2>
-<p>NetCDF (Network Common Data Format) is the most widely used format for distributing geoscience data. NetCDF is maintained by the <a class="reference external" href="https://www.unidata.ucar.edu/">Unidata</a> organization.</p>
-<p>Below we quote from the <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/faq.html#whatisit">NetCDF website</a>:</p>
+<p>NetCDF (Network Common Data Format) is the most widely used format for distributing geoscience data. NetCDF is maintained by the <a class="reference external" href="https://www.unidata.ucar.edu/" rel="noreferer noopener" target="_blank">Unidata</a> organization.</p>
+<p>Below we quote from the <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/faq.html#whatisit" rel="noreferer noopener" target="_blank">NetCDF website</a>:</p>
 <blockquote>
 <div><p>NetCDF (network Common Data Form) is a set of interfaces for array-oriented data access and a freely distributed collection of data access libraries for C, Fortran, C++, Java, and other languages. The netCDF libraries support a machine-independent format for representing scientific data. Together, the interfaces, libraries, and format support the creation, access, and sharing of scientific data.</p>
 <p>NetCDF data is:</p>
@@ -14037,8 +14037,8 @@ We could imagine creating a weight array exponentially proportional to pressure 
 <li><p>Archivable. Access to all earlier forms of netCDF data will be supported by current and future versions of the software.</p></li>
 </ul>
 </div></blockquote>
-<p>Xarray was designed to make reading netCDF files in python as easy, powerful, and flexible as possible. (See <a class="reference external" href="http://xarray.pydata.org/en/latest/io.html#netcdf">xarray netCDF docs</a> for more details.)</p>
-<p>Below we load some data from the <a class="reference external" href="https://catalog.leap.columbia.edu/">LEAP catalog</a>.</p>
+<p>Xarray was designed to make reading netCDF files in python as easy, powerful, and flexible as possible. (See <a class="reference external" href="http://xarray.pydata.org/en/latest/io.html#netcdf" rel="noreferer noopener" target="_blank">xarray netCDF docs</a> for more details.)</p>
+<p>Below we load some data from the <a class="reference external" href="https://catalog.leap.columbia.edu/" rel="noreferer noopener" target="_blank">LEAP catalog</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://catalog.leap.columbia.edu/feedstock/australian-gridded-climate-data-agcd</span>
@@ -16330,9 +16330,9 @@ Attributes:
 </section>
 <section id="xarray-tutorials">
 <h2>Xarray Tutorials:<a class="headerlink" href="#xarray-tutorials" title="Link to this heading">#</a></h2>
-<p>You can find a nice tutorial to fundamentals of Xarray on youtube <a class="reference external" href="https://www.youtube.com/watch?v=a339Q5F48UQ&amp;amp;list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR&amp;amp;index=9">here</a>.</p>
-<p>If you prefer reading there is a <a class="reference external" href="https://tutorial.xarray.dev/overview/xarray-in-45-min">Xarray in 45 mins</a></p>
-<p>And much much more: <a class="reference external" href="https://tutorial.xarray.dev/intro.html">https://tutorial.xarray.dev/intro.html</a> and <a class="reference external" href="https://www.youtube.com/playlist?list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR">https://www.youtube.com/playlist?list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR</a></p>
+<p>You can find a nice tutorial to fundamentals of Xarray on youtube <a class="reference external" href="https://www.youtube.com/watch?v=a339Q5F48UQ&amp;amp;list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR&amp;amp;index=9" rel="noreferer noopener" target="_blank">here</a>.</p>
+<p>If you prefer reading there is a <a class="reference external" href="https://tutorial.xarray.dev/overview/xarray-in-45-min" rel="noreferer noopener" target="_blank">Xarray in 45 mins</a></p>
+<p>And much much more: <a class="reference external" href="https://tutorial.xarray.dev/intro.html" rel="noreferer noopener" target="_blank">https://tutorial.xarray.dev/intro.html</a> and <a class="reference external" href="https://www.youtube.com/playlist?list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR" rel="noreferer noopener" target="_blank">https://www.youtube.com/playlist?list=PLNemzZpJM7lUu_iGP_lA2m7SeSUwKSIvR</a></p>
 </section>
 </section>
 

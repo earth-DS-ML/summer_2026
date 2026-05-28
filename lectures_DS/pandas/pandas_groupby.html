@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/pandas_groupby';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 1: Pandas Fundamentals with Earthquake Data" href="../../assignments/Pandas1.html" />
+    <link rel="next" title="Assignment 5a: Pandas Fundamentals with Earthquake Data" href="assignment5a.html" />
     <link rel="prev" title="Pandas Fundamentals" href="basic_pandas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -416,7 +416,6 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-method">The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
 </ul>
@@ -444,9 +443,13 @@
 <h1>Pandas: Groupby<a class="headerlink" href="#pandas-groupby" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> is an amazingly powerful function in pandas. But it is also complicated to use and understand.
 The point of this lesson is to make you feel confident in using <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and its cousins, <code class="docutils literal notranslate"><span class="pre">resample</span></code> and <code class="docutils literal notranslate"><span class="pre">rolling</span></code>.</p>
-<p>These notes are loosely based on the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/groupby.html">Pandas GroupBy Documentation</a>.</p>
-<p>The “split/apply/combine” concept was first introduced in a paper by Hadley Wickham: <a class="reference external" href="https://www.jstatsoft.org/article/view/v040i01">https://www.jstatsoft.org/article/view/v040i01</a>.</p>
+<p>These notes are loosely based on the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/groupby.html" rel="noreferer noopener" target="_blank">Pandas GroupBy Documentation</a>.</p>
+<p>The “split/apply/combine” concept was first introduced in a paper by Hadley Wickham: <a class="reference external" href="https://www.jstatsoft.org/article/view/v040i01" rel="noreferer noopener" target="_blank">https://www.jstatsoft.org/article/view/v040i01</a>.</p>
 <p>Imports:</p>
+<div class="tip admonition">
+<p class="admonition-title">Working through this notebook</p>
+<p>This page is a Jupyter notebook. <strong>Download it</strong> using the ⬇ button in the top-right (or copy-paste the cells into a fresh notebook), open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. When you reach a <strong>Try it</strong> admonition, experiment in your own cells before moving on.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -475,7 +478,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <p>First we read the Earthquake data from our previous assignment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">place</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">df_small</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">]</span>
@@ -715,7 +718,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 </div>
 <section id="an-example">
 <h2>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h2>
-<p>This is an example of a “one-liner” that you can accomplish with groupby.</p>
+<p>What if we wanted to know which <strong>country</strong> had the most earthquakes? <code class="docutils literal notranslate"><span class="pre">groupby</span></code> does this cleanly — it groups all rows that share a value, then we can apply an aggregation (here, <code class="docutils literal notranslate"><span class="pre">count</span></code>) to summarize each group:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -745,20 +748,12 @@ The point of this lesson is to make you feel confident in using <code class="doc
 </section>
 <section id="what-happened">
 <h2>What Happened?<a class="headerlink" href="#what-happened" title="Link to this heading">#</a></h2>
-<p>Let’s break apart this operation a bit. The workflow with <code class="docutils literal notranslate"><span class="pre">groubpy</span></code> can be divided into three general steps:</p>
+<p>Let’s break down what <code class="docutils literal notranslate"><span class="pre">groupby</span></code> actually does. The <code class="docutils literal notranslate"><span class="pre">.groupby(...)</span></code> call doesn’t immediately compute anything — it returns a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object that holds the grouping logic. Computation happens when you call an aggregation method on it (<code class="docutils literal notranslate"><span class="pre">.count()</span></code>, <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">.aggregate(...)</span></code>, etc.). This pattern is sometimes called <strong>split-apply-combine</strong>:</p>
 <ol class="arabic simple">
-<li><p><strong>Split</strong>: Partition the data into different groups based on some criterion.</p></li>
-<li><p><strong>Apply</strong>: Do some caclulation within each group. Different types of “apply” steps might be</p></li>
-<li><p><em>Aggregation</em>: Get the mean or max within the group.</p></li>
-<li><p><em>Transformation</em>: Normalize all the values within a group</p></li>
-<li><p><em>Filtration</em>: Eliminate some groups based on a criterion.</p></li>
-<li><p><strong>Combine</strong>: Put the results back together into a single object.</p></li>
+<li><p><strong>Split</strong> the data into groups based on a column or function.</p></li>
+<li><p><strong>Apply</strong> a function (aggregate, transform, or filter) to each group independently.</p></li>
+<li><p><strong>Combine</strong> the results back into a single DataFrame or Series.</p></li>
 </ol>
-<p><img alt="split-apply-combine" src="https://miro.medium.com/max/1840/1*JbF6nhrQsn4f-TaSF6IR9g.png" /></p>
-<section id="the-groupby-method">
-<h3>The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method<a class="headerlink" href="#the-groupby-method" title="Link to this heading">#</a></h3>
-<p>Both <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects have a groupby method. It accepts a variety of arguments, but the simplest way to think about it is that you pass another series, whose unique values are used to split the original object into different groups.</p>
-<p>via <a class="reference external" href="https://medium.com/analytics-vidhya/split-apply-combine-strategy-for-data-mining-4fd6e2a0cc99">https://medium.com/analytics-vidhya/split-apply-combine-strategy-for-data-mining-4fd6e2a0cc99</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -1006,7 +1001,6 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 </div>
-</section>
 <section id="the-groubby-object">
 <h3>The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object<a class="headerlink" href="#the-groubby-object" title="Link to this heading">#</a></h3>
 <p>When we call, <code class="docutils literal notranslate"><span class="pre">groupby</span></code> we get back a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object:</p>
@@ -1273,67 +1267,13 @@ Name: country, Length: 5923, dtype: object
 <p>You can loop through the groups if you want.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">:</span><span class="mi">4</span>
     <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 4}
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-</div>
-</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">groups</span></code> attribute is a regular Python dictionary — keys are the group labels and values are the row indices. We can look up a particular group by name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="p">[</span><span class="s1">&#39;south of Africa&#39;</span><span class="p">]</span>
@@ -2369,6 +2309,10 @@ Name: country, Length: 5923, dtype: object
 <p>5 rows × 22 columns</p>
 </div></div></div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take <code class="docutils literal notranslate"><span class="pre">df</span></code>. Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to count the number of earthquakes per country and plot the top 10 as a bar chart (<code class="docutils literal notranslate"><span class="pre">df.groupby('country').mag.count().nlargest(10).plot.bar()</span></code>). Then use <code class="docutils literal notranslate"><span class="pre">gb.get_group('Chile')</span></code> to peek at the rows for a specific country.</p>
+</div>
 </section>
 </section>
 <section id="aggregation">
@@ -2929,6 +2873,10 @@ Name: mag, dtype: float64
 <img alt="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" src="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" />
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Group the earthquakes by country and use <code class="docutils literal notranslate"><span class="pre">.aggregate(['min',</span> <span class="pre">'max',</span> <span class="pre">'mean'])</span></code> on the <code class="docutils literal notranslate"><span class="pre">mag</span></code> column to get all three statistics at once. Then sort by the mean magnitude in descending order and grab the top 10 countries.</p>
+</div>
 </section>
 <section id="transformation">
 <h2>Transformation<a class="headerlink" href="#transformation" title="Link to this heading">#</a></h2>
@@ -2957,6 +2905,10 @@ Name: mag, dtype: float64
 </div>
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">standardize(x)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">-</span> <span class="pre">x.mean())</span> <span class="pre">/</span> <span class="pre">x.std()</span></code>. Use it with <code class="docutils literal notranslate"><span class="pre">df.groupby('country').mag.transform(standardize)</span></code> and plot a histogram of the result — magnitudes should now be approximately centered on zero within each country.</p>
+</div>
 </section>
 <section id="time-grouping">
 <h2>Time Grouping<a class="headerlink" href="#time-grouping" title="Link to this heading">#</a></h2>
@@ -2964,26 +2916,34 @@ Name: mag, dtype: float64
 <p>To get started, let’s load the timeseries data we already explored in past lessons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">header_url</span> <span class="o">=</span> <span class="s1">&#39;ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/HEADERS.txt&#39;</span>
-<span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">header_url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">POOCH</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">os_cache</span><span class="p">(</span><span class="s2">&quot;noaa-data&quot;</span><span class="p">),</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;doi:10.5281/zenodo.5553029/&quot;</span><span class="p">,</span>
+    <span class="n">registry</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:2a306ca225fe3ccb72a98953ded2f536&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2016-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:eb69811d14d0573ffa69f70dd9c768d9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2017-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:b911da727ba1bdf26a34a775f25d1088&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2018-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:5b61bc687261596eba83801d7080dc56&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
 
-<span class="n">ftp_base</span> <span class="o">=</span> <span class="s1">&#39;ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
 <span class="n">dframes</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">):</span>
-    <span class="n">data_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">/CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-NY_Millbrook_3_W.txt&#39;</span>               
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ftp_base</span> <span class="o">+</span> <span class="n">data_url</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-NY_Millbrook_3_W.txt&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span>
                      <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
     <span class="n">dframes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dframes</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;LST_DATE&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4231,7 +4191,11 @@ Name: mag, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_climatology</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">remove_climatology</span><span class="p">)</span>
+<span class="n">anomaly</span>
 </pre></div>
 </div>
 </div>
@@ -4248,52 +4212,30 @@ Name: mag, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="c1">#(x - x.mean())#/x.std()</span>
-
-<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
-<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="c1">#/x.std()</span>
-
-<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
-<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-
-<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
-<span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Compute a <strong>daily</strong> climatology of <code class="docutils literal notranslate"><span class="pre">T_DAILY_MEAN</span></code> by grouping on <code class="docutils literal notranslate"><span class="pre">df.index.dayofyear</span></code> and taking the mean. Plot it as a line chart. Compare its shape to the monthly climatology shown above — the daily curve will be noisier but pick up sub-monthly structure.</p>
 </div>
 </section>
 <section id="resampling">
 <h3>Resampling<a class="headerlink" href="#resampling" title="Link to this heading">#</a></h3>
-<p>Another common operation is to change the resolution of a dataset by resampling in time. Pandas exposes this through the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#resampling">resample</a> function. The resample periods are specified using pandas <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">offset index</a> syntax.</p>
+<p>Another common operation is to change the resolution of a dataset by resampling in time. Pandas exposes this through the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#resampling" rel="noreferer noopener" target="_blank">resample</a> function. The resample periods are specified using pandas <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases" rel="noreferer noopener" target="_blank">offset index</a> syntax.</p>
 <p>Below we resample the dataset by taking the mean over each month.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4301,15 +4243,19 @@ Name: mag, dtype: float64
 <p>Just like with <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we can apply any aggregation function to our <code class="docutils literal notranslate"><span class="pre">resample</span></code> operation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.resample('YE').max()</span></code> to get the yearly maximum and plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MAX</span></code> against the resulting yearly index. Compare with the monthly resampling shown above — what trend, if any, do you see?</p>
+</div>
 </section>
 <section id="rolling-operations">
 <h3>Rolling Operations<a class="headerlink" href="#rolling-operations" title="Link to this heading">#</a></h3>
-<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">centered</span></code> to tell pandas whether to center the operation around the midpoint of the window.</p>
+<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html" rel="noreferer noopener" target="_blank">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">centered</span></code> to tell pandas whether to center the operation around the midpoint of the window.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -4324,6 +4270,10 @@ Name: mag, dtype: float64
 </pre></div>
 </div>
 </div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.rolling(7,</span> <span class="pre">center=True).T_DAILY_MEAN.mean()</span></code> to compute a 7-day moving average and plot it. Then overlay the raw daily series on the same axes (call <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> twice on the same axes, or use <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code> and call <code class="docutils literal notranslate"><span class="pre">.plot(ax=ax)</span></code> for each). What does smoothing reveal that the raw data hides?</p>
 </div>
 </section>
 </section>
@@ -4369,11 +4319,11 @@ Name: mag, dtype: float64
       </div>
     </a>
     <a class="right-next"
-       href="../../assignments/Pandas1.html"
+       href="assignment5a.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 1: Pandas Fundamentals with Earthquake Data</p>
+        <p class="prev-next-title">Assignment 5a: Pandas Fundamentals with Earthquake Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -4397,7 +4347,6 @@ Name: mag, dtype: float64
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-method">The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
 </ul>

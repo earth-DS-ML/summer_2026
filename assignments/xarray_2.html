@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -432,7 +432,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-more-xarray-with-el-nino-southern-oscillation-enso-data">
 <h1>Assignment: More Xarray with El Niño-Southern Oscillation (ENSO) Data<a class="headerlink" href="#assignment-more-xarray-with-el-nino-southern-oscillation-enso-data" title="Link to this heading">#</a></h1>
 <p>Here will will calculate the NINO 3.4 index of El Nino variabillity and use it to analyze datasets.</p>
-<p>First read <a class="reference external" href="https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst">this page from NOAA</a>. It tells you the following:</p>
+<p>First read <a class="reference external" href="https://www.ncdc.noaa.gov/teleconnections/enso/indicators/sst" rel="noreferer noopener" target="_blank">this page from NOAA</a>. It tells you the following:</p>
 <ul class="simple">
 <li><p>The Niño 3.4 region is defined as the region between +/- 5 deg. lat, 170 W - 120 W lon.</p></li>
 <li><p>Warm or cold phases of the Oceanic Niño Index are defined by a five consecutive 3-month running mean of sea surface temperature (SST) anomalies in the Niño 3.4 region that is above the threshold of +0.5°C (warm), or below the threshold of -0.5°C (cold). This is known as the Oceanic Niño Index (ONI).</p></li>
@@ -441,7 +441,7 @@
 <p>Start by importing Numpy, Matplotlib, and Xarray. Set the default figure size to (12, 6).</p>
 <section id="reproduce-the-sst-curve-from-the-figure-below">
 <h2>1. Reproduce the SST curve from the figure below<a class="headerlink" href="#reproduce-the-sst-curve-from-the-figure-below" title="Link to this heading">#</a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">sst.mnmean.nc</span></code> file that we worked with in class, located at <a class="reference external" href="http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc">http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc</a>.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">sst.mnmean.nc</span></code> file that we worked with in class, located at <a class="reference external" href="http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc" rel="noreferer noopener" target="_blank">http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc</a>.</p>
 <p>You don’t have to match the stylistic details, or use different colors above and below zero, just the “3mth running mean” curve.</p>
 <p><img alt="enso" src="https://www.ncdc.noaa.gov/monitoring-content/teleconnections/eln-f-pg.gif" /></p>
 <p>Load the data as an Xarray dataset. Drop the <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code> variable as we did in class and trim the data to 1950 onward for this assignment.</p>

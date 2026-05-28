@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -436,7 +436,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="python-fundamentals">
 <h1>Python Fundamentals<a class="headerlink" href="#python-fundamentals" title="Link to this heading">#</a></h1>
-<p>This material is mostly adapted from the <a class="reference external" href="https://docs.python.org/3/tutorial/">official python tutorial</a>, Copyright 2001-2024, Python Software Foundation. It is used here under the terms of the <a class="reference external" href="https://docs.python.org/3/license.html">Python License</a>.</p>
+<p>This material is mostly adapted from the <a class="reference external" href="https://docs.python.org/3/tutorial/" rel="noreferer noopener" target="_blank">official python tutorial</a>, Copyright 2001-2024, Python Software Foundation. It is used here under the terms of the <a class="reference external" href="https://docs.python.org/3/license.html" rel="noreferer noopener" target="_blank">Python License</a>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Working through this notebook</p>
 <p>This page is a Jupyter notebook. <strong>Download it</strong> using the ⬇ button in the top-right of the page, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. When you reach a <strong>Try it</strong> admonition, experiment in your own cells before moving on.</p>
@@ -464,7 +464,7 @@
 </div>
 </div>
 <blockquote>
-<div><p><em>Reference:</em> Python has a small set of <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#keywords">reserved words</a> (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">def</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, etc.) that can’t be used as variable names, and a long list of <a class="reference external" href="https://docs.python.org/3/library/functions.html">built-in functions</a> (<code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">len</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code>, etc.) that are always available. You don’t need to memorize either list — just be aware they exist.</p>
+<div><p><em>Reference:</em> Python has a small set of <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#keywords" rel="noreferer noopener" target="_blank">reserved words</a> (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">def</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, etc.) that can’t be used as variable names, and a long list of <a class="reference external" href="https://docs.python.org/3/library/functions.html" rel="noreferer noopener" target="_blank">built-in functions</a> (<code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">len</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">range</span></code>, etc.) that are always available. You don’t need to memorize either list — just be aware they exist.</p>
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -912,7 +912,7 @@ r: []
 </div>
 </div>
 <blockquote>
-<div><p><em>Reference:</em> Lists have many built-in methods — <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">extend</span></code>, <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">remove</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">clear</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, <code class="docutils literal notranslate"><span class="pre">reverse</span></code>, <code class="docutils literal notranslate"><span class="pre">copy</span></code>. See the <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python docs on lists</a> for the full reference. The ones you’ll use most in this course are <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, and <code class="docutils literal notranslate"><span class="pre">pop</span></code>.</p>
+<div><p><em>Reference:</em> Lists have many built-in methods — <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">extend</span></code>, <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">remove</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">clear</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, <code class="docutils literal notranslate"><span class="pre">reverse</span></code>, <code class="docutils literal notranslate"><span class="pre">copy</span></code>. See the <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" rel="noreferer noopener" target="_blank">Python docs on lists</a> for the full reference. The ones you’ll use most in this course are <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, and <code class="docutils literal notranslate"><span class="pre">pop</span></code>.</p>
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

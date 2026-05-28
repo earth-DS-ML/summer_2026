@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -474,8 +474,8 @@
 </div>
 </div>
 </div>
-<p>Data for this assignment in .csv format downloaded from the <a class="reference external" href="https://earthquake.usgs.gov/earthquakes/search/">USGS Earthquakes Database</a> is available at:</p>
-<p><a class="reference external" href="https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv">https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv</a></p>
+<p>Data for this assignment in .csv format downloaded from the <a class="reference external" href="https://earthquake.usgs.gov/earthquakes/search/" rel="noreferer noopener" target="_blank">USGS Earthquakes Database</a> is available at:</p>
+<p><a class="reference external" href="https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv" rel="noreferer noopener" target="_blank">https://raw.githubusercontent.com/earth-DS-ML/summer_2025/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv</a></p>
 <p>You don’t need to download this file. You can open it directly with Pandas.</p>
 <section id="use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe">
 <h2>1) Use Pandas’ read_csv function directly on this URL to open it as a DataFrame<a class="headerlink" href="#use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe" title="Link to this heading">#</a></h2>
@@ -1059,7 +1059,7 @@
 </section>
 <section id="use-nlargest-to-get-the-top-20-earthquakes-by-magnitude">
 <h2>4) Use <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> to get the top 20 earthquakes by magnitude<a class="headerlink" href="#use-nlargest-to-get-the-top-20-earthquakes-by-magnitude" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html</a></p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mag&#39;</span><span class="p">])</span>
@@ -1598,7 +1598,7 @@
 <p>Examine the structure of the <code class="docutils literal notranslate"><span class="pre">place</span></code> column. The state / country information seems to be in there. How would you get it out?</p>
 </section>
 <section id="extract-the-state-or-country-using-pandas-text-data-functions">
-<h2>5) Extract the state or country using Pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/text.html">text data functions</a><a class="headerlink" href="#extract-the-state-or-country-using-pandas-text-data-functions" title="Link to this heading">#</a></h2>
+<h2>5) Extract the state or country using Pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/text.html" rel="noreferer noopener" target="_blank">text data functions</a><a class="headerlink" href="#extract-the-state-or-country-using-pandas-text-data-functions" title="Link to this heading">#</a></h2>
 <p>Add it as a new column to the dataframe called <code class="docutils literal notranslate"><span class="pre">country</span></code>. Note that some of the “countries” are actually U.S. states.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1658,7 +1658,7 @@ Name: place, Length: 10654, dtype: object
 </section>
 <section id="display-each-unique-value-from-the-new-column">
 <h2>6) Display each unique value from the new column<a class="headerlink" href="#display-each-unique-value-from-the-new-column" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html</a></p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_countries</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -1723,8 +1723,8 @@ Name: place, Length: 10654, dtype: object
 </section>
 <section id="make-a-histogram-the-distribution-of-the-earthquake-magnitudes">
 <h2>9) Make a histogram the distribution of the Earthquake magnitudes<a class="headerlink" href="#make-a-histogram-the-distribution-of-the-earthquake-magnitudes" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html">https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html</a>
-<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html</a></p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html</a>
+<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html" rel="noreferer noopener" target="_blank">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html</a></p>
 <p>Do one subplot for the filtered and one for the unfiltered dataset.
 Use a Logarithmic scale. What sort of relationship do you see?</p>
 <div class="cell docutils container">

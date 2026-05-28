@@ -203,11 +203,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -481,7 +481,7 @@
 </section>
 <section id="from-your-cartesian-coordinates-create-polar-coordinates-r-and-varphi">
 <h3>1.3 From your cartesian coordinates, create polar coordinates <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\varphi\)</span><a class="headerlink" href="#from-your-cartesian-coordinates-create-polar-coordinates-r-and-varphi" title="Link to this heading">#</a></h3>
-<p>Refer to the <a class="reference external" href="https://en.wikipedia.org/wiki/Polar_coordinate_system#Converting_between_polar_and_Cartesian_coordinates">wikipedia page</a> for the conversion formula. You will need to use numpy’s <code class="docutils literal notranslate"><span class="pre">arctan2</span></code> function. Read its documentation.</p>
+<p>Refer to the <a class="reference external" href="https://en.wikipedia.org/wiki/Polar_coordinate_system#Converting_between_polar_and_Cartesian_coordinates" rel="noreferer noopener" target="_blank">wikipedia page</a> for the conversion formula. You will need to use numpy’s <code class="docutils literal notranslate"><span class="pre">arctan2</span></code> function. Read its documentation.</p>
 </section>
 <section id="visualize-r-and-varphi-on-the-2d-x-y-plane-using-pcolormesh">
 <h3>1.4. Visualize <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\varphi\)</span> on the 2D  <span class="math notranslate nohighlight">\(x\)</span> / <span class="math notranslate nohighlight">\(y\)</span> plane using <code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code><a class="headerlink" href="#visualize-r-and-varphi-on-the-2d-x-y-plane-using-pcolormesh" title="Link to this heading">#</a></h3>
@@ -504,12 +504,12 @@
 </section>
 </section>
 <section id="part-2-analyze-argo-data">
-<h2>Part 2: Analyze <a class="reference external" href="http://www.argo.ucsd.edu">ARGO</a> Data<a class="headerlink" href="#part-2-analyze-argo-data" title="Link to this heading">#</a></h2>
+<h2>Part 2: Analyze <a class="reference external" href="http://www.argo.ucsd.edu" rel="noreferer noopener" target="_blank">ARGO</a> Data<a class="headerlink" href="#part-2-analyze-argo-data" title="Link to this heading">#</a></h2>
 <p>In this problem, we use real data from ocean profiling floats.
 ARGO floats are autonomous robotic instruments that collect Temperature, Salinity, and Pressure data from the ocean. ARGO floats collect one “profile” (a set of messurements at different depths or “levels”).</p>
 <img src="https://argo.ucsd.edu/wp-content/uploads/sites/361/2020/06/float_cycle_1.png" width="80%" />
 <p>Each profile has a single latitude, longitude, and date associated with it, in addition to many different levels.</p>
-<p>Let’s start by using <a class="reference external" href="https://www.fatiando.org/pooch/latest/">pooch</a> to download the data files we need for this exercise.
+<p>Let’s start by using <a class="reference external" href="https://www.fatiando.org/pooch/latest/" rel="noreferer noopener" target="_blank">pooch</a> to download the data files we need for this exercise.
 The following code will give you a list of <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files that you can open in the next step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,7 +558,7 @@ The following code will give you a list of <code class="docutils literal notrans
 <h3>2.4 Compute the mean and standard deviation of each of T, S and P at each depth in <code class="docutils literal notranslate"><span class="pre">level</span></code>.<a class="headerlink" href="#compute-the-mean-and-standard-deviation-of-each-of-t-s-and-p-at-each-depth-in-level" title="Link to this heading">#</a></h3>
 </section>
 <section id="now-make-three-similar-plot-but-show-only-the-mean-t-s-and-p-at-each-depth-show-error-bars-on-each-plot-using-the-standard-deviations">
-<h3>2.5 Now make three similar plot, but show only the mean T, S and P at each depth. Show <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.errorbar.html">error bars</a> on each plot using the standard deviations.<a class="headerlink" href="#now-make-three-similar-plot-but-show-only-the-mean-t-s-and-p-at-each-depth-show-error-bars-on-each-plot-using-the-standard-deviations" title="Link to this heading">#</a></h3>
+<h3>2.5 Now make three similar plot, but show only the mean T, S and P at each depth. Show <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.errorbar.html" rel="noreferer noopener" target="_blank">error bars</a> on each plot using the standard deviations.<a class="headerlink" href="#now-make-three-similar-plot-but-show-only-the-mean-t-s-and-p-at-each-depth-show-error-bars-on-each-plot-using-the-standard-deviations" title="Link to this heading">#</a></h3>
 </section>
 <section id="account-for-missing-data">
 <h3>2.6 Account For Missing Data<a class="headerlink" href="#account-for-missing-data" title="Link to this heading">#</a></h3>
@@ -568,7 +568,7 @@ The following code will give you a list of <code class="docutils literal notrans
 </section>
 <section id="create-a-scatter-plot-of-the-lon-lat-positions-of-the-argo-float">
 <h3>2.7 Create a scatter plot of the <code class="docutils literal notranslate"><span class="pre">lon</span></code>, <code class="docutils literal notranslate"><span class="pre">lat</span></code> positions of the ARGO float.<a class="headerlink" href="#create-a-scatter-plot-of-the-lon-lat-positions-of-the-argo-float" title="Link to this heading">#</a></h3>
-<p>Use the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html">plt.scatter</a> function.</p>
+<p>Use the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html" rel="noreferer noopener" target="_blank">plt.scatter</a> function.</p>
 </section>
 </section>
 <section id="submission-instructions">

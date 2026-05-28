@@ -204,11 +204,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -446,8 +446,8 @@
 <section id="logistics">
 <h2>Logistics<a class="headerlink" href="#logistics" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Instructor:</strong> Dr. Dhruv Balwada (<a class="reference external" href="mailto:dbalwada&#37;&#52;&#48;ldeo&#46;columbia&#46;edu">dbalwada<span>&#64;</span>ldeo<span>&#46;</span>columbia<span>&#46;</span>edu</a>)</p></li>
-<li><p><strong>Teaching Assistant:</strong> Progga Dutta (<a class="reference external" href="mailto:pd2816&#37;&#52;&#48;columbia&#46;edu">pd2816<span>&#64;</span>columbia<span>&#46;</span>edu</a>)</p></li>
+<li><p><strong>Instructor:</strong> Dr. Dhruv Balwada (<a class="reference external" href="mailto:dbalwada&#37;&#52;&#48;ldeo&#46;columbia&#46;edu" rel="noreferer noopener" target="_blank">dbalwada<span>&#64;</span>ldeo<span>&#46;</span>columbia<span>&#46;</span>edu</a>)</p></li>
+<li><p><strong>Teaching Assistant:</strong> Progga Dutta (<a class="reference external" href="mailto:pd2816&#37;&#52;&#48;columbia&#46;edu" rel="noreferer noopener" target="_blank">pd2816<span>&#64;</span>columbia<span>&#46;</span>edu</a>)</p></li>
 <li><p><strong>Hours and location:</strong> TuTh 9am–10:45am, 602 Northwest Corner</p></li>
 <li><p><strong>Office hours:</strong> TBD</p></li>
 </ul>
@@ -508,7 +508,7 @@ The bulk of the content is devoted to in-depth exploration of the numerical anal
 <section id="using-ai-in-this-course">
 <h2>Using AI in This Course<a class="headerlink" href="#using-ai-in-this-course" title="Link to this heading">#</a></h2>
 <p>AI tools like ChatGPT are now part of how people work with data. This course treats them as a tool you’ll learn to use well — including where they help, where they don’t, and what your own judgment still has to provide.</p>
-<p><strong>What to use.</strong> For this course, the recommended chat-based AI tool is <a class="reference external" href="https://www.cuit.columbia.edu/content/google-gemini">Google Gemini</a>, which Columbia provides free to students through CUIT. Other chat tools (ChatGPT, <a class="reference external" href="http://Claude.ai">Claude.ai</a>) are also fine if you prefer them. Avoid editor-integrated tools like Copilot, Cursor, or Claude Code — chat keeps the “ask → read → verify” loop visible, which matters while you’re still learning the underlying skills.</p>
+<p><strong>What to use.</strong> For this course, the recommended chat-based AI tool is <a class="reference external" href="https://www.cuit.columbia.edu/content/google-gemini" rel="noreferer noopener" target="_blank">Google Gemini</a>, which Columbia provides free to students through CUIT. Other chat tools (ChatGPT, <a class="reference external" href="http://Claude.ai" rel="noreferer noopener" target="_blank">Claude.ai</a>) are also fine if you prefer them. Avoid editor-integrated tools like Copilot, Cursor, or Claude Code — chat keeps the “ask → read → verify” loop visible, which matters while you’re still learning the underlying skills.</p>
 <p><strong>How to use it — Socratic mode.</strong> Default to asking the AI to <em>teach</em> you, not to <em>do it for you</em>. At the start of a working session, prime your chat with a tutor prompt. Here is one to start with — feel free to adapt it as you learn what works:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">are</span> <span class="n">acting</span> <span class="k">as</span> <span class="n">my</span> <span class="n">Socratic</span> <span class="n">Tutor</span> <span class="k">for</span> <span class="n">a</span> <span class="n">graduate</span><span class="o">-</span><span class="n">level</span> <span class="n">Climate</span> <span class="n">Data</span> <span class="n">Science</span>
 <span class="n">course</span><span class="o">.</span> <span class="n">I</span> <span class="n">am</span> <span class="n">going</span> <span class="n">to</span> <span class="n">show</span> <span class="n">you</span> <span class="n">bugs</span> <span class="ow">or</span> <span class="n">ask</span> <span class="n">about</span> <span class="n">Python</span><span class="o">/</span><span class="n">Xarray</span><span class="o">/</span><span class="n">Git</span><span class="o">.</span>
@@ -527,11 +527,11 @@ The bulk of the content is devoted to in-depth exploration of the numerical anal
 <h2>History and Origins of the course<a class="headerlink" href="#history-and-origins-of-the-course" title="Link to this heading">#</a></h2>
 <p>Most of the content for CLMT5405 derives from previous versions of this course:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://earth-env-data-science.github.io/">Ryan Abernathey’s 2021 book</a> — the original incarnation.</p></li>
-<li><p><a class="reference external" href="https://github.com/yutianwuldeo/GR6901">Yutian Wu’s 2024 repo</a> — a more recent update.</p></li>
-<li><p><a class="reference external" href="https://foundations.projectpythia.org/">Project Pythia</a> — a separate but excellent companion resource.</p></li>
+<li><p><a class="reference external" href="https://earth-env-data-science.github.io/" rel="noreferer noopener" target="_blank">Ryan Abernathey’s 2021 book</a> — the original incarnation.</p></li>
+<li><p><a class="reference external" href="https://github.com/yutianwuldeo/GR6901" rel="noreferer noopener" target="_blank">Yutian Wu’s 2024 repo</a> — a more recent update.</p></li>
+<li><p><a class="reference external" href="https://foundations.projectpythia.org/" rel="noreferer noopener" target="_blank">Project Pythia</a> — a separate but excellent companion resource.</p></li>
 </ul>
-<p>The <a class="reference external" href="https://earth-ds-ml.github.io/summer_2025/">summer 2025 version of this course</a> is also available online for reference.</p>
+<p>The <a class="reference external" href="https://earth-ds-ml.github.io/summer_2025/" rel="noreferer noopener" target="_blank">summer 2025 version of this course</a> is also available online for reference.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

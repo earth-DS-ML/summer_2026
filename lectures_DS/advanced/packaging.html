@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -436,14 +436,14 @@
 <p>None of this is required for the weekly assignments — it’s reference / further-reading material for when your own research code matures.</p>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">Packages</a> are Python’s way of encapsulating reusable code for sharing with others. Packaging is a huge topic — this page just scratches the surface.</p>
+<p><a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages" rel="noreferer noopener" target="_blank">Packages</a> are Python’s way of encapsulating reusable code for sharing with others. Packaging is a huge topic — this page just scratches the surface.</p>
 <p>You’ve already interacted with many packages. Browse some of their GitHub repositories to see the structure of a large Python package:</p>
 <ul class="simple">
-<li><p>NumPy: <a class="github reference external" href="https://github.com/numpy/numpy">numpy/numpy</a></p></li>
-<li><p>Pandas: <a class="github reference external" href="https://github.com/pandas-dev/pandas">pandas-dev/pandas</a></p></li>
-<li><p>Xarray: <a class="github reference external" href="https://github.com/pydata/xarray">pydata/xarray</a></p></li>
+<li><p>NumPy: <a class="github reference external" href="https://github.com/numpy/numpy" rel="noreferer noopener" target="_blank">numpy/numpy</a></p></li>
+<li><p>Pandas: <a class="github reference external" href="https://github.com/pandas-dev/pandas" rel="noreferer noopener" target="_blank">pandas-dev/pandas</a></p></li>
+<li><p>Xarray: <a class="github reference external" href="https://github.com/pydata/xarray" rel="noreferer noopener" target="_blank">pydata/xarray</a></p></li>
 </ul>
-<p>For a smaller, more readable example, see the xrft package: <a class="github reference external" href="https://github.com/xgcm/xrft">xgcm/xrft</a></p>
+<p>For a smaller, more readable example, see the xrft package: <a class="github reference external" href="https://github.com/xgcm/xrft" rel="noreferer noopener" target="_blank">xgcm/xrft</a></p>
 <p>These packages all share a common basic structure. Imagine we wanted to turn our <code class="docutils literal notranslate"><span class="pre">gcdistance</span></code> module into a package — it would look like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">README</span><span class="o">.</span><span class="n">md</span>
 <span class="n">LICENSE</span>
@@ -468,16 +468,16 @@
 <td><p>Explain what the package is for</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code></p></td>
-<td><p>Defines the legal terms under which others can use the package. <a class="reference external" href="https://opensource.org/licenses/category">Open source</a> is encouraged.</p></td>
+<td><p>Defines the legal terms under which others can use the package. <a class="reference external" href="https://opensource.org/licenses/category" rel="noreferer noopener" target="_blank">Open source</a> is encouraged.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></p></td>
-<td><p>A conda environment describing the package’s dependencies (<a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file">more info</a>)</p></td>
+<td><p>A conda environment describing the package’s dependencies (<a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></td>
-<td><p>Same idea, but for pip (<a class="reference external" href="https://pip.pypa.io/en/stable/user_guide/#requirements-files">more info</a>)</p></td>
+<td><p>Same idea, but for pip (<a class="reference external" href="https://pip.pypa.io/en/stable/user_guide/#requirements-files" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></p></td>
-<td><p>A Python script that installs your package (<a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html">more info</a>)</p></td>
+<td><p>A Python script that installs your package (<a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -506,7 +506,7 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>There’s a <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html">wide range of options</a> for <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>. More fields are required if you want to <a class="reference external" href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">upload your package to PyPI</a> (so others can install it via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gcdistance</span></code>).</p>
+<p>There’s a <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html" rel="noreferer noopener" target="_blank">wide range of options</a> for <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>. More fields are required if you want to <a class="reference external" href="https://packaging.python.org/en/latest/tutorials/packaging-projects/" rel="noreferer noopener" target="_blank">upload your package to PyPI</a> (so others can install it via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gcdistance</span></code>).</p>
 <p>To install the package locally, run from the root directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
@@ -517,12 +517,12 @@
 </div>
 <p>In editable mode, the files are symlinked rather than copied — changes you make to the source take effect immediately without reinstalling.</p>
 <blockquote>
-<div><p><strong>Note:</strong> Modern Python packaging is moving from <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> to a <a class="reference external" href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/"><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></a> file as the canonical place to declare package metadata. <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> still works for now, but new projects often start with <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> from the beginning.</p>
+<div><p><strong>Note:</strong> Modern Python packaging is moving from <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> to a <a class="reference external" href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" rel="noreferer noopener" target="_blank"><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></a> file as the canonical place to declare package metadata. <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> still works for now, but new projects often start with <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> from the beginning.</p>
 </div></blockquote>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
-<p>A software package needs <a class="reference external" href="https://en.wikipedia.org/wiki/Software_testing">tests</a> to make sure it works as intended — and continues to work after future changes. Matt Rocklin has a <a class="reference external" href="http://matthewrocklin.com/blog/work/2016/02/08/tests">blog post</a> on why tests matter.</p>
+<p>A software package needs <a class="reference external" href="https://en.wikipedia.org/wiki/Software_testing" rel="noreferer noopener" target="_blank">tests</a> to make sure it works as intended — and continues to work after future changes. Matt Rocklin has a <a class="reference external" href="http://matthewrocklin.com/blog/work/2016/02/08/tests" rel="noreferer noopener" target="_blank">blog post</a> on why tests matter.</p>
 <p>Tests don’t have to be complicated. They are simply checks that verify your code does what it’s supposed to do.</p>
 <p>To add tests to our project, create <code class="docutils literal notranslate"><span class="pre">gcdistance/tests/test_gcdistance.py</span></code> (and an empty <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in the same directory). Here’s an example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -547,7 +547,7 @@
         <span class="n">great_circle_distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We use <a class="reference external" href="https://docs.pytest.org/">pytest</a> to run our tests. Install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pytest</span></code> if you don’t already have it, then run:</p>
+<p>We use <a class="reference external" href="https://docs.pytest.org/" rel="noreferer noopener" target="_blank">pytest</a> to run our tests. Install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pytest</span></code> if you don’t already have it, then run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-v
 </pre></div>
 </div>
@@ -555,7 +555,7 @@
 </section>
 <section id="continuous-integration-with-github-actions">
 <h2>Continuous Integration with GitHub Actions<a class="headerlink" href="#continuous-integration-with-github-actions" title="Link to this heading">#</a></h2>
-<p>You can configure automatic testing by integrating GitHub with <a class="reference external" href="https://docs.github.com/en/actions">GitHub Actions</a>. Every time you push commits, your tests run automatically in the cloud, and GitHub flags any failures on the pull request page.</p>
+<p>You can configure automatic testing by integrating GitHub with <a class="reference external" href="https://docs.github.com/en/actions" rel="noreferer noopener" target="_blank">GitHub Actions</a>. Every time you push commits, your tests run automatically in the cloud, and GitHub flags any failures on the pull request page.</p>
 <p>A minimal setup is a single YAML file at <code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests</span>
 <span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>

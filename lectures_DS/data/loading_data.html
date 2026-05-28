@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -438,7 +438,7 @@
 <section id="csv-over-http-pandas-read-csv">
 <h2>1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code><a class="headerlink" href="#csv-over-http-pandas-read-csv" title="Link to this heading">#</a></h2>
 <p>The simplest case: a CSV file sitting at a public URL. <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code> can read directly from a URL without you having to download it first.</p>
-<p>We’ll use the <a class="reference external" href="https://scrippsco2.ucsd.edu/">Scripps CO2 dataset</a> — atmospheric CO2 measurements from Mauna Loa, going back to 1958.</p>
+<p>We’ll use the <a class="reference external" href="https://scrippsco2.ucsd.edu/" rel="noreferer noopener" target="_blank">Scripps CO2 dataset</a> — atmospheric CO2 measurements from Mauna Loa, going back to 1958.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a code cell, run:</p>
@@ -459,7 +459,7 @@
 <section id="netcdf-over-opendap-xarray-open-dataset">
 <h2>2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code><a class="headerlink" href="#netcdf-over-opendap-xarray-open-dataset" title="Link to this heading">#</a></h2>
 <p>For gridded scientific data (temperature, precipitation, sea-surface height, etc.), the standard format is <strong>NetCDF</strong>. The standard <em>protocol</em> for serving NetCDF files over the network is <strong>OPeNDAP</strong> — it lets you access just the parts of a large dataset you need, without downloading the whole file.</p>
-<p>We’ll use the <a class="reference external" href="https://iridl.ldeo.columbia.edu/">IRI Data Library</a>’s precipitation dataset — global monthly rain estimates.</p>
+<p>We’ll use the <a class="reference external" href="https://iridl.ldeo.columbia.edu/" rel="noreferer noopener" target="_blank">IRI Data Library</a>’s precipitation dataset — global monthly rain estimates.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a code cell, run:</p>
@@ -479,7 +479,7 @@
 </section>
 <section id="a-file-from-zenodo-by-doi-pooch">
 <h2>3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code><a class="headerlink" href="#a-file-from-zenodo-by-doi-pooch" title="Link to this heading">#</a></h2>
-<p>Sometimes you need to <strong>download</strong> the actual file — for example, to use it with a tool that doesn’t speak HTTP, or to work offline. The <a class="reference external" href="https://www.fatiando.org/pooch/">Pooch</a> library is the recommended tool for this — it caches the file locally, checks it against a hash to detect corruption, and re-uses the cached copy on later runs.</p>
+<p>Sometimes you need to <strong>download</strong> the actual file — for example, to use it with a tool that doesn’t speak HTTP, or to work offline. The <a class="reference external" href="https://www.fatiando.org/pooch/" rel="noreferer noopener" target="_blank">Pooch</a> library is the recommended tool for this — it caches the file locally, checks it against a hash to detect corruption, and re-uses the cached copy on later runs.</p>
 <p>The interesting case: pulling a file from a Zenodo dataset using its DOI. This is the FAIR-canonical way to access a published dataset.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
@@ -500,7 +500,7 @@
 <p>The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse the cached copy (and verify it hasn’t been corrupted). Notice the DOI in the URL — the dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>
 </div>
 <blockquote>
-<div><p><em>Reference:</em> Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3 buckets, FTP, etc.) and is the standard download manager in many scientific Python packages. See its <a class="reference external" href="https://www.fatiando.org/pooch/">documentation</a> for details.</p>
+<div><p><em>Reference:</em> Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3 buckets, FTP, etc.) and is the standard download manager in many scientific Python packages. See its <a class="reference external" href="https://www.fatiando.org/pooch/" rel="noreferer noopener" target="_blank">documentation</a> for details.</p>
 </div></blockquote>
 </section>
 <section id="recap">
@@ -533,13 +533,13 @@
 </section>
 <section id="where-else-to-find-data">
 <h2>Where else to find data<a class="headerlink" href="#where-else-to-find-data" title="Link to this heading">#</a></h2>
-<p>The three patterns above cover most situations you’ll meet in this course, but the data-access landscape has been changing fast. A lot of newer climate datasets are now hosted on <strong>cloud object storage</strong> (S3, GCS, Azure) rather than traditional HTTP or OPeNDAP servers. The cloud-native equivalent of NetCDF + OPeNDAP is <strong>Zarr</strong> stored on a cloud bucket, accessed with <code class="docutils literal notranslate"><span class="pre">xarray.open_zarr(...)</span></code> (with <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a> doing the network plumbing).</p>
+<p>The three patterns above cover most situations you’ll meet in this course, but the data-access landscape has been changing fast. A lot of newer climate datasets are now hosted on <strong>cloud object storage</strong> (S3, GCS, Azure) rather than traditional HTTP or OPeNDAP servers. The cloud-native equivalent of NetCDF + OPeNDAP is <strong>Zarr</strong> stored on a cloud bucket, accessed with <code class="docutils literal notranslate"><span class="pre">xarray.open_zarr(...)</span></code> (with <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank"><code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a> doing the network plumbing).</p>
 <p>You don’t need to use any of these for the course, but they’re worth knowing about — especially when you’re looking for project data:</p>
 <ul class="simple">
-<li><p><strong><a class="reference external" href="https://app.earthmover.io/marketplace">Earthmover Marketplace</a></strong> — curated cloud-hosted climate datasets in Zarr / Icechunk format, designed for fast analysis-ready access.</p></li>
-<li><p><strong><a class="reference external" href="https://catalog.leap.columbia.edu/">LEAP Pangeo Catalog</a></strong> — datasets curated by the NSF LEAP STC (the same group that runs our course JupyterHub); often already on the hub for low-latency access.</p></li>
-<li><p><strong><a class="reference external" href="https://planetarycomputer.microsoft.com/">Microsoft Planetary Computer</a></strong> — large catalog of satellite imagery and climate datasets hosted on Azure, indexed via the <a class="reference external" href="https://stacspec.org/">STAC</a> spec.</p></li>
-<li><p><strong><a class="reference external" href="https://earthaccess.readthedocs.io/">NASA <code class="docutils literal notranslate"><span class="pre">earthaccess</span></code></a></strong> — Python package that handles auth + S3 access for NASA’s Earthdata Cloud.</p></li>
+<li><p><strong><a class="reference external" href="https://app.earthmover.io/marketplace" rel="noreferer noopener" target="_blank">Earthmover Marketplace</a></strong> — curated cloud-hosted climate datasets in Zarr / Icechunk format, designed for fast analysis-ready access.</p></li>
+<li><p><strong><a class="reference external" href="https://catalog.leap.columbia.edu/" rel="noreferer noopener" target="_blank">LEAP Pangeo Catalog</a></strong> — datasets curated by the NSF LEAP STC (the same group that runs our course JupyterHub); often already on the hub for low-latency access.</p></li>
+<li><p><strong><a class="reference external" href="https://planetarycomputer.microsoft.com/" rel="noreferer noopener" target="_blank">Microsoft Planetary Computer</a></strong> — large catalog of satellite imagery and climate datasets hosted on Azure, indexed via the <a class="reference external" href="https://stacspec.org/" rel="noreferer noopener" target="_blank">STAC</a> spec.</p></li>
+<li><p><strong><a class="reference external" href="https://earthaccess.readthedocs.io/" rel="noreferer noopener" target="_blank">NASA <code class="docutils literal notranslate"><span class="pre">earthaccess</span></code></a></strong> — Python package that handles auth + S3 access for NASA’s Earthdata Cloud.</p></li>
 </ul>
 <p>When you start looking for data for your final project, browsing these catalogs is often the fastest way to find something good — each comes with its own setup (a Python package, sometimes an account).</p>
 </section>

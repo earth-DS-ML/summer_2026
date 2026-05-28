@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -443,7 +443,7 @@
 <p>A complex research project often relies on many different programs and software packages to accomplish the research goals.
 An important part of data science or scientific computing is deciding how to organize and structure the code you use for data analysis and research.
 A well-structured project can make you a more efficient and effective researcher.
-It is also a key component of <a class="reference external" href="http://lorenabarba.com/blog/barbagroup-reproducibility-syllabus/">scientific reproducibility</a>.</p>
+It is also a key component of <a class="reference external" href="http://lorenabarba.com/blog/barbagroup-reproducibility-syllabus/" rel="noreferer noopener" target="_blank">scientific reproducibility</a>.</p>
 <p>Just putting all of your code into git repositories won’t magically turn a mess of scripts into a beautiful, well-organized project.
 More deliberate effort is required.</p>
 <section id="types-of-projects">
@@ -460,7 +460,7 @@ More deliberate effort is required.</p>
 <p>The first half of this page (project organization and reproducibility) is reading material — no code to run.</p>
 <p>The <strong>Modules</strong> section below has runnable code that imports a small <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> module. To follow along, either:</p>
 <ul class="simple">
-<li><p><strong>Download</strong> this notebook using the ⬇ icon in the top-right, and also grab <a class="reference external" href="https://github.com/earth-DS-ML/summer_2026/blob/main/lectures_DS/core_python/gcdistance.py"><code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code></a> from the course repo. Put both files in the same folder in your environment.</p></li>
+<li><p><strong>Download</strong> this notebook using the ⬇ icon in the top-right, and also grab <a class="reference external" href="https://github.com/earth-DS-ML/summer_2026/blob/main/lectures_DS/core_python/gcdistance.py" rel="noreferer noopener" target="_blank"><code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code></a> from the course repo. Put both files in the same folder in your environment.</p></li>
 <li><p><strong>Or copy-paste</strong>: open a fresh notebook in your environment and copy each code cell over from this page. The contents of <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> are shown below in the Modules section — paste those into a sibling text file named <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>.</p></li>
 </ul>
 <p>Either way, run the cells in JupyterLab on LEAP or Colab.</p>
@@ -470,19 +470,19 @@ More deliberate effort is required.</p>
 <h2>Exploratory Analysis<a class="headerlink" href="#exploratory-analysis" title="Link to this heading">#</a></h2>
 <p>When starting something new, you’re often motivated to just start coding and get results quickly. This is fine! Jupyter notebooks are an ideal format for open-ended exploratory analysis since they’re self-contained — text, code, and figures all in one place.</p>
 <p>If you find something cool or useful, preserve it. The simplest option is a single notebook in a folder of your project repo (e.g., the GitHub repo from Assignment 1).</p>
-<p>For one-off notebooks you want to share with others, GitHub’s <a class="reference external" href="https://help.github.com/articles/about-gists/">Gist mechanism</a> is also a lightweight option — gists are mini repos you can drag-and-drop a notebook into at <a class="reference external" href="https://gist.github.com/">https://gist.github.com/</a>.</p>
+<p>For one-off notebooks you want to share with others, GitHub’s <a class="reference external" href="https://help.github.com/articles/about-gists/" rel="noreferer noopener" target="_blank">Gist mechanism</a> is also a lightweight option — gists are mini repos you can drag-and-drop a notebook into at <a class="reference external" href="https://gist.github.com/" rel="noreferer noopener" target="_blank">https://gist.github.com/</a>.</p>
 </section>
 <section id="a-single-paper">
 <h2>A Single Paper<a class="headerlink" href="#a-single-paper" title="Link to this heading">#</a></h2>
 <section id="scientific-reproducibility">
 <h3>Scientific Reproducibility<a class="headerlink" href="#scientific-reproducibility" title="Link to this heading">#</a></h3>
-<p>Reproducibility is a cornerstone of the scientific process. Today, almost all earth science relies on some form of computation — from simple statistical analysis to advanced numerical simulation. In principle, computational science should be highly reproducible. In practice, <a class="reference external" href="http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970">it often isn’t</a>.</p>
+<p>Reproducibility is a cornerstone of the scientific process. Today, almost all earth science relies on some form of computation — from simple statistical analysis to advanced numerical simulation. In principle, computational science should be highly reproducible. In practice, <a class="reference external" href="http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970" rel="noreferer noopener" target="_blank">it often isn’t</a>.</p>
 <p>The audience for a reproducible project isn’t just other scientists — it’s <em>you</em>, a year from now, when you need to repeat or build on this work. Extra time spent on reproducibility now pays off later.</p>
 <p>A useful framing from one of the earliest papers on the topic:</p>
 <blockquote>
 <div><p>An article about computational science … is not the scholarship itself, it’s merely scholarship advertisement. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.</p>
 </div></blockquote>
-<p><em>Donoho, D. et al. (2009), Reproducible research in computational harmonic analysis, Comp. Sci. Eng. 11(1):8–18, doi: <a class="reference external" href="http://dx.doi.org/10.1109/MCSE.2009.15">10.1109/MCSE.2009.15</a></em></p>
+<p><em>Donoho, D. et al. (2009), Reproducible research in computational harmonic analysis, Comp. Sci. Eng. 11(1):8–18, doi: <a class="reference external" href="http://dx.doi.org/10.1109/MCSE.2009.15" rel="noreferer noopener" target="_blank">10.1109/MCSE.2009.15</a></em></p>
 <p>A few practical principles that follow from this:</p>
 <ol class="arabic simple">
 <li><p><strong>Keep track of how each result was produced</strong> — which script, which inputs, which parameters.</p></li>
@@ -491,7 +491,7 @@ More deliberate effort is required.</p>
 <li><p><strong>Provide public access</strong> to code, raw data, and analysis steps, so others (and future you) can re-run them.</p></li>
 </ol>
 <blockquote>
-<div><p><em>Further reading:</em> <a class="reference external" href="http://dx.doi.org/10.1371/journal.pcbi.1003285">Sandve et al. (2013)</a> lists ten specific recommendations for computational reproducibility, and the <a class="reference external" href="https://doi.org/10.6084/m9.figshare.4879928.v1">Barba-group Reproducibility Syllabus</a> collects best-practice references.</p>
+<div><p><em>Further reading:</em> <a class="reference external" href="http://dx.doi.org/10.1371/journal.pcbi.1003285" rel="noreferer noopener" target="_blank">Sandve et al. (2013)</a> lists ten specific recommendations for computational reproducibility, and the <a class="reference external" href="https://doi.org/10.6084/m9.figshare.4879928.v1" rel="noreferer noopener" target="_blank">Barba-group Reproducibility Syllabus</a> collects best-practice references.</p>
 </div></blockquote>
 <p>These principles suggest a certain structure for a project.</p>
 </section>
@@ -509,7 +509,7 @@ notebooks/helper.py
 manuscript/manuscript.tex
 </pre></div>
 </div>
-<p>A great example of such a paper is <a class="reference external" href="https://crocha700.github.io/">Cesar Rocha</a>’s Upper Ocean Seasonality project: <a class="github reference external" href="https://github.com/crocha700/UpperOceanSeasonality">crocha700/UpperOceanSeasonality</a>.</p>
+<p>A great example of such a paper is <a class="reference external" href="https://crocha700.github.io/" rel="noreferer noopener" target="_blank">Cesar Rocha</a>’s Upper Ocean Seasonality project: <a class="github reference external" href="https://github.com/crocha700/UpperOceanSeasonality" rel="noreferer noopener" target="_blank">crocha700/UpperOceanSeasonality</a>.</p>
 </section>
 </section>
 <section id="reuseable-software-elements">
@@ -517,11 +517,11 @@ manuscript/manuscript.tex
 <p>Scientific software can perhaps be grouped into two categories: single-use “scripts” that are used in a very specific context to do a very specific thing (e.g.~to generate a specific figure for a paper), and reuseable components which encapsulate a more generic workflow. Once you find yourself repeating the same chunks of code in many different scripts or projects, it’s time to start composing reusable software elements.</p>
 <section id="modules">
 <h3>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h3>
-<p>The basic element of reusability in python is the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">module</a>.
+<p>The basic element of reusability in python is the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html" rel="noreferer noopener" target="_blank">module</a>.
 A module is a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file which contains python objects which can be <em>imported</em> by other scripts or notebooks.
 Let’s illustrate how modules work with a simple example.</p>
-<p>A common task in geoscience is to calculate the <a class="reference external" href="https://en.wikipedia.org/wiki/Great-circle_distance">great-circle distance</a> between two points on the globe.
-There are several <a class="reference external" href="https://pypi.python.org/pypi/geopy">pacakges</a> that could do this for you, but let’s write our own as an example of a module.</p>
+<p>A common task in geoscience is to calculate the <a class="reference external" href="https://en.wikipedia.org/wiki/Great-circle_distance" rel="noreferer noopener" target="_blank">great-circle distance</a> between two points on the globe.
+There are several <a class="reference external" href="https://pypi.python.org/pypi/geopy" rel="noreferer noopener" target="_blank">pacakges</a> that could do this for you, but let’s write our own as an example of a module.</p>
 <p>The formula for great circle distance is</p>
 <p><img alt="great circle distance formula" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/75af53b063ee43aed3de186b1a98af5c150185b8" /></p>
 <p>(Note that this formula requires 64-bit precision for adequate accuracy.)</p>
@@ -564,7 +564,7 @@ There are several <a class="reference external" href="https://pypi.python.org/py
         <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lambda2</span> <span class="o">-</span> <span class="n">lambda1</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>The module begins with a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a> explaining what it does. Then it contains some data (just a constant <code class="docutils literal notranslate"><span class="pre">R</span></code>) and a single function.</p>
+<p>The module begins with a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/" rel="noreferer noopener" target="_blank">docstring</a> explaining what it does. Then it contains some data (just a constant <code class="docutils literal notranslate"><span class="pre">R</span></code>) and a single function.</p>
 <p>Now let’s import our module</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -653,7 +653,7 @@ FILE
 </section>
 <section id="aside-python-style">
 <h3>Aside: Python Style<a class="headerlink" href="#aside-python-style" title="Link to this heading">#</a></h3>
-<p>There are few absolute rules for python code style, but there is a detailed <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">recommended style guide</a>. Some especially relevant points are:</p>
+<p>There are few absolute rules for python code style, but there is a detailed <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/" rel="noreferer noopener" target="_blank">recommended style guide</a>. Some especially relevant points are:</p>
 <ul class="simple">
 <li><p>Line length should not exceed 79 characters</p></li>
 <li><p>Module names should be <code class="docutils literal notranslate"><span class="pre">lowercase</span></code></p></li>

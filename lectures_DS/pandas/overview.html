@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pandas &#8212; Earth Data Science and Machine Learning</title>
+    <title>Overview &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -60,7 +60,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/pandas_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Pandas Fundamentals" href="basic_pandas.html" />
@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -298,7 +298,7 @@
       
       
       
-      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/pandas/pandas_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/pandas/overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -328,7 +328,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/pandas/pandas_intro.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/pandas/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -404,7 +404,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pandas</h1>
+    <h1>Overview</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,7 +414,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-capabilities-from-the-pandas-website">Pandas capabilities (from the Pandas website):</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-pandas-can-do">What Pandas can do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
             </nav>
         </div>
@@ -426,34 +429,50 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pandas">
-<h1>Pandas<a class="headerlink" href="#pandas" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="http://pandas.pydata.org/">Pandas</a> is a an open source library providing high-performance, easy-to-use data structures and data analysis tools. Pandas is particularly suited to the analysis of <em>tabular</em> data, i.e. data that can can go into a table. In other words, if you can imagine the data in an Excel spreadsheet, then Pandas is the tool for the job.</p>
-<p>A <a class="reference external" href="https://stackoverflow.blog/2017/09/06/incredible-growth-python/">2017 recent analysis</a> of questions from Stack Overflow showed that python was the fastest growing and most widely used programming language in the world (in developed countries).
-As of 2021, the growth has now leveled off, but Python remains at the top.</p>
-<p><img alt="python growth" src="../../_images/SO_language_growth_2021.svg" /></p>
-<p><a class="reference external" href="https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cvb.net%2Cjavascript%2Cassembly%2Cphp%2Cperl%2Cruby%2Cvb%2Cswift%2Cr%2Cobjective-c">Link to generate your own version of this figure</a></p>
-<p>A <a class="reference external" href="https://149351115.v2.pressablecdn.com/wp-content/uploads/2017/09/related_tags_over_time-1-2000x2000.png">follow-up analysis</a> showed that this growth is driven by the data science packages such as numpy, matplotlib, and especially pandas.</p>
-<p><img alt="pandas growth" src="https://ourcodingclub.github.io/assets/img/tutorials/pandas-python-intro/python-pandas-growth.png" /></p>
-<p>The exponential growth of pandas is due to the fact that it <em>just works</em>. It saves you time and helps you do science more efficiently and effictively.</p>
-<section id="pandas-capabilities-from-the-pandas-website">
-<h2>Pandas capabilities (from the Pandas website):<a class="headerlink" href="#pandas-capabilities-from-the-pandas-website" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>This section introduces <strong>Pandas</strong>: an open-source library providing high-performance, easy-to-use data structures and data analysis tools. Pandas is particularly suited to <strong>tabular data</strong> — anything that fits naturally into rows and columns, like an Excel spreadsheet. The <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is the workhorse of nearly every data-science workflow in Python.</p>
+<section id="what-pandas-can-do">
+<h2>What Pandas can do<a class="headerlink" href="#what-pandas-can-do" title="Link to this heading">#</a></h2>
+<p>A few of the headline capabilities (from the <a class="reference external" href="http://pandas.pydata.org/" rel="noreferer noopener" target="_blank">pandas website</a>):</p>
 <ul class="simple">
-<li><p>A fast and efficient DataFrame object for data manipulation with integrated indexing;</p></li>
-<li><p>Tools for reading and writing data between in-memory data structures and different formats: CSV and text files, Microsoft Excel, SQL databases, and the fast HDF5 format;</p></li>
-<li><p>Intelligent data alignment and integrated handling of missing data: gain automatic label-based alignment in computations and easily manipulate messy data into an orderly form;</p></li>
-<li><p>Flexible reshaping and pivoting of data sets;</p></li>
-<li><p>Intelligent label-based slicing, fancy indexing, and subsetting of large data sets;</p></li>
-<li><p>Columns can be inserted and deleted from data structures for size mutability;</p></li>
-<li><p>Aggregating or transforming data with a powerful group by engine allowing split-apply-combine operations on data sets;</p></li>
-<li><p>High performance merging and joining of data sets;</p></li>
-<li><p>Hierarchical axis indexing provides an intuitive way of working with high-dimensional data in a lower-dimensional data structure;</p></li>
-<li><p>Time series-functionality: date range generation and frequency conversion, moving window statistics, moving window linear regressions, date shifting and lagging. Even create domain-specific time offsets and join time series without losing data;</p></li>
-<li><p>Highly optimized for performance, with critical code paths written in Cython or C.</p></li>
-<li><p>Python with pandas is in use in a wide variety of academic and commercial domains, including Finance, Neuroscience, Economics, Statistics, Advertising, Web Analytics, and more.</p></li>
+<li><p>Fast, efficient <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> for tabular data manipulation with integrated indexing.</p></li>
+<li><p>Reading and writing between in-memory data structures and many file formats (CSV, Excel, SQL, HDF5, Parquet, …).</p></li>
+<li><p>Intelligent label-based alignment and missing-data handling.</p></li>
+<li><p>Reshaping and pivoting of datasets.</p></li>
+<li><p>Slicing, boolean filtering, and fancy indexing of large datasets.</p></li>
+<li><p>Aggregation and transformation with a powerful <code class="docutils literal notranslate"><span class="pre">groupby</span></code> engine (split-apply-combine).</p></li>
+<li><p>High-performance joins and merges.</p></li>
+<li><p>Time-series functionality: date ranges, frequency conversion, moving-window statistics.</p></li>
 </ul>
-<p>In this lecture, we will go over the basic capabilities of Pandas. It is a very deep library, and you will need to dig into the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/">documentation</a> for more advanced usage.</p>
-<p>Pandas was created by <a class="reference external" href="http://wesmckinney.com/">Wes McKinney</a>. Many of the examples here are drawn from Wes McKinney’s book <a class="reference external" href="http://shop.oreilly.com/product/0636920023784.do">Python for Data Analysis</a>, which includes a github repo of <a class="reference external" href="https://github.com/wesm/pydata-book">code samples</a>.</p>
+<p>This section just scratches the surface; the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/" rel="noreferer noopener" target="_blank">pandas documentation</a> is the place to dig deeper. Pandas was created by <a class="reference external" href="http://wesmckinney.com/" rel="noreferer noopener" target="_blank">Wes McKinney</a>; his book <a class="reference external" href="http://shop.oreilly.com/product/0636920023784.do" rel="noreferer noopener" target="_blank">Python for Data Analysis</a> (with <a class="reference external" href="https://github.com/wesm/pydata-book" rel="noreferer noopener" target="_blank">code samples</a>) is an excellent deeper reference.</p>
+</section>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this section, you should be able to:</p>
+<ol class="arabic simple">
+<li><p><strong>Create and inspect Series and DataFrames</strong> — including index, columns, dtype, and basic descriptive methods (<code class="docutils literal notranslate"><span class="pre">.info()</span></code>, <code class="docutils literal notranslate"><span class="pre">.describe()</span></code>).</p></li>
+<li><p><strong>Index and slice</strong> — with <code class="docutils literal notranslate"><span class="pre">.loc</span></code> (label-based) and <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> (positional), plus boolean masks for row filtering.</p></li>
+<li><p><strong>Load tabular data</strong> — <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> with custom separators, missing-value handling, and date parsing.</p></li>
+<li><p><strong>Add new columns, modify cells, and merge DataFrames/Series</strong> along a shared index.</p></li>
+<li><p><strong>Work with time-indexed data</strong> — <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, slicing by date range, and time-series plotting.</p></li>
+<li><p><strong>Plot directly from a DataFrame</strong> — <code class="docutils literal notranslate"><span class="pre">.plot(...)</span></code> with line, bar, scatter, hist.</p></li>
+<li><p><strong>Split-apply-combine with <code class="docutils literal notranslate"><span class="pre">groupby</span></code></strong> — aggregate, transform, and iterate over groups; build climatologies and anomalies.</p></li>
+<li><p><strong>Resample and apply rolling statistics</strong> — change time frequency with <code class="docutils literal notranslate"><span class="pre">resample</span></code>, compute moving-window means with <code class="docutils literal notranslate"><span class="pre">rolling</span></code>.</p></li>
+</ol>
+</section>
+<section id="pages-in-this-section">
+<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="basic_pandas.html"><span class="std std-doc">Pandas Fundamentals</span></a> — Series, DataFrames, indexing, reading CSV files, time indexes, plotting.</p></li>
+<li><p><a class="reference internal" href="pandas_groupby.html"><span class="std std-doc">Pandas: Groupby</span></a> — split-apply-combine, aggregation, transformation, time grouping, climatology and anomalies.</p></li>
+<li><p><a class="reference internal" href="assignment5a.html"><span class="std std-doc">Assignment 5a</span></a> — pandas fundamentals on USGS earthquake data.</p></li>
+<li><p><a class="reference internal" href="assignment5b.html"><span class="std std-doc">Assignment 5b</span></a> — pandas groupby on NOAA hurricane tracks.</p></li>
+</ul>
+</section>
+<section id="working-through-the-lectures">
+<h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
+<p>Same workflow as previous modules — download each notebook (⬇ icon, top-right) or copy-paste the cells into a fresh notebook in JupyterLab on LEAP or Colab, then step through them. Stop at each <strong>Try it</strong> admonition to experiment in your own cells before moving on.</p>
 </section>
 </section>
 
@@ -523,7 +542,10 @@ As of 2021, the growth has now leveled off, but Python remains at the top.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-capabilities-from-the-pandas-website">Pandas capabilities (from the Pandas website):</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-pandas-can-do">What Pandas can do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
   </nav></div>
 

@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -476,7 +476,7 @@
 </tbody>
 </table>
 </div>
-<p><em>(via <a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/">NASA’s Planetary Fact Sheet</a>)</em></p>
+<p><em>(via <a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/" rel="noreferer noopener" target="_blank">NASA’s Planetary Fact Sheet</a>)</em></p>
 <p>Common storage:</p>
 <ul class="simple">
 <li><p><strong>CSV</strong> (comma-separated values) — human-readable plain text, universally supported, but no built-in types or metadata. Most common.</p></li>
@@ -488,7 +488,7 @@
 <h3>Gridded (array) data<a class="headerlink" href="#gridded-array-data" title="Link to this heading">#</a></h3>
 <p>Numerical data on N-dimensional regular grids — temperature at every (latitude, longitude, time), for example.</p>
 <img src="http://xarray.pydata.org/en/stable/_images/dataset-diagram.png" width="600px" />
-<p><em>(via <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html">xarray docs</a>)</em></p>
+<p><em>(via <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html" rel="noreferer noopener" target="_blank">xarray docs</a>)</em></p>
 <p>Common storage:</p>
 <ul class="simple">
 <li><p><strong>NetCDF</strong> — long-time standard in earth sciences. Self-describing: variables, dimensions, units, and other metadata are embedded in the file.</p></li>
@@ -513,16 +513,16 @@
 <h3>Vector data<a class="headerlink" href="#vector-data" title="Link to this heading">#</a></h3>
 <p>Discrete geometric features on the Earth’s surface — points (cities, sensors), lines (rivers, roads), or polygons (countries, watersheds).</p>
 <img src="https://datacarpentry.org/organization-geospatial/fig/dc-spatial-vector/pnt_line_poly.png" width="500px" />
-<p><em>(image credit: National Ecological Observatory Network (NEON), via <a class="reference external" href="https://datacarpentry.org/organization-geospatial/02-intro-vector-data/">Data Carpentry</a>)</em></p>
+<p><em>(image credit: National Ecological Observatory Network (NEON), via <a class="reference external" href="https://datacarpentry.org/organization-geospatial/02-intro-vector-data/" rel="noreferer noopener" target="_blank">Data Carpentry</a>)</em></p>
 <p>Common storage:</p>
 <ul class="simple">
-<li><p><strong>ESRI Shapefile</strong> — long-standing, widely supported (despite <a class="reference external" href="http://switchfromshapefile.org/">its flaws</a>).</p></li>
+<li><p><strong>ESRI Shapefile</strong> — long-standing, widely supported (despite <a class="reference external" href="http://switchfromshapefile.org/" rel="noreferer noopener" target="_blank">its flaws</a>).</p></li>
 <li><p><strong>GeoJSON</strong> — JSON-based, human-readable.</p></li>
 <li><p><strong>GeoPackage</strong> / <strong>FlatGeoBuf</strong> — modern alternatives.</p></li>
 </ul>
 <p>In Python, vector data is read with <strong>Fiona</strong> or <strong>GeoPandas</strong>. We won’t use vector data much in this course, but you’ll likely meet it later.</p>
 <blockquote>
-<div><p><em>Reference:</em> Other data shapes you may run into — <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph data</a> (nodes and edges, handled in Python with <a class="reference external" href="https://networkx.org/">NetworkX</a>), unstructured / nested data (commonly stored as <a class="reference external" href="https://www.json.org/">JSON</a>), or relational databases for sets of related tables. They’re not central to this course, but it’s worth knowing they exist.</p>
+<div><p><em>Reference:</em> Other data shapes you may run into — <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)" rel="noreferer noopener" target="_blank">graph data</a> (nodes and edges, handled in Python with <a class="reference external" href="https://networkx.org/" rel="noreferer noopener" target="_blank">NetworkX</a>), unstructured / nested data (commonly stored as <a class="reference external" href="https://www.json.org/" rel="noreferer noopener" target="_blank">JSON</a>), or relational databases for sets of related tables. They’re not central to this course, but it’s worth knowing they exist.</p>
 </div></blockquote>
 </section>
 </section>
@@ -531,8 +531,8 @@
 <p><strong>Metadata is “data about the data”:</strong> who created it, when, with what instrument, what units, what coordinate system, what license. Without metadata, raw numbers are nearly useless.</p>
 <p>In earth science, common metadata conventions for NetCDF/Zarr data include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://cfconventions.org/"><strong>CF Conventions</strong></a> — Climate and Forecast standard names, units, coordinate system descriptors.</p></li>
-<li><p><a class="reference external" href="https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3"><strong>Attribute Convention for Data Discovery (ACDD)</strong></a> — discovery-level fields like title, summary, geographic extent.</p></li>
+<li><p><a class="reference external" href="https://cfconventions.org/" rel="noreferer noopener" target="_blank"><strong>CF Conventions</strong></a> — Climate and Forecast standard names, units, coordinate system descriptors.</p></li>
+<li><p><a class="reference external" href="https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3" rel="noreferer noopener" target="_blank"><strong>Attribute Convention for Data Discovery (ACDD)</strong></a> — discovery-level fields like title, summary, geographic extent.</p></li>
 </ul>
 <p>For CSV or other formats without embedded metadata, a separate <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> or similar is the standard.</p>
 </section>
@@ -546,7 +546,7 @@
 <li><p><strong>Reusable</strong> — released with a clear license and provenance information.</p></li>
 </ul>
 <blockquote>
-<div><p><em>Reference:</em> The full <a class="reference external" href="https://www.force11.org/group/fairgroup/fairprinciples">FAIR principles</a> go into more detail, but the four words above cover the core ideas.</p>
+<div><p><em>Reference:</em> The full <a class="reference external" href="https://www.force11.org/group/fairgroup/fairprinciples" rel="noreferer noopener" target="_blank">FAIR principles</a> go into more detail, but the four words above cover the core ideas.</p>
 </div></blockquote>
 <section id="persistent-identifiers-and-dois">
 <h3>Persistent identifiers and DOIs<a class="headerlink" href="#persistent-identifiers-and-dois" title="Link to this heading">#</a></h3>
@@ -562,7 +562,7 @@
 </section>
 <section id="where-to-share-your-own-data">
 <h3>Where to share your own data<a class="headerlink" href="#where-to-share-your-own-data" title="Link to this heading">#</a></h3>
-<p>The default recommendation for small (&lt;10 GB) scientific datasets is <a class="reference external" href="https://zenodo.org/"><strong>Zenodo</strong></a> — a free, open-access repository run by CERN that mints a DOI for everything you upload. You can also <a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">archive your GitHub code repos in Zenodo</a> to get a citeable software DOI for your code.</p>
+<p>The default recommendation for small (&lt;10 GB) scientific datasets is <a class="reference external" href="https://zenodo.org/" rel="noreferer noopener" target="_blank"><strong>Zenodo</strong></a> — a free, open-access repository run by CERN that mints a DOI for everything you upload. You can also <a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content" rel="noreferer noopener" target="_blank">archive your GitHub code repos in Zenodo</a> to get a citeable software DOI for your code.</p>
 <blockquote>
 <div><p><em>Reference:</em> Avoid storing your “official” dataset on personal websites, Google Drive, Dropbox, or GitHub alone — none of those give you a persistent identifier. They’re fine for working copies but not for sharing the dataset that backs a paper.</p>
 </div></blockquote>

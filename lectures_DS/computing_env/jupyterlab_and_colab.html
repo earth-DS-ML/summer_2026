@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -448,22 +448,22 @@
 <p>When you run a code cell, the code is executed by a <strong>kernel</strong> — a running Python session attached to the notebook. The kernel remembers everything you’ve defined (variables, imports, functions) until you restart it, so a variable set in cell 3 is still available in cell 7.</p>
 <p>This mix of code, prose, and output is what makes notebooks well-suited to data analysis: you write code, look at the result, and explain what’s going on, all in the same document.</p>
 <p>Notebooks are just files. The tools described below — JupyterLab and Colab — are two different ways to open, edit, and run them.</p>
-<p><em>To see a notebook in action with no setup, try one at <a class="reference external" href="https://jupyter.org/try">jupyter.org/try</a>. For deeper background, see the <a class="reference external" href="https://docs.jupyter.org/en/latest/start/index.html">official Jupyter docs</a>.</em></p>
+<p><em>To see a notebook in action with no setup, try one at <a class="reference external" href="https://jupyter.org/try" rel="noreferer noopener" target="_blank">jupyter.org/try</a>. For deeper background, see the <a class="reference external" href="https://docs.jupyter.org/en/latest/start/index.html" rel="noreferer noopener" target="_blank">official Jupyter docs</a>.</em></p>
 </section>
 <section id="jupyterlab">
 <h2>JupyterLab<a class="headerlink" href="#jupyterlab" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://jupyterlab.readthedocs.io">JupyterLab</a> is the primary tool we’ll use to work with notebooks (and to access a Unix terminal, edit files, and more). It runs entirely in your web browser, so there’s nothing to install locally. You’ll get comfortable with it as we use it throughout the term.</p>
-<p><em>For a tour of the JupyterLab interface, see the <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/user/interface.html">official user guide</a>.</em></p>
+<p><a class="reference external" href="https://jupyterlab.readthedocs.io" rel="noreferer noopener" target="_blank">JupyterLab</a> is the primary tool we’ll use to work with notebooks (and to access a Unix terminal, edit files, and more). It runs entirely in your web browser, so there’s nothing to install locally. You’ll get comfortable with it as we use it throughout the term.</p>
+<p><em>For a tour of the JupyterLab interface, see the <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/user/interface.html" rel="noreferer noopener" target="_blank">official user guide</a>.</em></p>
 <section id="our-course-jupyterhub">
 <h3>Our Course JupyterHub<a class="headerlink" href="#our-course-jupyterhub" title="Link to this heading">#</a></h3>
-<p><a class="reference external" href="https://jupyter.org/hub">JupyterHub</a> is a multi-user Jupyter environment designed for companies, classrooms and research labs. This course will use a cloud-based JupyterHub environment supported by the <a class="reference external" href="https://leap.columbia.edu/">NSF LEAP STC</a> and managed by <a class="reference external" href="https://2i2c.org/infrastructure/">2i2c</a>:</p>
-<p><a class="reference external" href="https://leap.2i2c.cloud/"><img alt="Launch JupyterHub" src="https://img.shields.io/badge/jupyterhub-leap.2i2c.cloud-orange?style=for-the-badge&amp;logo=jupyter" /></a></p>
-<p>A lot of documentation about this hub can be found at <a class="reference external" href="https://leap-stc.github.io">https://leap-stc.github.io</a></p>
+<p><a class="reference external" href="https://jupyter.org/hub" rel="noreferer noopener" target="_blank">JupyterHub</a> is a multi-user Jupyter environment designed for companies, classrooms and research labs. This course will use a cloud-based JupyterHub environment supported by the <a class="reference external" href="https://leap.columbia.edu/" rel="noreferer noopener" target="_blank">NSF LEAP STC</a> and managed by <a class="reference external" href="https://2i2c.org/infrastructure/" rel="noreferer noopener" target="_blank">2i2c</a>:</p>
+<p><a class="reference external" href="https://leap.2i2c.cloud/" rel="noreferer noopener" target="_blank"><img alt="Launch JupyterHub" src="https://img.shields.io/badge/jupyterhub-leap.2i2c.cloud-orange?style=for-the-badge&amp;logo=jupyter" /></a></p>
+<p>A lot of documentation about this hub can be found at <a class="reference external" href="https://leap-stc.github.io" rel="noreferer noopener" target="_blank">https://leap-stc.github.io</a></p>
 </section>
 </section>
 <section id="google-colab">
 <h2>Google Colab<a class="headerlink" href="#google-colab" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://colab.research.google.com/">Google Colab</a> is a free, browser-based notebook environment provided by Google. Notebooks you create in Colab (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files) are saved automatically to a <code class="docutils literal notranslate"><span class="pre">Colab</span> <span class="pre">Notebooks</span></code> folder in your Google Drive — that’s where to find them. The file browser sidebar inside Colab shows a separate, temporary workspace, <em>not</em> your Drive.</p>
+<p><a class="reference external" href="https://colab.research.google.com/" rel="noreferer noopener" target="_blank">Google Colab</a> is a free, browser-based notebook environment provided by Google. Notebooks you create in Colab (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files) are saved automatically to a <code class="docutils literal notranslate"><span class="pre">Colab</span> <span class="pre">Notebooks</span></code> folder in your Google Drive — that’s where to find them. The file browser sidebar inside Colab shows a separate, temporary workspace, <em>not</em> your Drive.</p>
 <p>For this course, Colab serves as a fallback when:</p>
 <ul class="simple">
 <li><p>Your LEAP JupyterHub account hasn’t been provisioned yet (typically the first few days of the term).</p></li>
@@ -475,18 +475,18 @@
 </section>
 <section id="markdown">
 <h2>Markdown<a class="headerlink" href="#markdown" title="Link to this heading">#</a></h2>
-<p><strong>Markdown</strong> is the formatting language used in the Markdown cells of Jupyter notebooks. It’s a simple way to format text — headings, lists, links, code, images — using plain-text symbols (<code class="docutils literal notranslate"><span class="pre">#</span></code> for headings, <code class="docutils literal notranslate"><span class="pre">*</span></code> for emphasis, and so on). It’s also used for standalone <code class="docutils literal notranslate"><span class="pre">.md</span></code> documents — <a class="reference external" href="https://github.com/earth-DS-ML/summer_2026/blob/main/lectures_DS/computing_env/jupyterlab_and_colab.md?plain=1">here’s the Markdown source of this page on GitHub</a>.</p>
-<p><em>For syntax, see the <a class="reference external" href="https://www.markdownguide.org/basic-syntax">Markdown Guide</a>.</em></p>
+<p><strong>Markdown</strong> is the formatting language used in the Markdown cells of Jupyter notebooks. It’s a simple way to format text — headings, lists, links, code, images — using plain-text symbols (<code class="docutils literal notranslate"><span class="pre">#</span></code> for headings, <code class="docutils literal notranslate"><span class="pre">*</span></code> for emphasis, and so on). It’s also used for standalone <code class="docutils literal notranslate"><span class="pre">.md</span></code> documents — <a class="reference external" href="https://github.com/earth-DS-ML/summer_2026/blob/main/lectures_DS/computing_env/jupyterlab_and_colab.md?plain=1" rel="noreferer noopener" target="_blank">here’s the Markdown source of this page on GitHub</a>.</p>
+<p><em>For syntax, see the <a class="reference external" href="https://www.markdownguide.org/basic-syntax" rel="noreferer noopener" target="_blank">Markdown Guide</a>.</em></p>
 </section>
 <section id="python-environments">
 <h2>Python Environments<a class="headerlink" href="#python-environments" title="Link to this heading">#</a></h2>
-<p>You don’t need to install or configure anything for this course — both LEAP and Colab come with a scientific Python stack already set up. If you continue using Python after this course, you’ll want to learn how to manage your own environments; <a class="reference external" href="https://earth-env-data-science.github.io/lectures/environment/python_environments.html">this guide</a> is a thorough introduction.</p>
+<p>You don’t need to install or configure anything for this course — both LEAP and Colab come with a scientific Python stack already set up. If you continue using Python after this course, you’ll want to learn how to manage your own environments; <a class="reference external" href="https://earth-env-data-science.github.io/lectures/environment/python_environments.html" rel="noreferer noopener" target="_blank">this guide</a> is a thorough introduction.</p>
 </section>
 <section id="in-class-practice">
 <h2>In-class practice<a class="headerlink" href="#in-class-practice" title="Link to this heading">#</a></h2>
 <p>Work through these in your environment of choice — LEAP if you have access, Colab otherwise. About 15 minutes; ask if you get stuck.</p>
 <ol class="arabic simple">
-<li><p><strong>Log in.</strong> Open your environment in a browser — LEAP at <a class="reference external" href="https://leap.2i2c.cloud">leap.2i2c.cloud</a>, or Colab at <a class="reference external" href="https://colab.research.google.com">colab.research.google.com</a>. Get to a screen where you can create a new notebook.</p></li>
+<li><p><strong>Log in.</strong> Open your environment in a browser — LEAP at <a class="reference external" href="https://leap.2i2c.cloud" rel="noreferer noopener" target="_blank">leap.2i2c.cloud</a>, or Colab at <a class="reference external" href="https://colab.research.google.com" rel="noreferer noopener" target="_blank">colab.research.google.com</a>. Get to a screen where you can create a new notebook.</p></li>
 <li><p><strong>Create a notebook.</strong> Make a new Python notebook named <code class="docutils literal notranslate"><span class="pre">hello.ipynb</span></code>.</p></li>
 <li><p><strong>Run a code cell.</strong> Type <code class="docutils literal notranslate"><span class="pre">print(&quot;Hello,</span> <span class="pre">world!&quot;)</span></code> into a code cell and run it. Confirm the output appears beneath the cell.</p></li>
 <li><p><strong>Add a Markdown cell.</strong> Insert a Markdown cell, write a top-level heading (e.g., <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">My</span> <span class="pre">first</span> <span class="pre">notebook</span></code>) and a short paragraph below it. Render the cell and confirm the heading appears larger than the paragraph.</p></li>

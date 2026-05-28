@@ -201,11 +201,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="current nav bd-sidenav">
@@ -1680,7 +1680,7 @@ array(20.5)
 Coordinates:
     x        float64 8B 4.5</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-e95ed685-01bf-4e59-8975-83d3de0e5fec' class='xr-array-in' type='checkbox' checked><label for='section-e95ed685-01bf-4e59-8975-83d3de0e5fec' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>20.5</span></div><div class='xr-array-data'><pre>array(20.5)</pre></div></div></li><li class='xr-section-item'><input id='section-738abed9-2276-40de-8b19-a5c5114665a4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-738abed9-2276-40de-8b19-a5c5114665a4' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.5</div><input id='attrs-106a54b8-a194-4f32-85d2-f6c7ca734131' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-106a54b8-a194-4f32-85d2-f6c7ca734131' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5a03e27b-b283-4617-8f1c-ef51b6470842' class='xr-var-data-in' type='checkbox'><label for='data-5a03e27b-b283-4617-8f1c-ef51b6470842' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(4.5)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-04fad994-0f22-472d-87d9-ce1c66afe6d6' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-04fad994-0f22-472d-87d9-ce1c66afe6d6' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-86c657b5-5fb6-405d-97a6-e61a810a4c17' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-86c657b5-5fb6-405d-97a6-e61a810a4c17' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
-<p>Interpolation uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html">scipy.interpolate</a> under the hood.
+<p>Interpolation uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html" rel="noreferer noopener" target="_blank">scipy.interpolate</a> under the hood.
 There are different modes of interpolation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1770,14 +1770,14 @@ There are different modes of interpolation.</p>
 (Multidimensional interpolation only supports <code class="docutils literal notranslate"><span class="pre">mode='nearest'</span></code> and <code class="docutils literal notranslate"><span class="pre">mode='linear'</span></code>.)
 But keep in mind that <em>Xarray has no built-in understanding of geography</em>.
 If you use <code class="docutils literal notranslate"><span class="pre">interp</span></code> on lat / lon coordinates, it will just perform naive interpolation of the lat / lon values.
-More sophisticated treatment of spherical geometry requires another package such as <a class="reference external" href="https://xesmf.readthedocs.io/">xesmf</a>.</p>
+More sophisticated treatment of spherical geometry requires another package such as <a class="reference external" href="https://xesmf.readthedocs.io/" rel="noreferer noopener" target="_blank">xesmf</a>.</p>
 </div>
 </section>
 <section id="groupby">
 <h2>Groupby<a class="headerlink" href="#groupby" title="Link to this heading">#</a></h2>
 <p>Xarray copies Pandas’ very useful groupby functionality, enabling the “split / apply / combine” workflow on xarray DataArrays and Datasets. In the first part of the lesson, we will learn to use groupby by analyzing sea-surface temperature data.</p>
-<p>First we load a dataset. We will use the <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v5">NOAA Extended Reconstructed Sea Surface Temperature (ERSST) v5</a> product, a widely used and trusted gridded compilation of of historical data going back to 1854.</p>
-<p>Since the data is provided via an <a class="reference external" href="https://en.wikipedia.org/wiki/OPeNDAP">OPeNDAP</a> server, we can load it directly without downloading anything:</p>
+<p>First we load a dataset. We will use the <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v5" rel="noreferer noopener" target="_blank">NOAA Extended Reconstructed Sea Surface Temperature (ERSST) v5</a> product, a widely used and trusted gridded compilation of of historical data going back to 1854.</p>
+<p>Since the data is provided via an <a class="reference external" href="https://en.wikipedia.org/wiki/OPeNDAP" rel="noreferer noopener" target="_blank">OPeNDAP</a> server, we can load it directly without downloading anything:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&#39;</span>

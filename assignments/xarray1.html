@@ -203,11 +203,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures_DS/pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -459,11 +459,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-xarray-fundamentals-with-atmospheric-radiation-data">
 <h1>Assignment: Xarray Fundamentals with Atmospheric Radiation Data<a class="headerlink" href="#assignment-xarray-fundamentals-with-atmospheric-radiation-data" title="Link to this heading">#</a></h1>
-<p>In this assignment, we will use Xarray to analyze top-of-atmosphere radiation data from <a class="reference external" href="https://ceres.larc.nasa.gov/">NASA’s CERES project</a>.</p>
+<p>In this assignment, we will use Xarray to analyze top-of-atmosphere radiation data from <a class="reference external" href="https://ceres.larc.nasa.gov/" rel="noreferer noopener" target="_blank">NASA’s CERES project</a>.</p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/The-NASA-Earth%27s-Energy-Budget-Poster-Radiant-Energy-System-satellite-infrared-radiation-fluxes.jpg" width=65%>
 <p><em>Public domain, by NASA, from Wikimedia Commons</em></p>
-<p>A pre-downloaded and subsetted a portion of the CERES dataset is available here: <a class="reference external" href="http://ldeo.columbia.edu/~rpa/CERES_EBAF-TOA_Edition4.0_200003-201701.condensed.nc">http://ldeo.columbia.edu/~rpa/CERES_EBAF-TOA_Edition4.0_200003-201701.condensed.nc</a>. The size of the data file is 702.53 MB. It may take a few minutes to download.</p>
-<p>Please review the CERES <a class="reference external" href="https://ceres.larc.nasa.gov/resources/faqs">FAQs</a> before getting started.</p>
+<p>A pre-downloaded and subsetted a portion of the CERES dataset is available here: <a class="reference external" href="http://ldeo.columbia.edu/~rpa/CERES_EBAF-TOA_Edition4.0_200003-201701.condensed.nc" rel="noreferer noopener" target="_blank">http://ldeo.columbia.edu/~rpa/CERES_EBAF-TOA_Edition4.0_200003-201701.condensed.nc</a>. The size of the data file is 702.53 MB. It may take a few minutes to download.</p>
+<p>Please review the CERES <a class="reference external" href="https://ceres.larc.nasa.gov/resources/faqs" rel="noreferer noopener" target="_blank">FAQs</a> before getting started.</p>
 <p>Start by importing Numpy, Matplotlib, and Xarray. Set the default figure size to (12, 6).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -541,7 +541,7 @@
 </section>
 <section id="redo-your-global-mean-toa-net-radiation-calculation-with-this-weight-factor">
 <h3>3.3) Redo your global mean TOA net radiation calculation with this weight factor<a class="headerlink" href="#redo-your-global-mean-toa-net-radiation-calculation-with-this-weight-factor" title="Link to this heading">#</a></h3>
-<p>Use xarray’s <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/computation.html#weighted-array-reductions">weighted array reductions</a> to compute the weighted mean.</p>
+<p>Use xarray’s <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/computation.html#weighted-array-reductions" rel="noreferer noopener" target="_blank">weighted array reductions</a> to compute the weighted mean.</p>
 <p>This time around, you should have found something much closer to zero. Ask a climate scientist what the net energy imbalance of Earth due to global warming is estimated to be. Do you think our calculation is precise enough to detect this?</p>
 </section>
 <section id="now-that-you-have-a-weight-factor-verify-that-the-toa-incoming-solar-outgoing-longwave-and-outgoing-shortwave-approximately-match-up-with-infographic-shown-in-the-first-cell-of-this-assignment">
@@ -565,9 +565,9 @@
 </section>
 <section id="plot-the-cumulative-sum-of-the-total-amount-of-net-radiation-as-a-function-of-latitude">
 <h3>4.3) Plot the cumulative sum of the total amount of net radiation as a function of latitude<a class="headerlink" href="#plot-the-cumulative-sum-of-the-total-amount-of-net-radiation-as-a-function-of-latitude" title="Link to this heading">#</a></h3>
-<p>Label with correct units. (Hint: check out xarray’s <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.cumsum.html">cumsum</a> function.)</p>
+<p>Label with correct units. (Hint: check out xarray’s <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.cumsum.html" rel="noreferer noopener" target="_blank">cumsum</a> function.)</p>
 <p>This curve tells you how much energy must be transported meridionally by the ocean and atmosphere in order to account for the radiative imbalance at the top of the atmosphere.</p>
-<p>You should get a curve that looks something like this: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/14/16/full-i1520-0442-14-16-3433-f07.gif">https://journals.ametsoc.org/view/journals/clim/14/16/full-i1520-0442-14-16-3433-f07.gif</a> (Figure from Trenberth &amp; Caron, 2001)</p>
+<p>You should get a curve that looks something like this: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/14/16/full-i1520-0442-14-16-3433-f07.gif" rel="noreferer noopener" target="_blank">https://journals.ametsoc.org/view/journals/clim/14/16/full-i1520-0442-14-16-3433-f07.gif</a> (Figure from Trenberth &amp; Caron, 2001)</p>
 </section>
 </section>
 <section id="selecting-and-merging-data">

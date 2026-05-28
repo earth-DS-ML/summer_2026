@@ -200,11 +200,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="pandas/pandas_intro.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandas/basic_pandas.html">Pandas Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandas/pandas_groupby.html">Pandas: Groupby</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../assignments/Pandas1.html">Lab 1: Pandas Fundamentals with Earthquake Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../assignments/Pandas2.html">Lab 2: Pandas Groupby with Hurricane Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="nav bd-sidenav">
@@ -454,16 +454,16 @@
 <p>For your datasets, you can get them from a few sources:</p>
 <ul class="simple">
 <li><p>We have already played around with a few datasets in class, and there are more are coming (look ahead at the material posted on course website). Feel free to base your project around one or few of these if they interest you.</p></li>
-<li><p>The material in our <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">original book</a> towards the end (section on Climate Model Data), which we won’t have time to cover in this shorter course, contains examples of other datasets that you may be able to leverage.</p></li>
-<li><p>There are <a class="reference external" href="https://earth-env-data-science.github.io/projects.html">previous projects</a>, which you can use as inspiration and even source of the datasets (if the links still work!)</p></li>
-<li><p>There are a number of interesting datasets on <a class="reference external" href="https://catalog.leap.columbia.edu/">https://catalog.leap.columbia.edu/</a></p></li>
+<li><p>The material in our <a class="reference external" href="https://earth-env-data-science.github.io/intro.html" rel="noreferer noopener" target="_blank">original book</a> towards the end (section on Climate Model Data), which we won’t have time to cover in this shorter course, contains examples of other datasets that you may be able to leverage.</p></li>
+<li><p>There are <a class="reference external" href="https://earth-env-data-science.github.io/projects.html" rel="noreferer noopener" target="_blank">previous projects</a>, which you can use as inspiration and even source of the datasets (if the links still work!)</p></li>
+<li><p>There are a number of interesting datasets on <a class="reference external" href="https://catalog.leap.columbia.edu/" rel="noreferer noopener" target="_blank">https://catalog.leap.columbia.edu/</a></p></li>
 </ul>
 <p>Also here are a couple of other links that may also help:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://iridl.ldeo.columbia.edu/">IRI Data Library</a></p></li>
-<li><p><a class="reference external" href="https://data.usgs.gov/datacatalog/">USGS Data Catalog</a></p></li>
-<li><p><a class="reference external" href="https://www.ncdc.noaa.gov/">NOAA National Climate Data Center</a></p></li>
-<li><p><a class="reference external" href="https://earthdata.nasa.gov/">NASA Earth Science Data</a></p></li>
+<li><p><a class="reference external" href="http://iridl.ldeo.columbia.edu/" rel="noreferer noopener" target="_blank">IRI Data Library</a></p></li>
+<li><p><a class="reference external" href="https://data.usgs.gov/datacatalog/" rel="noreferer noopener" target="_blank">USGS Data Catalog</a></p></li>
+<li><p><a class="reference external" href="https://www.ncdc.noaa.gov/" rel="noreferer noopener" target="_blank">NOAA National Climate Data Center</a></p></li>
+<li><p><a class="reference external" href="https://earthdata.nasa.gov/" rel="noreferer noopener" target="_blank">NASA Earth Science Data</a></p></li>
 </ul>
 <p>You may use just one dataset, or you may choose to combine multiple datasets, depending on your scientific question.</p>
 </section>
@@ -482,21 +482,21 @@
 <li><p>All data is either stored in the repo itself or downloaded / accessed from within the notebook (no manual download steps)</p></li>
 <li><p>Complete explanatory text / equations included in the notebook as markdown cells</p></li>
 <li><p>Notebook must execute in sequence with no errors</p></li>
-<li><p>The whole github repo must be configured to run on <a class="reference external" href="https://leap.2i2c.cloud/">Leap pangeo hub</a></p></li>
+<li><p>The whole github repo must be configured to run on <a class="reference external" href="https://leap.2i2c.cloud/" rel="noreferer noopener" target="_blank">Leap pangeo hub</a></p></li>
 </ul>
 <p>You <em>must</em> use either Pandas or Xarray (or both) in some part of your project. You <em>may</em> use other scientific python libraries as well, if you wish, to facilitate some analysis that is not possible with Xarray / Pandas alone.</p>
 <p>Some other libraries you may wish to consider (but not required to) are:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/">SciPy</a> for interpolation, signal processing, spectral analysis, linear algebra, and other general purpose scientific computing routines</p></li>
-<li><p><a class="reference external" href="https://github.com/statsmodels/statsmodels">Statsmodels</a> for advanced statistical analysis</p></li>
-<li><p><a class="reference external" href="https://scikit-image.org/">Scikit-image</a> for image processing</p></li>
-<li><p><a class="reference external" href="https://scikit-learn.org/stable/">Scikit-learn</a> for machine learning</p></li>
-<li><p><a class="reference external" href="https://xgcm.readthedocs.io/en/latest/">XGCM</a> for working with finite-volume data from general circulation models</p></li>
-<li><p><a class="reference external" href="https://xesmf.readthedocs.io/en/latest/">XESMF</a> for regridding of gridded data</p></li>
-<li><p><a class="reference external" href="https://pyresample.readthedocs.io/en/latest/">Pyresample</a> for resampling (reprojection) of satellite data</p></li>
-<li><p><a class="reference external" href="https://ajdawson.github.io/eofs/">EOFS</a> for empirical orthogonal function analysis</p></li>
-<li><p><a class="reference external" href="https://ajdawson.github.io/windspharm/latest/">windspharm</a> for spherical harmonic analysis of global atmospheric wind data</p></li>
-<li><p><a class="reference external" href="https://unidata.github.io/MetPy/latest/index.html">metpy</a> a collection of tools in Python for reading, visualizing, and performing calculations with weather data</p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/" rel="noreferer noopener" target="_blank">SciPy</a> for interpolation, signal processing, spectral analysis, linear algebra, and other general purpose scientific computing routines</p></li>
+<li><p><a class="reference external" href="https://github.com/statsmodels/statsmodels" rel="noreferer noopener" target="_blank">Statsmodels</a> for advanced statistical analysis</p></li>
+<li><p><a class="reference external" href="https://scikit-image.org/" rel="noreferer noopener" target="_blank">Scikit-image</a> for image processing</p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/" rel="noreferer noopener" target="_blank">Scikit-learn</a> for machine learning</p></li>
+<li><p><a class="reference external" href="https://xgcm.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank">XGCM</a> for working with finite-volume data from general circulation models</p></li>
+<li><p><a class="reference external" href="https://xesmf.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank">XESMF</a> for regridding of gridded data</p></li>
+<li><p><a class="reference external" href="https://pyresample.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank">Pyresample</a> for resampling (reprojection) of satellite data</p></li>
+<li><p><a class="reference external" href="https://ajdawson.github.io/eofs/" rel="noreferer noopener" target="_blank">EOFS</a> for empirical orthogonal function analysis</p></li>
+<li><p><a class="reference external" href="https://ajdawson.github.io/windspharm/latest/" rel="noreferer noopener" target="_blank">windspharm</a> for spherical harmonic analysis of global atmospheric wind data</p></li>
+<li><p><a class="reference external" href="https://unidata.github.io/MetPy/latest/index.html" rel="noreferer noopener" target="_blank">metpy</a> a collection of tools in Python for reading, visualizing, and performing calculations with weather data</p></li>
 </ul>
 </section>
 <section id="project-approval">
