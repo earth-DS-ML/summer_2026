@@ -416,7 +416,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-object">The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
 </ul>
 </li>
@@ -475,7 +475,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 </div>
 </div>
 </div>
-<p>First we read the Earthquake data from our previous assignment:</p>
+<p>First we read the earthquake data from the previous assignment. Two extra steps set up the rest of the lesson: we derive a <code class="docutils literal notranslate"><span class="pre">country</span></code> column from the free-text <code class="docutils literal notranslate"><span class="pre">place</span></code> field, and we split the catalog by magnitude into the larger events (<code class="docutils literal notranslate"><span class="pre">df</span></code>, magnitude &gt; 4) and the smaller ones (<code class="docutils literal notranslate"><span class="pre">df_small</span></code>, magnitude &lt; 4), so we can compare the two groups later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
@@ -678,6 +678,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <p>5 rows × 22 columns</p>
 </div></div></div>
 </div>
+<p>Before grouping, let’s get oriented — how many large events are in <code class="docutils literal notranslate"><span class="pre">df</span></code>, and what does the distribution of magnitudes look like?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -700,7 +701,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;id&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/a59f63d3c0ccc06370708c698b3d20069bd1ae57e2530e58a396d7011dc3e564.png" src="../../_images/a59f63d3c0ccc06370708c698b3d20069bd1ae57e2530e58a396d7011dc3e564.png" />
+<img alt="../../_images/3f233a669d240f30902ccd5706f43a0ff434d2d89522195ddb4ad795f5f53507.png" src="../../_images/3f233a669d240f30902ccd5706f43a0ff434d2d89522195ddb4ad795f5f53507.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -713,7 +714,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Frequency&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/568c53a890d24593897e4f8ba459e71b79fd874b14c7af12db5389b7fc95f021.png" src="../../_images/568c53a890d24593897e4f8ba459e71b79fd874b14c7af12db5389b7fc95f021.png" />
+<img alt="../../_images/3ffbb5d9e0873f99d9d93deca04910c00a836c11e11d1320dd5882f82315df2f.png" src="../../_images/3ffbb5d9e0873f99d9d93deca04910c00a836c11e11d1320dd5882f82315df2f.png" />
 </div>
 </div>
 <section id="an-example">
@@ -729,7 +730,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/0510944104a9b737b449a64b1b72000019c5c9c23c60b9b71d4873ad888e5fef.png" src="../../_images/0510944104a9b737b449a64b1b72000019c5c9c23c60b9b71d4873ad888e5fef.png" />
+<img alt="../../_images/730b58205d9e85b125aed9af362c314cf2d5d28eb237f03faa0bbc19625588da.png" src="../../_images/730b58205d9e85b125aed9af362c314cf2d5d28eb237f03faa0bbc19625588da.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -742,7 +743,7 @@ The point of this lesson is to make you feel confident in using <code class="doc
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/40acd377422e69b72e0ef6d2dab0302f459c3f0b8b9981854020cef1a0535577.png" src="../../_images/40acd377422e69b72e0ef6d2dab0302f459c3f0b8b9981854020cef1a0535577.png" />
+<img alt="../../_images/5d88f842235f8241d4a07f65e22b4c6f606478e755faa92f4d87b2384a3e474e.png" src="../../_images/5d88f842235f8241d4a07f65e22b4c6f606478e755faa92f4d87b2384a3e474e.png" />
 </div>
 </div>
 </section>
@@ -983,7 +984,7 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a93adb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.api.typing.DataFrameGroupBy object at 0x111dad790&gt;
 </pre></div>
 </div>
 </div>
@@ -996,14 +997,14 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2aeda210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.api.typing.DataFrameGroupBy object at 0x111ddb590&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<section id="the-groubby-object">
-<h3>The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object<a class="headerlink" href="#the-groubby-object" title="Link to this heading">#</a></h3>
-<p>When we call, <code class="docutils literal notranslate"><span class="pre">groupby</span></code> we get back a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object:</p>
+<section id="the-groupby-object">
+<h3>The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object<a class="headerlink" href="#the-groupby-object" title="Link to this heading">#</a></h3>
+<p>When we call <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we get back a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
@@ -1012,7 +1013,7 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a931070&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.api.typing.DataFrameGroupBy object at 0x111b85510&gt;
 </pre></div>
 </div>
 </div>
@@ -1265,14 +1266,6 @@ Name: country, Length: 5923, dtype: object
 <section id="iterating-and-selecting-groups">
 <h3>Iterating and selecting groups<a class="headerlink" href="#iterating-and-selecting-groups" title="Link to this heading">#</a></h3>
 <p>You can loop through the groups if you want.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">:</span><span class="mi">4</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">groups</span></code> attribute is a regular Python dictionary — keys are the group labels and values are the row indices. We can look up a particular group by name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1281,7 +1274,7 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;us6000qjkh&#39;, &#39;us7000pp10&#39;, &#39;us6000pzrv&#39;, &#39;us6000pzl1&#39;, &#39;us6000pvw6&#39;], dtype=&#39;object&#39;, name=&#39;id&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;us6000qjkh&#39;, &#39;us7000pp10&#39;, &#39;us6000pzrv&#39;, &#39;us6000pzl1&#39;, &#39;us6000pvw6&#39;], dtype=&#39;str&#39;, name=&#39;id&#39;)
 </pre></div>
 </div>
 </div>
@@ -1304,7 +1297,7 @@ Name: country, Length: 5923, dtype: object
        &#39;us7000pd3k&#39;, &#39;us7000pchv&#39;, &#39;us7000pb68&#39;, &#39;us7000pb30&#39;, &#39;us6000pmd7&#39;,
        &#39;us6000plpp&#39;, &#39;us6000pk88&#39;, &#39;us6000pk23&#39;, &#39;us6000pjtx&#39;, &#39;us6000pjpy&#39;,
        &#39;us6000pjlp&#39;],
-      dtype=&#39;object&#39;, name=&#39;id&#39;)
+      dtype=&#39;str&#39;, name=&#39;id&#39;)
 </pre></div>
 </div>
 </div>
@@ -2318,18 +2311,14 @@ Name: country, Length: 5923, dtype: object
 <section id="aggregation">
 <h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h2>
 <p>Now that we know how to create a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object, let’s learn how to do aggregation on it.</p>
-<p>One way us to use the <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> method, which accepts another function as its argument. The result is automatically combined into a new dataframe with the group key as the index.</p>
+<p>One way is to use the <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> method, which accepts another function as its argument. The result is automatically combined into a new dataframe with the group key as the index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2808193076.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using DataFrameGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.aggregate(np.max).head()
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2529,7 +2518,7 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7daf2a931070&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.api.typing.DataFrameGroupBy object at 0x111b85510&gt;
 </pre></div>
 </div>
 </div>
@@ -2541,22 +2530,18 @@ Name: country, Length: 5923, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7daf2a933da0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.api.typing.SeriesGroupBy object at 0x111e8ced0&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2229133186.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.mag.aggregate(np.max)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
 2025 Drake Passage Earthquake     7.4
 Afghanistan                       5.7
@@ -2576,15 +2561,11 @@ Name: mag, Length: 194, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2970731060.py:1: FutureWarning: The provided callable &lt;function sum at 0x7daf3a13ef20&gt; is currently using SeriesGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
-  gb.mag.aggregate(np.sum)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
 2025 Drake Passage Earthquake       7.4
 Afghanistan                       221.7
@@ -2604,15 +2585,11 @@ Name: mag, Length: 194, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/480462825.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
-  gb.mag.aggregate(np.mean)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
 2025 Drake Passage Earthquake     7.400000
 Afghanistan                       4.347059
@@ -2632,15 +2609,11 @@ Name: mag, Length: 194, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2287653877.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.mag.aggregate(np.max).head()
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
 2025 Drake Passage Earthquake    7.4
 Afghanistan                      5.7
@@ -2654,15 +2627,11 @@ Name: mag, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/2071493650.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.mag.aggregate(np.max).nlargest(10)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>country
 Burma (Myanmar) Earthquake       7.7
 Cayman Islands                   7.6
@@ -2775,19 +2744,11 @@ Name: mag, dtype: float64
 <p>We can also apply multiple functions at once:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function min at 0x7daf3a13fa60&gt; is currently using SeriesGroupBy.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).head()
-/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).head()
-/tmp/ipykernel_6529/1381609224.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).head()
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2854,23 +2815,15 @@ Name: mag, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function min at 0x7daf3a13fa60&gt; is currently using SeriesGroupBy.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
-/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function max at 0x7daf3a13f920&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
-/tmp/ipykernel_6529/3179219123.py:1: FutureWarning: The provided callable &lt;function mean at 0x7daf3a160360&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
-  gb.mag.aggregate([np.min, np.max, np.mean]).nlargest(10, &#39;mean&#39;).plot(kind=&#39;bar&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;country&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" src="../../_images/d757e7bd48aa60681dc9481c296ef34d1dec62c7e3c1acd8a065086d7f0b211b.png" />
+<img alt="../../_images/b7be447ccbcee883cc1ecc2e3177cd76125bd07697e400a656933e57b6b96b2b.png" src="../../_images/b7be447ccbcee883cc1ecc2e3177cd76125bd07697e400a656933e57b6b96b2b.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -2948,13 +2901,196 @@ Name: mag, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-/tmp/ipykernel_6529/2092298281.py:15: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-  names=headers, header=None, sep=&#39;\s+&#39;,
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WBANNO</th>
+      <th>CRX_VN</th>
+      <th>LONGITUDE</th>
+      <th>LATITUDE</th>
+      <th>T_DAILY_MAX</th>
+      <th>T_DAILY_MIN</th>
+      <th>T_DAILY_MEAN</th>
+      <th>T_DAILY_AVG</th>
+      <th>P_DAILY_CALC</th>
+      <th>SOLARAD_DAILY</th>
+      <th>...</th>
+      <th>SOIL_MOISTURE_10_DAILY</th>
+      <th>SOIL_MOISTURE_20_DAILY</th>
+      <th>SOIL_MOISTURE_50_DAILY</th>
+      <th>SOIL_MOISTURE_100_DAILY</th>
+      <th>SOIL_TEMP_5_DAILY</th>
+      <th>SOIL_TEMP_10_DAILY</th>
+      <th>SOIL_TEMP_20_DAILY</th>
+      <th>SOIL_TEMP_50_DAILY</th>
+      <th>SOIL_TEMP_100_DAILY</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>LST_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2016-01-01</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>3.4</td>
+      <td>-0.5</td>
+      <td>1.5</td>
+      <td>1.3</td>
+      <td>0.0</td>
+      <td>1.69</td>
+      <td>...</td>
+      <td>0.233</td>
+      <td>0.204</td>
+      <td>0.155</td>
+      <td>0.147</td>
+      <td>4.2</td>
+      <td>4.4</td>
+      <td>5.1</td>
+      <td>6.0</td>
+      <td>7.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-02</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>2.9</td>
+      <td>-3.6</td>
+      <td>-0.4</td>
+      <td>-0.3</td>
+      <td>0.0</td>
+      <td>6.25</td>
+      <td>...</td>
+      <td>0.227</td>
+      <td>0.199</td>
+      <td>0.152</td>
+      <td>0.144</td>
+      <td>2.8</td>
+      <td>3.1</td>
+      <td>4.2</td>
+      <td>5.7</td>
+      <td>7.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-03</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>5.1</td>
+      <td>-1.8</td>
+      <td>1.6</td>
+      <td>1.1</td>
+      <td>0.0</td>
+      <td>5.69</td>
+      <td>...</td>
+      <td>0.223</td>
+      <td>0.196</td>
+      <td>0.151</td>
+      <td>0.141</td>
+      <td>2.6</td>
+      <td>2.8</td>
+      <td>3.8</td>
+      <td>5.2</td>
+      <td>7.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-04</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>0.5</td>
+      <td>-14.4</td>
+      <td>-6.9</td>
+      <td>-7.5</td>
+      <td>0.0</td>
+      <td>9.17</td>
+      <td>...</td>
+      <td>0.220</td>
+      <td>0.194</td>
+      <td>0.148</td>
+      <td>0.139</td>
+      <td>1.7</td>
+      <td>2.1</td>
+      <td>3.4</td>
+      <td>4.9</td>
+      <td>6.9</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016-01-05</th>
+      <td>64756</td>
+      <td>2.422</td>
+      <td>-73.74</td>
+      <td>41.79</td>
+      <td>-5.2</td>
+      <td>-15.5</td>
+      <td>-10.3</td>
+      <td>-11.7</td>
+      <td>0.0</td>
+      <td>9.34</td>
+      <td>...</td>
+      <td>0.213</td>
+      <td>0.191</td>
+      <td>0.148</td>
+      <td>0.138</td>
+      <td>0.4</td>
+      <td>0.9</td>
+      <td>2.4</td>
+      <td>4.3</td>
+      <td>6.6</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 28 columns</p>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3165,7 +3301,7 @@ Name: mag, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/ed4383b447bcc4bd3940ef7461bf60523dcb5932b421abac787359230ff75a4e.png" src="../../_images/ed4383b447bcc4bd3940ef7461bf60523dcb5932b421abac787359230ff75a4e.png" />
+<img alt="../../_images/a76833cd5c9d99ce3b36dccc0f4f755b7d1727cabe5389b482c46b47858696dd.png" src="../../_images/a76833cd5c9d99ce3b36dccc0f4f755b7d1727cabe5389b482c46b47858696dd.png" />
 </div>
 </div>
 <p>A common way to analyze such data in climate science is to create a “climatology,” which contains the average values in each month or day of the year. We can do this easily with groupby. Recall that <code class="docutils literal notranslate"><span class="pre">df.index</span></code> is a pandas <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code> object.</p>
@@ -3183,7 +3319,7 @@ Name: mag, dtype: float64
                &#39;2018-12-22&#39;, &#39;2018-12-23&#39;, &#39;2018-12-24&#39;, &#39;2018-12-25&#39;,
                &#39;2018-12-26&#39;, &#39;2018-12-27&#39;, &#39;2018-12-28&#39;, &#39;2018-12-29&#39;,
                &#39;2018-12-30&#39;, &#39;2018-12-31&#39;],
-              dtype=&#39;datetime64[ns]&#39;, name=&#39;LST_DATE&#39;, length=1096, freq=None)
+              dtype=&#39;datetime64[us]&#39;, name=&#39;LST_DATE&#39;, length=1096, freq=None)
 </pre></div>
 </div>
 </div>
@@ -3291,9 +3427,9 @@ Name: mag, dtype: float64
       <td>5.812258</td>
       <td>...</td>
       <td>0.240250</td>
-      <td>0.200698</td>
-      <td>0.153645</td>
-      <td>0.160859</td>
+      <td>0.200717</td>
+      <td>0.153667</td>
+      <td>0.160880</td>
       <td>0.150538</td>
       <td>0.248387</td>
       <td>0.788172</td>
@@ -3314,10 +3450,10 @@ Name: mag, dtype: float64
       <td>4.077647</td>
       <td>8.495882</td>
       <td>...</td>
-      <td>0.247714</td>
-      <td>0.210044</td>
-      <td>0.159153</td>
-      <td>0.163889</td>
+      <td>0.247771</td>
+      <td>0.210067</td>
+      <td>0.159176</td>
+      <td>0.163901</td>
       <td>1.216471</td>
       <td>1.169412</td>
       <td>1.278824</td>
@@ -3338,9 +3474,9 @@ Name: mag, dtype: float64
       <td>2.788172</td>
       <td>13.211290</td>
       <td>...</td>
-      <td>0.228612</td>
+      <td>0.228624</td>
       <td>0.203634</td>
-      <td>0.157796</td>
+      <td>0.157817</td>
       <td>0.160366</td>
       <td>3.450538</td>
       <td>3.400000</td>
@@ -3362,9 +3498,9 @@ Name: mag, dtype: float64
       <td>2.396667</td>
       <td>15.295889</td>
       <td>...</td>
-      <td>0.214067</td>
+      <td>0.214078</td>
       <td>0.195844</td>
-      <td>0.153878</td>
+      <td>0.153922</td>
       <td>0.158100</td>
       <td>9.415556</td>
       <td>9.117778</td>
@@ -3388,7 +3524,7 @@ Name: mag, dtype: float64
       <td>...</td>
       <td>0.204796</td>
       <td>0.187097</td>
-      <td>0.148871</td>
+      <td>0.148892</td>
       <td>0.155720</td>
       <td>16.934409</td>
       <td>16.640860</td>
@@ -3410,10 +3546,10 @@ Name: mag, dtype: float64
       <td>3.053333</td>
       <td>21.913333</td>
       <td>...</td>
-      <td>0.136911</td>
+      <td>0.136933</td>
       <td>0.135211</td>
       <td>0.129422</td>
-      <td>0.152711</td>
+      <td>0.152722</td>
       <td>22.403333</td>
       <td>22.126667</td>
       <td>20.956667</td>
@@ -3434,10 +3570,10 @@ Name: mag, dtype: float64
       <td>3.865591</td>
       <td>21.570645</td>
       <td>...</td>
-      <td>0.105806</td>
+      <td>0.105817</td>
       <td>0.095204</td>
-      <td>0.114419</td>
-      <td>0.150000</td>
+      <td>0.114430</td>
+      <td>0.150014</td>
       <td>25.448387</td>
       <td>25.318280</td>
       <td>24.163441</td>
@@ -3460,8 +3596,8 @@ Name: mag, dtype: float64
       <td>...</td>
       <td>0.156161</td>
       <td>0.132333</td>
-      <td>0.128796</td>
-      <td>0.158750</td>
+      <td>0.128839</td>
+      <td>0.158800</td>
       <td>24.758065</td>
       <td>24.829032</td>
       <td>24.116129</td>
@@ -3482,9 +3618,9 @@ Name: mag, dtype: float64
       <td>3.730000</td>
       <td>13.625667</td>
       <td>...</td>
-      <td>0.136900</td>
-      <td>0.126422</td>
-      <td>0.121356</td>
+      <td>0.136911</td>
+      <td>0.126456</td>
+      <td>0.121378</td>
       <td>0.154000</td>
       <td>21.028889</td>
       <td>21.168889</td>
@@ -3506,10 +3642,10 @@ Name: mag, dtype: float64
       <td>3.228261</td>
       <td>9.442527</td>
       <td>...</td>
-      <td>0.155275</td>
-      <td>0.128462</td>
-      <td>0.120187</td>
-      <td>0.144588</td>
+      <td>0.155297</td>
+      <td>0.128473</td>
+      <td>0.120220</td>
+      <td>0.144618</td>
       <td>14.872527</td>
       <td>15.056044</td>
       <td>15.379121</td>
@@ -3531,9 +3667,9 @@ Name: mag, dtype: float64
       <td>6.350111</td>
       <td>...</td>
       <td>0.226111</td>
-      <td>0.212200</td>
-      <td>0.164778</td>
-      <td>0.163078</td>
+      <td>0.212211</td>
+      <td>0.164789</td>
+      <td>0.163122</td>
       <td>6.777778</td>
       <td>6.975556</td>
       <td>7.658889</td>
@@ -3554,10 +3690,10 @@ Name: mag, dtype: float64
       <td>2.791398</td>
       <td>4.708602</td>
       <td>...</td>
-      <td>0.259527</td>
-      <td>0.221280</td>
-      <td>0.171817</td>
-      <td>0.177172</td>
+      <td>0.259608</td>
+      <td>0.221301</td>
+      <td>0.171849</td>
+      <td>0.177194</td>
       <td>1.831183</td>
       <td>2.009677</td>
       <td>2.647312</td>
@@ -3580,7 +3716,7 @@ Name: mag, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/04bb90fec3cbcc4f8f702a38bd4eaa674261cb3e96f005c40d6041cd3c0fae3a.png" src="../../_images/04bb90fec3cbcc4f8f702a38bd4eaa674261cb3e96f005c40d6041cd3c0fae3a.png" />
+<img alt="../../_images/8c2cf7e291e1265aaa5bca53ae5fb251ea46abfe793a139980da9ed437ac7861.png" src="../../_images/8c2cf7e291e1265aaa5bca53ae5fb251ea46abfe793a139980da9ed437ac7861.png" />
 </div>
 </div>
 <p>Each row in this new dataframe respresents the average values for the months (1=January, 2=February, etc.)</p>
@@ -3711,7 +3847,7 @@ Name: mag, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/033551592df0d741a75e1a16ad93b170bf12822724db5963a1bd59f8cf15a1e9.png" src="../../_images/033551592df0d741a75e1a16ad93b170bf12822724db5963a1bd59f8cf15a1e9.png" />
+<img alt="../../_images/bb466079168ad180ff55bcac5a8dfe6c98373f71ae38b6e4442d55671849e85f.png" src="../../_images/bb466079168ad180ff55bcac5a8dfe6c98373f71ae38b6e4442d55671849e85f.png" />
 </div>
 </div>
 <p>If we want to do it on a finer scale, we can group by day of year.</p>
@@ -3728,7 +3864,7 @@ Name: mag, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/14b0b0394d66744dfd1398ca5176b7714bce165c299de8164f868fb7f1ea3ccb.png" src="../../_images/14b0b0394d66744dfd1398ca5176b7714bce165c299de8164f868fb7f1ea3ccb.png" />
+<img alt="../../_images/6c62e81a38e57f31a12efed7cd89a4bfcf88872992da202e27e06429b10f1768.png" src="../../_images/6c62e81a38e57f31a12efed7cd89a4bfcf88872992da202e27e06429b10f1768.png" />
 </div>
 </div>
 <section id="calculating-anomalies">
@@ -4200,12 +4336,19 @@ Name: mag, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">57</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">anomaly</span>
-
-<span class="ne">NameError</span>: name &#39;anomaly&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LST_DATE
+2016-01-01    3.600000
+2016-01-02    1.700000
+2016-01-03    3.700000
+2016-01-04   -4.800000
+2016-01-05   -8.200000
+                ...   
+2018-12-27    1.269892
+2018-12-28    7.869892
+2018-12-29    5.669892
+2018-12-30   -0.830108
+2018-12-31    2.169892
+Name: T_DAILY_MEAN, Length: 1096, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -4215,6 +4358,12 @@ Name: mag, dtype: float64
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/f6ad558789b4dc436d1ac25d9b5fc049af0fc735dd650b124eaa898dd8e51996.png" src="../../_images/f6ad558789b4dc436d1ac25d9b5fc049af0fc735dd650b124eaa898dd8e51996.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -4232,12 +4381,24 @@ Name: mag, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/06393b3149231864ffcaaa8add38730ed9a15fe820e6d9b92dfb749e72d05882.png" src="../../_images/06393b3149231864ffcaaa8add38730ed9a15fe820e6d9b92dfb749e72d05882.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/37d1abd9e9728aa5e5e2b0dc792261f5f5491f3f7cd2e7599e753430f5dc4d46.png" src="../../_images/37d1abd9e9728aa5e5e2b0dc792261f5f5491f3f7cd2e7599e753430f5dc4d46.png" />
 </div>
 </div>
 <p>Just like with <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we can apply any aggregation function to our <code class="docutils literal notranslate"><span class="pre">resample</span></code> operation.</p>
@@ -4247,6 +4408,12 @@ Name: mag, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/83fa54e1193e265d07f9e9e4f7c04f83fd2cafd493dac3d1dd4e9f26d46109b3.png" src="../../_images/83fa54e1193e265d07f9e9e4f7c04f83fd2cafd493dac3d1dd4e9f26d46109b3.png" />
+</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
@@ -4255,7 +4422,7 @@ Name: mag, dtype: float64
 </section>
 <section id="rolling-operations">
 <h3>Rolling Operations<a class="headerlink" href="#rolling-operations" title="Link to this heading">#</a></h3>
-<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html" rel="noreferer noopener" target="_blank">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">centered</span></code> to tell pandas whether to center the operation around the midpoint of the window.</p>
+<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html" rel="noreferer noopener" target="_blank">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">center</span></code> to tell pandas whether to center the operation around the midpoint of the window.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -4263,12 +4430,24 @@ Name: mag, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/7fea3ebedf0835b3d2262e0df27b524942cc8a58d5ae3cea52caeaad5f767ec2.png" src="../../_images/7fea3ebedf0835b3d2262e0df27b524942cc8a58d5ae3cea52caeaad5f767ec2.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;LST_DATE&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/cd9fe4ba22e0ad5b059bb30a43a064e74ce9b792df34f0af02ee3c7bf718c48e.png" src="../../_images/cd9fe4ba22e0ad5b059bb30a43a064e74ce9b792df34f0af02ee3c7bf718c48e.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -4347,7 +4526,7 @@ Name: mag, dtype: float64
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groubby-object">The <code class="docutils literal notranslate"><span class="pre">GroubBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-object">The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-and-selecting-groups">Iterating and selecting groups</a></li>
 </ul>
 </li>
