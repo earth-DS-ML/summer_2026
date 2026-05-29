@@ -19,7 +19,7 @@ In a code cell, run:
 ~~~python
 import pandas as pd
 
-url = "https://scrippsco2.ucsd.edu/assets/data/atmospheric/stations/in_situ_co2/monthly/monthly_in_situ_co2_mlo.csv"
+url = "https://www.scrippsco2.ucsd.edu/assets/data/atmospheric/stations/in_situ_co2/monthly/monthly_in_situ_co2_mlo.csv"
 df = pd.read_csv(url, skiprows=61)
 df.head()
 ~~~
