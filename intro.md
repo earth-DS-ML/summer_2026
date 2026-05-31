@@ -55,7 +55,7 @@ Your grade in this course is based on:
 
 Most weeks have **two assignments, each worth 10 points**:
 
-- **In-class assignment** — the **"Try it"** exercises built into that week's lecture notebooks. Work through them in your own copy of the notebook during class, then submit the completed notebook. (A few early command-line lessons — the Unix and Git practice — have nothing to submit, so those weeks have only an at-home assignment.)
+- **In-class assignment** — the **"Try it"** exercises built into that week's lecture notebooks. Work through them in your own copy of the notebook during class, then submit the completed notebook. Each section makes clear which in-class work needs to be submitted — look for the **In-class assignment** note on the section overview and at the top of each relevant lecture notebook. (A few early command-line lessons — the Unix and Git practice — have nothing to submit, so those weeks have only an at-home assignment.)
 - **At-home assignment** — the week's homework page (the numbered "Assignment" pages in each section).
 
 You'll keep all your work in the private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md), with each week's assignment in its own folder (e.g. `week1/`, `week2/`). **To hand it in:** push your work to GitHub, then post a link to the relevant folder or notebook on that week's **Courseworks** assignment. (Each assignment page tells you whether to link the whole folder or a specific notebook.)
