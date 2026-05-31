@@ -37,6 +37,11 @@ By the end of this section, you should be able to:
 - [Assignment 5a](./assignment5a.ipynb) — pandas fundamentals on USGS earthquake data.
 - [Assignment 5b](./assignment5b.ipynb) — pandas groupby on NOAA hurricane tracks.
 
+:::{admonition} In-class assignment — 10 points
+:class: note
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook, then submit the completed notebook(s) in your week folder. (The two at-home assignments — 5a and 5b — are graded separately, 10 points each.)
+:::
+
 ## Working through the lectures
 
 Same workflow as previous modules — download each notebook (⬇ icon, top-right) or copy-paste the cells into a fresh notebook in JupyterLab on LEAP or Colab, then step through them. Stop at each **Try it** admonition to experiment in your own cells before moving on.

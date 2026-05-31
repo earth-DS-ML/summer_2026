@@ -20,6 +20,11 @@ By the end of this section, you should be able to:
 - [Organizing Python projects](./organization_and_packaging.ipynb) — project structure, reproducibility, and using `.py` modules from a notebook.
 - [Assignment 3](./assignment3.ipynb) — practice with lists, dictionaries, and functions (notebook you'll download, fill in, and submit).
 
+:::{admonition} In-class assignment — 10 points
+:class: note
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook, then submit the completed notebook(s) in your week folder. (Your at-home assignment — Assignment 3 — is graded separately, 10 points.)
+:::
+
 ## Working through the lectures
 
 The three lecture pages above are **Jupyter notebooks**. Use the download button in the top-right of each page (the ⬇ icon) to grab the `.ipynb` file, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. For the shorter notebooks you can also just copy-paste the cells into a fresh notebook in your environment. The **Try it** admonitions invite you to experiment in your own cells before moving on.

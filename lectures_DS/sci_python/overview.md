@@ -21,6 +21,11 @@ By the end of this section, you should be able to:
 - [Assignment 4a](./assignment4a.ipynb) — numpy reductions, broadcasting, and matplotlib on real ARGO float data.
 - [Assignment 4b](./assignment4b.ipynb) — replicate three target figures using only numpy and matplotlib.
 
+:::{admonition} In-class assignment — 10 points
+:class: note
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook, then submit the completed notebook(s) in your week folder. (The two at-home assignments — 4a and 4b — are graded separately, 10 points each.)
+:::
+
 ## Working through the lectures
 
 Both lecture pages are **Jupyter notebooks**. Use the download button in the top-right (⬇ icon) to grab the `.ipynb` file, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. For the shorter notebooks you can also just copy-paste the cells into a fresh notebook. The **Try it** admonitions invite you to experiment in your own cells before moving on.

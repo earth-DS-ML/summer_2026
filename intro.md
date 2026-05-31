@@ -51,9 +51,14 @@ Each week, students complete some lecture material and one homework assignment. 
 Your grade in this course is based on:
 
 - **60%** — final project
-- **40%** — weekly assignments (both in-class and at-home)
+- **40%** — weekly assignments (in-class and at-home)
 
-You'll submit each week's assignment as a folder (e.g., `week1/`, `week2/`) inside a private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md). Hand in by pushing commits to that repo.
+Most weeks have **two assignments, each worth 10 points**:
+
+- **In-class assignment** — the **"Try it"** exercises built into that week's lecture notebooks. Work through them in your own copy of the notebook during class, then submit the completed notebook. (A few early command-line lessons — the Unix and Git practice — have nothing to submit, so those weeks have only an at-home assignment.)
+- **At-home assignment** — the week's homework page (the numbered "Assignment" pages in each section).
+
+You'll submit each week's work as a folder (e.g., `week1/`, `week2/`) inside a private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md). Hand in by pushing commits to that repo.
 
 **Late policy:** all weekly assignments are due by the end of Sunday night of the following week — assignments not in by then receive a zero.
 
