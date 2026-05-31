@@ -39,7 +39,7 @@ By the end of this section, you should be able to:
 
 :::{admonition} In-class assignment — 10 points
 :class: note
-Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook, then submit the completed notebook(s) in your week folder. (The two at-home assignments — 5a and 5b — are graded separately, 10 points each.)
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook. To submit, push your completed notebook(s) to your week folder and post a link to each on the matching **Courseworks** assignment. (The two at-home assignments — 5a and 5b — are graded separately, 10 points each.)
 :::
 
 ## Working through the lectures

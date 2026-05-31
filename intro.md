@@ -58,7 +58,7 @@ Most weeks have **two assignments, each worth 10 points**:
 - **In-class assignment** — the **"Try it"** exercises built into that week's lecture notebooks. Work through them in your own copy of the notebook during class, then submit the completed notebook. (A few early command-line lessons — the Unix and Git practice — have nothing to submit, so those weeks have only an at-home assignment.)
 - **At-home assignment** — the week's homework page (the numbered "Assignment" pages in each section).
 
-You'll submit each week's work as a folder (e.g., `week1/`, `week2/`) inside a private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md). Hand in by pushing commits to that repo.
+You'll keep all your work in the private GitHub repository you set up in [Assignment 1](./lectures_DS/computing_env/assignment1.md), with each week's assignment in its own folder (e.g. `week1/`, `week2/`). **To hand it in:** push your work to GitHub, then post a link to the relevant folder or notebook on that week's **Courseworks** assignment. (Each assignment page tells you whether to link the whole folder or a specific notebook.)
 
 **Late policy:** all weekly assignments are due by the end of Sunday night of the following week — assignments not in by then receive a zero.
 
