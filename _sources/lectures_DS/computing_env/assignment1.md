@@ -62,6 +62,8 @@ Every assignment you submit in this course will live in one private GitHub repos
 
    They'll receive invitations to accept so they can see and grade your work.
 
+6. **Email us your name and username.** A GitHub invitation only tells us your username, not who you are. So we can match your username to you, send a short email to both [Dhruv](mailto:dbalwada@ldeo.columbia.edu) and [Progga](mailto:pd2816@columbia.edu) with your **full name** and your **GitHub username**.
+
 That's it for Part 1 — your assignments repo is ready, and you'll push commits to it to submit future assignments.
 
 ## Part 2: Submit a "week 1" assignment to your repo
