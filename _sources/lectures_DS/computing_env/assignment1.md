@@ -1,6 +1,6 @@
 # Assignment 1: Files, Git, and GitHub
 
-**At-home assignment — worth 10 points.**
+**At-home assignment — worth 10 points.** When you're done, push your work to your week folder and post a link to that **folder** on the matching Courseworks assignment.
 
 The main goal of this assignment is to set up the GitHub repository where you'll submit every assignment in this course (Part 1), and to submit your first piece of work to it (Part 2). Every weekly assignment will live in its own folder inside that repo.
 

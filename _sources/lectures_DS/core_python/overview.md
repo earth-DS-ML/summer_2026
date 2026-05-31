@@ -22,7 +22,7 @@ By the end of this section, you should be able to:
 
 :::{admonition} In-class assignment — 10 points
 :class: note
-Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook, then submit the completed notebook(s) in your week folder. (Your at-home assignment — Assignment 3 — is graded separately, 10 points.)
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook. To submit, push your completed notebook(s) to your week folder and post a link to each on the matching **Courseworks** assignment. (Your at-home assignment — Assignment 3 — is graded separately, 10 points.)
 :::
 
 ## Working through the lectures

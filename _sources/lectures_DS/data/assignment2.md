@@ -1,6 +1,6 @@
 # Assignment 2: Explore a climate dataset
 
-**At-home assignment — worth 10 points.**
+**At-home assignment — worth 10 points.** When you're done, push your work to your week folder and post a link to that **folder** on the matching Courseworks assignment.
 
 Pick any climate-related dataset that interests you — could be something you're considering for your final project, or just something you're curious about. The point here is **practice with the FAIR + access workflow**, not a commitment to a specific project.
 
