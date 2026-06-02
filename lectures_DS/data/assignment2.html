@@ -589,6 +589,17 @@ By Dhruv Balwada & Kara Lamb
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("a.btn-download-source-button").forEach(function (a) {
+    a.setAttribute("download", "");
+    a.removeAttribute("target");
+  });
+});
+</script>
+
+</div>
   </div>
   
 </div>
