@@ -20,14 +20,17 @@ In a code cell, run:
 import pandas as pd
 
 url = "https://www.scrippsco2.ucsd.edu/assets/data/atmospheric/stations/in_situ_co2/monthly/monthly_in_situ_co2_mlo.csv"
-df = pd.read_csv(url, skiprows=61)
+columns = ["year", "month", "date_excel", "date", "co2", "co2_seasonally_adjusted",
+           "fit", "fit_seasonally_adjusted", "co2_filled", "co2_filled_seasonally_adjusted",
+           "station"]
+df = pd.read_csv(url, skiprows=64, names=columns, na_values=-99.99)
 df.head()
 ~~~
 
 You should see a table with year, month, date, and CO2 columns. Notice that you didn't have to download anything to your computer — `pandas` streamed the data from the URL directly into memory.
 :::
 
-The `skiprows=61` argument tells pandas to skip the file's 61-line header (which contains metadata and column descriptions, not data). Without it, pandas would try to parse the header as rows.
+Real files often need a few options. This one opens with a long comment header followed by a three-row column header — 64 lines in all — so `skiprows=64` jumps past it. We then give pandas our own column `names`, and `na_values=-99.99` tells it that Scripps's `-99.99` placeholder means *missing*, so those entries load as `NaN` instead of being mistaken for real measurements. (Scripps occasionally adds lines to the header, so if the table ever looks misaligned, re-check the skip count against the file.)
 
 > *Reference:* Why this works — most HTTP-served files are public and don't require authentication, so `pandas` can fetch them with a plain GET request. For files behind logins or paywalls, you'd need additional setup.
 
