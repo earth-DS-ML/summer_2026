@@ -30,6 +30,17 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  # Force the page "Download source file" (.ipynb) button to save the file
+  # instead of opening the raw JSON in a new tab.
+  extra_footer: |
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("a.btn-download-source-button").forEach(function (a) {
+        a.setAttribute("download", "");
+        a.removeAttribute("target");
+      });
+    });
+    </script>
 
 # Pin the footer copyright year so it doesn't auto-pick "build year"
 sphinx:
