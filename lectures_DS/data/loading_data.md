@@ -10,7 +10,7 @@ For each example below, **open a new notebook in your environment** and copy-pas
 
 The simplest case: a CSV file sitting at a public URL. `pandas.read_csv` can read directly from a URL without you having to download it first.
 
-We'll use the [Scripps CO2 dataset](https://scrippsco2.ucsd.edu/) — atmospheric CO2 measurements from Mauna Loa, going back to 1958.
+We'll use atmospheric CO2 measurements from Mauna Loa — the famous [Keeling Curve](https://scrippsco2.ucsd.edu/), recorded by the Scripps CO2 program since 1958. We read it from a snapshot hosted in the course repository, because the original Scripps server isn't reachable from every environment (the LEAP hub can't reach it, for example).
 
 :::{admonition} Try it
 :class: tip
@@ -19,7 +19,7 @@ In a code cell, run:
 ~~~python
 import pandas as pd
 
-url = "https://www.scrippsco2.ucsd.edu/assets/data/atmospheric/stations/in_situ_co2/monthly/monthly_in_situ_co2_mlo.csv"
+url = "https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/monthly_in_situ_co2_mlo.csv"
 columns = ["year", "month", "date_excel", "date", "co2", "co2_seasonally_adjusted",
            "fit", "fit_seasonally_adjusted", "co2_filled", "co2_filled_seasonally_adjusted",
            "station"]
@@ -30,7 +30,7 @@ df.head()
 You should see a table with year, month, date, and CO2 columns. Notice that you didn't have to download anything to your computer — `pandas` streamed the data from the URL directly into memory.
 :::
 
-Real files often need a few options. This one opens with a long comment header followed by a three-row column header — 64 lines in all — so `skiprows=64` jumps past it. We then give pandas our own column `names`, and `na_values=-99.99` tells it that Scripps's `-99.99` placeholder means *missing*, so those entries load as `NaN` instead of being mistaken for real measurements. (Scripps occasionally adds lines to the header, so if the table ever looks misaligned, re-check the skip count against the file.)
+Real files often need a few options. This one opens with a long comment header followed by a three-row column header — 64 lines in all — so `skiprows=64` jumps past it. We then give pandas our own column `names`, and `na_values=-99.99` tells it that Scripps's `-99.99` placeholder means *missing*, so those entries load as `NaN` instead of being mistaken for real measurements.
 
 > *Reference:* Why this works — most HTTP-served files are public and don't require authentication, so `pandas` can fetch them with a plain GET request. For files behind logins or paywalls, you'd need additional setup.
 
