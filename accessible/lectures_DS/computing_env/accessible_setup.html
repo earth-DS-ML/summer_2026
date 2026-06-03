@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Setting up an accessible workflow &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/computing_env/accessible_setup';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Working with Python scripts" href="working_with_scripts.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible Chapter 1 (preview)
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/computing_env/accessible_setup.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Setting up an accessible workflow</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-different-setup">Why a different setup?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-install">What to install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-read-it">Open a terminal and read it</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-python">Running Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#later-connecting-to-the-leap-hub">Later: connecting to the LEAP hub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keystroke-quick-reference">Keystroke quick reference</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="setting-up-an-accessible-workflow">
+<h1>Setting up an accessible workflow<a class="headerlink" href="#setting-up-an-accessible-workflow" title="Link to this heading">#</a></h1>
+<p><em>This page is written for students using a screen reader (it assumes
+<a class="reference external" href="https://www.nvaccess.org/" rel="noreferer noopener" target="_blank">NVDA</a> on Windows, but the ideas apply to other screen
+readers too). It replaces the in-browser terminal and notebook interface used elsewhere
+in the course with a setup that a screen reader can actually read.</em></p>
+<section id="why-a-different-setup">
+<h2>Why a different setup?<a class="headerlink" href="#why-a-different-setup" title="Link to this heading">#</a></h2>
+<p>The course’s default environment opens a <strong>terminal and notebooks inside a web browser</strong>
+(JupyterLab on the LEAP hub, or Google Colab). Those in-browser tools are highly visual,
+and large parts of them — especially the terminal — are not reliably read by a screen
+reader.</p>
+<p>The good news: you do <strong>not</strong> have to learn Python through that interface. A text-based
+workflow built around <strong><a class="reference external" href="https://code.visualstudio.com/" rel="noreferer noopener" target="_blank">Visual Studio Code (VS Code)</a></strong>
+is far more screen-reader-friendly, and it runs the exact same commands and Python the
+course uses. This page sets that up once; the rest of the chapter then works inside it.</p>
+<p>A quick note on the plan, so it isn’t a surprise later:</p>
+<ul class="simple">
+<li><p><strong>For now</strong> (this chapter and the first Python chapters), everything runs <strong>on your own
+computer</strong>. You don’t need the cloud at all.</p></li>
+<li><p><strong>Later</strong> (the data chapters, which use large cloud datasets), you connect this <em>same</em>
+VS Code to the course’s LEAP hub. The interface stays identical; only the data and
+computing move to the cloud. That step is described at the end of this page.</p></li>
+</ul>
+</section>
+<section id="what-to-install">
+<h2>What to install<a class="headerlink" href="#what-to-install" title="Link to this heading">#</a></h2>
+<p>On your Windows machine, install these. A sighted helper or the course assistant can help
+with this one-time install; after that, you work on your own.</p>
+<ol class="arabic simple">
+<li><p><strong>NVDA</strong> — the screen reader, if it isn’t already installed: <a class="reference external" href="https://www.nvaccess.org/" rel="noreferer noopener" target="_blank">https://www.nvaccess.org/</a></p></li>
+<li><p><strong>Python</strong> — from <a class="reference external" href="https://www.python.org/downloads/" rel="noreferer noopener" target="_blank">https://www.python.org/downloads/</a>. During installation, check the
+box labelled <strong>“Add python.exe to PATH”</strong>.</p></li>
+<li><p><strong>Visual Studio Code</strong> — from <a class="reference external" href="https://code.visualstudio.com/" rel="noreferer noopener" target="_blank">https://code.visualstudio.com/</a>.</p></li>
+<li><p><strong>The Python extension for VS Code</strong> — open VS Code, open the Extensions view
+(<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+X</span></code>), search for “Python” by Microsoft, and install it.</p></li>
+<li><p><strong>Git</strong> — from <a class="reference external" href="https://git-scm.com/download/win" rel="noreferer noopener" target="_blank">https://git-scm.com/download/win</a>. You’ll need this for the <em>Intro to
+Git</em> lesson; it also installs <strong>Git Bash</strong>, the terminal you’ll set up just below.</p></li>
+</ol>
+<p>(Later in the course you’ll also install scientific packages such as NumPy and Pandas, or
+just use the LEAP hub, which already has them. You don’t need those yet.)</p>
+</section>
+<section id="turning-on-vs-code-s-accessibility-features">
+<h2>Turning on VS Code’s accessibility features<a class="headerlink" href="#turning-on-vs-code-s-accessibility-features" title="Link to this heading">#</a></h2>
+<p>VS Code has strong, built-in support for screen readers, and it <strong>detects NVDA
+automatically</strong>. When a screen reader is running, the status bar shows <strong>“Screen Reader
+Optimized”</strong>. If you ever need to set it by hand, open the Command Palette
+(<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>) and run <strong>“Toggle Screen Reader Accessibility Mode”</strong>.</p>
+<p>Three commands are worth memorizing — they work in the editor, the terminal, and
+notebooks:</p>
+<ul class="simple">
+<li><p><strong>Accessibility Help — <code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code>.</strong> Press this in any view to hear a summary of what you
+can do there and the relevant shortcuts. When in doubt, press <code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code>.</p></li>
+<li><p><strong>Accessible View — <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</strong> This opens the current content — <em>terminal output</em>,
+error messages, notebook output, hovers — as plain text you can read line by line and
+character by character. This is the single most important command for you: it is how
+you read things a screen reader would otherwise skip.</p></li>
+<li><p><strong>Audio cues</strong> are normally enabled automatically when a screen reader is attached (for
+example, a sound when a line has an error). To hear the full list, run <strong>“Help: List
+Signal Sounds”</strong> from the Command Palette.</p></li>
+</ul>
+<blockquote>
+<div><p><em>NVDA tip:</em> VS Code’s own guidance is to <strong>stay in focus mode and use the hotkeys</strong>
+above, rather than switching NVDA to browse mode.</p>
+</div></blockquote>
+</section>
+<section id="the-terminal-the-key-fix">
+<h2>The terminal — the key fix<a class="headerlink" href="#the-terminal-the-key-fix" title="Link to this heading">#</a></h2>
+<p>This is the part that did not work in the browser. In VS Code it does — but first, one
+important one-time setting.</p>
+<section id="make-your-terminal-use-git-bash">
+<h3>Make your terminal use Git Bash<a class="headerlink" href="#make-your-terminal-use-git-bash" title="Link to this heading">#</a></h3>
+<p>On Windows, VS Code’s terminal defaults to <strong>PowerShell</strong>, which uses different commands
+from the Unix ones this course teaches (for example, <code class="docutils literal notranslate"><span class="pre">touch</span></code> and <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-F</span></code> don’t work in
+PowerShell). Git for Windows — which you installed above — includes <strong>Git Bash</strong>, a
+terminal that <em>does</em> understand them. Set it as your default once:</p>
+<ol class="arabic simple">
+<li><p>Open the Command Palette: <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>.</p></li>
+<li><p>Type <strong>Terminal: Select Default Profile</strong> and press Enter.</p></li>
+<li><p>Choose <strong>Git Bash</strong> from the list.</p></li>
+</ol>
+<p>Now every terminal you open is a Git Bash terminal, and the commands in the lessons work
+exactly as written. <em>(When you later connect to the LEAP hub, its terminal is Linux, where
+these same commands also work — so nothing you learn here goes to waste.)</em></p>
+</section>
+<section id="open-a-terminal-and-read-it">
+<h3>Open a terminal and read it<a class="headerlink" href="#open-a-terminal-and-read-it" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Open a terminal: the <strong>Terminal</strong> menu → <strong>New Terminal</strong>, or press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>. A
+terminal opens at the bottom of the window, and your typing goes straight to it.</p></li>
+<li><p>Type a command and press Enter as usual — for example, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p></li>
+<li><p><strong>To read what the terminal printed, press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong> (Accessible View). You get the
+full terminal output as navigable text — which the in-browser JupyterLab terminal does
+not reliably provide.</p></li>
+<li><p>To jump between your previous commands inside that view, press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> (“Go to
+Symbol in Accessible View”).</p></li>
+</ol>
+<p>Everything the course shows you “in a JupyterLab terminal” — <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, and the
+rest of the next lesson — you do <strong>here</strong>, in this Git Bash terminal.</p>
+</section>
+</section>
+<section id="running-python">
+<h2>Running Python<a class="headerlink" href="#running-python" title="Link to this heading">#</a></h2>
+<p>Two screen-reader-friendly ways, in order of preference:</p>
+<ol class="arabic simple">
+<li><p><strong>Write a script and run it.</strong> Make a file <code class="docutils literal notranslate"><span class="pre">lesson1.py</span></code>, type your code, save
+(<code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code>), then in the terminal run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">lesson1.py</span></code>. The code is linear, NVDA
+reads it line by line, and the output appears in the terminal (read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>).
+This is the main way to work.</p></li>
+<li><p><strong>Run cells inside a script (optional, needs extra setup).</strong> If you want to run code
+piece by piece, put <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">%%</span></code> on its own line to mark a “cell” in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file; VS Code
+can then run each cell and show the result in a panel (read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>). This
+needs the <strong>Jupyter</strong> extension (install it from the Extensions view, like the Python
+one) and the Jupyter package (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">jupyter</span></code>). You don’t need any of this to
+start — running whole scripts is enough.</p></li>
+</ol>
+<p>For now, avoid doing your main work <em>inside</em> <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebook cells — that’s the
+cell-based, visual interface that is hardest to navigate.</p>
+</section>
+<section id="later-connecting-to-the-leap-hub">
+<h2>Later: connecting to the LEAP hub<a class="headerlink" href="#later-connecting-to-the-leap-hub" title="Link to this heading">#</a></h2>
+<p>When the course reaches the data chapters (which use large datasets stored in the cloud),
+you’ll connect this same VS Code to the <strong>LEAP JupyterHub</strong>, so you keep the accessible
+interface but gain the hub’s data and computing. The steps are here:</p>
+<blockquote>
+<div><p><strong>VS Code → LEAP hub:</strong> <a class="reference external" href="https://leap-stc.github.io/compute/vs_code_to_hub/" rel="noreferer noopener" target="_blank">https://leap-stc.github.io/compute/vs_code_to_hub/</a></p>
+</div></blockquote>
+<p>That setup (a one-time access token and SSH key) is more involved, so plan to do it <strong>with
+the course assistant or Disability Services</strong>, once, early. After it’s connected, your VS
+Code looks and behaves exactly as it does now — it just runs on the hub. (That page is
+written mainly around opening notebooks; you can ignore those parts and simply use
+<strong>Terminal → New Terminal</strong>, which now runs on the hub, for your script workflow.)</p>
+</section>
+<section id="keystroke-quick-reference">
+<h2>Keystroke quick reference<a class="headerlink" href="#keystroke-quick-reference" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code> — Accessibility Help (what can I do here?)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> — Accessible View (read terminal / notebook / error output)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> — open a terminal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> — move between commands in the Accessible View</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> — Command Palette (run any command by name)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code> — save the current file</p></li>
+</ul>
+<p>You’re set. Continue to <strong><a class="reference internal" href="intro_to_unix.html"><span class="std std-doc">Intro to Unix</span></a></strong>, and do each “Try it” in the
+Git Bash terminal you just set up.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/computing_env"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="working_with_scripts.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working with Python scripts</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-different-setup">Why a different setup?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-install">What to install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-read-it">Open a terminal and read it</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-python">Running Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#later-connecting-to-the-leap-hub">Later: connecting to the LEAP hub</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keystroke-quick-reference">Keystroke quick reference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

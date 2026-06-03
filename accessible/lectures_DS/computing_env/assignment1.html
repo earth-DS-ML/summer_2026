@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 1: Files, Git, and GitHub &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/computing_env/assignment1';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Intro to Git" href="intro_to_git.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible Chapter 1 (preview)
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/computing_env/assignment1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 1: Files, Git, and GitHub</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-set-up-your-assignments-repository">Part 1: Set up your assignments repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-submit-a-week-1-assignment-to-your-repo">Part 2: Submit a “week 1” assignment to your repo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-1-files-git-and-github">
+<h1>Assignment 1: Files, Git, and GitHub<a class="headerlink" href="#assignment-1-files-git-and-github" title="Link to this heading">#</a></h1>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to that <strong>folder</strong> on the matching Courseworks assignment.</p>
+<p>The main goal of this assignment is to set up the GitHub repository where you’ll submit every assignment in this course (Part 1), and to submit your first piece of work to it (Part 2). Every weekly assignment will live in its own folder inside that repo.</p>
+<div class="important admonition">
+<p class="admonition-title">Doing this assignment with a screen reader</p>
+<p>Do all the steps below in your <strong>VS Code</strong> setup: the <strong>Git Bash</strong> terminal for the <code class="docutils literal notranslate"><span class="pre">git</span></code> and Unix commands (press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read output), and the VS Code editor for writing <code class="docutils literal notranslate"><span class="pre">resume.md</span></code>. See <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> if you need to.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the environment-setup skills from this section:</p>
+<ul class="simple">
+<li><p>Use Unix commands (<code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>) to create folders and files</p></li>
+<li><p>Initialize a local Git repository and make commits</p></li>
+<li><p>Connect a local repository to a GitHub remote and push</p></li>
+<li><p>Write basic Markdown (headings, lists, images with alt text, links)</p></li>
+<li><p>Practice the edit → add → commit → push loop</p></li>
+</ul>
+</div>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>Before starting, make sure you’ve worked through:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a> — you have a working VS Code environment.</p></li>
+<li><p><a class="reference internal" href="intro_to_unix.html"><span class="std std-doc">Intro to Unix</span></a> — you’re comfortable with <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>.</p></li>
+<li><p><a class="reference internal" href="intro_to_git.html"><span class="std std-doc">Intro to Git</span></a> — you’ve run the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> setup and authentication is working (Git Credential Manager or <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span></code> on your computer).</p></li>
+</ul>
+</section>
+<section id="part-1-set-up-your-assignments-repository">
+<h2>Part 1: Set up your assignments repository<a class="headerlink" href="#part-1-set-up-your-assignments-repository" title="Link to this heading">#</a></h2>
+<p>Every assignment you submit in this course will live in one private GitHub repository. Set it up now.</p>
+<ol class="arabic">
+<li><p><strong>Create a local directory and initialize git:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">clmt5405</span><span class="o">-</span><span class="n">assignments</span>
+<span class="n">cd</span> <span class="n">clmt5405</span><span class="o">-</span><span class="n">assignments</span>
+<span class="n">git</span> <span class="n">init</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add a Readme and make a first commit:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;# My CLMT5405 assignments&quot;</span> <span class="o">&gt;</span> <span class="n">Readme</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">Readme</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Initial commit&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create a private repository on GitHub:</strong></p>
+<ul class="simple">
+<li><p>Go to <a class="reference external" href="https://github.com/new" rel="noreferer noopener" target="_blank">github.com/new</a>.</p></li>
+<li><p>Name it <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> (use exactly this name — don’t vary the capitalization or punctuation).</p></li>
+<li><p>Choose <strong>Private</strong>.</p></li>
+<li><p>Don’t initialize it with a README — leave it empty.</p></li>
+</ul>
+</li>
+<li><p><strong>Connect your local repo to GitHub and push:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">clmt5405</span><span class="o">-</span><span class="n">assignments</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add the instructors as collaborators.</strong> On GitHub, go to your repo → <strong>Settings</strong> → <strong>Collaborators and teams</strong> → <strong>Add people</strong>. Add:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dhruvbalwada</span></code> (Dhruv, instructor)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">progga004</span></code> (Progga, TA)</p></li>
+</ul>
+<p>They’ll receive invitations to accept so they can see and grade your work.</p>
+</li>
+<li><p><strong>Email us your name and username.</strong> A GitHub invitation only tells us your username, not who you are. So we can match your username to you, send a short email to both <a class="reference external" href="mailto:dbalwada&#37;&#52;&#48;ldeo&#46;columbia&#46;edu" rel="noreferer noopener" target="_blank">Dhruv</a> and <a class="reference external" href="mailto:pd2816&#37;&#52;&#48;columbia&#46;edu" rel="noreferer noopener" target="_blank">Progga</a> with your <strong>full name</strong> and your <strong>GitHub username</strong>.</p></li>
+</ol>
+<p>That’s it for Part 1 — your assignments repo is ready, and you’ll push commits to it to submit future assignments.</p>
+</section>
+<section id="part-2-submit-a-week-1-assignment-to-your-repo">
+<h2>Part 2: Submit a “week 1” assignment to your repo<a class="headerlink" href="#part-2-submit-a-week-1-assignment-to-your-repo" title="Link to this heading">#</a></h2>
+<p>Every week, you’ll submit your assignment as a folder inside your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo. Set up the pattern now by putting a small markdown resume into a <code class="docutils literal notranslate"><span class="pre">week1/</span></code> folder.</p>
+<ol class="arabic">
+<li><p><strong>From inside your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo, create the <code class="docutils literal notranslate"><span class="pre">week1</span></code> folder and an empty resume file:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">week1</span>
+<span class="n">cd</span> <span class="n">week1</span>
+<span class="n">touch</span> <span class="n">resume</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Edit <code class="docutils literal notranslate"><span class="pre">resume.md</span></code></strong> to include:</p>
+<ul class="simple">
+<li><p>A top-level heading with your name.</p></li>
+<li><p>An image (a photo of you, or your spirit animal) — and give it <strong>descriptive alt text</strong>, the short text a screen reader reads aloud in place of the image. In Markdown, the alt text goes in the square brackets: <code class="docutils literal notranslate"><span class="pre">![A</span> <span class="pre">golden</span> <span class="pre">retriever</span> <span class="pre">lying</span> <span class="pre">in</span> <span class="pre">tall</span> <span class="pre">grass](dog.jpg)</span></code>. Writing good alt text is itself one of the most important skills in this course, so take a moment to make yours genuinely descriptive.</p></li>
+<li><p>A secondary heading <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Education</span></code>.</p></li>
+<li><p>A bulleted list of schools you attended, with each name hyperlinked to that institution’s website.</p></li>
+</ul>
+<p>Edit the file in the <strong>VS Code editor</strong> (open <code class="docutils literal notranslate"><span class="pre">resume.md</span></code>, make your changes, and save with <code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code>). VS Code can show a Markdown preview if you’d like, but the text source is what gets committed.</p>
+</li>
+<li><p><strong>Commit and push:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+<span class="n">git</span> <span class="n">status</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">week1</span><span class="o">/</span><span class="n">resume</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add week 1 assignment&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Verify on GitHub.</strong> Refresh your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo page. You should see a <code class="docutils literal notranslate"><span class="pre">week1/</span></code> folder; click into it to see your rendered <code class="docutils literal notranslate"><span class="pre">resume.md</span></code>.</p></li>
+<li><p><strong>Practice the iterative loop.</strong> Add a <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Project</span> <span class="pre">Interests</span></code> section to <code class="docutils literal notranslate"><span class="pre">week1/resume.md</span></code> — some potential ideas of climate-data projects you might want to work on for this course. These are just starting thoughts; you can absolutely change your mind or refine them as the term goes on. Commit and push:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">week1</span><span class="o">/</span><span class="n">resume</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add Project Interests to week 1&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+<p>Refresh the GitHub page and confirm the new section appears.</p>
+</li>
+</ol>
+<p>This is the pattern for every assignment in this course: make a week folder, add your work, commit, push.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/computing_env"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_to_git.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Intro to Git</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-set-up-your-assignments-repository">Part 1: Set up your assignments repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-submit-a-week-1-assignment-to-your-repo">Part 2: Submit a “week 1” assignment to your repo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
