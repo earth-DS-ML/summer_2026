@@ -1,4 +1,5 @@
 _build/*
+accessible_pilot/_build/
 .ipynb_checkpoints/
 __pycache__/
 *.pyc

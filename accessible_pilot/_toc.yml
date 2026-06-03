@@ -1,0 +1,9 @@
+format: jb-book
+root: intro
+chapters:
+  - file: lectures_DS/computing_env/overview
+  - file: lectures_DS/computing_env/accessible_setup
+  - file: lectures_DS/computing_env/working_with_scripts
+  - file: lectures_DS/computing_env/intro_to_unix
+  - file: lectures_DS/computing_env/intro_to_git
+  - file: lectures_DS/computing_env/assignment1
