@@ -1,0 +1,144 @@
+# Setting up an accessible workflow
+
+*This page is written for students using a screen reader (it assumes
+[NVDA](https://www.nvaccess.org/) on Windows, but the ideas apply to other screen
+readers too). It replaces the in-browser terminal and notebook interface used elsewhere
+in the course with a setup that a screen reader can actually read.*
+
+## Why a different setup?
+
+The course's default environment opens a **terminal and notebooks inside a web browser**
+(JupyterLab on the LEAP hub, or Google Colab). Those in-browser tools are highly visual,
+and large parts of them — especially the terminal — are not reliably read by a screen
+reader.
+
+The good news: you do **not** have to learn Python through that interface. A text-based
+workflow built around **[Visual Studio Code (VS Code)](https://code.visualstudio.com/)**
+is far more screen-reader-friendly, and it runs the exact same commands and Python the
+course uses. This page sets that up once; the rest of the chapter then works inside it.
+
+A quick note on the plan, so it isn't a surprise later:
+
+- **For now** (this chapter and the first Python chapters), everything runs **on your own
+  computer**. You don't need the cloud at all.
+- **Later** (the data chapters, which use large cloud datasets), you connect this *same*
+  VS Code to the course's LEAP hub. The interface stays identical; only the data and
+  computing move to the cloud. That step is described at the end of this page.
+
+## What to install
+
+On your Windows machine, install these. A sighted helper or the course assistant can help
+with this one-time install; after that, you work on your own.
+
+1. **NVDA** — the screen reader, if it isn't already installed: <https://www.nvaccess.org/>
+2. **Python** — from <https://www.python.org/downloads/>. During installation, check the
+   box labelled **"Add python.exe to PATH"**.
+3. **Visual Studio Code** — from <https://code.visualstudio.com/>.
+4. **The Python extension for VS Code** — open VS Code, open the Extensions view
+   (`Ctrl+Shift+X`), search for "Python" by Microsoft, and install it.
+5. **Git** — from <https://git-scm.com/download/win>. You'll need this for the *Intro to
+   Git* lesson; it also installs **Git Bash**, the terminal you'll set up just below.
+
+(Later in the course you'll also install scientific packages such as NumPy and Pandas, or
+just use the LEAP hub, which already has them. You don't need those yet.)
+
+## Turning on VS Code's accessibility features
+
+VS Code has strong, built-in support for screen readers, and it **detects NVDA
+automatically**. When a screen reader is running, the status bar shows **"Screen Reader
+Optimized"**. If you ever need to set it by hand, open the Command Palette
+(`Ctrl+Shift+P`) and run **"Toggle Screen Reader Accessibility Mode"**.
+
+Three commands are worth memorizing — they work in the editor, the terminal, and
+notebooks:
+
+- **Accessibility Help — `Alt+F1`.** Press this in any view to hear a summary of what you
+  can do there and the relevant shortcuts. When in doubt, press `Alt+F1`.
+- **Accessible View — `Alt+F2`.** This opens the current content — *terminal output*,
+  error messages, notebook output, hovers — as plain text you can read line by line and
+  character by character. This is the single most important command for you: it is how
+  you read things a screen reader would otherwise skip.
+- **Audio cues** are normally enabled automatically when a screen reader is attached (for
+  example, a sound when a line has an error). To hear the full list, run **"Help: List
+  Signal Sounds"** from the Command Palette.
+
+> *NVDA tip:* VS Code's own guidance is to **stay in focus mode and use the hotkeys**
+> above, rather than switching NVDA to browse mode.
+
+## The terminal — the key fix
+
+This is the part that did not work in the browser. In VS Code it does — but first, one
+important one-time setting.
+
+### Make your terminal use Git Bash
+
+On Windows, VS Code's terminal defaults to **PowerShell**, which uses different commands
+from the Unix ones this course teaches (for example, `touch` and `ls -F` don't work in
+PowerShell). Git for Windows — which you installed above — includes **Git Bash**, a
+terminal that *does* understand them. Set it as your default once:
+
+1. Open the Command Palette: `Ctrl+Shift+P`.
+2. Type **Terminal: Select Default Profile** and press Enter.
+3. Choose **Git Bash** from the list.
+
+Now every terminal you open is a Git Bash terminal, and the commands in the lessons work
+exactly as written. *(When you later connect to the LEAP hub, its terminal is Linux, where
+these same commands also work — so nothing you learn here goes to waste.)*
+
+### Open a terminal and read it
+
+1. Open a terminal: the **Terminal** menu → **New Terminal**, or press `` Ctrl+` ``. A
+   terminal opens at the bottom of the window, and your typing goes straight to it.
+2. Type a command and press Enter as usual — for example, `pwd`.
+3. **To read what the terminal printed, press `Alt+F2`** (Accessible View). You get the
+   full terminal output as navigable text — which the in-browser JupyterLab terminal does
+   not reliably provide.
+4. To jump between your previous commands inside that view, press `Ctrl+Shift+O` ("Go to
+   Symbol in Accessible View").
+
+Everything the course shows you "in a JupyterLab terminal" — `pwd`, `ls`, `cd`, and the
+rest of the next lesson — you do **here**, in this Git Bash terminal.
+
+## Running Python
+
+Two screen-reader-friendly ways, in order of preference:
+
+1. **Write a script and run it.** Make a file `lesson1.py`, type your code, save
+   (`Ctrl+S`), then in the terminal run `python lesson1.py`. The code is linear, NVDA
+   reads it line by line, and the output appears in the terminal (read it with `Alt+F2`).
+   This is the main way to work.
+2. **Run cells inside a script (optional, needs extra setup).** If you want to run code
+   piece by piece, put `# %%` on its own line to mark a "cell" in a `.py` file; VS Code
+   can then run each cell and show the result in a panel (read it with `Alt+F2`). This
+   needs the **Jupyter** extension (install it from the Extensions view, like the Python
+   one) and the Jupyter package (`pip install jupyter`). You don't need any of this to
+   start — running whole scripts is enough.
+
+For now, avoid doing your main work *inside* `.ipynb` notebook cells — that's the
+cell-based, visual interface that is hardest to navigate.
+
+## Later: connecting to the LEAP hub
+
+When the course reaches the data chapters (which use large datasets stored in the cloud),
+you'll connect this same VS Code to the **LEAP JupyterHub**, so you keep the accessible
+interface but gain the hub's data and computing. The steps are here:
+
+> **VS Code → LEAP hub:** <https://leap-stc.github.io/compute/vs_code_to_hub/>
+
+That setup (a one-time access token and SSH key) is more involved, so plan to do it **with
+the course assistant or Disability Services**, once, early. After it's connected, your VS
+Code looks and behaves exactly as it does now — it just runs on the hub. (That page is
+written mainly around opening notebooks; you can ignore those parts and simply use
+**Terminal → New Terminal**, which now runs on the hub, for your script workflow.)
+
+## Keystroke quick reference
+
+- `Alt+F1` — Accessibility Help (what can I do here?)
+- `Alt+F2` — Accessible View (read terminal / notebook / error output)
+- `` Ctrl+` `` — open a terminal
+- `Ctrl+Shift+O` — move between commands in the Accessible View
+- `Ctrl+Shift+P` — Command Palette (run any command by name)
+- `Ctrl+S` — save the current file
+
+You're set. Continue to **[Intro to Unix](intro_to_unix.md)**, and do each "Try it" in the
+Git Bash terminal you just set up.

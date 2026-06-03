@@ -1,0 +1,21 @@
+# Accessible pilot build — Chapter 1 only.
+# Minimal, standalone Jupyter Book: markdown-only, no notebook execution,
+# no bibtex, no scientific stack. Builds in seconds and is easy to host
+# or retire. The page files keep the same names as in the main repo so
+# improvements can be copied straight back into summer_2026/.
+title: "Accessible Pilot — The Interactive Computing Environment"
+author: Earth Data Science & Machine Learning
+
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: 'off'
+
+html:
+  use_issues_button: false
+  use_repository_button: false
+
+sphinx:
+  config:
+    html_show_copyright: false
+    myst_links_external_new_tab: true

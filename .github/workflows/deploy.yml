@@ -27,6 +27,12 @@ jobs:
       - name: Build the book
         run: jupyter-book build .
 
+      - name: Build the accessible pilot
+        run: |
+          jupyter-book build accessible_pilot
+          mkdir -p _build/html/accessible
+          cp -r accessible_pilot/_build/html/. _build/html/accessible/
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
