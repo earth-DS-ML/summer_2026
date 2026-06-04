@@ -1,9 +1,18 @@
 format: jb-book
 root: intro
-chapters:
-  - file: lectures_DS/computing_env/overview
-  - file: lectures_DS/computing_env/accessible_setup
-  - file: lectures_DS/computing_env/working_with_scripts
-  - file: lectures_DS/computing_env/intro_to_unix
-  - file: lectures_DS/computing_env/intro_to_git
-  - file: lectures_DS/computing_env/assignment1
+parts:
+  - caption: The Interactive Computing Environment
+    chapters:
+      - file: lectures_DS/computing_env/overview
+      - file: lectures_DS/computing_env/accessible_setup
+      - file: lectures_DS/computing_env/working_with_scripts
+      - file: lectures_DS/computing_env/intro_to_unix
+      - file: lectures_DS/computing_env/intro_to_git
+      - file: lectures_DS/computing_env/assignment1
+  - caption: The Core Python Language
+    chapters:
+      - file: lectures_DS/core_python/overview
+      - file: lectures_DS/core_python/python_fundamentals
+      - file: lectures_DS/core_python/functions_classes
+      - file: lectures_DS/core_python/organization_and_packaging
+      - file: lectures_DS/core_python/assignment3
