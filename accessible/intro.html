@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Accessible Chapter 1 (preview) &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+    <title>Accessible course pages (preview) &#8212; Accessible Pilot — The Interactive Computing Environment</title>
   
   
   
@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -159,17 +161,26 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Accessible Chapter 1 (preview)
+                    Accessible course pages (preview)
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/working_with_scripts.html">Working with Python scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/intro_to_unix.html">Intro to Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/intro_to_git.html">Intro to Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lectures_DS/computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lectures_DS/core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 
     </div>
@@ -303,7 +314,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Accessible Chapter 1 (preview)</h1>
+    <h1>Accessible course pages (preview)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -317,22 +328,26 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="accessible-chapter-1-preview">
-<h1>Accessible Chapter 1 (preview)<a class="headerlink" href="#accessible-chapter-1-preview" title="Link to this heading">#</a></h1>
-<p>This is an accessible, screen-reader-friendly version of <strong>Chapter 1: The Interactive
-Computing Environment</strong>, prepared as a pilot. The teaching content matches the main
-course site; the differences are in <em>how you do the work</em>:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="accessible-course-pages-preview">
+<h1>Accessible course pages (preview)<a class="headerlink" href="#accessible-course-pages-preview" title="Link to this heading">#</a></h1>
+<p>This is an accessible, screen-reader-friendly version of the course’s lecture material,
+prepared as a pilot. It currently covers the first two sections — <strong>The Interactive
+Computing Environment</strong> and <strong>The Core Python Language</strong>. The teaching content matches the
+main course site; the differences are in <em>how you do the work</em>:</p>
 <ul class="simple">
 <li><p>a workflow built on <strong>VS Code and Python scripts</strong> instead of the in-browser
 JupyterLab/Colab notebook interface, which is hard to use with a screen reader;</p></li>
-<li><p>a new <a class="reference internal" href="lectures_DS/computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a>
-page and a <a class="reference internal" href="lectures_DS/computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>
-page that replace the notebook-focused material;</p></li>
-<li><p>figures replaced with text descriptions, and the hands-on activities rewritten for this
-setup.</p></li>
+<li><p>new <a class="reference internal" href="lectures_DS/computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a>
+and <a class="reference internal" href="lectures_DS/computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>
+pages that replace the notebook-focused material;</p></li>
+<li><p>figures replaced with text descriptions (and formulas as readable math), and the
+hands-on activities and examples rewritten for this setup.</p></li>
 </ul>
-<p><strong>Start with the <a class="reference internal" href="lectures_DS/computing_env/overview.html"><span class="std std-doc">Overview</span></a></strong>, which lists the
-pages in order.</p>
+<p><strong>Start with the <a class="reference internal" href="lectures_DS/computing_env/overview.html"><span class="std std-doc">Overview</span></a></strong> of the first section,
+or jump to the <a class="reference internal" href="lectures_DS/core_python/overview.html"><span class="std std-doc">Core Python overview</span></a>. The sidebar
+table of contents lists every page in order.</p>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>

@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Organizing Python Projects &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/core_python/organization_and_packaging';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 3: Core Python" href="assignment3.html" />
+    <link rel="prev" title="Python Functions and Classes" href="functions_classes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages (preview)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/core_python/organization_and_packaging.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Organizing Python Projects</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-projects">Types of Projects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">Exploratory Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-paper">A Single Paper</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-reproducibility">Scientific Reproducibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-layout">Project Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reusable-software-elements">Reusable Software Elements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-python-style">Aside: Python Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-modules-packaging-testing-ci">Beyond modules: packaging, testing, CI</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="organizing-python-projects">
+<h1>Organizing Python Projects<a class="headerlink" href="#organizing-python-projects" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the output.</p>
+</div>
+<p>A complex research project often relies on many different programs and software packages to accomplish the research goals. An important part of data science or scientific computing is deciding how to organize and structure the code you use for data analysis and research. A well-structured project can make you a more efficient and effective researcher. It is also a key component of <a class="reference external" href="http://lorenabarba.com/blog/barbagroup-reproducibility-syllabus/" rel="noreferer noopener" target="_blank">scientific reproducibility</a>.</p>
+<p>Just putting all of your code into git repositories won’t magically turn a mess of scripts into a beautiful, well-organized project. More deliberate effort is required.</p>
+<p>This chapter is a natural fit for your scripts-based workflow: the whole topic is how to organize Python code into <code class="docutils literal notranslate"><span class="pre">.py</span></code> files — scripts and modules — which is exactly what you are already doing.</p>
+<section id="types-of-projects">
+<h2>Types of Projects<a class="headerlink" href="#types-of-projects" title="Link to this heading">#</a></h2>
+<p>Not all projects are created equal. There are three common “research code” scenarios in geosciences:</p>
+<ol class="arabic simple">
+<li><p><strong>Exploratory analyses</strong>: When exploring a new idea, a single notebook or script is often all we need.</p></li>
+<li><p><strong>A Single Paper</strong>: The “paper” is a standard unit of scientific output. The code related to a single paper usually belongs together.</p></li>
+<li><p><strong>Reusable software elements</strong>: In the course of our computing, we often identify specialized routines that we want to package for reuse in other projects, or by other scientists. This is where “scripts” become “software.”</p></li>
+</ol>
+<p>This page outlines some suggested practices for each category.</p>
+<div class="tip admonition">
+<p class="admonition-title">Working through this page</p>
+<p>The first half of this page (project organization and reproducibility) is reading material — no code to run.</p>
+<p>The <strong>Modules</strong> section below has runnable code that imports a small <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> module. The full contents of that module are shown in the Modules section — create it yourself as a file named <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> in VS Code, then put the example scripts in the <strong>same folder</strong> so they can import it. Run each script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code> and read the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>The <strong>“Try it”</strong> exercises on this page are part of your in-class assignment for this section. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment. (One 10-point assignment covers all the lecture material in this section.)</p>
+</div>
+</section>
+<section id="exploratory-analysis">
+<h2>Exploratory Analysis<a class="headerlink" href="#exploratory-analysis" title="Link to this heading">#</a></h2>
+<p>When starting something new, you’re often motivated to just start coding and get results quickly. This is fine! In the standard course, Jupyter notebooks are used for open-ended exploratory analysis because they keep text, code, and figures in one place. In your scripts-based workflow, the equivalent is a single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file where you write a bit of code, run it, read the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>, and keep going — the same quick, iterative loop, in a linear text file your screen reader handles well.</p>
+<p>If you find something cool or useful, preserve it. The simplest option is a single script (or notebook) in a folder of your project repo (e.g., the GitHub repo from Assignment 1).</p>
+<p>For one-off files you want to share with others, GitHub’s <a class="reference external" href="https://help.github.com/articles/about-gists/" rel="noreferer noopener" target="_blank">Gist mechanism</a> is also a lightweight option — gists are mini repos you can add a file to at <a class="reference external" href="https://gist.github.com/" rel="noreferer noopener" target="_blank">https://gist.github.com/</a>.</p>
+</section>
+<section id="a-single-paper">
+<h2>A Single Paper<a class="headerlink" href="#a-single-paper" title="Link to this heading">#</a></h2>
+<section id="scientific-reproducibility">
+<h3>Scientific Reproducibility<a class="headerlink" href="#scientific-reproducibility" title="Link to this heading">#</a></h3>
+<p>Reproducibility is a cornerstone of the scientific process. Today, almost all earth science relies on some form of computation — from simple statistical analysis to advanced numerical simulation. In principle, computational science should be highly reproducible. In practice, <a class="reference external" href="http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970" rel="noreferer noopener" target="_blank">it often isn’t</a>.</p>
+<p>The audience for a reproducible project isn’t just other scientists — it’s <em>you</em>, a year from now, when you need to repeat or build on this work. Extra time spent on reproducibility now pays off later.</p>
+<p>A useful framing from one of the earliest papers on the topic:</p>
+<blockquote>
+<div><p>An article about computational science … is not the scholarship itself, it’s merely scholarship advertisement. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.</p>
+</div></blockquote>
+<p><em>Donoho, D. et al. (2009), Reproducible research in computational harmonic analysis, Comp. Sci. Eng. 11(1):8–18, doi: <a class="reference external" href="http://dx.doi.org/10.1109/MCSE.2009.15" rel="noreferer noopener" target="_blank">10.1109/MCSE.2009.15</a></em></p>
+<p>A few practical principles that follow from this:</p>
+<ol class="arabic simple">
+<li><p><strong>Keep track of how each result was produced</strong> — which script, which inputs, which parameters.</p></li>
+<li><p><strong>Version-control all custom scripts</strong> (Git is doing this for you).</p></li>
+<li><p><strong>Avoid manual data-manipulation steps</strong> — write a script (or run a block of code) instead of editing the data by hand.</p></li>
+<li><p><strong>Provide public access</strong> to code, raw data, and analysis steps, so others (and future you) can re-run them.</p></li>
+</ol>
+<blockquote>
+<div><p><em>Further reading:</em> <a class="reference external" href="http://dx.doi.org/10.1371/journal.pcbi.1003285" rel="noreferer noopener" target="_blank">Sandve et al. (2013)</a> lists ten specific recommendations for computational reproducibility, and the <a class="reference external" href="https://doi.org/10.6084/m9.figshare.4879928.v1" rel="noreferer noopener" target="_blank">Barba-group Reproducibility Syllabus</a> collects best-practice references.</p>
+</div></blockquote>
+<p>These principles suggest a certain structure for a project.</p>
+</section>
+<section id="project-layout">
+<h3>Project Layout<a class="headerlink" href="#project-layout" title="Link to this heading">#</a></h3>
+<p>A reproducible single-paper project directory structure might look something like this. Read it top to bottom; each line is one file, and the <code class="docutils literal notranslate"><span class="pre">/</span></code> characters separate folders from the files inside them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="n">LICENSE</span>
+<span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">data</span><span class="o">/</span><span class="n">intermediate_results</span><span class="o">.</span><span class="n">csv</span>
+<span class="n">notebooks</span><span class="o">/</span><span class="n">process_raw_data</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="n">notebooks</span><span class="o">/</span><span class="n">figure1</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="n">notebooks</span><span class="o">/</span><span class="n">figure2</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="n">notebooks</span><span class="o">/</span><span class="n">helper</span><span class="o">.</span><span class="n">py</span>
+<span class="n">manuscript</span><span class="o">/</span><span class="n">manuscript</span><span class="o">.</span><span class="n">tex</span>
+</pre></div>
+</div>
+<p>So this project has three files at the top level (<code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, and an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> describing the software environment), a <code class="docutils literal notranslate"><span class="pre">data</span></code> folder holding a results file, a <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> folder holding the analysis files and a shared <code class="docutils literal notranslate"><span class="pre">helper.py</span></code> module, and a <code class="docutils literal notranslate"><span class="pre">manuscript</span></code> folder holding the paper itself. In your workflow, the analysis files would simply be <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts instead of <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebooks — for example <code class="docutils literal notranslate"><span class="pre">notebooks/figure1.py</span></code> — but the organizing idea is identical: code, data, and manuscript each have a clear place.</p>
+<p>A great example of such a paper is <a class="reference external" href="https://crocha700.github.io/" rel="noreferer noopener" target="_blank">Cesar Rocha</a>’s Upper Ocean Seasonality project: <a class="github reference external" href="https://github.com/crocha700/UpperOceanSeasonality" rel="noreferer noopener" target="_blank">crocha700/UpperOceanSeasonality</a>.</p>
+</section>
+</section>
+<section id="reusable-software-elements">
+<h2>Reusable Software Elements<a class="headerlink" href="#reusable-software-elements" title="Link to this heading">#</a></h2>
+<p>Scientific software can perhaps be grouped into two categories: single-use “scripts” that are used in a very specific context to do a very specific thing (e.g. to generate a specific figure for a paper), and reusable components which encapsulate a more generic workflow. Once you find yourself repeating the same chunks of code in many different scripts or projects, it’s time to start composing reusable software elements.</p>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h3>
+<p>The basic element of reusability in Python is the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html" rel="noreferer noopener" target="_blank">module</a>. A module is a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file which contains Python objects that can be <em>imported</em> by other scripts or notebooks. Because you are already writing <code class="docutils literal notranslate"><span class="pre">.py</span></code> files, you have in fact been creating things that <em>could</em> be modules all along — the only new idea here is importing one file’s code into another. Let’s illustrate how modules work with a simple example.</p>
+<p>A common task in geoscience is to calculate the <a class="reference external" href="https://en.wikipedia.org/wiki/Great-circle_distance" rel="noreferer noopener" target="_blank">great-circle distance</a> between two points on the globe. There are several <a class="reference external" href="https://pypi.python.org/pypi/geopy" rel="noreferer noopener" target="_blank">packages</a> that could do this for you, but let’s write our own as an example of a module.</p>
+<p>The formula for great-circle distance computes the angle between two points (given by their latitudes and longitudes) as seen from the center of the Earth, then multiplies that angle by the Earth’s radius <span class="math notranslate nohighlight">\(r\)</span> to get the distance along the surface. Writing <span class="math notranslate nohighlight">\(\phi_1, \phi_2\)</span> for the two latitudes, <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2\)</span> for the two longitudes, and <span class="math notranslate nohighlight">\(\Delta\lambda = \lambda_2 - \lambda_1\)</span> for the difference in longitude, the distance <span class="math notranslate nohighlight">\(d\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+d = r \, \arccos\!\big( \sin\phi_1 \sin\phi_2 + \cos\phi_1 \cos\phi_2 \cos\Delta\lambda \big)
+\]</div>
+<p>(Note that this formula requires 64-bit precision for adequate accuracy.)</p>
+<p>Let’s write a module to do this calculation. In VS Code, create a file called <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>. (The file should be in the <strong>same directory</strong> as any script that will import it.) Populate it with the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A python module for computing great circle distance</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># approximate radius of Earth</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">6.371e6</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">great_circle_distance</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate great-circle distance between two points.</span>
+<span class="sd">    </span>
+<span class="sd">    PARAMETERS</span>
+<span class="sd">    ----------</span>
+<span class="sd">    point1 : tuple</span>
+<span class="sd">        A (lat, lon) pair of coordinates in degrees</span>
+<span class="sd">    point2 : tuple</span>
+<span class="sd">        A (lat, lon) pair of coordinates in degrees</span>
+<span class="sd">        </span>
+<span class="sd">    RETURNS</span>
+<span class="sd">    -------</span>
+<span class="sd">    distance : float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># unpack coordinates</span>
+    <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span> <span class="o">=</span> <span class="n">point1</span>
+    <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span> <span class="o">=</span> <span class="n">point2</span>
+    
+    <span class="c1"># unpack and convert everything to radians</span>
+    <span class="n">phi1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> 
+                                    <span class="p">(</span><span class="n">point1</span> <span class="o">+</span> <span class="n">point2</span><span class="p">)]</span>
+    
+    <span class="c1"># apply formula</span>
+    <span class="c1"># https://en.wikipedia.org/wiki/Great-circle_distance</span>
+    <span class="k">return</span> <span class="n">R</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi2</span><span class="p">)</span> <span class="o">+</span> 
+        <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lambda2</span> <span class="o">-</span> <span class="n">lambda1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The module begins with a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/" rel="noreferer noopener" target="_blank">docstring</a> (the triple-quoted text at the top) explaining what it does. Then it contains some data (just a constant <code class="docutils literal notranslate"><span class="pre">R</span></code>, the radius of the Earth in meters) and a single function. The function takes two <code class="docutils literal notranslate"><span class="pre">(lat,</span> <span class="pre">lon)</span></code> pairs, converts the degree values to radians, and applies the formula above. This is the same <code class="docutils literal notranslate"><span class="pre">r</span></code> and the same formula from the math above, written in code: <code class="docutils literal notranslate"><span class="pre">R</span></code> is the radius <span class="math notranslate nohighlight">\(r\)</span>, and <code class="docutils literal notranslate"><span class="pre">np.arccos(...)</span></code> is the <span class="math notranslate nohighlight">\(\arccos\)</span> of the sines-and-cosines expression.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> is a real, working module — it is part of the course repository. You can write it yourself by typing the code above into a new file in VS Code and saving it as <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>.</p>
+<p>Now let’s import our module. Create a second file in the same folder — call it <code class="docutils literal notranslate"><span class="pre">try_gcdistance.py</span></code> — and start with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
+<span class="n">help</span><span class="p">(</span><span class="n">gcdistance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">try_gcdistance.py</span></code> and read the result with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The <code class="docutils literal notranslate"><span class="pre">help()</span></code> function prints the module’s docstring and the documentation for everything it contains. This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">module</span> <span class="n">gcdistance</span><span class="p">:</span>
+
+<span class="n">NAME</span>
+    <span class="n">gcdistance</span> <span class="o">-</span> <span class="n">A</span> <span class="n">python</span> <span class="n">module</span> <span class="k">for</span> <span class="n">computing</span> <span class="n">great</span> <span class="n">circle</span> <span class="n">distance</span>
+
+<span class="n">FUNCTIONS</span>
+    <span class="n">great_circle_distance</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">)</span>
+        <span class="n">Calculate</span> <span class="n">great</span><span class="o">-</span><span class="n">circle</span> <span class="n">distance</span> <span class="n">between</span> <span class="n">two</span> <span class="n">points</span><span class="o">.</span>
+
+        <span class="n">PARAMETERS</span>
+        <span class="o">----------</span>
+        <span class="n">point1</span> <span class="p">:</span> <span class="nb">tuple</span>
+            <span class="n">A</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">pair</span> <span class="n">of</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">degrees</span>
+        <span class="n">point2</span> <span class="p">:</span> <span class="nb">tuple</span>
+            <span class="n">A</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">pair</span> <span class="n">of</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">degrees</span>
+
+        <span class="n">RETURNS</span>
+        <span class="o">-------</span>
+        <span class="n">distance</span> <span class="p">:</span> <span class="nb">float</span>
+
+<span class="n">DATA</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mf">6371000.0</span>
+
+<span class="n">FILE</span>
+    <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">gcdistance</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>(The last line, <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, will show the actual path to your own <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>, so it will differ from what is shown here.)</p>
+<p>And let’s try using it to make a calculation. We’ll <code class="docutils literal notranslate"><span class="pre">print()</span></code> the result so it shows up in the terminal — remember that, unlike a notebook, a script only displays a value if you explicitly print it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gcdistance</span><span class="o">.</span><span class="n">great_circle_distance</span><span class="p">((</span><span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1460007.189049398</span>
+</pre></div>
+</div>
+<p>The result is the distance in <strong>meters</strong> between the point at latitude 60, longitude 0 and the point at latitude 50, longitude 15 — about 1,460 km.</p>
+<blockquote>
+<div><p><em>Note:</em> depending on your NumPy version, the value may print wrapped as <code class="docutils literal notranslate"><span class="pre">np.float64(1460007.189049398)</span></code> instead of the bare number. That is just how newer NumPy displays a floating-point number; the value is the same, and you can do arithmetic on it (such as dividing by 1000) exactly as you would with any number.</p>
+</div></blockquote>
+<p>We could instead import just the pieces we need, by name. Notice we can pull in both the function and the constant <code class="docutils literal notranslate"><span class="pre">R</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gcdistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span><span class="p">,</span> <span class="n">great_circle_distance</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">6371000.0</span>
+</pre></div>
+</div>
+<p>That is the Earth radius constant, <code class="docutils literal notranslate"><span class="pre">6.371e6</span></code> written out in full. After a <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">gcdistance</span> <span class="pre">import</span> <span class="pre">...</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">great_circle_distance</span></code> directly, without the <code class="docutils literal notranslate"><span class="pre">gcdistance.</span></code> prefix.</p>
+<p>If you change the module while working, a script picks up the change automatically the next time you run it — that is one quiet advantage of the script workflow: every <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">try_gcdistance.py</span></code> starts fresh and re-reads <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>. In a long-running notebook (or an interactive Python session) this is not automatic; there you would have to restart the kernel or reload the module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload</span>
+<span class="n">reload</span><span class="p">(</span><span class="n">gcdistance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(Note that a function imported via <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">func</span></code> cannot be reloaded this way.) You generally will not need <code class="docutils literal notranslate"><span class="pre">reload</span></code> in the scripts workflow — it is mentioned here so you recognize it if you see it in notebook-based materials.</p>
+<p>Modules are a simple way to share code between different scripts in the same project. <em>Module files must reside in the same directory as any script which imports them!</em> This is a big limitation; it means you can’t easily share modules between different projects.</p>
+<p>Once you have a piece of code that is general-purpose enough to share between projects, you need to create a package.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<ol class="arabic simple">
+<li><p>In VS Code, create <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> with the module code shown above (or download it from the course repo), and save it.</p></li>
+<li><p>In the <strong>same folder</strong>, create a new file — for example <code class="docutils literal notranslate"><span class="pre">city_distances.py</span></code> — that imports the module and uses <code class="docutils literal notranslate"><span class="pre">gcdistance.great_circle_distance</span></code> to compute the distance between <strong>three pairs of cities</strong> you’re interested in. Lat/lon coordinates are easy to find online (search “latitude longitude of <city>”). The result is in meters, so divide by 1000 for kilometers, and <code class="docutils literal notranslate"><span class="pre">print()</span></code> each one.</p></li>
+<li><p>Save, then run it in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">city_distances.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the distances.</p></li>
+<li><p>Cross-check one of your answers against the distance shown on Google Maps.</p></li>
+</ol>
+<p>For example, the distance from New York City <code class="docutils literal notranslate"><span class="pre">(40.7128,</span> <span class="pre">-74.0060)</span></code> to London <code class="docutils literal notranslate"><span class="pre">(51.5074,</span> <span class="pre">-0.1278)</span></code> comes out to about 5,570 km.</p>
+</div>
+</section>
+<section id="aside-python-style">
+<h3>Aside: Python Style<a class="headerlink" href="#aside-python-style" title="Link to this heading">#</a></h3>
+<p>There are few absolute rules for Python code style, but there is a detailed <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/" rel="noreferer noopener" target="_blank">recommended style guide</a>. Some especially relevant points are:</p>
+<ul class="simple">
+<li><p>Line length should not exceed 79 characters</p></li>
+<li><p>Module names should be <code class="docutils literal notranslate"><span class="pre">lowercase</span></code></p></li>
+<li><p>Function and variable names should be <code class="docutils literal notranslate"><span class="pre">lower_case_with_underscores</span></code></p></li>
+<li><p>Class names should be <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code></p></li>
+</ul>
+</section>
+<section id="beyond-modules-packaging-testing-ci">
+<h3>Beyond modules: packaging, testing, CI<a class="headerlink" href="#beyond-modules-packaging-testing-ci" title="Link to this heading">#</a></h3>
+<p>Once your code is general enough to share between projects or with collaborators, the next step is turning it into a <strong>package</strong> — a directory with a particular layout that can be installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code> and used from anywhere. A parallel ecosystem of testing (with <code class="docutils literal notranslate"><span class="pre">pytest</span></code>) and continuous integration (with GitHub Actions) grows naturally alongside it.</p>
+<p>This is beyond the scope of the weekly assignments, but there is a reference walkthrough, <em>Packaging Python Code</em>, under <em>Other Geoscience and Advanced Concepts</em> in the main course materials whenever you’re ready.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/core_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="functions_classes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Python Functions and Classes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="assignment3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 3: Core Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-projects">Types of Projects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">Exploratory Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-paper">A Single Paper</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-reproducibility">Scientific Reproducibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-layout">Project Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reusable-software-elements">Reusable Software Elements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-python-style">Aside: Python Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-modules-packaging-testing-ci">Beyond modules: packaging, testing, CI</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
