@@ -9,6 +9,12 @@ parts:
       - file: lectures_DS/computing_env/intro_to_unix
       - file: lectures_DS/computing_env/intro_to_git
       - file: lectures_DS/computing_env/assignment1
+  - caption: Data
+    chapters:
+      - file: lectures_DS/data/overview
+      - file: lectures_DS/data/formats_and_metadata
+      - file: lectures_DS/data/loading_data
+      - file: lectures_DS/data/assignment2
   - caption: The Core Python Language
     chapters:
       - file: lectures_DS/core_python/overview
@@ -16,9 +22,3 @@ parts:
       - file: lectures_DS/core_python/functions_classes
       - file: lectures_DS/core_python/organization_and_packaging
       - file: lectures_DS/core_python/assignment3
-  - caption: Data
-    chapters:
-      - file: lectures_DS/data/overview
-      - file: lectures_DS/data/formats_and_metadata
-      - file: lectures_DS/data/loading_data
-      - file: lectures_DS/data/assignment2
