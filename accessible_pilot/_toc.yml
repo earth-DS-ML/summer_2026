@@ -16,3 +16,9 @@ parts:
       - file: lectures_DS/core_python/functions_classes
       - file: lectures_DS/core_python/organization_and_packaging
       - file: lectures_DS/core_python/assignment3
+  - caption: Data
+    chapters:
+      - file: lectures_DS/data/overview
+      - file: lectures_DS/data/formats_and_metadata
+      - file: lectures_DS/data/loading_data
+      - file: lectures_DS/data/assignment2
