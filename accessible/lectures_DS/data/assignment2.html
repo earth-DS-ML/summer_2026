@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+    <title>Assignment 2: Explore a climate dataset &#8212; Accessible Pilot — The Interactive Computing Environment</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/computing_env/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/data/assignment2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Setting up an accessible workflow" href="accessible_setup.html" />
-    <link rel="prev" title="Accessible course pages (preview)" href="../../intro.html" />
+    <link rel="next" title="Overview" href="../core_python/overview.html" />
+    <link rel="prev" title="Loading data" href="loading_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -163,20 +163,20 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="accessible_setup.html">Setting up an accessible workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_scripts.html">Working with Python scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_unix.html">Intro to Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_git.html">Intro to Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loading_data.html">Loading data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
@@ -244,7 +244,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/computing_env/overview.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/data/assignment2.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -320,7 +320,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
+    <h1>Assignment 2: Explore a climate dataset</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -330,8 +330,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-do">What to do</a></li>
 </ul>
             </nav>
         </div>
@@ -343,46 +343,85 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>Here you’ll set up the tools you’ll use for the rest of the course: an accessible,
-screen-reader-friendly Python workflow built on <strong>VS Code and scripts</strong>, the <strong>Unix
-shell</strong> for navigating files and running commands, and <strong>Git/GitHub</strong> for version control
-and assignment submission. (Later in the course, this same VS Code setup connects to the
-cloud-based LEAP hub for the data-heavy chapters — but you don’t need the cloud yet.)</p>
-<section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p>By the end of this module, you should be able to:</p>
-<ol class="arabic simple">
-<li><p><strong>Set up and use an accessible working environment</strong> — VS Code with a screen reader, a
-terminal you can read, and Python run from scripts.</p></li>
-<li><p><strong>Navigate the file system</strong> using shell commands — <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, and paths
-(relative, absolute, <code class="docutils literal notranslate"><span class="pre">~</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">..</span></code>).</p></li>
-<li><p><strong>Create, modify, and remove files and directories</strong> using <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cp</span></code>, and <code class="docutils literal notranslate"><span class="pre">rm</span></code> — and understand why “deleted is forever” on the shell.</p></li>
-<li><p><strong>Explain why version control exists</strong> and what problem it solves.</p></li>
-<li><p><strong>Track changes with git</strong> — <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code>, and inspect history with
-<code class="docutils literal notranslate"><span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">log</span></code>.</p></li>
-<li><p><strong>Push code to GitHub</strong> from your environment.</p></li>
-<li><p><strong>Set up your assignments repository</strong> and submit work using the course’s week-folder
-pattern.</p></li>
-</ol>
-<p>Use this list to check your understanding before moving on. If any item feels uncertain,
-the page that covers it is linked below.</p>
-</section>
-<section id="pages-in-this-section">
-<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-2-explore-a-climate-dataset">
+<h1>Assignment 2: Explore a climate dataset<a class="headerlink" href="#assignment-2-explore-a-climate-dataset" title="Link to this heading">#</a></h1>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week
+folder and post a link to that <strong>folder</strong> on the matching Courseworks assignment.</p>
+<p>Pick any climate-related dataset that interests you — could be something you’re considering
+for your final project, or just something you’re curious about. The point here is <strong>practice
+with the FAIR + access workflow</strong>, not a commitment to a specific project.</p>
+<div class="important admonition">
+<p class="admonition-title">Doing this assignment with a screen reader</p>
+<p>Do the steps below in your VS Code setup — the Git Bash terminal for the <code class="docutils literal notranslate"><span class="pre">git</span></code> commands
+(press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read output), and the VS Code editor for writing the files. The data
+loader is a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script you run with <code class="docutils literal notranslate"><span class="pre">python</span></code>. See <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible
+workflow</span></a>.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the data-discovery and access skills from this section:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> — install VS Code, turn on
-its screen-reader features, and open a terminal you can read</p></li>
-<li><p><a class="reference internal" href="working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a> — how we run Python in this
-course (scripts, not notebooks), and why</p></li>
-<li><p><a class="reference internal" href="intro_to_unix.html"><span class="std std-doc">Intro to Unix</span></a> — navigating the file system and basic file
-operations</p></li>
-<li><p><a class="reference internal" href="intro_to_git.html"><span class="std std-doc">Intro to Git</span></a> — version control and the GitHub workflow</p></li>
-<li><p><a class="reference internal" href="assignment1.html"><span class="std std-doc">Assignment 1</span></a> — set up your assignments repository and submit your
-first week-folder</p></li>
+<li><p>Locate a dataset in a public scientific repository (Zenodo, NOAA, NASA, IRI, etc.)</p></li>
+<li><p>Document a dataset’s format, license, provenance, and FAIR-ness</p></li>
+<li><p>Load data into Python using <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code>, or <code class="docutils literal notranslate"><span class="pre">pooch.retrieve</span></code></p></li>
+<li><p>Submit work via the week-folder pattern in your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo</p></li>
 </ul>
+</div>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You’ve worked through <a class="reference internal" href="formats_and_metadata.html"><span class="std std-doc">Formats and metadata</span></a> and <a class="reference internal" href="loading_data.html"><span class="std std-doc">Loading
+data</span></a>.</p></li>
+<li><p>You have your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo set up from Assignment 1, and can push to it.</p></li>
+</ul>
+</section>
+<section id="what-to-do">
+<h2>What to do<a class="headerlink" href="#what-to-do" title="Link to this heading">#</a></h2>
+<p>Throughout the steps below, replace <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;</span></code> with the current week’s folder name (e.g.,
+<code class="docutils literal notranslate"><span class="pre">week1</span></code>, <code class="docutils literal notranslate"><span class="pre">week2</span></code>, etc).</p>
+<ol class="arabic">
+<li><p><strong>Find a dataset.</strong> Look on <a class="reference external" href="https://zenodo.org/" rel="noreferer noopener" target="_blank">Zenodo</a>, a NOAA or NASA portal, the
+<a class="reference external" href="https://iridl.ldeo.columbia.edu/" rel="noreferer noopener" target="_blank">IRI Data Library</a>, or anywhere else scientific data
+lives. Pick something with a clear source page that you can document.</p></li>
+<li><p><strong>Create a <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;</span></code> folder inside your <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> repo.</strong> (If you don’t
+already have your repo locally, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> it down first, then open the folder in VS
+Code.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">clmt5405</span><span class="o">-</span><span class="n">assignments</span>
+<span class="n">mkdir</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;</span>
+<span class="n">cd</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Write <code class="docutils literal notranslate"><span class="pre">dataset.md</span></code></strong> inside <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code> describing:</p>
+<ul class="simple">
+<li><p><strong>What it is</strong> — one sentence about the dataset (variable, region, time period).</p></li>
+<li><p><strong>Where it lives</strong> — the URL or DOI.</p></li>
+<li><p><strong>Format</strong> — CSV? NetCDF? Zarr? GeoTIFF?</p></li>
+<li><p><strong>License</strong> — what does the source page say? (CC-BY, public domain, “no restrictions,”
+etc.)</p></li>
+<li><p><strong>Provenance</strong> — who created it?</p></li>
+<li><p><strong>FAIR check</strong> — does it have a persistent identifier? Is the metadata clear? Is the
+format machine-readable? Is the license open?</p></li>
+</ul>
+</li>
+<li><p><strong>Create <code class="docutils literal notranslate"><span class="pre">dataset_load.py</span></code></strong> in the same <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code> folder. Write a few lines that load
+the dataset using whichever of the three patterns from the <a class="reference internal" href="loading_data.html"><span class="std std-doc">loading
+lecture</span></a> fits its format (<code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">pooch.retrieve</span></code>), and <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> something so you can confirm it worked. Run it with
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">dataset_load.py</span></code> and read the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> — you should see <em>something</em> (a
+DataFrame, a Dataset, or a file path). No analysis needed; this just confirms the access
+works.</p></li>
+<li><p><strong>Commit and push:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+<span class="n">git</span> <span class="n">status</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;/</span><span class="n">dataset</span><span class="o">.</span><span class="n">md</span> <span class="o">&lt;</span><span class="n">weekN</span><span class="o">&gt;/</span><span class="n">dataset_load</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add &lt;weekN&gt; assignment&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Refresh your repo page on GitHub and confirm both files appear in <code class="docutils literal notranslate"><span class="pre">&lt;weekN&gt;/</span></code>.</p>
 </section>
 </section>
 
@@ -399,7 +438,7 @@ first week-folder</p></li>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures_DS/computing_env"
+            path: "./lectures_DS/data"
         },
         predefinedOutput: true
     }
@@ -417,20 +456,20 @@ first week-folder</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../intro.html"
+       href="loading_data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Accessible course pages (preview)</p>
+        <p class="prev-next-title">Loading data</p>
       </div>
     </a>
     <a class="right-next"
-       href="accessible_setup.html"
+       href="../core_python/overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setting up an accessible workflow</p>
+        <p class="prev-next-title">Overview</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -452,8 +491,8 @@ first week-folder</p></li>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-do">What to do</a></li>
 </ul>
   </nav></div>
 

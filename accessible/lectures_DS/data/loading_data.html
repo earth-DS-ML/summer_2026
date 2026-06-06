@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Loading data &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/data/loading_data';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 2: Explore a climate dataset" href="assignment2.html" />
+    <link rel="prev" title="Formats and metadata" href="formats_and_metadata.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages (preview)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/data/loading_data.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Loading data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-over-http-pandas-read-csv">1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-over-opendap-xarray-open-dataset">2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file-from-zenodo-by-doi-pooch">3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-else-to-find-data">Where else to find data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="loading-data">
+<h1>Loading data<a class="headerlink" href="#loading-data" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Do each example below as a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script in VS Code (see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible
+workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python
+scripts</span></a>). Run a script in the Git Bash terminal
+with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read what comes back. These examples need
+a few packages — if you haven’t already: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">xarray</span> <span class="pre">pooch</span> <span class="pre">netcdf4</span> <span class="pre">pydap</span></code>.</p>
+</div>
+<p>This page walks through <strong>three different ways to get data into Python</strong>, each suited to a
+different kind of source. The point isn’t to learn the API of any one tool — you’ll meet
+<code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">xarray</span></code> properly in later modules — but to see that “data access” is not one
+thing. Different sources call for different approaches.</p>
+<p>Why programmatic access matters: <strong>manual download steps break reproducibility</strong>. If your
+code loads data from a URL or DOI directly, anyone running it (including future-you) gets
+the same data — no guessing about which file you used or where you stored it.</p>
+<p>For each example below, put the code in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script, run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>,
+and read what comes back with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. Each example already wraps its last line in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> so the result shows in the
+terminal — in a script (unlike a notebook), a bare expression prints nothing.</p>
+<section id="csv-over-http-pandas-read-csv">
+<h2>1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code><a class="headerlink" href="#csv-over-http-pandas-read-csv" title="Link to this heading">#</a></h2>
+<p>The simplest case: a CSV file sitting at a public URL. <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code> can read directly
+from a URL without you having to download it first.</p>
+<p>We’ll use atmospheric CO2 measurements from Mauna Loa — the famous <a class="reference external" href="https://scrippsco2.ucsd.edu/" rel="noreferer noopener" target="_blank">Keeling
+Curve</a>, recorded by the Scripps CO2 program since 1958. We
+read it from a snapshot hosted in the course repository, because the original Scripps server
+isn’t reachable from every environment (the LEAP hub can’t reach it, for example).</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a script, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/monthly_in_situ_co2_mlo.csv&quot;</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date_excel&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_seasonally_adjusted&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;fit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_seasonally_adjusted&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled_seasonally_adjusted&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;station&quot;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=-</span><span class="mf">99.99</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>You should see those four columns — year, month, date, and CO2 — read with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. (We
+print just those four so they fit and read cleanly; printing the whole <code class="docutils literal notranslate"><span class="pre">df</span></code> in a terminal
+hides the middle columns behind <code class="docutils literal notranslate"><span class="pre">...</span></code>. The full table has 11 columns.)
+Notice that you didn’t have to download anything to your computer — <code class="docutils literal notranslate"><span class="pre">pandas</span></code> streamed the
+data from the URL directly into memory.</p>
+</div>
+<p>Real files often need a few options. This one opens with a long comment header followed by a
+three-row column header — 64 lines in all — so <code class="docutils literal notranslate"><span class="pre">skiprows=64</span></code> jumps past it. We then give
+pandas our own column <code class="docutils literal notranslate"><span class="pre">names</span></code>, and <code class="docutils literal notranslate"><span class="pre">na_values=-99.99</span></code> tells it that Scripps’s <code class="docutils literal notranslate"><span class="pre">-99.99</span></code>
+placeholder means <em>missing</em>, so those entries load as <code class="docutils literal notranslate"><span class="pre">NaN</span></code> instead of being mistaken for
+real measurements.</p>
+<blockquote>
+<div><p><em>Reference:</em> Why this works — most HTTP-served files are public and don’t require
+authentication, so <code class="docutils literal notranslate"><span class="pre">pandas</span></code> can fetch them with a plain GET request. For files behind
+logins or paywalls, you’d need additional setup.</p>
+</div></blockquote>
+</section>
+<section id="netcdf-over-opendap-xarray-open-dataset">
+<h2>2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code><a class="headerlink" href="#netcdf-over-opendap-xarray-open-dataset" title="Link to this heading">#</a></h2>
+<p>For gridded scientific data (temperature, precipitation, sea-surface height, etc.), the
+standard format is <strong>NetCDF</strong>. The standard <em>protocol</em> for serving NetCDF files over the
+network is <strong>OPeNDAP</strong> — it lets you access just the parts of a large dataset you need,
+without downloading the whole file.</p>
+<p>We’ll use the <a class="reference external" href="https://iridl.ldeo.columbia.edu/" rel="noreferer noopener" target="_blank">IRI Data Library</a>’s precipitation dataset —
+global monthly rain estimates.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a script, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://iridl.ldeo.columbia.edu/expert/SOURCES/.NOAA/.NCEP/.CPC/.UNIFIED_PRCP/.GAUGE_BASED/.GLOBAL/.v1p0/.Monthly/.RETRO/.rain/dods&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You’ll see a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object with dimensions <code class="docutils literal notranslate"><span class="pre">Y</span></code> (latitude), <code class="docutils literal notranslate"><span class="pre">X</span></code> (longitude), and <code class="docutils literal notranslate"><span class="pre">T</span></code>
+(time). This is <strong>a lot richer</strong> than a pandas DataFrame — it carries coordinates, units,
+and other metadata along with the data values. (Reading a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> summary with a screen
+reader takes a moment — it’s a structured listing of dimensions, then coordinates, then data
+variables, then attributes.)</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">decode_times=False</span></code> argument is a workaround — the IRI server uses non-standard time
+encoding that xarray can’t auto-parse. You’ll see this kind of one-off fix often when
+working with real scientific datasets. (Reading OPeNDAP also needs a backend; in most
+installs <code class="docutils literal notranslate"><span class="pre">netcdf4</span></code> handles it, with <code class="docutils literal notranslate"><span class="pre">pydap</span></code> as a fallback if your <code class="docutils literal notranslate"><span class="pre">netcdf4</span></code> lacks OPeNDAP
+support — both are in the install line above.)</p>
+<blockquote>
+<div><p><em>Reference:</em> OPeNDAP is widely supported by NetCDF tools (xarray, the <code class="docutils literal notranslate"><span class="pre">netCDF4</span></code> library,
+ncview, etc.). Most major climate data providers (NOAA, NASA, ECMWF, IRI, …) serve their
+datasets over OPeNDAP.</p>
+</div></blockquote>
+</section>
+<section id="a-file-from-zenodo-by-doi-pooch">
+<h2>3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code><a class="headerlink" href="#a-file-from-zenodo-by-doi-pooch" title="Link to this heading">#</a></h2>
+<p>Sometimes you need to <strong>download</strong> the actual file — for example, to use it with a tool that
+doesn’t speak HTTP, or to work offline. The <a class="reference external" href="https://www.fatiando.org/pooch/" rel="noreferer noopener" target="_blank">Pooch</a> library
+is the recommended tool for this — it caches the file locally, checks it against a hash to
+detect corruption, and re-uses the cached copy on later runs.</p>
+<p>The interesting case: pulling a file from a Zenodo dataset using its DOI. This is the
+FAIR-canonical way to access a published dataset.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a script, run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">doi</span> <span class="o">=</span> <span class="s2">&quot;doi:10.5281/zenodo.5739406&quot;</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;wind_po_hrly.csv&quot;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">doi</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">known_hash</span><span class="o">=</span><span class="s2">&quot;md5:cf059b73d6831282c5580776ac07309a&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse
+the cached copy (and verify it hasn’t been corrupted). Notice the DOI in the URL — the
+dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>
+</div>
+<blockquote>
+<div><p><em>Reference:</em> Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3
+buckets, FTP, etc.) and is the standard download manager in many scientific Python
+packages. See its <a class="reference external" href="https://www.fatiando.org/pooch/" rel="noreferer noopener" target="_blank">documentation</a> for details.</p>
+</div></blockquote>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now seen three styles of data access:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Use it for</p></th>
+<th class="head"><p>Python tool</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pandas.read_csv(url)</span></code></p></td>
+<td><p>Small public CSVs over HTTP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xarray.open_dataset(opendap_url)</span></code></p></td>
+<td><p>Large gridded scientific data (NetCDF) over the network</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xarray</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pooch.retrieve(...)</span></code></p></td>
+<td><p>Downloading specific files (e.g., by DOI from Zenodo)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pooch</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Most real workflows mix and match — you might use OPeNDAP to inspect a dataset, then Pooch
+to download a specific subset you need offline.</p>
+</section>
+<section id="where-else-to-find-data">
+<h2>Where else to find data<a class="headerlink" href="#where-else-to-find-data" title="Link to this heading">#</a></h2>
+<p>The three patterns above cover most situations you’ll meet in this course, but the
+data-access landscape has been changing fast. A lot of newer climate datasets are now hosted
+on <strong>cloud object storage</strong> (S3, GCS, Azure) rather than traditional HTTP or OPeNDAP servers.
+The cloud-native equivalent of NetCDF + OPeNDAP is <strong>Zarr</strong> stored on a cloud bucket,
+accessed with <code class="docutils literal notranslate"><span class="pre">xarray.open_zarr(...)</span></code> (with <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank"><code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a>
+doing the network plumbing).</p>
+<p>You don’t need to use any of these for the course, but they’re worth knowing about —
+especially when you’re looking for project data:</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://app.earthmover.io/marketplace" rel="noreferer noopener" target="_blank">Earthmover Marketplace</a></strong> — curated cloud-hosted
+climate datasets in Zarr / Icechunk format, designed for fast analysis-ready access.</p></li>
+<li><p><strong><a class="reference external" href="https://catalog.leap.columbia.edu/" rel="noreferer noopener" target="_blank">LEAP Pangeo Catalog</a></strong> — datasets curated by the
+NSF LEAP STC (the same group that runs our course JupyterHub); often already on the hub for
+low-latency access.</p></li>
+<li><p><strong><a class="reference external" href="https://planetarycomputer.microsoft.com/" rel="noreferer noopener" target="_blank">Microsoft Planetary Computer</a></strong> — large
+catalog of satellite imagery and climate datasets hosted on Azure, indexed via the
+<a class="reference external" href="https://stacspec.org/" rel="noreferer noopener" target="_blank">STAC</a> spec.</p></li>
+<li><p><strong><a class="reference external" href="https://earthaccess.readthedocs.io/" rel="noreferer noopener" target="_blank">NASA <code class="docutils literal notranslate"><span class="pre">earthaccess</span></code></a></strong> — Python package that
+handles auth + S3 access for NASA’s Earthdata Cloud.</p></li>
+</ul>
+<p>When you start looking for data for your final project, browsing these catalogs is often the
+fastest way to find something good — each comes with its own setup (a Python package,
+sometimes an account).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="formats_and_metadata.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Formats and metadata</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="assignment2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 2: Explore a climate dataset</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-over-http-pandas-read-csv">1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-over-opendap-xarray-open-dataset">2. NetCDF over OPeNDAP — <code class="docutils literal notranslate"><span class="pre">xarray.open_dataset</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-file-from-zenodo-by-doi-pooch">3. A file from Zenodo by DOI — <code class="docutils literal notranslate"><span class="pre">pooch</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-else-to-find-data">Where else to find data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Formats and metadata &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/data/formats_and_metadata';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Loading data" href="loading_data.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages (preview)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/data/formats_and_metadata.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Formats and metadata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-formats">Common data formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">Tabular data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-array-data">Gridded (array) data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raster-image-data">Raster (image) data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-data">Vector data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-data">FAIR data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-identifiers-and-dois">Persistent identifiers and DOIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-share-your-own-data">Where to share your own data</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="formats-and-metadata">
+<h1>Formats and metadata<a class="headerlink" href="#formats-and-metadata" title="Link to this heading">#</a></h1>
+<p>This page is a short tour of the <strong>kinds of data</strong> you’ll meet in climate and
+environmental science, how they’re stored, and how to think about metadata and sharing.</p>
+<div class="note admonition">
+<p class="admonition-title">A note for screen-reader users</p>
+<p>This page is conceptual — there’s no code to run. The three diagrams from the original
+page (the gridded-data model, raster data, and vector data) have each been replaced, in
+place, with a text description of what the figure shows.</p>
+</div>
+<section id="what-is-data">
+<h2>What is data?<a class="headerlink" href="#what-is-data" title="Link to this heading">#</a></h2>
+<p>For our purposes, scientific data is <strong>organized information stored on disk</strong>. What you can
+do with a dataset depends on its <strong>format</strong> — how the values are arranged in the file and
+what conventions are used to describe them. The format determines which Python tools can
+read it, what structure you’ll get back, and whether the metadata travels along with the
+values.</p>
+<p>Most of this lecture is about recognizing the main formats you’ll meet in this course, and
+how to think about the metadata and licensing that come with them.</p>
+</section>
+<section id="common-data-formats">
+<h2>Common data formats<a class="headerlink" href="#common-data-formats" title="Link to this heading">#</a></h2>
+<p>Single values only get you so far. To represent scientific data, you need ways of
+<strong>organizing</strong> many values together. In this course you’ll mostly encounter three families.</p>
+<section id="tabular-data">
+<h3>Tabular data<a class="headerlink" href="#tabular-data" title="Link to this heading">#</a></h3>
+<p>Rows and columns, like a spreadsheet. Each row is an observation, each column a variable.
+For example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Mass</p></th>
+<th class="head"><p>Diameter</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mercury</p></td>
+<td><p>0.330 × 10²⁴ kg</p></td>
+<td><p>4879 km</p></td>
+</tr>
+<tr class="row-odd"><td><p>Venus</p></td>
+<td><p>4.87 × 10²⁴ kg</p></td>
+<td><p>12104 km</p></td>
+</tr>
+<tr class="row-even"><td><p>Earth</p></td>
+<td><p>5.97 × 10²⁴ kg</p></td>
+<td><p>12756 km</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>(via <a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/" rel="noreferer noopener" target="_blank">NASA’s Planetary Fact Sheet</a>)</em></p>
+<p>Common storage:</p>
+<ul class="simple">
+<li><p><strong>CSV</strong> (comma-separated values) — human-readable plain text, universally supported, but
+no built-in types or metadata. Most common.</p></li>
+<li><p><strong>Parquet</strong> — columnar binary format, much more efficient for large tables, but not
+human-readable.</p></li>
+</ul>
+<p>In Python, tabular data lives in <strong>pandas</strong> (covered later in this course).</p>
+</section>
+<section id="gridded-array-data">
+<h3>Gridded (array) data<a class="headerlink" href="#gridded-array-data" title="Link to this heading">#</a></h3>
+<p>Numerical data on N-dimensional regular grids — temperature at every (latitude, longitude,
+time), for example.</p>
+<blockquote>
+<div><p><em>Text description of the diagram (the xarray data model):</em> The figure builds up an xarray
+<strong>Dataset</strong> from labelled arrays. It contains two <strong>data variables</strong> — <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and
+<code class="docutils literal notranslate"><span class="pre">precipitation</span></code> — each a 3-D array over the <strong>dimensions</strong> <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">t</span></code> (time). Two
+<strong>coordinates</strong>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>, are drawn as 2-D sheets that label every
+<code class="docutils literal notranslate"><span class="pre">x</span></code>/<code class="docutils literal notranslate"><span class="pre">y</span></code> grid point, and a single scalar coordinate <code class="docutils literal notranslate"><span class="pre">reference_time</span></code> is shown as one point.
+The figure groups the variables, coordinates, and dimensions together as a <strong>DataArray</strong>,
+and brackets the whole collection as the enclosing <strong>Dataset</strong> — the key idea being that a
+Dataset bundles several aligned arrays plus the coordinate labels that describe them. (In
+practice xarray objects also carry free-form <strong>attributes</strong> — metadata such as units and
+descriptions — though this particular diagram doesn’t draw them.)</p>
+</div></blockquote>
+<p><em>(diagram via <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html" rel="noreferer noopener" target="_blank">xarray docs</a>)</em></p>
+<p>Common storage:</p>
+<ul class="simple">
+<li><p><strong>NetCDF</strong> — long-time standard in earth sciences. Self-describing: variables,
+dimensions, units, and other metadata are embedded in the file.</p></li>
+<li><p><strong>Zarr</strong> — newer, cloud-native equivalent. Stores arrays as collections of small
+“chunks,” much better suited to streaming over the network.</p></li>
+<li><p><strong>HDF5</strong> — generic hierarchical container that NetCDF (version 4) is built on top of.</p></li>
+</ul>
+<p>In Python, gridded data lives in <strong>xarray</strong> (covered later in this course).</p>
+</section>
+<section id="raster-image-data">
+<h3>Raster (image) data<a class="headerlink" href="#raster-image-data" title="Link to this heading">#</a></h3>
+<p>A specific kind of gridded data: 2D pixel arrays with a geographic coordinate reference
+system. Used for satellite imagery, digital elevation models, etc.</p>
+<blockquote>
+<div><p><em>Text description of the diagram:</em> Raster data is a rectangular <strong>grid of equally sized
+cells (pixels)</strong>, each holding a single value — for example an elevation, a temperature,
+or a satellite brightness. The figure shows a real-world aerial scene on the left
+(vegetation, a bare patch, a river, a road) and, on the right, the same area zoomed into a
+regular grid of equal square cells. Each cell is shaded a single solid colour standing for
+one value — the colour, not a printed number, encodes the value. One square is outlined and
+labelled “Cell” to point out the basic unit. The grid is tied to geographic space by a
+coordinate reference system, so each cell corresponds to a fixed area on the Earth’s
+surface.</p>
+</div></blockquote>
+<p><em>(image credit: Environmental Systems Research Institute, Inc.)</em></p>
+<p>Common storage:</p>
+<ul class="simple">
+<li><p><strong>GeoTIFF</strong> — the most common format. Includes the coordinate reference system in the
+file’s metadata so each pixel maps to a location on Earth.</p></li>
+<li><p><strong>Cloud-optimized GeoTIFF (COG)</strong> — newer variant designed for streaming subsets over
+HTTP.</p></li>
+</ul>
+<p>In Python, raster data is commonly read with <strong>rasterio</strong> (or <strong>rioxarray</strong> for
+xarray-style access).</p>
+</section>
+<section id="vector-data">
+<h3>Vector data<a class="headerlink" href="#vector-data" title="Link to this heading">#</a></h3>
+<p>Discrete geometric features on the Earth’s surface — points (cities, sensors), lines
+(rivers, roads), or polygons (countries, watersheds).</p>
+<blockquote>
+<div><p><em>Text description of the diagram:</em> Vector data represents features as geometry built from
+x,y coordinate pairs. The figure stacks the three basic types in three rows — <strong>points</strong> on
+top, <strong>lines</strong> in the middle, <strong>polygons</strong> at the bottom — and labels every vertex with
+“x, y” to stress that each feature is defined by coordinate pairs. A <strong>point</strong> is a single
+x,y location (the figure’s examples: plot, tower, and sampling locations); a <strong>line</strong>
+connects two or more x,y vertices (examples: roads and streams); and a <strong>polygon</strong> is three
+or more vertices connected and closed to enclose an area (examples: building boundaries and
+lakes).</p>
+</div></blockquote>
+<p><em>(image credit: National Ecological Observatory Network (NEON), via <a class="reference external" href="https://datacarpentry.org/organization-geospatial/02-intro-vector-data/" rel="noreferer noopener" target="_blank">Data Carpentry</a>)</em></p>
+<p>Common storage:</p>
+<ul class="simple">
+<li><p><strong>ESRI Shapefile</strong> — long-standing, widely supported (despite <a class="reference external" href="http://switchfromshapefile.org/" rel="noreferer noopener" target="_blank">its
+flaws</a>).</p></li>
+<li><p><strong>GeoJSON</strong> — JSON-based, human-readable.</p></li>
+<li><p><strong>GeoPackage</strong> / <strong>FlatGeoBuf</strong> — modern alternatives.</p></li>
+</ul>
+<p>In Python, vector data is read with <strong>Fiona</strong> or <strong>GeoPandas</strong>. We won’t use vector data
+much in this course, but you’ll likely meet it later.</p>
+<blockquote>
+<div><p><em>Reference:</em> Other data shapes you may run into — <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)" rel="noreferer noopener" target="_blank">graph
+data</a> (nodes and edges,
+handled in Python with <a class="reference external" href="https://networkx.org/" rel="noreferer noopener" target="_blank">NetworkX</a>), unstructured / nested data
+(commonly stored as <a class="reference external" href="https://www.json.org/" rel="noreferer noopener" target="_blank">JSON</a>), or relational databases for sets of
+related tables. They’re not central to this course, but it’s worth knowing they exist.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Link to this heading">#</a></h2>
+<p><strong>Metadata is “data about the data”:</strong> who created it, when, with what instrument, what
+units, what coordinate system, what license. Without metadata, raw numbers are nearly
+useless.</p>
+<p>In earth science, common metadata conventions for NetCDF/Zarr data include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cfconventions.org/" rel="noreferer noopener" target="_blank"><strong>CF Conventions</strong></a> — Climate and Forecast standard names,
+units, coordinate system descriptors.</p></li>
+<li><p><a class="reference external" href="https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3" rel="noreferer noopener" target="_blank"><strong>Attribute Convention for Data Discovery (ACDD)</strong></a>
+— discovery-level fields like title, summary, geographic extent.</p></li>
+</ul>
+<p>For CSV or other formats without embedded metadata, a separate <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> or similar is
+the standard.</p>
+</section>
+<section id="fair-data">
+<h2>FAIR data<a class="headerlink" href="#fair-data" title="Link to this heading">#</a></h2>
+<p>Modern scientific practice is converging on a shared standard for what makes data shareable
+and useful. The acronym is <strong>FAIR</strong>:</p>
+<ul class="simple">
+<li><p><strong>Findable</strong> — has a persistent identifier (like a DOI) and rich, indexed metadata.</p></li>
+<li><p><strong>Accessible</strong> — retrievable via a standard, open protocol (HTTP, OPeNDAP, etc.).</p></li>
+<li><p><strong>Interoperable</strong> — uses formal, shared vocabularies (e.g., CF Conventions).</p></li>
+<li><p><strong>Reusable</strong> — released with a clear license and provenance information.</p></li>
+</ul>
+<blockquote>
+<div><p><em>Reference:</em> The full <a class="reference external" href="https://www.go-fair.org/fair-principles/" rel="noreferer noopener" target="_blank">FAIR principles</a> go into
+more detail, but the four words above cover the core ideas.</p>
+</div></blockquote>
+<section id="persistent-identifiers-and-dois">
+<h3>Persistent identifiers and DOIs<a class="headerlink" href="#persistent-identifiers-and-dois" title="Link to this heading">#</a></h3>
+<p>The most important FAIR practice for getting data is the <strong>Digital Object Identifier
+(DOI)</strong> — a permanent, citeable URL for a dataset (or paper, or piece of software). A DOI
+looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.5281</span><span class="o">/</span><span class="n">zenodo</span><span class="mf">.5739406</span>
+</pre></div>
+</div>
+<p>and is resolved by prepending <code class="docutils literal notranslate"><span class="pre">https://doi.org/</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">doi</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mf">10.5281</span><span class="o">/</span><span class="n">zenodo</span><span class="mf">.5739406</span>
+</pre></div>
+</div>
+<p>Publishers and data repositories commit to keeping DOIs working “forever.” If your code
+references data by DOI (rather than an arbitrary URL), it stays reproducible even if the
+data is later moved or reorganized.</p>
+</section>
+<section id="where-to-share-your-own-data">
+<h3>Where to share your own data<a class="headerlink" href="#where-to-share-your-own-data" title="Link to this heading">#</a></h3>
+<p>The default recommendation for small scientific datasets is
+<a class="reference external" href="https://zenodo.org/" rel="noreferer noopener" target="_blank"><strong>Zenodo</strong></a> — a free, open-access repository run by CERN that mints a
+DOI for everything you upload (it accepts up to 50 GB per record, more on request). You can
+also <a class="reference external" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content" rel="noreferer noopener" target="_blank">archive your GitHub code repos in
+Zenodo</a>
+to get a citeable software DOI for your code.</p>
+<blockquote>
+<div><p><em>Reference:</em> Avoid storing your “official” dataset on personal websites, Google Drive,
+Dropbox, or GitHub alone — none of those give you a persistent identifier. They’re fine
+for working copies but not for sharing the dataset that backs a paper.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="loading_data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Loading data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-formats">Common data formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">Tabular data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-array-data">Gridded (array) data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raster-image-data">Raster (image) data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-data">Vector data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-data">FAIR data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persistent-identifiers-and-dois">Persistent identifiers and DOIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-share-your-own-data">Where to share your own data</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
