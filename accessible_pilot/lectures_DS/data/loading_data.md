@@ -19,8 +19,8 @@ code loads data from a URL or DOI directly, anyone running it (including future-
 the same data — no guessing about which file you used or where you stored it.
 
 For each example below, put the code in a `.py` script, run it with `python yourfile.py`,
-and read what comes back with `Alt+F2`. Since these print a preview of the data, add a
-`print(...)` around the last line (noted in each example) so it shows in the terminal.
+and read what comes back with `Alt+F2`. Each example already wraps its last line in `print(...)` so the result shows in the
+terminal — in a script (unlike a notebook), a bare expression prints nothing.
 
 ## 1. CSV over HTTP — `pandas.read_csv`
 
@@ -44,10 +44,12 @@ columns = ["year", "month", "date_excel", "date", "co2", "co2_seasonally_adjuste
            "fit", "fit_seasonally_adjusted", "co2_filled", "co2_filled_seasonally_adjusted",
            "station"]
 df = pd.read_csv(url, skiprows=64, names=columns, na_values=-99.99)
-print(df.head())
+print(df[["year", "month", "date", "co2"]].head())
 ~~~
 
-You should see a table with year, month, date, and CO2 columns (read it with `Alt+F2`).
+You should see those four columns — year, month, date, and CO2 — read with `Alt+F2`. (We
+print just those four so they fit and read cleanly; printing the whole `df` in a terminal
+hides the middle columns behind `...`. The full table has 11 columns.)
 Notice that you didn't have to download anything to your computer — `pandas` streamed the
 data from the URL directly into memory.
 :::
@@ -93,8 +95,9 @@ variables, then attributes.)
 
 The `decode_times=False` argument is a workaround — the IRI server uses non-standard time
 encoding that xarray can't auto-parse. You'll see this kind of one-off fix often when
-working with real scientific datasets. (Reading OPeNDAP also needs a backend — that's the
-`pydap` / `netcdf4` package from the install line above.)
+working with real scientific datasets. (Reading OPeNDAP also needs a backend; in most
+installs `netcdf4` handles it, with `pydap` as a fallback if your `netcdf4` lacks OPeNDAP
+support — both are in the install line above.)
 
 > *Reference:* OPeNDAP is widely supported by NetCDF tools (xarray, the `netCDF4` library,
 > ncview, etc.). Most major climate data providers (NOAA, NASA, ECMWF, IRI, …) serve their

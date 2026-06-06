@@ -45,6 +45,7 @@ Throughout the steps below, replace `<weekN>` with the current week's folder nam
    Code.)
 
    ~~~
+   cd clmt5405-assignments
    mkdir <weekN>
    cd <weekN>
    ~~~

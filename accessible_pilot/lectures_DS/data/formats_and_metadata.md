@@ -7,7 +7,7 @@ environmental science, how they're stored, and how to think about metadata and s
 :class: note
 This page is conceptual — there's no code to run. The three diagrams from the original
 page (the gridded-data model, raster data, and vector data) have each been replaced, in
-place, with a text description you can read directly.
+place, with a text description of what the figure shows.
 :::
 
 ## What is data?
@@ -52,24 +52,25 @@ In Python, tabular data lives in **pandas** (covered later in this course).
 Numerical data on N-dimensional regular grids — temperature at every (latitude, longitude,
 time), for example.
 
-> *Text description of the diagram (the xarray data model):* An xarray **Dataset** is a
-> container holding one or more **data variables** — for example `temperature` and
-> `precipitation` — that are each multi-dimensional arrays sharing the same **dimensions**
-> (here `x`, `y`, and `time`). Alongside the data variables sit **coordinates** that label
-> those dimensions: arrays such as `latitude` and `longitude` giving the position of each
-> `x`/`y` grid point, and a `time` array of dates. The whole thing also carries
-> **attributes** — free-form metadata such as units and descriptions. In short: several
-> aligned N-dimensional arrays, plus the coordinate labels and metadata that describe them,
-> bundled into one self-describing object.
+> *Text description of the diagram (the xarray data model):* The figure builds up an xarray
+> **Dataset** from labelled arrays. It contains two **data variables** — `temperature` and
+> `precipitation` — each a 3-D array over the **dimensions** `x`, `y`, and `t` (time). Two
+> **coordinates**, `latitude` and `longitude`, are drawn as 2-D sheets that label every
+> `x`/`y` grid point, and a single scalar coordinate `reference_time` is shown as one point.
+> The figure groups the variables, coordinates, and dimensions together as a **DataArray**,
+> and brackets the whole collection as the enclosing **Dataset** — the key idea being that a
+> Dataset bundles several aligned arrays plus the coordinate labels that describe them. (In
+> practice xarray objects also carry free-form **attributes** — metadata such as units and
+> descriptions — though this particular diagram doesn't draw them.)
 
-*(diagram concept via [xarray docs](http://xarray.pydata.org/en/stable/user-guide/data-structures.html))*
+*(diagram via [xarray docs](http://xarray.pydata.org/en/stable/user-guide/data-structures.html))*
 
 Common storage:
 - **NetCDF** — long-time standard in earth sciences. Self-describing: variables,
   dimensions, units, and other metadata are embedded in the file.
 - **Zarr** — newer, cloud-native equivalent. Stores arrays as collections of small
   "chunks," much better suited to streaming over the network.
-- **HDF5** — generic hierarchical container that NetCDF is built on top of.
+- **HDF5** — generic hierarchical container that NetCDF (version 4) is built on top of.
 
 In Python, gridded data lives in **xarray** (covered later in this course).
 
@@ -80,17 +81,20 @@ system. Used for satellite imagery, digital elevation models, etc.
 
 > *Text description of the diagram:* Raster data is a rectangular **grid of equally sized
 > cells (pixels)**, each holding a single value — for example an elevation, a temperature,
-> or a satellite brightness. The grid is tied to geographic space by a coordinate reference
-> system, so each cell corresponds to a fixed area on the Earth's surface. The original
-> figure shows a real-world scene on one side and, on the other, the same area divided into
-> a regular grid of square cells with a number stored in each cell.
+> or a satellite brightness. The figure shows a real-world aerial scene on the left
+> (vegetation, a bare patch, a river, a road) and, on the right, the same area zoomed into a
+> regular grid of equal square cells. Each cell is shaded a single solid colour standing for
+> one value — the colour, not a printed number, encodes the value. One square is outlined and
+> labelled "Cell" to point out the basic unit. The grid is tied to geographic space by a
+> coordinate reference system, so each cell corresponds to a fixed area on the Earth's
+> surface.
 
 *(image credit: Environmental Systems Research Institute, Inc.)*
 
 Common storage:
 - **GeoTIFF** — the most common format. Includes the coordinate reference system in the
   file's metadata so each pixel maps to a location on Earth.
-- **Cloud-optimized GeoTIFF (CoG)** — newer variant designed for streaming subsets over
+- **Cloud-optimized GeoTIFF (COG)** — newer variant designed for streaming subsets over
   HTTP.
 
 In Python, raster data is commonly read with **rasterio** (or **rioxarray** for
@@ -101,11 +105,14 @@ xarray-style access).
 Discrete geometric features on the Earth's surface — points (cities, sensors), lines
 (rivers, roads), or polygons (countries, watersheds).
 
-> *Text description of the diagram:* Vector data represents features as geometry. The
-> original figure shows the three basic types side by side: **points** (single locations,
-> such as cities or sensors), **lines** (ordered sequences of connected points, such as
-> rivers or roads), and **polygons** (closed shapes enclosing an area, such as country
-> borders or watersheds).
+> *Text description of the diagram:* Vector data represents features as geometry built from
+> x,y coordinate pairs. The figure stacks the three basic types in three rows — **points** on
+> top, **lines** in the middle, **polygons** at the bottom — and labels every vertex with
+> "x, y" to stress that each feature is defined by coordinate pairs. A **point** is a single
+> x,y location (the figure's examples: plot, tower, and sampling locations); a **line**
+> connects two or more x,y vertices (examples: roads and streams); and a **polygon** is three
+> or more vertices connected and closed to enclose an area (examples: building boundaries and
+> lakes).
 
 *(image credit: National Ecological Observatory Network (NEON), via [Data Carpentry](https://datacarpentry.org/organization-geospatial/02-intro-vector-data/))*
 
@@ -150,8 +157,8 @@ and useful. The acronym is **FAIR**:
 - **Interoperable** — uses formal, shared vocabularies (e.g., CF Conventions).
 - **Reusable** — released with a clear license and provenance information.
 
-> *Reference:* The full [FAIR principles](https://www.force11.org/group/fairgroup/fairprinciples)
-> go into more detail, but the four words above cover the core ideas.
+> *Reference:* The full [FAIR principles](https://www.go-fair.org/fair-principles/) go into
+> more detail, but the four words above cover the core ideas.
 
 ### Persistent identifiers and DOIs
 
@@ -175,9 +182,10 @@ data is later moved or reorganized.
 
 ### Where to share your own data
 
-The default recommendation for small (<10 GB) scientific datasets is
+The default recommendation for small scientific datasets is
 [**Zenodo**](https://zenodo.org/) — a free, open-access repository run by CERN that mints a
-DOI for everything you upload. You can also [archive your GitHub code repos in
+DOI for everything you upload (it accepts up to 50 GB per record, more on request). You can
+also [archive your GitHub code repos in
 Zenodo](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content)
 to get a citeable software DOI for your code.
 
