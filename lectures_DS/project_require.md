@@ -1,7 +1,7 @@
 # Final Project Requirements
 
 ### Team size and project structure
-Work in groups of **2–3 people** (or on your own, if you prefer) around a shared project (a common topic and repository). **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
+Work in **groups of 2–3 people** around a shared project (a common topic and repository). Groups are preferred, but you may work on your own if you would rather. **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
 
 ### Learning Goals
 
