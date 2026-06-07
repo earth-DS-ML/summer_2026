@@ -13,7 +13,17 @@ only_build_toc_files: true
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
+  # CI re-executes notebooks on each build. Pure-compute + small-data notebooks
+  # (core_python, sci_python, pandas) execute fine and stay output-free in the
+  # repo (clean downloads). The xarray notebooks pull data over OPeNDAP/Zarr that
+  # is slow/unreachable from CI runners, so they are excluded here and render from
+  # their committed outputs instead (run them locally before committing).
   execute_notebooks: force
+  timeout: 120
+  exclude_patterns:
+    - '*xarray*'      # OPeNDAP/Zarr data is slow/blocked from CI; render committed outputs
+    - '*assignment*'  # student templates (empty answer cells) + heavy data (e.g. 322 MB IBTrACS); no need to execute
+    - '*final_lec*'   # needs cartopy + xarray + data (not in CI); render committed outputs
 
 # Define the name of the latex output file for PDF builds
 latex:

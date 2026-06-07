@@ -1,3 +1,5 @@
 jupyter-book<2
 matplotlib
 numpy
+pandas
+pooch

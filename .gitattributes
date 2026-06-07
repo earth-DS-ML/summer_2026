@@ -1,3 +1,11 @@
 *.ipynb filter=nbstripout
 *.zpln filter=nbstripout
 *.ipynb diff=ipynb
+
+# These lecture notebooks use heavy data (OPeNDAP / Zarr / cartopy) that is
+# excluded from CI execution (see _config.yml execute.exclude_patterns), so they
+# must KEEP their committed outputs to render on the live site. Exempt them from
+# the nbstripout clean filter (run them locally and commit with outputs).
+lectures_DS/xarray/xarray_fundamentals.ipynb -filter
+lectures_DS/xarray/xarray_advanced.ipynb -filter
+lectures_DS/geoscience/final_lec.ipynb -filter
