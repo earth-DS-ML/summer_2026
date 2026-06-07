@@ -413,7 +413,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#team-size-requirements">Team size requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#team-size-and-project-structure">Team size and project structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-requirements">Dataset Requirements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-requirements">Analysis Requirements</a></li>
@@ -434,9 +434,9 @@
                   
   <section id="final-project-requirements">
 <h1>Final Project Requirements<a class="headerlink" href="#final-project-requirements" title="Link to this heading">#</a></h1>
-<section id="team-size-requirements">
-<h2>Team size requirements<a class="headerlink" href="#team-size-requirements" title="Link to this heading">#</a></h2>
-<p>Work in groups of <strong>2–3 people</strong>. Every member is expected to understand the <em>entire</em> project, not just the part they personally worked on.</p>
+<section id="team-size-and-project-structure">
+<h2>Team size and project structure<a class="headerlink" href="#team-size-and-project-structure" title="Link to this heading">#</a></h2>
+<p>Work in groups of <strong>2–3 people</strong> around a shared project (a common topic and repository). <strong>Each member contributes their own notebook</strong>, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the <em>entire</em> group project, not just their own piece.</p>
 </section>
 <section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Link to this heading">#</a></h2>
@@ -474,18 +474,18 @@
 <h2>Analysis Requirements<a class="headerlink" href="#analysis-requirements" title="Link to this heading">#</a></h2>
 <p>The goal here is the same as with any science/data analysis project: to use the data to investigate a question or hypothesis. In order to succeed on the project, you will have to draw on your experience <em>outside</em> our class, from your other classes or independent research, in order to define an interesting question. It is also acceptable to use this project to reproduce the results from a published study that you find interesting, provided you have access to the original data.</p>
 <p>Whatever you choose, you should <em>clearly define a hypothesis or scientific question that you aim to investigate with your analysis</em>. This will determine what you have to do.</p>
-<p>The results of this analysis will be figures. Beautiful figures which clearly provide answers to your question / hypothesis. Your notebook should contain at least 4 and no more than 8 figures. If you have closer to 4, they should be complex, multi-panel figures. All figures must have titles, clearly labeled axes, informative colormaps / colorbars, and legends, where appropriate.</p>
+<p>The results of this analysis will be figures — beautiful figures that clearly answer your question / hypothesis. <strong>Each member’s notebook should contain at least 3 and no more than 5 figures.</strong> All figures must have titles, clearly labeled axes, informative colormaps / colorbars, and legends, where appropriate.</p>
 </section>
 <section id="technical-requirements">
 <h2>Technical Requirements<a class="headerlink" href="#technical-requirements" title="Link to this heading">#</a></h2>
 <p>Your final project must meet the following technical requirements</p>
 <ul class="simple">
-<li><p>A <em>single jupyter notebook</em></p></li>
+<li><p><strong>One Jupyter notebook per group member</strong>, each carrying out a complementary part of the project and each able to stand on its own</p></li>
 <li><p>Stored in a standalone public github repo</p></li>
 <li><p>Each group member contributes their own commits, under their own GitHub account</p></li>
 <li><p>All data is either stored in the repo itself or downloaded / accessed from within the notebook (no manual download steps)</p></li>
-<li><p>Complete explanatory text / equations included in the notebook as markdown cells</p></li>
-<li><p>Notebook must execute in sequence with no errors</p></li>
+<li><p>Complete explanatory text / equations included in each notebook as markdown cells</p></li>
+<li><p>Each notebook must execute in sequence with no errors</p></li>
 <li><p>The whole github repo must be configured to run on <a class="reference external" href="https://leap.2i2c.cloud/" rel="noreferer noopener" target="_blank">Leap pangeo hub</a></p></li>
 </ul>
 <p>You <em>must</em> use either Pandas or Xarray (or both) in some part of your project. You <em>may</em> use other scientific python libraries as well, if you wish, to facilitate some analysis that is not possible with Xarray / Pandas alone.</p>
@@ -523,8 +523,8 @@
 </section>
 <section id="in-class-presentations">
 <h2>In-Class Presentations<a class="headerlink" href="#in-class-presentations" title="Link to this heading">#</a></h2>
-<p>Each group gives a <strong>10-minute presentation</strong> of its project during class. Presentations take place in week 6, on <strong>Tuesday 30 June and Thursday 2 July 2026</strong> — we’ll assign each group to one of the two days.</p>
-<p><strong>Every group member must present part of the project</strong> — take turns walking us through the different pieces. Don’t prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.</p>
+<p>Presentations take place in week 6, on <strong>Tuesday 30 June and Thursday 2 July 2026</strong> — we’ll assign each group to one of the two days.</p>
+<p><strong>Each member presents their own notebook for about 5 minutes</strong>, followed by about <strong>5 minutes of questions for the whole group</strong>. (So a group of three runs ~15 minutes of presentation plus ~5 minutes of Q&amp;A; a pair runs ~10 + 5.) Don’t prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.</p>
 <p>Your presentation should be concise and cover:</p>
 <ul class="simple">
 <li><p>What data did you analyze, and how did you load it?</p></li>
@@ -548,7 +548,7 @@
 <ol class="arabic simple">
 <li><p><strong>The project</strong> — the analysis, figures, and notebook (see the requirements above).</p></li>
 <li><p><strong>The presentation and Q&amp;A</strong> — how clearly the group presents, and how each member answers questions about the project (see above).</p></li>
-<li><p><strong>Individual contribution</strong> — each member must make their own commits to the project repo under their own GitHub account, so the commit history shows who did what.</p></li>
+<li><p><strong>Individual contribution</strong> — each member submits and presents their <strong>own notebook</strong> (a complementary piece of the project), committed under their own GitHub account. Your individual notebook is the main evidence of your contribution.</p></li>
 </ol>
 <p>A member whose understanding (in the Q&amp;A) or contribution (in the repo’s commit history) is clearly lacking may receive a lower individual grade than the rest of their group, so make sure everyone stays involved throughout.</p>
 </section>
@@ -611,7 +611,7 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#team-size-requirements">Team size requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#team-size-and-project-structure">Team size and project structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-requirements">Dataset Requirements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-requirements">Analysis Requirements</a></li>
