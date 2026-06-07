@@ -9,12 +9,12 @@ The goal of the final project is to assess your ability to combine and apply the
 
 *   Discover and download real datasets in standard formats (e.g. CSV, netCDF, zarr etc)
 *   Load the data into Pandas or Xarray, performing any necessary data cleanup (dealing with missing values, proper time encoding, etc.) along the way.
-*   Perform realistic scientific calculation involving, for example tasks such as grouping, aggregating, and applying mathematical formulas.
+*   Perform a realistic analysis — for example, grouping, aggregating, and applying formulas or other computations.
 *   Visualize your results in well-formatted plots.
 
 ### Dataset Requirements
 
-Your datasets can involve data collected by yourself or your lab, or can come from a public data repository. Ideally, your choice of dataset should be driven by your own interests. It is acceptable (and encouraged) to have your final project for this class involve an ongoing research project. _However, it is not acceptable to have your final project overlap with the final project for another class._
+Your datasets can involve data collected by yourself or your lab, or can come from a public data repository. Ideally, your choice of dataset should be driven by your own interests. It is acceptable (and encouraged) to have your final project for this class build on an ongoing research or applied project. _However, it is not acceptable to have your final project overlap with the final project for another class._
 
 For your datasets, you can get them from a few sources:
 - We have already played around with a few datasets in class, and there are more are coming (look ahead at the material posted on course website). Feel free to base your project around one or few of these if they interest you.
@@ -32,13 +32,13 @@ Also here are a couple of other links that may also help:
 *   [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/) — large catalog of satellite imagery and climate data on Azure
 *   [NASA earthaccess](https://earthaccess.readthedocs.io/) — Python package for NASA's Earthdata Cloud (handles auth + S3)
 
-You may use just one dataset, or you may choose to combine multiple datasets, depending on your scientific question.
+You may use just one dataset, or you may choose to combine multiple datasets, depending on your question.
 
 ### Analysis Requirements
 
-The goal here is the same as with any science/data analysis project: to use the data to investigate a question or hypothesis. In order to succeed on the project, you will have to draw on your experience _outside_ our class, from your other classes or independent research, in order to define an interesting question. It is also acceptable to use this project to reproduce the results from a published study that you find interesting, provided you have access to the original data.
+The goal here is the same as with any data-analysis project: to use the data to investigate a question or idea. Your question can come from anywhere — physical science, policy, sustainability, public health, economics, environmental justice — as long as it is something real data can help you explore. To define a good question you will likely draw on your experience _outside_ our class, from your other classes, work, or independent projects. It is also acceptable to use this project to reproduce results from a published study or report that you find interesting, provided you have access to the original data.
 
-Whatever you choose, you should _clearly define a hypothesis or scientific question that you aim to investigate with your analysis_. This will determine what you have to do.
+Whatever you choose, you should _clearly define the question or hypothesis that you aim to investigate with your analysis_. This will determine what you have to do.
 
 The results of this analysis will be figures — beautiful figures that clearly answer your question / hypothesis. **Each member's notebook should contain at least 3 and no more than 5 figures.** All figures must have titles, clearly labeled axes, informative colormaps / colorbars, and legends, where appropriate.
 
