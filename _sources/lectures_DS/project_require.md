@@ -102,11 +102,11 @@ Your presentation should be concise and cover:
 
 _Don't forget to make your project repo **public** — otherwise we won't be able to see it._
 
-> Note: Try to finish your project before your presentation. But it's okay if it isn't fully complete by then — still present what you have, the challenges you're facing, and your plan to finish. The final code is due the following week (see below).
+> Note: Try to finish your project before your presentation. But it's okay if it isn't fully complete by then — still present what you have, the challenges you're facing, and your plan to finish. The final code is due that Sunday, 5 July (see below).
 
 ### Final submission and evaluation
 
-To wrap up your project, confirm your final submission by **5pm on Friday 10 July 2026**:
+To wrap up your project, confirm your final submission by **the end of Sunday night, 5 July 2026** (the same Sunday-night pattern as the weekly assignments):
 
 - Make sure your completed notebook and all code are pushed to your public project repo.
 - Email the instructor and TA to confirm you are done and don't plan further changes — this tells us the project is ready to grade.
