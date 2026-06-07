@@ -71,20 +71,11 @@ Some other libraries you may wish to consider (but not required to) are:
 
 ### Project Approval
 
-You must have your dataset(s) and general scope for your project approved by the instructor. 
+You must have your project — your dataset(s) and general scope — approved by the instructor. Submit a single short proposal by **Sunday 21 June 2026** (as with the weekly assignments, anything not submitted by the deadline receives a zero):
 
-The approval process has two parts. 
-
-For part 1: 
-- List of your group members 
-- A rough title and a very short informal description of what you are planning to do
-- The deadline for this task is **21 June 2026** (as with the weekly assignments, anything not submitted by the deadline receives a zero)
-
-For part 2:
--  Create a new public github repo for your project
--  Add a `README.md` file which contains the question / hypothesis you plan to investigate, links to the relevant datasets, and a three sentence summary of the analysis you plan to do. (It is very important that you have identified the datasets and know where to get them at this stage).
--  Submit a link to your project repo via email to the instructor.
--  The deadline for doing this **26 June 2026** (as with the weekly assignments, anything not submitted by the deadline receives a zero)
+-  Create a new **public** GitHub repo for your project.
+-  Add a `README.md` that contains: your group members, a rough title, the question or hypothesis you plan to investigate, links to the dataset(s) you plan to use, and a three-sentence summary of the analysis you plan to do. (It is very important that you have identified your datasets and know where to get them at this stage.)
+-  Email a link to your project repo to the instructor and TA.
 
 ### In-Class Presentations
 
