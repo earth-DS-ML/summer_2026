@@ -28,6 +28,9 @@ Also here are a couple of other links that may also help:
 *   [USGS Data Catalog](https://data.usgs.gov/datacatalog/)
 *   [NOAA National Climate Data Center](https://www.ncdc.noaa.gov/)
 *   [NASA Earth Science Data](https://earthdata.nasa.gov/)
+*   [Earthmover Marketplace](https://app.earthmover.io/marketplace) — curated cloud-hosted (Zarr) climate datasets, analysis-ready
+*   [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/) — large catalog of satellite imagery and climate data on Azure
+*   [NASA earthaccess](https://earthaccess.readthedocs.io/) — Python package for NASA's Earthdata Cloud (handles auth + S3)
 
 You may use just one dataset, or you may choose to combine multiple datasets, depending on your scientific question.
 
@@ -75,7 +78,7 @@ The approval process has two parts.
 For part 1: 
 - List of your group members 
 - A rough title and a very short informal description of what you are planning to do
-- The deadline for this task is **23 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
+- The deadline for this task is **21 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
 
 For part 2:
 -  Create a new public github repo for your project
