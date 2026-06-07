@@ -78,13 +78,13 @@ The approval process has two parts.
 For part 1: 
 - List of your group members 
 - A rough title and a very short informal description of what you are planning to do
-- The deadline for this task is **21 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
+- The deadline for this task is **21 June 2026** (as with the weekly assignments, anything not submitted by the deadline receives a zero)
 
 For part 2:
 -  Create a new public github repo for your project
 -  Add a `README.md` file which contains the question / hypothesis you plan to investigate, links to the relevant datasets, and a three sentence summary of the analysis you plan to do. (It is very important that you have identified the datasets and know where to get them at this stage).
 -  Submit a link to your project repo via email to the instructor.
--  The deadline for doing this **26 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
+-  The deadline for doing this **26 June 2026** (as with the weekly assignments, anything not submitted by the deadline receives a zero)
 
 ### In-Class Presentations
 
