@@ -1,7 +1,7 @@
 ## Final Project Requirements
 
 ### Team size and project structure
-Work in groups of **2–3 people** around a shared project (a common topic and repository). **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
+Work in groups of **2–3 people** (or on your own, if you prefer) around a shared project (a common topic and repository). **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
 
 ### Learning Goals
 
@@ -75,7 +75,7 @@ You must have your project — your dataset(s) and general scope — approved by
 
 -  Create a new **public** GitHub repo for your project.
 -  Add a `README.md` that contains: your group members, a rough title, the question or hypothesis you plan to investigate, links to the dataset(s) you plan to use, and a three-sentence summary of the analysis you plan to do. (It is very important that you have identified your datasets and know where to get them at this stage.)
--  Submit a link to your project repo on the **project proposal** assignment on Courseworks.
+-  On the **project proposal** assignment on Courseworks, submit **both**: (1) the link to your project repo (URL), and (2) a text entry with the **full names of everyone in your group** (or just your own name, if you are working solo) — entering names is required.
 
 ### In-Class Presentations
 
