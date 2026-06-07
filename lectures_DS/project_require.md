@@ -1,4 +1,4 @@
-## Final Project Requirements
+# Final Project Requirements
 
 ### Team size and project structure
 Work in groups of **2–3 people** (or on your own, if you prefer) around a shared project (a common topic and repository). **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
@@ -81,7 +81,7 @@ You must have your project — your dataset(s) and general scope — approved by
 
 Presentations take place in week 6, on **Tuesday 30 June and Thursday 2 July 2026** — we'll assign each group to one of the two days.
 
-**Each member presents their own notebook for about 5 minutes**, followed by about **5 minutes of questions for the whole group**. (So a group of three runs ~15 minutes of presentation plus ~5 minutes of Q&A; a pair runs ~10 + 5.) Don't prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.
+**Each member presents their own notebook for about 5 minutes**, followed by about **5 minutes of questions for the whole group**. (So a group of three runs ~15 minutes of presentation plus ~5 minutes of Q&A; a pair runs ~10 + 5; on your own, ~5 + 5.) Don't prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.
 
 Your presentation should be concise and cover:
 
@@ -99,13 +99,13 @@ _Don't forget to make your project repo **public** — otherwise we won't be abl
 
 To wrap up your project, confirm your final submission by **the end of Sunday night, 5 July 2026** (the same Sunday-night pattern as the weekly assignments):
 
-- Make sure your completed notebook and all code are pushed to your public project repo.
+- Make sure all the project notebooks and code are pushed to your public project repo.
 - Post a link to your project repo on the **final project** assignment on Courseworks to confirm you are done and don't plan to make further changes — this tells us the project is ready to grade.
 
-**How the project is evaluated.** Because this is a group project, your grade reflects both the work itself and each member's understanding and contribution:
+**How the project is evaluated.** Your grade reflects both the work itself and — for group projects — each member's individual understanding and contribution:
 
-1. **The project** — the analysis, figures, and notebook (see the requirements above).
+1. **The project** — the analysis, figures, and notebooks (see the requirements above).
 2. **The presentation and Q&A** — how clearly the group presents, and how each member answers questions about the project (see above).
 3. **Individual contribution** — each member submits and presents their **own notebook** (a complementary piece of the project), committed under their own GitHub account. Your individual notebook is the main evidence of your contribution.
 
-A member whose understanding (in the Q&A) or contribution (in the repo's commit history) is clearly lacking may receive a lower individual grade than the rest of their group, so make sure everyone stays involved throughout.
+In a group, a member whose understanding (in the Q&A) or contribution (in the commit history) is clearly lacking may receive a lower individual grade than their teammates — so make sure everyone stays involved throughout. (If you're working solo, this individual differentiation simply doesn't apply.)
