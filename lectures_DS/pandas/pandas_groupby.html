@@ -428,6 +428,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
         </div>
@@ -936,6 +937,18 @@
 </div>
 </section>
 </section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>This notebook was all about <strong>split–apply–combine</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">groupby</span></code> on a column</strong> — grouping earthquakes by country, then summarizing each group with <strong>aggregation</strong> (<code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">.aggregate([...])</span></code>).</p></li>
+<li><p><strong>Transformation</strong> — returning a value for every row using whole-group information (standardizing within each group; removing a climatology to get anomalies).</p></li>
+<li><p><strong>Time grouping</strong> — grouping by parts of a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> to build a <strong>climatology</strong>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">resample</span></code></strong> — a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> over time bins, for changing time resolution.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rolling</span></code></strong> — moving-window calculations for smoothing.</p></li>
+</ul>
+<p>These same <code class="docutils literal notranslate"><span class="pre">groupby</span></code> / <code class="docutils literal notranslate"><span class="pre">resample</span></code> / <code class="docutils literal notranslate"><span class="pre">rolling</span></code> ideas carry straight into the next section, <strong>Xarray</strong>, where they work on labelled N-dimensional arrays.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1018,6 +1031,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
 

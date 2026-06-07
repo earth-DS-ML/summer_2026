@@ -431,6 +431,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
         </div>
@@ -1035,12 +1036,23 @@ An important point is that the Series keep their index during such operations.</
 </div>
 </div>
 </div>
-<p>Next time we will dig deeper into resampling, rolling means, and grouping operations (groupby).</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">df.resample('YE').mean()</span></code> to get yearly means and plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MAX</span></code> against the resulting index as a line chart. Then do the same with <code class="docutils literal notranslate"><span class="pre">'10D'</span></code> (10-day bins) — the lower-frequency series should look smoother.</p>
 </div>
 </section>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now met the two core pandas objects and the everyday ways to work with them:</p>
+<ul class="simple">
+<li><p><strong>Series and DataFrames</strong> — labelled 1-D and 2-D data, with <code class="docutils literal notranslate"><span class="pre">.info()</span></code> and <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> for a quick look.</p></li>
+<li><p><strong>Indexing</strong> — <code class="docutils literal notranslate"><span class="pre">.loc</span></code> (by label), <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> (by position), and boolean masks to filter rows by a condition.</p></li>
+<li><p><strong>Building and combining</strong> — adding computed columns, and joining a Series or DataFrame on a shared index.</p></li>
+<li><p><strong>Reading real data</strong> — <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> with <code class="docutils literal notranslate"><span class="pre">sep</span></code>, <code class="docutils literal notranslate"><span class="pre">na_values</span></code>, and <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code>, then setting a column as the index.</p></li>
+<li><p><strong>Time series</strong> — a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, slicing by date, plotting straight from a DataFrame, and a first taste of <code class="docutils literal notranslate"><span class="pre">resample</span></code>.</p></li>
+</ul>
+<p>Next we go deeper into grouping operations — <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">resample</span></code>, and <code class="docutils literal notranslate"><span class="pre">rolling</span></code> — in <a class="reference internal" href="pandas_groupby.html"><span class="std std-doc">Pandas: Groupby</span></a>.</p>
 </section>
 </section>
 
@@ -1127,6 +1139,7 @@ An important point is that the Series keep their index during such operations.</
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
 
