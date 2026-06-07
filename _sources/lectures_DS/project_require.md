@@ -1,7 +1,7 @@
 ## Final Project Requirements
 
 ### Team size requirements
-Work in groups of 2-4 people. However, each individual should be able to describe every single component of the project.
+Work in groups of **2–3 people**. Every member is expected to understand the *entire* project, not just the part they personally worked on.
 
 ### Learning Goals
 
@@ -45,6 +45,7 @@ Your final project must meet the following technical requirements
 
 *   A _single jupyter notebook_
 *   Stored in a standalone public github repo
+*   Each group member contributes their own commits, under their own GitHub account
 *   All data is either stored in the repo itself or downloaded / accessed from within the notebook (no manual download steps)
 *   Complete explanatory text / equations included in the notebook as markdown cells
 *   Notebook must execute in sequence with no errors
@@ -74,46 +75,43 @@ The approval process has two parts.
 For part 1: 
 - List of your group members 
 - A rough title and a very short informal description of what you are planning to do
-- The deadline for this task is **26 June 2025** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
+- The deadline for this task is **23 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
 
 For part 2:
 -  Create a new public github repo for your project
 -  Add a `README.md` file which contains the question / hypothesis you plan to investigate, links to the relevant datasets, and a three sentence summary of the analysis you plan to do. (It is very important that you have identified the datasets and know where to get them at this stage).
 -  Submit a link to your project repo via email to the instructor.
--  The deadline for doing this **1 July 2025** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
+-  The deadline for doing this **26 June 2026** (note that similar to homeworks, a delay would lead to the standard 10% penalty per 2 days)
 
 ### In-Class Presentations
 
-You are asked to give a 10-minute presentation about your project. This can be done by one team member or as a group where you take turns. 
-Do not prepare any slides. Instead, make your presentation by opening your notebook from GitHub on the presentation computer and walking us through parts of it. 
+Each group gives a **10-minute presentation** of its project during class. Presentations take place in week 6, on **Tuesday 30 June and Thursday 2 July 2026** — we'll assign each group to one of the two days.
 
-The presentations would take place on **3 July 2025** during the class period. 
+**Every group member must present part of the project** — take turns walking us through the different pieces. Don't prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.
 
-Your presentation should be concise and ideally cover the following topics:
+Your presentation should be concise and cover:
 
-*   What data did you analyze and how did you load it?
+*   What data did you analyze, and how did you load it?
 *   What is the most interesting figure you made? (Show us the figure.)
-*   What was the biggest challenge you faced in completing your project.
+*   What was the biggest challenge you faced?
 
-_Don't forget to make your project repo **public**; otherwise we won't be able to see it._
+**Q&A — this is part of your evaluation.** After each talk, the instructor and TA will ask **each group member a question or two**, often about a part of the project they did *not* personally present. Everyone is expected to be able to explain any part of the analysis, so make sure you understand the whole project, not just your own piece.
 
-> Note: Try to finish your projects to the best of your abilities before the class presentation. However, it is ok if you have not completed your project all the way (or to your heart's satisfaction) by 3 July 2025. Still prepare a presentation and walk us through what you have done so far, what challenges you are actively facing, and what you plan to do to wrap up the project. The deadline for the final submission of the code would be the following week (read next section). 
+_Don't forget to make your project repo **public** — otherwise we won't be able to see it._
 
+> Note: Try to finish your project before your presentation. But it's okay if it isn't fully complete by then — still present what you have, the challenges you're facing, and your plan to finish. The final code is due the following week (see below).
 
-### Final submission confirmation and 1-1 in person discussion
+### Final submission and evaluation
 
-To wrap up your project and this class, you will need to take 2 more steps after the presentation. Both these steps would need to be completed before end of the working day (5pm) on **10 July 2025**.
+To wrap up your project, confirm your final submission by **5pm on Friday 10 July 2026**:
 
-1. Confirm with the instructor and TA that you are happy with your submission (in your Github project repo), and you don't plan to do any more changes. This will let us know when to go in and grade.
-2. Setup a meeting time to have a 1-1 discussion between the instructor and each group member.
+- Make sure your completed notebook and all code are pushed to your public project repo.
+- Email the instructor and TA to confirm you are done and don't plan further changes — this tells us the project is ready to grade.
 
-Guidance for the 1-1 discussion: 
-- This is a critical part of your evaluation for the project
-- Schedule a time to meet the instructor on one of the following days: 3 July (sometime after the class), 8 July or 10 July. If possible, please find this time to meet with the instructor (via email or ask in class) with the whole group at once, and plan for each member spending about ~5 mins in 1-1 discussions.
-- Ideally, this should be scheduled after you are have completed step 1 (confirming your final submission).
-- During these meetings expect to be asked 2-3 questions about any part of the code or analysis, and be prepared to explain it in depth. (Each group member is expected to understand the entirety of the code, even if you had contributed to different parts of the work).
+**How the project is evaluated.** Because this is a group project, your grade reflects both the work itself and each member's understanding and contribution:
 
-_Try to not wait till the last day to complete all these steps, as we will have finite time to do these 1-1 meetings and people will be served on first come first serve basis. So if you are unable to find a time to schedule this because all slots were taken, it would count as an incomplete submission._
+1. **The project** — the analysis, figures, and notebook (see the requirements above).
+2. **The presentation and Q&A** — how clearly the group presents, and how each member answers questions about the project (see above).
+3. **Individual contribution** — each member must make their own commits to the project repo under their own GitHub account, so the commit history shows who did what.
 
-
-
+A member whose understanding (in the Q&A) or contribution (in the repo's commit history) is clearly lacking may receive a lower individual grade than the rest of their group, so make sure everyone stays involved throughout.
