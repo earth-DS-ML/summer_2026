@@ -1,7 +1,7 @@
 ## Final Project Requirements
 
-### Team size requirements
-Work in groups of **2–3 people**. Every member is expected to understand the *entire* project, not just the part they personally worked on.
+### Team size and project structure
+Work in groups of **2–3 people** around a shared project (a common topic and repository). **Each member contributes their own notebook**, carrying out a complementary piece of the work — this can be a different (but related) dataset, or a different analysis of the same data. Every member is still expected to understand the *entire* group project, not just their own piece.
 
 ### Learning Goals
 
@@ -40,18 +40,18 @@ The goal here is the same as with any science/data analysis project: to use the 
 
 Whatever you choose, you should _clearly define a hypothesis or scientific question that you aim to investigate with your analysis_. This will determine what you have to do.
 
-The results of this analysis will be figures. Beautiful figures which clearly provide answers to your question / hypothesis. Your notebook should contain at least 4 and no more than 8 figures. If you have closer to 4, they should be complex, multi-panel figures. All figures must have titles, clearly labeled axes, informative colormaps / colorbars, and legends, where appropriate.
+The results of this analysis will be figures — beautiful figures that clearly answer your question / hypothesis. **Each member's notebook should contain at least 3 and no more than 5 figures.** All figures must have titles, clearly labeled axes, informative colormaps / colorbars, and legends, where appropriate.
 
 ### Technical Requirements
 
 Your final project must meet the following technical requirements
 
-*   A _single jupyter notebook_
+*   **One Jupyter notebook per group member**, each carrying out a complementary part of the project and each able to stand on its own
 *   Stored in a standalone public github repo
 *   Each group member contributes their own commits, under their own GitHub account
 *   All data is either stored in the repo itself or downloaded / accessed from within the notebook (no manual download steps)
-*   Complete explanatory text / equations included in the notebook as markdown cells
-*   Notebook must execute in sequence with no errors
+*   Complete explanatory text / equations included in each notebook as markdown cells
+*   Each notebook must execute in sequence with no errors
 *   The whole github repo must be configured to run on [Leap pangeo hub](https://leap.2i2c.cloud/)
 
 You _must_ use either Pandas or Xarray (or both) in some part of your project. You _may_ use other scientific python libraries as well, if you wish, to facilitate some analysis that is not possible with Xarray / Pandas alone. 
@@ -88,9 +88,9 @@ For part 2:
 
 ### In-Class Presentations
 
-Each group gives a **10-minute presentation** of its project during class. Presentations take place in week 6, on **Tuesday 30 June and Thursday 2 July 2026** — we'll assign each group to one of the two days.
+Presentations take place in week 6, on **Tuesday 30 June and Thursday 2 July 2026** — we'll assign each group to one of the two days.
 
-**Every group member must present part of the project** — take turns walking us through the different pieces. Don't prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.
+**Each member presents their own notebook for about 5 minutes**, followed by about **5 minutes of questions for the whole group**. (So a group of three runs ~15 minutes of presentation plus ~5 minutes of Q&A; a pair runs ~10 + 5.) Don't prepare slides; instead, open your notebook from GitHub on the presentation computer and walk us through it.
 
 Your presentation should be concise and cover:
 
@@ -115,6 +115,6 @@ To wrap up your project, confirm your final submission by **5pm on Friday 10 Jul
 
 1. **The project** — the analysis, figures, and notebook (see the requirements above).
 2. **The presentation and Q&A** — how clearly the group presents, and how each member answers questions about the project (see above).
-3. **Individual contribution** — each member must make their own commits to the project repo under their own GitHub account, so the commit history shows who did what.
+3. **Individual contribution** — each member submits and presents their **own notebook** (a complementary piece of the project), committed under their own GitHub account. Your individual notebook is the main evidence of your contribution.
 
 A member whose understanding (in the Q&A) or contribution (in the repo's commit history) is clearly lacking may receive a lower individual grade than the rest of their group, so make sure everyone stays involved throughout.
