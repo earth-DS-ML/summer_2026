@@ -18,22 +18,86 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-from matplotlib import pyplot as plt
-plt.rcParams['figure.figsize'] = (12,7)
-%matplotlib inline
-import pandas as pd
+df.rolling(30, center=True).T_DAILY_MEAN.mean().plot()
+df.rolling(30, center=True, win_type='triang').T_DAILY_MEAN.mean().plot()
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 5[39m
-[32m      1[39m [38;5;28;01mimport[39;00m numpy [38;5;28;01mas[39;00m np
-[32m      2[39m [38;5;28;01mfrom[39;00m matplotlib [38;5;28;01mimport[39;00m pyplot [38;5;28;01mas[39;00m plt
-[32m      3[39m plt.rcParams[[33m'figure.figsize'[39m] = ([32m12[39m,[32m7[39m)
-[32m      4[39m get_ipython().run_line_magic([33m'matplotlib'[39m, [33m'inline'[39m)
-[32m----> [39m[32m5[39m [38;5;28;01mimport[39;00m pandas [38;5;28;01mas[39;00m pd
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/compat/_optional.py:158[39m, in [36mimport_optional_dependency[39m[34m(name, extra, min_version, errors)[39m
+[32m    157[39m [38;5;28;01mtry[39;00m:
+[32m--> [39m[32m158[39m     module = [30;43mimportlib[39;49m[30;43m.[39;49m[30;43mimport_module[39;49m[30;43m([39;49m[30;43mname[39;49m[30;43m)[39;49m
+[32m    159[39m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m err:
 
-[31mModuleNotFoundError[39m: No module named 'pandas'
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126[39m, in [36mimport_module[39m[34m(name, package)[39m
+[32m    125[39m         level += [32m1[39m
+[32m--> [39m[32m126[39m [38;5;28;01mreturn[39;00m [30;43m_bootstrap[39;49m[30;43m.[39;49m[30;43m_gcd_import[39;49m[30;43m([39;49m[30;43mname[39;49m[30;43m[[39;49m[30;43mlevel[39;49m[30;43m:[39;49m[30;43m][39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mpackage[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mlevel[39;49m[30;43m)[39;49m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1204[39m, in [36m_gcd_import[39m[34m(name, package, level)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1176[39m, in [36m_find_and_load[39m[34m(name, import_)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1126[39m, in [36m_find_and_load_unlocked[39m[34m(name, import_)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:241[39m, in [36m_call_with_frames_removed[39m[34m(f, *args, **kwds)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1204[39m, in [36m_gcd_import[39m[34m(name, package, level)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1176[39m, in [36m_find_and_load[39m[34m(name, import_)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1126[39m, in [36m_find_and_load_unlocked[39m[34m(name, import_)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:241[39m, in [36m_call_with_frames_removed[39m[34m(f, *args, **kwds)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1204[39m, in [36m_gcd_import[39m[34m(name, package, level)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1176[39m, in [36m_find_and_load[39m[34m(name, import_)[39m
+
+[36mFile [39m[32m<frozen importlib._bootstrap>:1140[39m, in [36m_find_and_load_unlocked[39m[34m(name, import_)[39m
+
+[31mModuleNotFoundError[39m: No module named 'scipy'
+
+The above exception was the direct cause of the following exception:
+
+[31mImportError[39m                               Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[45][39m[32m, line 2[39m
+[32m      1[39m df.rolling([32m30[39m, center=[38;5;28;01mTrue[39;00m).T_DAILY_MEAN.mean().plot()
+[32m----> [39m[32m2[39m df.rolling([32m30[39m, center=[38;5;28;01mTrue[39;00m, win_type=[33m'triang'[39m).T_DAILY_MEAN.mean().plot()
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/core/generic.py:12196[39m, in [36mNDFrame.rolling[39m[34m(self, window, min_periods, center, win_type, on, closed, step, method)[39m
+[32m  12192[39m         [32m2020[39m-[32m0[39m[32m1[39m-[32m0[39m[32m2[39m [32m2020[39m-[32m0[39m[32m1[39m-[32m0[39m[32m1[39m  [32m3.0[39m
+[32m  12193[39m         [32m2020[39m-[32m0[39m[32m1[39m-[32m0[39m[32m3[39m [32m2020[39m-[32m0[39m[32m1[39m-[32m0[39m[32m2[39m  [32m6.0[39m
+[32m  12194[39m         """
+[32m  12195[39m         [38;5;28;01mif[39;00m win_type [38;5;28;01mis[39;00m [38;5;28;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m> [39m[32m12196[39m             return Window(
+[32m  12197[39m                 self,
+[32m  12198[39m                 window=window,
+[32m  12199[39m                 min_periods=min_periods,
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/core/window/rolling.py:160[39m, in [36mBaseWindow.__init__[39m[34m(self, obj, window, min_periods, center, win_type, on, closed, step, method, selection)[39m
+[32m    154[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[32m    155[39m         [33mf[39m[33m"[39m[33minvalid on specified as [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.on[38;5;132;01m}[39;00m[33m, [39m[33m"[39m
+[32m    156[39m         [33m"[39m[33mmust be a column (of DataFrame), an Index or None[39m[33m"[39m
+[32m    157[39m     )
+[32m    159[39m [38;5;28mself[39m._selection = selection
+[32m--> [39m[32m160[39m [30;43mself[39;49m[30;43m.[39;49m[30;43m_validate[39;49m[30;43m([39;49m[30;43m)[39;49m
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/core/window/rolling.py:1130[39m, in [36mWindow._validate[39m[34m(self)[39m
+[32m   1128[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m([38;5;28mself[39m.win_type, [38;5;28mstr[39m):
+[32m   1129[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([33mf[39m[33m"[39m[33mInvalid win_type [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.win_type[38;5;132;01m}[39;00m[33m"[39m)
+[32m-> [39m[32m1130[39m signal = [30;43mimport_optional_dependency[39;49m[30;43m([39;49m
+[32m   1131[39m [30;43m    [39;49m[30;43m"[39;49m[30;43mscipy.signal.windows[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mextra[39;49m[30;43m=[39;49m[30;43m"[39;49m[30;43mScipy is required to generate window weight.[39;49m[30;43m"[39;49m
+[32m   1132[39m [30;43m[39;49m[30;43m)[39;49m
+[32m   1133[39m [38;5;28mself[39m._scipy_weight_generator = [38;5;28mgetattr[39m(signal, [38;5;28mself[39m.win_type, [38;5;28;01mNone[39;00m)
+[32m   1134[39m [38;5;28;01mif[39;00m [38;5;28mself[39m._scipy_weight_generator [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/compat/_optional.py:161[39m, in [36mimport_optional_dependency[39m[34m(name, extra, min_version, errors)[39m
+[32m    159[39m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m err:
+[32m    160[39m     [38;5;28;01mif[39;00m errors == [33m"[39m[33mraise[39m[33m"[39m:
+[32m--> [39m[32m161[39m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(msg) [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01merr[39;00m
+[32m    162[39m     [38;5;28;01mreturn[39;00m [38;5;28;01mNone[39;00m
+[32m    164[39m [38;5;66;03m# Handle submodules: if we have submodule, grab parent module from sys.modules[39;00m
+
+[31mImportError[39m: `Import scipy.signal.windows` failed. Scipy is required to generate window weight. Use pip or conda to install the scipy.signal.windows package.
 
