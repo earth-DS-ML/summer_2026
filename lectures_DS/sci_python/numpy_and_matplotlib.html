@@ -427,6 +427,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">Reduction Operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
         </div>
@@ -440,20 +441,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numpy-and-matplotlib">
 <h1>NumPy and Matplotlib<a class="headerlink" href="#numpy-and-matplotlib" title="Link to this heading">#</a></h1>
-<p>This lecture will introduce NumPy and Matplotlib.
-These are two of the most fundamental parts of the scientific python “ecosystem”.
-Most everything else is built on top of them.</p>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/330px-NumPy_logo_2020.svg.png" width="300px" />
-<p><strong>NumPy</strong>: <em>The fundamental package for scientific computing with Python</em></p>
+<p>Climate data is, underneath it all, <strong>numbers in arrays</strong> — a grid of model temperatures, a satellite swath, a stack of float profiles. <strong>NumPy</strong> is the library that lets Python store and compute on those arrays efficiently, and <strong>Matplotlib</strong> is how we turn them into figures. Almost everything later in this course (pandas, xarray) is built on top of these two, so this is the bedrock of the scientific Python stack.</p>
+<p>In this notebook we’ll create and index arrays, do math across whole arrays at once (vectorization and <strong>broadcasting</strong>), reduce them to summary statistics, and make our first plots.</p>
 <ul class="simple">
-<li><p>Website: <a class="reference external" href="https://numpy.org/" rel="noreferer noopener" target="_blank">https://numpy.org/</a></p></li>
-<li><p>GitHub: <a class="github reference external" href="https://github.com/numpy/numpy" rel="noreferer noopener" target="_blank">numpy/numpy</a></p></li>
-</ul>
-<img src="https://upload.wikimedia.org/wikipedia/en/5/56/Matplotlib_logo.svg" width="300px" />
-<p><strong>Matplotlib</strong>: <em>A comprehensive library for creating static, animated, and interactive visualizations in Python.</em></p>
-<ul class="simple">
-<li><p>Website: <a class="reference external" href="https://matplotlib.org/" rel="noreferer noopener" target="_blank">https://matplotlib.org/</a></p></li>
-<li><p>GitHub: <a class="github reference external" href="https://github.com/matplotlib/matplotlib" rel="noreferer noopener" target="_blank">matplotlib/matplotlib</a></p></li>
+<li><p><strong>NumPy</strong> — <em>the fundamental package for scientific computing with Python</em> (<a class="reference external" href="https://numpy.org/" rel="noreferer noopener" target="_blank">numpy.org</a>)</p></li>
+<li><p><strong>Matplotlib</strong> — <em>a comprehensive library for static, animated, and interactive visualizations</em> (<a class="reference external" href="https://matplotlib.org/" rel="noreferer noopener" target="_blank">matplotlib.org</a>)</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Working through this notebook</p>
@@ -842,7 +834,7 @@ We will now bring in Matplotlib to start visualizing these arrays.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24f1ee4a50&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa30dcbc390&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/ada57b23236e91b769515afd82f3a4851d9c6777ad237ca2719b74c0b53fbc12.png" src="../../_images/ada57b23236e91b769515afd82f3a4851d9c6777ad237ca2719b74c0b53fbc12.png" />
@@ -857,7 +849,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24f1cd8a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30d6c1c10&gt;
 </pre></div>
 </div>
 <img alt="../../_images/9417f51b4b3d0cda1e85a69e91093c52c7ba0b8150c979e8cb8e9990f6fd4196.png" src="../../_images/9417f51b4b3d0cda1e85a69e91093c52c7ba0b8150c979e8cb8e9990f6fd4196.png" />
@@ -870,7 +862,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24ef987fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30d666910&gt;
 </pre></div>
 </div>
 <img alt="../../_images/0b5f6dd681146f076497cc688e0961bd4e72e74e57c2c679e67c06430c0a55da.png" src="../../_images/0b5f6dd681146f076497cc688e0961bd4e72e74e57c2c679e67c06430c0a55da.png" />
@@ -900,7 +892,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24ef9a5650&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa30d64c090&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/2d3ba718679cc2bd8d968be6e319d37547bac71ff5a391abbaf7d61d9a9960f6.png" src="../../_images/2d3ba718679cc2bd8d968be6e319d37547bac71ff5a391abbaf7d61d9a9960f6.png" />
@@ -921,7 +913,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24ef9f0a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30d6c1550&gt;
 </pre></div>
 </div>
 <img alt="../../_images/16d3c75708b59e47fe95cab5f21ec95486b959d6ecdd3567127ff38648d110d3.png" src="../../_images/16d3c75708b59e47fe95cab5f21ec95486b959d6ecdd3567127ff38648d110d3.png" />
@@ -945,7 +937,7 @@ He we use <code class="docutils literal notranslate"><span class="pre">pcolormes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24f1b88310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30d56c550&gt;
 </pre></div>
 </div>
 <img alt="../../_images/9a3c82dcec91e82f7af7517aaa12e36e2fc0790df099db6c023b74196143a5a8.png" src="../../_images/9a3c82dcec91e82f7af7517aaa12e36e2fc0790df099db6c023b74196143a5a8.png" />
@@ -995,7 +987,7 @@ You can accidentally lose the structure of the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f251c52f690&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30b0fd750&gt;
 </pre></div>
 </div>
 <img alt="../../_images/705f45de467708dcbb3e25091d5b542396d0e813a6fdb256091fec13ead2f3d8.png" src="../../_images/705f45de467708dcbb3e25091d5b542396d0e813a6fdb256091fec13ead2f3d8.png" />
@@ -1010,7 +1002,7 @@ You can accidentally lose the structure of the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24f1c8a3d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30d65a1d0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/6826db7c59f4909297075b44c3cd2983efd0d5df8e783b9d734a362dc54f600e.png" src="../../_images/6826db7c59f4909297075b44c3cd2983efd0d5df8e783b9d734a362dc54f600e.png" />
@@ -1097,7 +1089,7 @@ When performing operations on two arrays, NumPy compares their shapes element-wi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24ef830110&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30afad090&gt;
 </pre></div>
 </div>
 <img alt="../../_images/1d34b98473492b683ec5122873efcf104c0271d03e588720baf068fe7c67bd91.png" src="../../_images/1d34b98473492b683ec5122873efcf104c0271d03e588720baf068fe7c67bd91.png" />
@@ -1110,7 +1102,7 @@ When performing operations on two arrays, NumPy compares their shapes element-wi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24ef406390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30ae17190&gt;
 </pre></div>
 </div>
 <img alt="../../_images/960146252404634b38c2c64db426b3eaab12f849607ad5e21b26e404a39e84ef.png" src="../../_images/960146252404634b38c2c64db426b3eaab12f849607ad5e21b26e404a39e84ef.png" />
@@ -1163,7 +1155,7 @@ Then the length-50 dimensions will line up.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f24ef4948d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa30af17650&gt;
 </pre></div>
 </div>
 <img alt="../../_images/4948254331371db6093325cc903dfba7f3f02f223ddabd5dcff27a5fd2cd1572.png" src="../../_images/4948254331371db6093325cc903dfba7f3f02f223ddabd5dcff27a5fd2cd1572.png" />
@@ -1225,7 +1217,7 @@ There are many different reduction operations. Here we will look at some of the 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7f24ef4343d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7fa30af96a50&gt;
 </pre></div>
 </div>
 <img alt="../../_images/944d3e14800252db778106456904aff424ea8d1b291eb5cafafadb200b5511c5.png" src="../../_images/944d3e14800252db778106456904aff424ea8d1b291eb5cafafadb200b5511c5.png" />
@@ -1247,7 +1239,7 @@ There are many different reduction operations. Here we will look at some of the 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24ef4cc090&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa30ad99090&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/273ed0e3af7aa9e3120a9a0b505878eee0a34f854dc7378a3abbf97edf90f26e.png" src="../../_images/273ed0e3af7aa9e3120a9a0b505878eee0a34f854dc7378a3abbf97edf90f26e.png" />
@@ -1260,7 +1252,7 @@ There are many different reduction operations. Here we will look at some of the 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24ef225550&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa30ade9210&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/48dfa7724335b6496c7d850db51de5a744c38e345f138042a52234a6df88ecec.png" src="../../_images/48dfa7724335b6496c7d850db51de5a744c38e345f138042a52234a6df88ecec.png" />
@@ -1391,6 +1383,18 @@ There are many different reduction operations. Here we will look at some of the 
 <p>Save the 3D array <code class="docutils literal notranslate"><span class="pre">arr3d</span></code> to a file called <code class="docutils literal notranslate"><span class="pre">arr3d.npy</span></code>. Load it back into a new variable and verify they’re equal using <code class="docutils literal notranslate"><span class="pre">np.testing.assert_equal</span></code>.</p>
 </div>
 </section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now met <strong>NumPy</strong>, the foundation of numerical Python:</p>
+<ul class="simple">
+<li><p><strong>Arrays (<code class="docutils literal notranslate"><span class="pre">ndarray</span></code>)</strong> — creating them (<code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">ones</span></code>, <code class="docutils literal notranslate"><span class="pre">arange</span></code>, <code class="docutils literal notranslate"><span class="pre">linspace</span></code>) and inspecting <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p></li>
+<li><p><strong>Indexing and slicing</strong> — pulling out elements, rows, columns, and sub-arrays.</p></li>
+<li><p><strong>Vectorized operations</strong> — math across whole arrays at once, including <strong>broadcasting</strong> between different shapes.</p></li>
+<li><p><strong>Reductions</strong> — collapsing arrays with <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, … along chosen axes.</p></li>
+<li><p><strong>Plotting and files</strong> — a first look at Matplotlib, and saving/loading arrays with <code class="docutils literal notranslate"><span class="pre">np.save</span></code>/<code class="docutils literal notranslate"><span class="pre">np.load</span></code>.</p></li>
+</ul>
+<p>Next we go deeper into visualization — the Figure/Axes model and the full range of plot types — in <a class="reference internal" href="more_matplotlib.html"><span class="std std-doc">More Matplotlib</span></a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1472,6 +1476,7 @@ There are many different reduction operations. Here we will look at some of the 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">Reduction Operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
 

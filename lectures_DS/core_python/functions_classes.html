@@ -425,6 +425,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magic-dunder-methods">Magic / dunder methods</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
             </nav>
         </div>
@@ -438,11 +439,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="python-functions-and-classes">
 <h1>Python Functions and Classes<a class="headerlink" href="#python-functions-and-classes" title="Link to this heading">#</a></h1>
-<p>For longer and more complex tasks, it is important to organize your code into reuseable elements.
-For example, if you find yourself cutting and pasting the same or similar lines of code over and over,
-you probably need to define a <em>function</em> to encapsulate that code and make it reusable.
-An important principle in programming in <strong>DRY</strong>: “don’t repeat yourself”.
-Repetition is tedious and opens you up to errors. Strive for elegance and simplicity in your programs.</p>
+<p>As your analyses grow, you’ll find yourself writing the same few lines again and again — converting units, computing the distance between two lat/lon points, cleaning a column. The fix is to wrap that logic in a reusable <strong>function</strong>. The guiding principle is <strong>DRY</strong> — <em>don’t repeat yourself</em>: repetition is tedious and a breeding ground for bugs.</p>
+<p>In this notebook we’ll write functions (and learn the subtle ways they interact with the variables around them), then build up to <strong>classes</strong> — bundles of data and behavior — using a <code class="docutils literal notranslate"><span class="pre">Hurricane</span></code> as our running example.</p>
 <div class="tip admonition">
 <p class="admonition-title">Working through this notebook</p>
 <p>This page is a Jupyter notebook. <strong>Download it</strong> using the ⬇ button in the top-right of the page, open it in your environment (JupyterLab on LEAP or Colab), and step through the cells. When you reach a <strong>Try it</strong> admonition, experiment in your own cells before moving on.</p>
@@ -792,7 +790,7 @@ Ryan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7fa0a4310dd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7f9d70c7e850&gt;
 </pre></div>
 </div>
 </div>
@@ -836,7 +834,7 @@ Ryan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7fa0a4311790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Hurricane at 0x7f9d70c79810&gt;
 </pre></div>
 </div>
 </div>
@@ -958,6 +956,17 @@ Ryan
 </div>
 </section>
 </section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now seen how to package logic into reusable pieces:</p>
+<ul class="simple">
+<li><p><strong>Functions</strong> — wrapping repeated logic with <code class="docutils literal notranslate"><span class="pre">def</span></code>, passing positional and keyword arguments, and returning results.</p></li>
+<li><p><strong>Pure vs. impure functions</strong> — why a function that quietly modifies its input (or relies on outside state) can surprise you.</p></li>
+<li><p><strong>Namespaces and scope</strong> — which variables a function can actually see.</p></li>
+<li><p><strong>Classes</strong> — bundling data and behavior together (our <code class="docutils literal notranslate"><span class="pre">Hurricane</span></code>), with <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">self</span></code>, and dunder methods like <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>.</p></li>
+</ul>
+<p>Next we look at how to organize functions and classes across files and projects in <a class="reference internal" href="organization_and_packaging.html"><span class="std std-doc">Organizing Python Projects</span></a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1037,6 +1046,7 @@ Ryan
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magic-dunder-methods">Magic / dunder methods</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
 
