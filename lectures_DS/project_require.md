@@ -75,7 +75,7 @@ You must have your project — your dataset(s) and general scope — approved by
 
 -  Create a new **public** GitHub repo for your project.
 -  Add a `README.md` that contains: your group members, a rough title, the question or hypothesis you plan to investigate, links to the dataset(s) you plan to use, and a three-sentence summary of the analysis you plan to do. (It is very important that you have identified your datasets and know where to get them at this stage.)
--  Email a link to your project repo to the instructor and TA.
+-  Submit a link to your project repo on the **project proposal** assignment on Courseworks.
 
 ### In-Class Presentations
 
@@ -100,7 +100,7 @@ _Don't forget to make your project repo **public** — otherwise we won't be abl
 To wrap up your project, confirm your final submission by **the end of Sunday night, 5 July 2026** (the same Sunday-night pattern as the weekly assignments):
 
 - Make sure your completed notebook and all code are pushed to your public project repo.
-- Email the instructor and TA to confirm you are done and don't plan further changes — this tells us the project is ready to grade.
+- Post a link to your project repo on the **final project** assignment on Courseworks to confirm you are done and don't plan to make further changes — this tells us the project is ready to grade.
 
 **How the project is evaluated.** Because this is a group project, your grade reflects both the work itself and each member's understanding and contribution:
 
