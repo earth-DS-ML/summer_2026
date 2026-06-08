@@ -335,7 +335,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-read-it">Open a terminal and read it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal">Open a terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-accessible-view">Read the output with the Accessible View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">If you can’t re-read earlier commands: turn on shell integration</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-python">Running Python</a></li>
@@ -420,8 +422,8 @@ above, rather than switching NVDA to browse mode.</p>
 </section>
 <section id="the-terminal-the-key-fix">
 <h2>The terminal — the key fix<a class="headerlink" href="#the-terminal-the-key-fix" title="Link to this heading">#</a></h2>
-<p>This is the part that did not work in the browser. In VS Code it does — but first, one
-important one-time setting.</p>
+<p>This is the part that did not work in the browser. In VS Code it does — but the
+screen-reader steps take a little one-time setup, so this section spells them out in detail.</p>
 <section id="make-your-terminal-use-git-bash">
 <h3>Make your terminal use Git Bash<a class="headerlink" href="#make-your-terminal-use-git-bash" title="Link to this heading">#</a></h3>
 <p>On Windows, VS Code’s terminal defaults to <strong>PowerShell</strong>, which uses different commands
@@ -437,18 +439,58 @@ terminal that <em>does</em> understand them. Set it as your default once:</p>
 exactly as written. <em>(When you later connect to the LEAP hub, its terminal is Linux, where
 these same commands also work — so nothing you learn here goes to waste.)</em></p>
 </section>
-<section id="open-a-terminal-and-read-it">
-<h3>Open a terminal and read it<a class="headerlink" href="#open-a-terminal-and-read-it" title="Link to this heading">#</a></h3>
+<section id="open-a-terminal">
+<h3>Open a terminal<a class="headerlink" href="#open-a-terminal" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Open a terminal: the <strong>Terminal</strong> menu → <strong>New Terminal</strong>, or press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>. A
-terminal opens at the bottom of the window, and your typing goes straight to it.</p></li>
-<li><p>Type a command and press Enter as usual — for example, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p></li>
-<li><p><strong>To read what the terminal printed, press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong> (Accessible View). You get the
-full terminal output as navigable text — which the in-browser JupyterLab terminal does
-not reliably provide.</p></li>
-<li><p>To jump between your previous commands inside that view, press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> (“Go to
-Symbol in Accessible View”).</p></li>
+terminal opens at the bottom of the window, and keyboard focus moves into it — so what
+you type goes straight to the terminal.</p></li>
+<li><p>Type a command and press Enter as usual — for example, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>. The result is printed on
+the next line.</p></li>
 </ol>
+</section>
+<section id="read-the-output-with-the-accessible-view">
+<h3>Read the output with the Accessible View<a class="headerlink" href="#read-the-output-with-the-accessible-view" title="Link to this heading">#</a></h3>
+<p>A sighted user just looks at the output. With a screen reader, you read it through the
+<strong>Accessible View</strong>, which turns the terminal’s contents into plain text you can move
+through one line at a time:</p>
+<ol class="arabic simple">
+<li><p>Make sure focus is in the terminal. If you’re not sure, press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> to jump back
+into it — <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> reads whatever is currently focused, so this matters.</p></li>
+<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong>. This opens the Accessible View of the whole terminal buffer.</p></li>
+<li><p>Read with the <strong>Up and Down arrow keys</strong> — your screen reader speaks one line at a time.
+You can arrow <em>up</em> past your most recent command to re-read earlier output that’s still
+on screen.</p></li>
+<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Escape</span></code></strong> to close the Accessible View and return to the terminal.</p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">If you forget these keys</p>
+<p>Any time focus is in the terminal, press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code></strong> (Accessibility Help). VS Code reads
+out the keys that work where you are, including the Accessible View — it’s the “what can I
+do here?” button.</p>
+</div>
+</section>
+<section id="if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">
+<h3>If you can’t re-read earlier commands: turn on shell integration<a class="headerlink" href="#if-you-can-t-re-read-earlier-commands-turn-on-shell-integration" title="Link to this heading">#</a></h3>
+<p>Jumping <em>between</em> your previous commands in the Accessible View — pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code>
+there to move from one command’s output to another — relies on a VS Code feature called
+<strong>shell integration</strong>. It usually turns on by itself, but with Git Bash it sometimes
+doesn’t, and then re-reading past output can fail. If that happens, switch it on by hand.
+This is a <strong>one-time</strong> step, and a sighted helper or the course assistant can do it with you
+once:</p>
+<ol class="arabic">
+<li><p>In the terminal, run this single command. It adds shell integration to Git Bash’s
+startup file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;[[ &quot;$TERM_PROGRAM&quot; == &quot;vscode&quot; ]] &amp;&amp; . &quot;$(code --locate-shell-integration-path bash)&quot;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+</li>
+<li><p>Close the terminal (type <code class="docutils literal notranslate"><span class="pre">exit</span></code> and press Enter), then open a fresh one with <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>.</p></li>
+</ol>
+<p>Now <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> inside the Accessible View lists your recent commands, so you can jump
+straight to any one’s output. <em>(To confirm it’s active, a sighted helper can hover the mouse
+over the terminal tab: VS Code shows the shell-integration quality as “Rich”, “Basic”, or
+“None” — “None” means it isn’t on yet.)</em></p>
 <p>Everything the course shows you “in a JupyterLab terminal” — <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, and the
 rest of the next lesson — you do <strong>here</strong>, in this Git Bash terminal.</p>
 </section>
@@ -492,6 +534,7 @@ written mainly around opening notebooks; you can ignore those parts and simply u
 <li><p><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> — Accessible View (read terminal / notebook / error output)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> — open a terminal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> — move between commands in the Accessible View</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Escape</span></code> — close the Accessible View</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> — Command Palette (run any command by name)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code> — save the current file</p></li>
 </ul>
@@ -571,7 +614,9 @@ Git Bash terminal you just set up.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal-and-read-it">Open a terminal and read it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal">Open a terminal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-accessible-view">Read the output with the Accessible View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">If you can’t re-read earlier commands: turn on shell integration</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-python">Running Python</a></li>

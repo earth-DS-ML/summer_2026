@@ -67,8 +67,8 @@ notebooks:
 
 ## The terminal — the key fix
 
-This is the part that did not work in the browser. In VS Code it does — but first, one
-important one-time setting.
+This is the part that did not work in the browser. In VS Code it does — but the
+screen-reader steps take a little one-time setup, so this section spells them out in detail.
 
 ### Make your terminal use Git Bash
 
@@ -85,16 +85,57 @@ Now every terminal you open is a Git Bash terminal, and the commands in the less
 exactly as written. *(When you later connect to the LEAP hub, its terminal is Linux, where
 these same commands also work — so nothing you learn here goes to waste.)*
 
-### Open a terminal and read it
+### Open a terminal
 
 1. Open a terminal: the **Terminal** menu → **New Terminal**, or press `` Ctrl+` ``. A
-   terminal opens at the bottom of the window, and your typing goes straight to it.
-2. Type a command and press Enter as usual — for example, `pwd`.
-3. **To read what the terminal printed, press `Alt+F2`** (Accessible View). You get the
-   full terminal output as navigable text — which the in-browser JupyterLab terminal does
-   not reliably provide.
-4. To jump between your previous commands inside that view, press `Ctrl+Shift+O` ("Go to
-   Symbol in Accessible View").
+   terminal opens at the bottom of the window, and keyboard focus moves into it — so what
+   you type goes straight to the terminal.
+2. Type a command and press Enter as usual — for example, `pwd`. The result is printed on
+   the next line.
+
+### Read the output with the Accessible View
+
+A sighted user just looks at the output. With a screen reader, you read it through the
+**Accessible View**, which turns the terminal's contents into plain text you can move
+through one line at a time:
+
+1. Make sure focus is in the terminal. If you're not sure, press `` Ctrl+` `` to jump back
+   into it — `Alt+F2` reads whatever is currently focused, so this matters.
+2. Press **`Alt+F2`**. This opens the Accessible View of the whole terminal buffer.
+3. Read with the **Up and Down arrow keys** — your screen reader speaks one line at a time.
+   You can arrow *up* past your most recent command to re-read earlier output that's still
+   on screen.
+4. Press **`Escape`** to close the Accessible View and return to the terminal.
+
+:::{admonition} If you forget these keys
+:class: tip
+Any time focus is in the terminal, press **`Alt+F1`** (Accessibility Help). VS Code reads
+out the keys that work where you are, including the Accessible View — it's the "what can I
+do here?" button.
+:::
+
+### If you can't re-read earlier commands: turn on shell integration
+
+Jumping *between* your previous commands in the Accessible View — pressing `Ctrl+Shift+O`
+there to move from one command's output to another — relies on a VS Code feature called
+**shell integration**. It usually turns on by itself, but with Git Bash it sometimes
+doesn't, and then re-reading past output can fail. If that happens, switch it on by hand.
+This is a **one-time** step, and a sighted helper or the course assistant can do it with you
+once:
+
+1. In the terminal, run this single command. It adds shell integration to Git Bash's
+   startup file:
+
+   ~~~
+   echo '[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"' >> ~/.bashrc
+   ~~~
+
+2. Close the terminal (type `exit` and press Enter), then open a fresh one with `` Ctrl+` ``.
+
+Now `Ctrl+Shift+O` inside the Accessible View lists your recent commands, so you can jump
+straight to any one's output. *(To confirm it's active, a sighted helper can hover the mouse
+over the terminal tab: VS Code shows the shell-integration quality as "Rich", "Basic", or
+"None" — "None" means it isn't on yet.)*
 
 Everything the course shows you "in a JupyterLab terminal" — `pwd`, `ls`, `cd`, and the
 rest of the next lesson — you do **here**, in this Git Bash terminal.
@@ -137,6 +178,7 @@ written mainly around opening notebooks; you can ignore those parts and simply u
 - `Alt+F2` — Accessible View (read terminal / notebook / error output)
 - `` Ctrl+` `` — open a terminal
 - `Ctrl+Shift+O` — move between commands in the Accessible View
+- `Escape` — close the Accessible View
 - `Ctrl+Shift+P` — Command Palette (run any command by name)
 - `Ctrl+S` — save the current file
 
