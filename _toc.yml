@@ -43,7 +43,7 @@ parts:
     - file: lectures_DS/xarray/overview
     - file: lectures_DS/xarray/xarray_fundamentals
     - file: lectures_DS/xarray/xarray_advanced
-    - file: assignments/xarray_lab
+    - file: lectures_DS/xarray/assignment6
   - caption: Other Geoscience and Advanced Concepts
     chapters:
     - file: lectures_DS/geoscience/final_lec
