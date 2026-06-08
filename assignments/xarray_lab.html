@@ -436,6 +436,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below">4) Group by and ENSO: Reproduce the SST curve from the figure below</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
 </ul>
             </nav>
         </div>
@@ -449,11 +450,29 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lab-xarray-with-sea-surface-temperature-sst-data">
 <h1>Lab: Xarray with Sea Surface Temperature (SST) data<a class="headerlink" href="#lab-xarray-with-sea-surface-temperature-sst-data" title="Link to this heading">#</a></h1>
-<p>Here we will work with NOAA’s SST dataset, which can be accessed via:</p>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to your completed <strong>notebook</strong> on the matching Courseworks assignment.</p>
+<p>In this lab you’ll apply xarray to NOAA’s Extended Reconstructed SST (ERSST v5) dataset, accessed over OPeNDAP:</p>
 <blockquote>
-<div><p><a class="reference external" href="http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc" rel="noreferer noopener" target="_blank">http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc</a></p>
+<div><p><a class="reference external" href="https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc" rel="noreferer noopener" target="_blank">https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc</a></p>
 </div></blockquote>
-<p>Start by importing Numpy, Matplotlib, and Xarray. Set the default figure size to (12, 6).</p>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the xarray skills from this section:</p>
+<ul class="simple">
+<li><p>Open a gridded dataset over OPeNDAP and inspect its metadata (<code class="docutils literal notranslate"><span class="pre">attrs</span></code>, <code class="docutils literal notranslate"><span class="pre">long_name</span></code>)</p></li>
+<li><p>Compute time-means and spatial means; plot maps and timeseries</p></li>
+<li><p>Build a latitude (<span class="math notranslate nohighlight">\(\cos\lambda\)</span>) weighting and take an area-weighted spatial mean</p></li>
+<li><p>Select point locations with <code class="docutils literal notranslate"><span class="pre">.sel</span></code> and combine them along a new <code class="docutils literal notranslate"><span class="pre">location</span></code> dimension with <code class="docutils literal notranslate"><span class="pre">concat</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to build a climatology and anomalies, and <code class="docutils literal notranslate"><span class="pre">rolling</span></code> for a running mean</p></li>
+<li><p>Compute the Niño 3.4 ENSO index from SST anomalies</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Working through this notebook</p>
+<p><strong>Download</strong> this notebook using the ⬇ button in the top-right (or copy-paste the cells into a fresh notebook), open it in your environment (JupyterLab on LEAP or Colab), and fill in your solution under each numbered task.</p>
+<p>When you’re done, follow the <a class="reference internal" href="#submission-instructions"><span class="xref myst">submission instructions</span></a> at the bottom of the page.</p>
+</div>
+<p>Start by importing NumPy, Matplotlib, and Xarray. Set the default figure size to (12, 6).</p>
 <section id="opening-data-and-examining-the-metadata">
 <h2>1) Opening data and examining the metadata<a class="headerlink" href="#opening-data-and-examining-the-metadata" title="Link to this heading">#</a></h2>
 <section id="open-the-dataset-and-display-its-contents">
@@ -537,6 +556,16 @@ Display the combined dataset.</p>
 </ul>
 <p>(Note that “anomaly” means that the seasonal cycle, also called the “climatology” has been removed.)</p>
 <p>Also for this part: Drop the <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code> variable as we did in class and trim the data to 1950 onward for this assignment.</p>
+</section>
+<section id="submission-instructions">
+<h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your completed notebook as <code class="docutils literal notranslate"><span class="pre">xarray_lab.ipynb</span></code> inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo, then push the commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>&lt;weekN&gt;/xarray_lab.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit the Xarray SST lab&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Then post a link to your completed notebook on the matching <strong>Courseworks</strong> assignment. Due Sunday night.</p>
 </section>
 </section>
 
@@ -626,6 +655,7 @@ Display the combined dataset.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below">4) Group by and ENSO: Reproduce the SST curve from the figure below</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
 </ul>
   </nav></div>
 
