@@ -1,151 +1,33 @@
-# Packaging Python Code
+# Going Further with Computing
 
-This page extends the [Modules section](../core_python/organization_and_packaging.ipynb) from Core Python. There, we showed how a `.py` file (a *module*) can hold reusable functions that you import into a notebook — but modules only work from the same directory. Once you want to share code across projects, with collaborators, or with the wider community, you turn the module into a **package**. This page walks through that step and the surrounding ecosystem of tests and continuous integration.
+This course introduced just enough programming to get you working with data. But real research and professional computing draws on a much wider set of skills — and simply knowing these things exist, and roughly what they are for, makes them far easier to pick up when a project calls for them.
 
-None of this is required for the weekly assignments — it's reference / further-reading material for when your own research code matures.
+This page is a short, curated map of **coding and computing topics beyond this course** that are worth knowing about. None of it is required — think of it as signposts for where to go next as your own work grows.
 
-## Packages
+## Where to go learn this
 
-[Packages](https://docs.python.org/3/tutorial/modules.html#packages) are Python's way of encapsulating reusable code for sharing with others. Packaging is a huge topic — this page just scratches the surface.
+There are many good books, courses, and tutorials for this kind of material. One we particularly like is MIT's free [Missing Semester of Your CS Education](https://missing.csail.mit.edu/) — short, practical lectures on exactly the tools that usually get picked up informally rather than taught in a class. The [2026 edition](https://missing.csail.mit.edu/2026/) is current and well worth your time; each lecture is about an hour and stands on its own, and we link the relevant ones beside the topics below.
 
-You've already interacted with many packages. Browse some of their GitHub repositories to see the structure of a large Python package:
+## Topics worth knowing about
 
-- NumPy: <https://github.com/numpy/numpy>
-- Pandas: <https://github.com/pandas-dev/pandas>
-- Xarray: <https://github.com/pydata/xarray>
+A handful of the most useful next steps, each framed by what you already did in this course:
 
-For a smaller, more readable example, see the xrft package: <https://github.com/xgcm/xrft>
+- **The command line, in depth** ([shell](https://missing.csail.mit.edu/2026/course-shell/), [command-line environment](https://missing.csail.mit.edu/2026/command-line-environment/)) — in the *Computing Environment* module you got around the shell with `pwd`, `ls`, and `cd`. That barely scratches the surface: with scripting and pipes you can automate repetitive work, chain tools together, and work fluently on the remote servers and HPC clusters where much climate data lives — often with no graphical interface at all.
 
-These packages all share a common basic structure. Imagine we wanted to turn our `gcdistance` module into a package — it would look like this:
+- **Version control, beyond the basics** ([Version Control and Git](https://missing.csail.mit.edu/2026/version-control/)) — you used Git to `commit` and `push` your assignments to GitHub. Branches, merges, and pull requests are the next step: they let you try out changes without fear of losing work, and collaborate on shared code without overwriting each other.
 
-```
-README.md
-LICENSE
-environment.yml
-requirements.txt
-setup.py
-gcdistance/__init__.py
-gcdistance/gcdistance.py
-gcdistance/tests/__init__.py
-gcdistance/tests/test_gcdistance.py
-```
+- **Debugging and profiling** ([Debugging and Profiling](https://missing.csail.mit.edu/2026/debugging-profiling/)) — working in notebooks, you could poke at a problem interactively: rerun a cell, print a variable, read the traceback inline. That easy visibility fades once your code grows into functions and scripts, where you can no longer see what is happening *inside* a function from the outside. A **debugger** lets you pause a running program and step through its variables one line at a time, and a **profiler** measures which lines actually take the time — so when a long analysis is slow, you fix the part that matters instead of guessing.
 
-The actual package is the `gcdistance/` subdirectory. The other files are auxiliary — they help others understand and install the package:
+- **Packaging and sharing code** ([Packaging and Shipping Code](https://missing.csail.mit.edu/2026/shipping-code/)) — in *Core Python* you turned a set of functions into a `.py` module (`gcdistance`) and imported it. Packaging is the next step up: wrapping modules into an installable package, so a one-off analysis becomes a tool you and your collaborators can reuse across projects and cite in a paper.
 
-| File | Purpose |
-|------|---------|
-| `README.md` | Explain what the package is for |
-| `LICENSE` | Defines the legal terms under which others can use the package. [Open source](https://opensource.org/licenses/category) is encouraged. |
-| `environment.yml` | A conda environment describing the package's dependencies ([more info](https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file)) |
-| `requirements.txt` | Same idea, but for pip ([more info](https://pip.pypa.io/en/stable/user_guide/#requirements-files)) |
-| `setup.py` | A Python script that installs your package ([more info](https://setuptools.readthedocs.io/en/latest/setuptools.html)) |
+- **Testing and code quality** ([Code Quality](https://missing.csail.mit.edu/2026/code-quality/)) — as the notebooks in this course grew, you mostly checked your work by eye. Automated tests, linters, and continuous integration check it for you — giving you confidence that your results are reproducible (the software-side complement to the reproducibility ideas from the *Data* module) and that your code keeps working as it changes.
 
-## The actual package
+## Agentic coding
 
-The directory `gcdistance/` is the actual package. Any directory containing an `__init__.py` file is recognized by Python as a package. The `__init__.py` file can be blank, but it needs to be present. From the parent directory, you can import a module from the package as follows:
+This one deserves a special mention, because it is changing how code gets written right now.
 
-```python
-from gcdistance import gcdistance
-```
+Throughout this course we asked you to use AI as a chat-based tutor — asking it to explain things and unstick you, not to write your code for you. That was deliberate: you only build real fluency by working through the problems yourself.
 
-This is a bit redundant — that's because the `gcdistance.py` module has the same name as the `gcdistance` package directory.
+It is worth knowing where the field is heading, though. **Agentic coding tools** — such as [Claude Code](https://claude.com/claude-code), [Cursor](https://cursor.com/), and [GitHub Copilot](https://github.com/features/copilot) — go well beyond chat: you describe what you want in plain language, and the tool reads your whole project, writes and runs code, executes tests, and iterates on the results on its own. This is quickly becoming a standard part of how research and professional software gets written, and Missing Semester's [lecture on agentic coding](https://missing.csail.mit.edu/2026/agentic-coding/) is a good hands-on introduction.
 
-This import only works from the parent directory; it isn't globally accessible from your Python environment until you install the package (next section).
-
-## `setup.py`
-
-`setup.py` is the file that makes your package installable and globally accessible. Here is a minimal example:
-
-```python
-from setuptools import setup
-
-setup(
-    name="gcdistance",
-    version="0.1.0",
-    author="Your Name",
-    packages=["gcdistance"],
-    install_requires=["numpy"],
-)
-```
-
-There's a [wide range of options](https://setuptools.readthedocs.io/en/latest/setuptools.html) for `setup.py`. More fields are required if you want to [upload your package to PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/) (so others can install it via `pip install gcdistance`).
-
-To install the package locally, run from the root directory:
-
-```bash
-pip install .
-```
-
-If you plan to keep developing the package, install it in "editable" mode:
-
-```bash
-pip install -e .
-```
-
-In editable mode, the files are symlinked rather than copied — changes you make to the source take effect immediately without reinstalling.
-
-> **Note:** Modern Python packaging is moving from `setup.py` to a [`pyproject.toml`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/) file as the canonical place to declare package metadata. `setup.py` still works for now, but new projects often start with `pyproject.toml` from the beginning.
-
-## Testing
-
-A software package needs [tests](https://en.wikipedia.org/wiki/Software_testing) to make sure it works as intended — and continues to work after future changes. Matt Rocklin has a [blog post](http://matthewrocklin.com/blog/work/2016/02/08/tests) on why tests matter.
-
-Tests don't have to be complicated. They are simply checks that verify your code does what it's supposed to do.
-
-To add tests to our project, create `gcdistance/tests/test_gcdistance.py` (and an empty `__init__.py` in the same directory). Here's an example:
-
-```python
-import numpy as np
-import pytest
-
-from gcdistance.gcdistance import great_circle_distance
-
-def test_great_circle_distance():
-    # distance between two identical points should be zero
-    assert great_circle_distance((20., 30.), (20., 30.)) == 0
-
-    # distance between New York and London
-    new_york = 40.7128, -74.0060
-    london = 51.5074, 0.1278
-    dist_nyc_london = great_circle_distance(new_york, london)
-
-    # approximate check (floats won't be exactly equal)
-    np.testing.assert_allclose(dist_nyc_london, 5.587e6, rtol=1e-5)
-
-    # passing the wrong number of arguments should raise TypeError
-    with pytest.raises(TypeError):
-        great_circle_distance(1, 2, 3, 4)
-```
-
-We use [pytest](https://docs.pytest.org/) to run our tests. Install it with `pip install pytest` if you don't already have it, then run:
-
-```bash
-pytest -v
-```
-
-from the root directory of your project. You should see a notification that the tests passed. Try changing a test to make it fail, and see what pytest reports.
-
-## Continuous Integration with GitHub Actions
-
-You can configure automatic testing by integrating GitHub with [GitHub Actions](https://docs.github.com/en/actions). Every time you push commits, your tests run automatically in the cloud, and GitHub flags any failures on the pull request page.
-
-A minimal setup is a single YAML file at `.github/workflows/test.yml`:
-
-```yaml
-name: tests
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: pip install -e . pytest
-      - run: pytest
-```
-
-Commit this file alongside your code, push to GitHub, and the next push triggers a test run. You'll get a green checkmark (or a red X) next to each commit on the GitHub web UI.
-
-> Older course material on the web sometimes references **Travis CI** — that was the previous-generation CI service and has been largely replaced by GitHub Actions for open-source Python projects.
+The catch — and the reason we had you learn the fundamentals first — is that these tools are only as good as your ability to steer and check them. You still need to read the code, recognize when it is wrong or doing something you did not intend, and know what to ask for next. The skills from this course are exactly what let you use agentic tools as a force multiplier, rather than being led astray by them.
