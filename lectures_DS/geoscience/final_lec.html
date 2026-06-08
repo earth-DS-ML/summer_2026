@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quick survey of some other important concepts in geo-data-science &#8212; Earth Data Science and Machine Learning</title>
+    <title>A quick tour of further topics in geoscience data science &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Packaging Python Code" href="../advanced/packaging.html" />
-    <link rel="prev" title="Assignment 6: Xarray with Sea Surface Temperature (SST) data" href="../xarray/assignment6.html" />
+    <link rel="prev" title="Final Project Requirements" href="../project_require.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -214,14 +214,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Geoscience and Advanced Concepts</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick survey of some other important concepts in geo-data-science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Packaging Python Code</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Packaging Python Code</a></li>
 </ul>
 
     </div>
@@ -404,7 +404,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Quick survey of some other important concepts in geo-data-science</h1>
+    <h1>A quick tour of further topics in geoscience data science</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -442,10 +442,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="quick-survey-of-some-other-important-concepts-in-geo-data-science">
-<h1>Quick survey of some other important concepts in geo-data-science<a class="headerlink" href="#quick-survey-of-some-other-important-concepts-in-geo-data-science" title="Link to this heading">#</a></h1>
-<p>The field of data science for Earth sciences is vast, and the available software tools are always growing and changing. If you end up using these tools in your work, you can (and should) expect to keep learning and refining your skills and toolbox. This also means that no single course can cover everything (specially not a 6 week course).</p>
-<p>In this notebook we will get a high level overview of a few more concepts (software packages), which may be helpful as starting points for further exploration.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="a-quick-tour-of-further-topics-in-geoscience-data-science">
+<h1>A quick tour of further topics in geoscience data science<a class="headerlink" href="#a-quick-tour-of-further-topics-in-geoscience-data-science" title="Link to this heading">#</a></h1>
+<p>The field of data science for the Earth sciences is vast, and the software tools are always growing and changing. If you end up using these tools in your work, you can (and should) expect to keep learning and refining your skills and toolbox. It also means that no single course can cover everything — especially not a six-week one.</p>
+<p>This notebook is a <strong>survey</strong>: a high-level tour of a few more concepts and software packages that make good starting points for further exploration. It belongs to the appendix and is <strong>not assessed</strong> — read it for orientation, and come back to it when a project (or your later work) pushes you toward one of these tools.</p>
+<div class="note admonition">
+<p class="admonition-title">This is a read-along tour, not a hands-on lab</p>
+<p>Unlike the rest of the course, this notebook uses specialised packages that are <strong>not installed in the course environment</strong> (<code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, <code class="docutils literal notranslate"><span class="pre">xmip</span></code>, <code class="docutils literal notranslate"><span class="pre">intake-esm</span></code>, …) and pulls large datasets from the cloud. You are <strong>not expected to run it</strong>. The outputs are saved in the page so you can read along; if you want to try a piece yourself, you’ll first need to install the relevant package.</p>
+</div>
 <section id="maps">
 <h2>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h2>
 <p>This is a derivative of the longer notebook available <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html" rel="noreferer noopener" target="_blank">here</a>.</p>
@@ -12455,7 +12459,7 @@ z
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integration with xarray</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&#39;</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time_bnds&#39;</span><span class="p">])</span>
 <span class="n">sst</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2000-01-01&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -14483,7 +14487,7 @@ Attributes: (12/51)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">ddict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="c1"># construct yearly global mean timeseries</span>
-    <span class="n">mean_temp</span> <span class="o">=</span>  <span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">coarsen</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">mean_temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">coarsen</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="n">mean_temp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;member_id&#39;</span><span class="p">)</span>
     <span class="c1"># lets also plot the average over all members</span>
@@ -14547,12 +14551,12 @@ Attributes: (12/51)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../xarray/assignment6.html"
+       href="../project_require.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assignment 6: Xarray with Sea Surface Temperature (SST) data</p>
+        <p class="prev-next-title">Final Project Requirements</p>
       </div>
     </a>
     <a class="right-next"
