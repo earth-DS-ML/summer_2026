@@ -83,11 +83,11 @@ Because xarray is central to gridded-data analysis in the Earth and environmenta
 
 - [Xarray Fundamentals](./xarray_fundamentals.ipynb) — DataArrays and Datasets, label-based selection, computation, broadcasting, reductions, and loading netCDF/Zarr data.
 - [Xarray: Advanced](./xarray_advanced.ipynb) — interpolation, `groupby`, `resample`, `rolling`, and `coarsen`; building climatologies and more.
-- [Lab: Xarray with SST data](../../assignments/xarray_lab.ipynb) — apply xarray to NOAA sea-surface-temperature data (the at-home assignment).
+- [Assignment 6: Xarray with SST data](./assignment6.ipynb) — apply xarray to NOAA sea-surface-temperature data (the at-home assignment).
 
 :::{admonition} In-class assignment — 10 points
 :class: note
-Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook. To submit, push your completed notebook(s) to your week folder and post a link to each on the matching **Courseworks** assignment. (The at-home assignment — the SST lab — is graded separately, 10 points.)
+Your in-class assignment for this section is to complete the **"Try it"** exercises in the lecture notebooks above. Work through them in your own copy of each notebook. To submit, push your completed notebook(s) to your week folder and post a link to each on the matching **Courseworks** assignment. (The at-home assignment — Assignment 6, the SST lab — is graded separately, 10 points.)
 :::
 
 ## Working through the lectures
