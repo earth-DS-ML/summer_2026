@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Xarray for multidimensional gridded data &#8212; Earth Data Science and Machine Learning</title>
+    <title>Overview &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/xarray/xarray_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/xarray/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Xarray Fundamentals" href="xarray_fundamentals.html" />
@@ -211,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Xarray for multidimensional gridded data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xarray_fundamentals.html">Xarray Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xarray_advanced.html">Xarray Advanced</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assignments/xarray_lab.html">Lab: Xarray with Sea Surface Temperature (SST) data</a></li>
@@ -300,7 +300,7 @@
       
       
       
-      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/xarray/xarray_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/earth-DS-ML/summer_2026/issues/new?title=Issue%20on%20page%20%2Flectures_DS/xarray/overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -330,7 +330,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/xarray/xarray_intro.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/xarray/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -406,7 +406,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Xarray for multidimensional gridded data</h1>
+    <h1>Overview</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,7 +416,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals-for-xarray">Learning Goals for Xarray</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-1-xarray-fundamentals">Lesson 1: Xarray Fundamentals</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-creation">Dataset Creation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-and-interpolation">Basic Indexing and Interpolation</a></li>
@@ -426,14 +426,15 @@
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-2-advanced-usage">Lesson 2: Advanced Usage</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-s-groupby-resample-and-rolling">Xarray’s groupby, resample, and rolling</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-combining-datasets">Merging Combining Datasets</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-and-combining-datasets">Merging and Combining Datasets</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-computations">Advanced Computations</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
             </nav>
         </div>
@@ -445,28 +446,27 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="xarray-for-multidimensional-gridded-data">
-<h1>Xarray for multidimensional gridded data<a class="headerlink" href="#xarray-for-multidimensional-gridded-data" title="Link to this heading">#</a></h1>
-<p>In the previous set of lectures, we saw how Pandas provided a way to keep track of additional “metadata” surrounding tabular datasets, including “indexes” for each row and labels for each column. These features, together with Pandas’ many useful routines for all kinds of data munging and analysis, have made Pandas one of the most popular python packages in the world.</p>
-<p>However, not all Earth science datasets easily fit into the “tabular” model (i.e. rows and columns) imposed by Pandas. In particular, we often deal with <em>multidimensional data</em>. By <em>multidimensional data</em> (also often called <em>N-dimensional</em>), I mean data with many independent dimensions or axes. For example, we might represent Earth’s surface temperature <span class="math notranslate nohighlight">\(T\)</span> as a three dimensional variable</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>In the previous module, we saw how Pandas keeps track of the “metadata” surrounding tabular datasets — an <em>index</em> for each row and labels for each column. These features, together with Pandas’ many routines for data munging and analysis, have made it one of the most popular Python packages in the world.</p>
+<p>However, not all Earth and environmental datasets fit the “tabular” (rows-and-columns) model. We often deal with <strong>multidimensional data</strong> (also called <em>N-dimensional</em>): data with many independent dimensions or axes. For example, we might represent Earth’s surface temperature <span class="math notranslate nohighlight">\(T\)</span> as a three-dimensional variable</p>
 <div class="math notranslate nohighlight">
 \[ T(x, y, t) \]</div>
 <p>where <span class="math notranslate nohighlight">\(x\)</span> is longitude, <span class="math notranslate nohighlight">\(y\)</span> is latitude, and <span class="math notranslate nohighlight">\(t\)</span> is time.</p>
-<p>The point of xarray is to provide pandas-level convenience for working with this type of data.</p>
-<p><img alt="xarray data model" src="http://xarray.pydata.org/en/stable/_images/dataset-diagram.png" /></p>
-<section id="learning-goals-for-xarray">
-<h2>Learning Goals for Xarray<a class="headerlink" href="#learning-goals-for-xarray" title="Link to this heading">#</a></h2>
-<p>Because of the importance of xarray for data analysis in geoscience, we are going to spend a long time on it.
-The goals of this section include the following.</p>
+<p><strong>Xarray</strong> brings pandas-level convenience to this kind of labelled, multidimensional data — and it is the workhorse for gridded climate data, from model output and reanalysis to satellite fields.</p>
+<p><img alt="xarray data model" src="https://docs.xarray.dev/en/stable/_images/dataset-diagram.png" /></p>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>Because xarray is central to gridded-data analysis in the Earth and environmental sciences, we give it a full section. By the end you should be able to:</p>
 <section id="lesson-1-xarray-fundamentals">
 <h3>Lesson 1: Xarray Fundamentals<a class="headerlink" href="#lesson-1-xarray-fundamentals" title="Link to this heading">#</a></h3>
 <section id="dataset-creation">
 <h4>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Describe the core xarray data structures, the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> and the <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>, and the components that make them up, including: Data Variables, Dimensions, Coordinates, Indexes, and Attributes</p></li>
-<li><p>Create xarray <code class="docutils literal notranslate"><span class="pre">DataArrays</span></code> and <code class="docutils literal notranslate"><span class="pre">DataSets</span></code> out of raw numpy arrays</p></li>
+<li><p>Create xarray <code class="docutils literal notranslate"><span class="pre">DataArrays</span></code> and <code class="docutils literal notranslate"><span class="pre">Datasets</span></code> out of raw numpy arrays</p></li>
 <li><p>Create xarray objects with and without indexes</p></li>
-<li><p>Load xarray datasets from netCDF files and openDAP servers</p></li>
+<li><p>Load xarray datasets from netCDF files and OPeNDAP servers</p></li>
 <li><p>View and set attributes</p></li>
 </ol>
 </section>
@@ -485,8 +485,8 @@ The goals of this section include the following.</p>
 <h4>Basic Computation<a class="headerlink" href="#basic-computation" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Do basic arithmetic with DataArrays and Datasets</p></li>
-<li><p>Use numpy universal function on DataArrays and Datasets, or use corresponding built-in xarray methods</p></li>
-<li><p>Combine multiple xarray objects in arithmetic operations and understand how they are broadcasted / aligned</p></li>
+<li><p>Use numpy universal functions on DataArrays and Datasets, or use corresponding built-in xarray methods</p></li>
+<li><p>Combine multiple xarray objects in arithmetic operations and understand how they are broadcast / aligned</p></li>
 <li><p>Perform aggregation (reduction) along one or multiple dimensions of a DataArray or Dataset</p></li>
 </ol>
 </section>
@@ -507,16 +507,16 @@ The goals of this section include the following.</p>
 <li><p>Apply reduction operations to groups (e.g. mean)</p></li>
 <li><p>Apply non-reducing functions to groups (e.g. standardize)</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> with time coordinates (e.g. to create climatologies)</p></li>
-<li><p>Use artimetic between <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects and regular DataArrays / Datasets</p></li>
+<li><p>Use arithmetic between <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects and regular DataArrays / Datasets</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby_bins</span></code> to aggregate data in bins</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">resample</span></code> on time dimensions</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">rolling</span></code> to apply rolling aggregations</p></li>
 </ol>
 </section>
-<section id="merging-combining-datasets">
-<h4>Merging Combining Datasets<a class="headerlink" href="#merging-combining-datasets" title="Link to this heading">#</a></h4>
+<section id="merging-and-combining-datasets">
+<h4>Merging and Combining Datasets<a class="headerlink" href="#merging-and-combining-datasets" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>Concatentate DataArrays and Datasets along a new or existing dimension</p></li>
+<li><p>Concatenate DataArrays and Datasets along a new or existing dimension</p></li>
 <li><p>Merge multiple datasets with different variables</p></li>
 <li><p>Add a new data variable to an existing Dataset</p></li>
 </ol>
@@ -538,14 +538,23 @@ The goals of this section include the following.</p>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">apply_ufunc</span></code> to apply custom or specialized operations to data</p></li>
 </ol>
 </section>
-<section id="plotting">
-<h4>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h4>
-<ol class="arabic simple">
-<li><p>Show multiple line plots over a dimension using the <code class="docutils literal notranslate"><span class="pre">hue</span></code> keyword</p></li>
-<li><p>Create multiple 2D plots using faceting</p></li>
-</ol>
 </section>
 </section>
+<section id="pages-in-this-section">
+<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="xarray_fundamentals.html"><span class="std std-doc">Xarray Fundamentals</span></a> — DataArrays and Datasets, label-based selection, computation, broadcasting, reductions, and loading netCDF/Zarr data.</p></li>
+<li><p><a class="reference internal" href="xarray_advanced.html"><span class="std std-doc">Xarray: Advanced</span></a> — interpolation, <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">resample</span></code>, <code class="docutils literal notranslate"><span class="pre">rolling</span></code>, and <code class="docutils literal notranslate"><span class="pre">coarsen</span></code>; building climatologies and more.</p></li>
+<li><p><a class="reference internal" href="../../assignments/xarray_lab.html"><span class="std std-doc">Lab: Xarray with SST data</span></a> — apply xarray to NOAA sea-surface-temperature data (the at-home assignment).</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>Your in-class assignment for this section is to complete the <strong>“Try it”</strong> exercises in the lecture notebooks above. Work through them in your own copy of each notebook. To submit, push your completed notebook(s) to your week folder and post a link to each on the matching <strong>Courseworks</strong> assignment. (The at-home assignment — the SST lab — is graded separately, 10 points.)</p>
+</div>
+</section>
+<section id="working-through-the-lectures">
+<h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
+<p>Same workflow as previous modules — download each notebook (⬇ icon, top-right) or copy-paste the cells into a fresh notebook in JupyterLab on LEAP or Colab, then step through them. Stop at each <strong>Try it</strong> admonition to experiment in your own cells before moving on.</p>
 </section>
 </section>
 
@@ -615,7 +624,7 @@ The goals of this section include the following.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals-for-xarray">Learning Goals for Xarray</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-1-xarray-fundamentals">Lesson 1: Xarray Fundamentals</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-creation">Dataset Creation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-and-interpolation">Basic Indexing and Interpolation</a></li>
@@ -625,14 +634,15 @@ The goals of this section include the following.</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-2-advanced-usage">Lesson 2: Advanced Usage</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-s-groupby-resample-and-rolling">Xarray’s groupby, resample, and rolling</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-combining-datasets">Merging Combining Datasets</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-and-combining-datasets">Merging and Combining Datasets</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-computations">Advanced Computations</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
 </ul>
   </nav></div>
 
