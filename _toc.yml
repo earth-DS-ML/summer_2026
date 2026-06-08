@@ -40,7 +40,7 @@ parts:
     - file: lectures_DS/pandas/assignment5b
   - caption: Xarray
     chapters:
-    - file: lectures_DS/xarray/xarray_intro
+    - file: lectures_DS/xarray/overview
     - file: lectures_DS/xarray/xarray_fundamentals
     - file: lectures_DS/xarray/xarray_advanced
     - file: assignments/xarray_lab
