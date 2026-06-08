@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Packaging Python Code &#8212; Earth Data Science and Machine Learning</title>
+    <title>Going Further with Computing &#8212; Earth Data Science and Machine Learning</title>
   
   
   
@@ -220,7 +220,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Packaging Python Code</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Going Further with Computing</a></li>
 </ul>
 
     </div>
@@ -403,7 +403,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Packaging Python Code</h1>
+    <h1>Going Further with Computing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -413,11 +413,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-actual-package">The actual package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-py"><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration-with-github-actions">Continuous Integration with GitHub Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-learn-this">Where to go learn this</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-worth-knowing-about">Topics worth knowing about</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentic-coding">Agentic coding</a></li>
 </ul>
             </nav>
         </div>
@@ -429,151 +427,31 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="packaging-python-code">
-<h1>Packaging Python Code<a class="headerlink" href="#packaging-python-code" title="Link to this heading">#</a></h1>
-<p>This page extends the <a class="reference internal" href="../core_python/organization_and_packaging.html"><span class="std std-doc">Modules section</span></a> from Core Python. There, we showed how a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file (a <em>module</em>) can hold reusable functions that you import into a notebook — but modules only work from the same directory. Once you want to share code across projects, with collaborators, or with the wider community, you turn the module into a <strong>package</strong>. This page walks through that step and the surrounding ecosystem of tests and continuous integration.</p>
-<p>None of this is required for the weekly assignments — it’s reference / further-reading material for when your own research code matures.</p>
-<section id="packages">
-<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages" rel="noreferer noopener" target="_blank">Packages</a> are Python’s way of encapsulating reusable code for sharing with others. Packaging is a huge topic — this page just scratches the surface.</p>
-<p>You’ve already interacted with many packages. Browse some of their GitHub repositories to see the structure of a large Python package:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="going-further-with-computing">
+<h1>Going Further with Computing<a class="headerlink" href="#going-further-with-computing" title="Link to this heading">#</a></h1>
+<p>This course introduced just enough programming to get you working with data. But real research and professional computing draws on a much wider set of skills — and simply knowing these things exist, and roughly what they are for, makes them far easier to pick up when a project calls for them.</p>
+<p>This page is a short, curated map of <strong>coding and computing topics beyond this course</strong> that are worth knowing about. None of it is required — think of it as signposts for where to go next as your own work grows.</p>
+<section id="where-to-go-learn-this">
+<h2>Where to go learn this<a class="headerlink" href="#where-to-go-learn-this" title="Link to this heading">#</a></h2>
+<p>There are many good books, courses, and tutorials for this kind of material. One we particularly like is MIT’s free <a class="reference external" href="https://missing.csail.mit.edu/" rel="noreferer noopener" target="_blank">Missing Semester of Your CS Education</a> — short, practical lectures on exactly the tools that usually get picked up informally rather than taught in a class. The <a class="reference external" href="https://missing.csail.mit.edu/2026/" rel="noreferer noopener" target="_blank">2026 edition</a> is current and well worth your time; each lecture is about an hour and stands on its own, and we link the relevant ones beside the topics below.</p>
+</section>
+<section id="topics-worth-knowing-about">
+<h2>Topics worth knowing about<a class="headerlink" href="#topics-worth-knowing-about" title="Link to this heading">#</a></h2>
+<p>A handful of the most useful next steps, each framed by what you already did in this course:</p>
 <ul class="simple">
-<li><p>NumPy: <a class="github reference external" href="https://github.com/numpy/numpy" rel="noreferer noopener" target="_blank">numpy/numpy</a></p></li>
-<li><p>Pandas: <a class="github reference external" href="https://github.com/pandas-dev/pandas" rel="noreferer noopener" target="_blank">pandas-dev/pandas</a></p></li>
-<li><p>Xarray: <a class="github reference external" href="https://github.com/pydata/xarray" rel="noreferer noopener" target="_blank">pydata/xarray</a></p></li>
+<li><p><strong>The command line, in depth</strong> (<a class="reference external" href="https://missing.csail.mit.edu/2026/course-shell/" rel="noreferer noopener" target="_blank">shell</a>, <a class="reference external" href="https://missing.csail.mit.edu/2026/command-line-environment/" rel="noreferer noopener" target="_blank">command-line environment</a>) — in the <em>Computing Environment</em> module you got around the shell with <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, <code class="docutils literal notranslate"><span class="pre">ls</span></code>, and <code class="docutils literal notranslate"><span class="pre">cd</span></code>. That barely scratches the surface: with scripting and pipes you can automate repetitive work, chain tools together, and work fluently on the remote servers and HPC clusters where much climate data lives — often with no graphical interface at all.</p></li>
+<li><p><strong>Version control, beyond the basics</strong> (<a class="reference external" href="https://missing.csail.mit.edu/2026/version-control/" rel="noreferer noopener" target="_blank">Version Control and Git</a>) — you used Git to <code class="docutils literal notranslate"><span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code> your assignments to GitHub. Branches, merges, and pull requests are the next step: they let you try out changes without fear of losing work, and collaborate on shared code without overwriting each other.</p></li>
+<li><p><strong>Debugging and profiling</strong> (<a class="reference external" href="https://missing.csail.mit.edu/2026/debugging-profiling/" rel="noreferer noopener" target="_blank">Debugging and Profiling</a>) — working in notebooks, you could poke at a problem interactively: rerun a cell, print a variable, read the traceback inline. That easy visibility fades once your code grows into functions and scripts, where you can no longer see what is happening <em>inside</em> a function from the outside. A <strong>debugger</strong> lets you pause a running program and step through its variables one line at a time, and a <strong>profiler</strong> measures which lines actually take the time — so when a long analysis is slow, you fix the part that matters instead of guessing.</p></li>
+<li><p><strong>Packaging and sharing code</strong> (<a class="reference external" href="https://missing.csail.mit.edu/2026/shipping-code/" rel="noreferer noopener" target="_blank">Packaging and Shipping Code</a>) — in <em>Core Python</em> you turned a set of functions into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">gcdistance</span></code>) and imported it. Packaging is the next step up: wrapping modules into an installable package, so a one-off analysis becomes a tool you and your collaborators can reuse across projects and cite in a paper.</p></li>
+<li><p><strong>Testing and code quality</strong> (<a class="reference external" href="https://missing.csail.mit.edu/2026/code-quality/" rel="noreferer noopener" target="_blank">Code Quality</a>) — as the notebooks in this course grew, you mostly checked your work by eye. Automated tests, linters, and continuous integration check it for you — giving you confidence that your results are reproducible (the software-side complement to the reproducibility ideas from the <em>Data</em> module) and that your code keeps working as it changes.</p></li>
 </ul>
-<p>For a smaller, more readable example, see the xrft package: <a class="github reference external" href="https://github.com/xgcm/xrft" rel="noreferer noopener" target="_blank">xgcm/xrft</a></p>
-<p>These packages all share a common basic structure. Imagine we wanted to turn our <code class="docutils literal notranslate"><span class="pre">gcdistance</span></code> module into a package — it would look like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">README</span><span class="o">.</span><span class="n">md</span>
-<span class="n">LICENSE</span>
-<span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
-<span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
-<span class="n">setup</span><span class="o">.</span><span class="n">py</span>
-<span class="n">gcdistance</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-<span class="n">gcdistance</span><span class="o">/</span><span class="n">gcdistance</span><span class="o">.</span><span class="n">py</span>
-<span class="n">gcdistance</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-<span class="n">gcdistance</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_gcdistance</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-<p>The actual package is the <code class="docutils literal notranslate"><span class="pre">gcdistance/</span></code> subdirectory. The other files are auxiliary — they help others understand and install the package:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>File</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code></p></td>
-<td><p>Explain what the package is for</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code></p></td>
-<td><p>Defines the legal terms under which others can use the package. <a class="reference external" href="https://opensource.org/licenses/category" rel="noreferer noopener" target="_blank">Open source</a> is encouraged.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></p></td>
-<td><p>A conda environment describing the package’s dependencies (<a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></td>
-<td><p>Same idea, but for pip (<a class="reference external" href="https://pip.pypa.io/en/stable/user_guide/#requirements-files" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></p></td>
-<td><p>A Python script that installs your package (<a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html" rel="noreferer noopener" target="_blank">more info</a>)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
-<section id="the-actual-package">
-<h2>The actual package<a class="headerlink" href="#the-actual-package" title="Link to this heading">#</a></h2>
-<p>The directory <code class="docutils literal notranslate"><span class="pre">gcdistance/</span></code> is the actual package. Any directory containing an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file is recognized by Python as a package. The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file can be blank, but it needs to be present. From the parent directory, you can import a module from the package as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gcdistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcdistance</span>
-</pre></div>
-</div>
-<p>This is a bit redundant — that’s because the <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> module has the same name as the <code class="docutils literal notranslate"><span class="pre">gcdistance</span></code> package directory.</p>
-<p>This import only works from the parent directory; it isn’t globally accessible from your Python environment until you install the package (next section).</p>
-</section>
-<section id="setup-py">
-<h2><code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#setup-py" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is the file that makes your package installable and globally accessible. Here is a minimal example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">setuptools</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span>
-
-<span class="n">setup</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;gcdistance&quot;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-    <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span>
-    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gcdistance&quot;</span><span class="p">],</span>
-    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;numpy&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>There’s a <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html" rel="noreferer noopener" target="_blank">wide range of options</a> for <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>. More fields are required if you want to <a class="reference external" href="https://packaging.python.org/en/latest/tutorials/packaging-projects/" rel="noreferer noopener" target="_blank">upload your package to PyPI</a> (so others can install it via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gcdistance</span></code>).</p>
-<p>To install the package locally, run from the root directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
-</pre></div>
-</div>
-<p>If you plan to keep developing the package, install it in “editable” mode:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
-<p>In editable mode, the files are symlinked rather than copied — changes you make to the source take effect immediately without reinstalling.</p>
-<blockquote>
-<div><p><strong>Note:</strong> Modern Python packaging is moving from <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> to a <a class="reference external" href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" rel="noreferer noopener" target="_blank"><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></a> file as the canonical place to declare package metadata. <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> still works for now, but new projects often start with <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> from the beginning.</p>
-</div></blockquote>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
-<p>A software package needs <a class="reference external" href="https://en.wikipedia.org/wiki/Software_testing" rel="noreferer noopener" target="_blank">tests</a> to make sure it works as intended — and continues to work after future changes. Matt Rocklin has a <a class="reference external" href="http://matthewrocklin.com/blog/work/2016/02/08/tests" rel="noreferer noopener" target="_blank">blog post</a> on why tests matter.</p>
-<p>Tests don’t have to be complicated. They are simply checks that verify your code does what it’s supposed to do.</p>
-<p>To add tests to our project, create <code class="docutils literal notranslate"><span class="pre">gcdistance/tests/test_gcdistance.py</span></code> (and an empty <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in the same directory). Here’s an example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">gcdistance.gcdistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">great_circle_distance</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_great_circle_distance</span><span class="p">():</span>
-    <span class="c1"># distance between two identical points should be zero</span>
-    <span class="k">assert</span> <span class="n">great_circle_distance</span><span class="p">((</span><span class="mf">20.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">),</span> <span class="p">(</span><span class="mf">20.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
-
-    <span class="c1"># distance between New York and London</span>
-    <span class="n">new_york</span> <span class="o">=</span> <span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span>
-    <span class="n">london</span> <span class="o">=</span> <span class="mf">51.5074</span><span class="p">,</span> <span class="mf">0.1278</span>
-    <span class="n">dist_nyc_london</span> <span class="o">=</span> <span class="n">great_circle_distance</span><span class="p">(</span><span class="n">new_york</span><span class="p">,</span> <span class="n">london</span><span class="p">)</span>
-
-    <span class="c1"># approximate check (floats won&#39;t be exactly equal)</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">dist_nyc_london</span><span class="p">,</span> <span class="mf">5.587e6</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
-
-    <span class="c1"># passing the wrong number of arguments should raise TypeError</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
-        <span class="n">great_circle_distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We use <a class="reference external" href="https://docs.pytest.org/" rel="noreferer noopener" target="_blank">pytest</a> to run our tests. Install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pytest</span></code> if you don’t already have it, then run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-v
-</pre></div>
-</div>
-<p>from the root directory of your project. You should see a notification that the tests passed. Try changing a test to make it fail, and see what pytest reports.</p>
-</section>
-<section id="continuous-integration-with-github-actions">
-<h2>Continuous Integration with GitHub Actions<a class="headerlink" href="#continuous-integration-with-github-actions" title="Link to this heading">#</a></h2>
-<p>You can configure automatic testing by integrating GitHub with <a class="reference external" href="https://docs.github.com/en/actions" rel="noreferer noopener" target="_blank">GitHub Actions</a>. Every time you push commits, your tests run automatically in the cloud, and GitHub flags any failures on the pull request page.</p>
-<p>A minimal setup is a single YAML file at <code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests</span>
-<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
-<span class="nt">jobs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
-<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -e . pytest</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
-</pre></div>
-</div>
-<p>Commit this file alongside your code, push to GitHub, and the next push triggers a test run. You’ll get a green checkmark (or a red X) next to each commit on the GitHub web UI.</p>
-<blockquote>
-<div><p>Older course material on the web sometimes references <strong>Travis CI</strong> — that was the previous-generation CI service and has been largely replaced by GitHub Actions for open-source Python projects.</p>
-</div></blockquote>
+<section id="agentic-coding">
+<h2>Agentic coding<a class="headerlink" href="#agentic-coding" title="Link to this heading">#</a></h2>
+<p>This one deserves a special mention, because it is changing how code gets written right now.</p>
+<p>Throughout this course we asked you to use AI as a chat-based tutor — asking it to explain things and unstick you, not to write your code for you. That was deliberate: you only build real fluency by working through the problems yourself.</p>
+<p>It is worth knowing where the field is heading, though. <strong>Agentic coding tools</strong> — such as <a class="reference external" href="https://claude.com/claude-code" rel="noreferer noopener" target="_blank">Claude Code</a>, <a class="reference external" href="https://cursor.com/" rel="noreferer noopener" target="_blank">Cursor</a>, and <a class="reference external" href="https://github.com/features/copilot" rel="noreferer noopener" target="_blank">GitHub Copilot</a> — go well beyond chat: you describe what you want in plain language, and the tool reads your whole project, writes and runs code, executes tests, and iterates on the results on its own. This is quickly becoming a standard part of how research and professional software gets written, and Missing Semester’s <a class="reference external" href="https://missing.csail.mit.edu/2026/agentic-coding/" rel="noreferer noopener" target="_blank">lecture on agentic coding</a> is a good hands-on introduction.</p>
+<p>The catch — and the reason we had you learn the fundamentals first — is that these tools are only as good as your ability to steer and check them. You still need to read the code, recognize when it is wrong or doing something you did not intend, and know what to ask for next. The skills from this course are exactly what let you use agentic tools as a force multiplier, rather than being led astray by them.</p>
 </section>
 </section>
 
@@ -634,11 +512,9 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-actual-package">The actual package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-py"><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration-with-github-actions">Continuous Integration with GitHub Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-learn-this">Where to go learn this</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-worth-knowing-about">Topics worth knowing about</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentic-coding">Agentic coding</a></li>
 </ul>
   </nav></div>
 
