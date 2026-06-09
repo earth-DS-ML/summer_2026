@@ -10,7 +10,19 @@ This lecture introduces **NumPy**, *the fundamental package for scientific compu
 - Website: <https://numpy.org/>
 - GitHub: <https://github.com/numpy/numpy>
 
-To build intuition, this lecture often **visualizes** the arrays it creates, using Matplotlib. The Matplotlib basics — importing it, showing or saving a figure, and exploring plots non-visually — live on the companion page [Visualizing Arrays with Matplotlib](./matplotlib.md). Wherever a plot appears below, it is followed by a **"What this shows"** note describing the result in words and numbers, so you get the insight without seeing the picture. (The import line, when you need it, is `from matplotlib import pyplot as plt`.)
+To build intuition, this lecture often **visualizes** the arrays it creates, using Matplotlib. The Matplotlib basics — importing it, showing or saving a figure, and exploring plots non-visually — live on the companion page [Visualizing Arrays with Matplotlib](./matplotlib.md). Wherever a plot appears below, it is followed by a **"What this shows"** note describing the result in words and numbers, and usually by a **"Check it"** block — code that confirms the same conclusion directly from the array, no eyes required. (The import line, when you need it, is `from matplotlib import pyplot as plt`.)
+
+:::{admonition} Checking an array without a picture
+:class: tip
+For sighted readers, the quick plots in this lecture act as an *array microscope* — a two-second glance to confirm an operation did what they think it did. You can get the same confirmation directly from the array, and this page practices that style at every step:
+
+- **Shape first.** `print(a.shape)` before and after an operation — most mistakes change the shape.
+- **Spot-check values.** Print a value you can predict (`a[0, 0]`), or test a whole slice at once with `np.allclose(...)` / `np.array_equal(...)`.
+- **Summary statistics.** `a.min()`, `a.max()`, `a.mean()` — the non-visual equivalent of glancing at a colorbar.
+- **1D profiles.** Slice out one row or column and you have an ordinary 1D array: `a[25, :]` is row 25. You can print it, plot it as a line with `plt.plot(...)`, or explore that line plot by sound with [MAIDR](./trying_maidr.md) — MAIDR handles line plots well, though not (yet) 2D heatmaps like `pcolormesh`.
+
+These checks are not a workaround — printing shapes and verifying values is exactly how experienced programmers debug arrays, with or without sight.
+:::
 
 :::{admonition} A note on how output works
 :class: note
@@ -362,9 +374,34 @@ plt.show()
 
 **What this shows.** `f` now has shape `(50, 100)`, one value per grid point. Passing `xx, yy, f` to `pcolormesh` plots it with real coordinates on the axes (x from −2π to +2π, y from −π to +π). The pattern is a grid of "blobs": along the x-direction it oscillates between bright (+) and dark (−) following `sin(x)` (two full cycles), while along the y-direction the amplitude is gently modulated by `cos(0.5·y)`, which is strongest (close to 1) near the middle row (y = 0) and tapers toward the top and bottom edges. We reuse this `f` (shape `(50, 100)`) in the sections below.
 
+**Check it.** Everything the plot shows is verifiable straight from the array:
+
+```python
+print(f.shape)
+print(f.min(), f.max())
+print(np.abs(f[25, :] - np.sin(x)).max())
+```
+
+This prints:
+
+```
+(50, 100)
+-0.9993604085457249 0.9993604085457249
+0.0005137191281501252
+```
+
+The shape says one value per grid point; the min/max say the values span roughly −1 to +1. The third line checks the *structure*: `f[25, :]` is the middle row — the row closest to y = 0, where `cos(0.5·y) ≈ 1` — and it differs from plain `sin(x)` by at most 0.0005. That slice is also your **1D profile**: an ordinary length-100 array, so
+
+```python
+plt.plot(x, f[25, :])
+plt.show()
+```
+
+draws the familiar two-cycle sine wave — a line plot you can read with `print`, or explore by sound with MAIDR. Slicing a single row or column out of a 2D array and examining it as a curve is one of the most useful moves in this whole lecture: it turns a heatmap question into a 1D question.
+
 :::{admonition} Try it
 :class: tip
-Create `basic_math.py` with `x`, `y`, `xx`, `yy` rebuilt. Compute a 2D Gaussian on the grid: `gaussian = np.exp(-(xx**2 + yy**2))`. Visualize it with `plt.pcolormesh(xx, yy, gaussian)` then `plt.show()`. Where is the array largest, and where is it smallest? (Hint: `exp(0) = 1` at the center where `xx` and `yy` are both 0, and the values fall toward 0 far from the center.)
+Create `basic_math.py` with `x`, `y`, `xx`, `yy` rebuilt. Compute a 2D Gaussian on the grid: `gaussian = np.exp(-(xx**2 + yy**2))`. Visualize it with `plt.pcolormesh(xx, yy, gaussian)` then `plt.show()`. Where is the array largest, and where is it smallest? (Hint: `exp(0) = 1` at the center where `xx` and `yy` are both 0, and the values fall toward 0 far from the center.) Then answer the same question *without* the picture: print `gaussian.max()` and `np.unravel_index(gaussian.argmax(), gaussian.shape)` (the row and column of the maximum — it should be near the center of the grid), and plot the middle-row profile with `plt.plot(x, gaussian[25, :])` — a bell curve centered at x = 0.
 :::
 
 ## Manipulating Array Dimensions
@@ -387,6 +424,18 @@ This prints:
 ```
 
 **What this shows.** Transposing turns the `(50, 100)` array into `(100, 50)` — rows become columns and vice versa. The heatmap looks like the earlier `f` plot rotated/flipped across its diagonal: the blob pattern that ran left-to-right now runs top-to-bottom.
+
+**Check it.** Transposing means every element swaps its row and column index — `f_transposed[j, i]` equals `f[i, j]` for any pair of indices:
+
+```python
+print(f[3, 10], f_transposed[10, 3])
+```
+
+This prints the same number twice:
+
+```
+0.18253780301831585 0.18253780301831585
+```
 
 We can also manually change the shape of an array — as long as the new shape has the **same number of elements**. `f` has 50 × 100 = 5000 elements. Watch what happens when the new shape doesn't match:
 
@@ -417,7 +466,23 @@ This prints:
 (200, 25)
 ```
 
-**What this shows.** The reshape succeeds (200 × 25 = 5000), but it has scrambled the spatial pattern. NumPy refills the new `(200, 25)` array by reading `f`'s values in order, so the smooth blobs from before are sliced and re-wrapped into a tall, narrow grid that no longer resembles the original surface — a reminder that reshaping reorganizes numbers without respecting their original 2D meaning.
+**What this shows.** The reshape succeeds (200 × 25 = 5000), but it has scrambled the spatial pattern. NumPy refills the new `(200, 25)` array by reading `f`'s values in order, so the smooth blobs from before are sliced and re-wrapped — the heatmap appears as fine horizontal striping rather than smooth blobs, no longer resembling the original surface. A reminder that reshaping reorganizes numbers without respecting their original 2D meaning.
+
+**Check it.** Reshaping never changes the values or their order — only where the row breaks fall:
+
+```python
+print(np.allclose(f.ravel(), g.ravel()))
+print(np.allclose(g[0, :], f[0, :25]))
+```
+
+This prints:
+
+```
+True
+True
+```
+
+Flattened out, the two arrays are identical. But `g`'s first row holds only the first 25 values of `f`'s first row — each original row of 100 values now wraps across four rows of 25. That re-wrapping is exactly why the spatial pattern scrambles.
 
 We can also "tile" an array to repeat it many times:
 
@@ -435,6 +500,15 @@ This prints:
 ```
 
 **What this shows.** `np.tile(f, (3, 2))` stacks the `f` pattern **3 times vertically and 2 times horizontally**, giving a `(150, 200)` array. The heatmap shows the same blob pattern repeated as a 3-by-2 grid of identical copies, like wallpaper.
+
+**Check it.** Every 50×100 block should be an exact copy of `f`:
+
+```python
+print(np.array_equal(f_tiled[:50, :100], f))
+print(np.array_equal(f_tiled[100:150, 100:200], f))
+```
+
+This prints `True` twice — the first line checks the block in the first 50 rows and 100 columns, the second checks the block in the last 50 rows and last 100 columns.
 
 Another common need is to add an extra dimension to an array. This can be accomplished via indexing with `None`. Start by checking the shape of `x`:
 
@@ -525,7 +599,28 @@ plt.pcolormesh(g)
 plt.show()
 ```
 
-**What this shows.** `g = f * x` multiplies each column of the pattern by that column's `x` value, which runs from about −6.28 on the left to +6.28 on the right. The effect is that the blobs grow in amplitude toward the **left and right edges** (where |x| is large) and shrink toward the **middle** (where x ≈ 0, so `f*x ≈ 0`). The plot is darkest/most-extreme at the sides and washed out down the center column.
+**What this shows.** `g = f * x` multiplies each column of the pattern by that column's `x` value, which runs from about −6.28 on the left to +6.28 on the right. Down the **middle** of the plot (x ≈ 0) the values are washed out to near zero, and the amplitude grows as you move outward — but it does *not* keep growing all the way to the edges: `sin(x)` itself returns to zero at x = ±2π, so the outermost columns fade back toward zero too. The most extreme cells sit about three-quarters of the way out, near x ≈ ±4.9, where the array reaches its minimum of about −4.8; bright maxima of about +1.8 sit near x ≈ ±2. And because multiplying by a *negative* `x` flips the sign of the whole left half, the pattern is mirror-symmetric about the center instead of simply repeating.
+
+**Check it.** Broadcasting claims that each column of `g` equals `f`'s column times that column's single `x` value — test it directly for, say, column 12:
+
+```python
+print(np.allclose(g[:, 12], f[:, 12] * x[12]))
+```
+
+This prints:
+
+```
+True
+```
+
+And the middle row of `g` is a 1D profile of the whole structure. Since `f`'s middle row is nearly `sin(x)`, this row is nearly `x·sin(x)`:
+
+```python
+plt.plot(x, g[25, :])
+plt.show()
+```
+
+**What this shows.** A mirror-symmetric W-shaped curve: zero at x = 0, rising to about +1.8 near x = ±2, plunging to about −4.8 near x = ±4.9, and returning to zero at the edges (x = ±2π). One curve captures the whole story — the quiet center, the strong lobes three-quarters of the way out, and the quiet edges.
 
 However, if the last (trailing) dimensions are *not* the same, NumPy cannot just automatically figure it out. Here `y` has shape `(50,)`, and its 50 does **not** match `f`'s trailing dimension of 100:
 
@@ -560,7 +655,17 @@ plt.pcolormesh(h)
 plt.show()
 ```
 
-**What this shows.** `h = f * y[:, None]` multiplies each **row** of the pattern by that row's `y` value, which runs from about −3.14 at the bottom to +3.14 at the top. So the blobs grow in amplitude toward the **top and bottom edges** (where |y| is large) and shrink toward the **middle row** (where y ≈ 0). It's the row-wise counterpart of the `g` plot above — the modulation now runs vertically instead of horizontally.
+**What this shows.** `h = f * y[:, None]` multiplies each **row** of the pattern by that row's `y` value, which runs from about −3.14 at the bottom to +3.14 at the top. The middle row (y ≈ 0) is washed out to near zero, and the amplitude grows as you move away from it — but, as with `g`, not all the way out: the `cos(0.5·y)` factor in `f` vanishes at y = ±π, so the top and bottom edges fade back to zero as well. The strongest lobes sit a little over halfway out, near y ≈ ±1.7, where the values reach about ±1.12. And because the lower half is multiplied by *negative* y values, every lobe in the lower half has the opposite sign of the lobe directly above it in the upper half — a sign-flipped checkerboard, the row-wise counterpart of the `g` plot.
+
+**Check it.** Same column test as before, plus a **column profile** this time — column 12 sits where `f` is near its maximum, so `h[:, 12]` traces the vertical structure cleanly:
+
+```python
+print(np.allclose(h[:, 12], f[:, 12] * y))
+plt.plot(y, h[:, 12])
+plt.show()
+```
+
+The `print` gives `True`. **What the plot shows:** an antisymmetric curve along y — zero at the bottom edge (y = −π), dipping to about −1.12 at y ≈ −1.7, crossing zero exactly at y = 0, peaking at about +1.12 at y ≈ +1.7, and returning to zero at the top edge. The two halves are equal and opposite, which is the sign flip the heatmap shows.
 
 :::{admonition} Try it
 :class: tip
@@ -597,7 +702,19 @@ plt.colorbar()
 plt.show()
 ```
 
-**What this shows.** This is the `g = f * x` surface again (blobs that intensify toward the left and right edges), now with a colorbar so you can read off the value range — the data runs roughly from about −4.8 to +1.8, with the largest-magnitude (most negative) cells near the left and right edges.
+**What this shows.** This is the `g = f * x` surface again (washed out down the center, strongest about three-quarters of the way toward the sides), now with a colorbar so you can read off the value range — the data runs from about −4.8 to +1.8, with the most negative cells in the two dark lobes near x ≈ ±4.9.
+
+**Check it.** The non-visual equivalent of reading a colorbar is asking the array for its range directly:
+
+```python
+print(g.min(), g.max())
+```
+
+This prints:
+
+```
+-4.810205904698232 1.8137647229935456
+```
 
 We can reduce along **specific axes**. `axis=0` reduces along the first dimension (down the rows of `g`), leaving the **column** means — one value per column, so a length-100 result. `axis=1` reduces along the second dimension (across the columns), leaving the **row** means — a length-50 result.
 
@@ -618,14 +735,42 @@ plt.plot(x, g_ymean)
 plt.show()
 ```
 
-**What this shows.** `g_ymean` is the average over all 50 rows, one value per x-column, plotted against `x` (−2π to +2π). Because averaging over y mostly cancels the oscillations, this curve stays close to zero across the middle and only departs from zero where the edge-amplification in `g` doesn't fully cancel — a small, roughly odd (anti-symmetric) wiggle that is near 0 at x = 0.
+**What this shows.** `g_ymean` is the average over all 50 rows, one value per x-column, plotted against `x` (−2π to +2π). Averaging over y does **not** flatten the structure, because `g`'s oscillation runs along x — every column of `g` is `x·sin(x)` times `cos(0.5·y)`, and averaging the rows just replaces the cosine factor by its mean, about 0.62. So the curve is a scaled-down copy of the `x·sin(x)` W-shape from the broadcasting section: zero at x = 0 and at x = ±2π, local peaks of about +1.1 near x = ±2, and deep minima of about −3.0 near x = ±4.9, mirror-symmetric about the center.
+
+**Check it.** The claimed extremes, straight from the array:
+
+```python
+print(g_ymean.min(), g_ymean.max())
+```
+
+This prints:
+
+```
+-3.001540809618145 1.1317787518811862
+```
+
+Notice what just happened, because it is the central move of non-visual data analysis: a reduction turned a 2D heatmap question into a **1D line plot** — exactly the kind of plot you can print as numbers or explore by sonification with MAIDR.
 
 ```python
 plt.plot(g_xmean, y)
 plt.show()
 ```
 
-**What this shows.** Here the averaged row values `g_xmean` are on the **horizontal** axis and `y` (−π to +π) is on the **vertical** axis (the arguments are swapped to make `y` the vertical coordinate). Averaging each row of `g` over its 100 x-values nearly cancels the sine oscillation, so the curve hugs zero — a near-vertical line at x ≈ 0 — with only small departures.
+**What this shows.** Here the averaged row values `g_xmean` are on the **horizontal** axis and `y` (−π to +π) is on the **vertical** axis (the arguments are swapped to make `y` the vertical coordinate). This time the average runs *along* the oscillation, and it does not cancel either: averaging `x·sin(x)` over the full −2π..+2π range gives about −1, because its negative lobes occur at larger |x| and outweigh the positive ones. Each row's mean is therefore about `−cos(0.5·y)`, and the curve is a smooth C-shaped bow opening to the right: it starts at 0 at the bottom (y = −π), bulges left to its most negative value of about −0.99 at the middle (y = 0), and returns to 0 at the top (y = +π). All values are ≤ 0.
+
+**Check it.**
+
+```python
+print(g_xmean.min(), g_xmean.max())
+```
+
+This prints:
+
+```
+-0.9881624404319173 -6.053860223869245e-17
+```
+
+The first number is the −0.99 bulge at y = 0. The second looks odd, but read the `e-17` suffix: it is −6×10⁻¹⁷, i.e. zero up to floating-point round-off — the curve's value at the two ends.
 
 Reductions can also operate on **multiple axes at once** — useful for higher-dimensional data:
 
@@ -706,5 +851,6 @@ In this lecture you met **NumPy**, the foundation of scientific Python:
 
 - **NumPy** gives you the `ndarray`: a fast, N-dimensional, single-dtype container. You learned to **create** arrays (`np.array`, `np.zeros`/`np.ones`/`np.full`, `np.arange`, `np.linspace`/`np.logspace`, `np.meshgrid`), **inspect** them (`.dtype`, `.shape`), **index and slice** them (comma-separated per dimension, plus boolean masks), do **element-wise math** (`np.sin`, `*`, etc.), **manipulate dimensions** (`transpose`, `reshape`, `tile`, and `None` to add axes), combine different-sized arrays with **broadcasting**, **reduce** them (`sum`, `mean`, `std`, optionally `axis=...`), and **save/load** them (`np.save`, `np.load`).
 - Along the way you **visualized** arrays with Matplotlib. For the plotting basics — and for exploring charts non-visually — see [Visualizing Arrays with Matplotlib](./matplotlib.md) and [Trying MAIDR](./trying_maidr.md).
+- Just as importantly, you practiced **checking arrays without a picture**: shape before and after, spot-checking predictable values, `np.allclose`/`np.array_equal` on whole slices, `min`/`max`/`mean` as a textual colorbar, and slicing out **1D profiles** (a single row, column, or axis-reduction) to turn a 2D question into a curve you can print or sonify. This habit is how you verify your own work in the assignments — and how working scientists debug arrays, sighted or not.
 
 The NumPy documentation is your best reference as you go: <https://numpy.org/doc/stable/reference/>.
