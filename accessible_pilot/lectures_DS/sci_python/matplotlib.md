@@ -27,7 +27,10 @@ array into a picture.
 Matplotlib plots are images, so they aren't directly readable with a screen reader. On this
 page (and wherever the NumPy page plots an array) each plotting snippet is followed by a
 short **"What this shows"** note that describes, in words and numbers, what the plot reveals
-about the underlying data — so you get the same insight without seeing the picture. As an
+about the underlying data — so you get the same insight without seeing the picture. Most are
+also followed by a **"Check it"** block that confirms the same conclusion straight from the
+array (see the "Checking an array without a picture" box on the [NumPy](./numpy.md) page for
+the general toolkit). As an
 experiment we're evaluating, many of these charts can also be made **explorable
 non-visually** — navigated by keyboard and played as sound — using a tool called **MAIDR**.
 See [Trying MAIDR](./trying_maidr.md) for how to set that up and try it yourself.
@@ -61,6 +64,23 @@ plt.show()
 from about −6.28 at the left (index 0) to about +6.28 at the right (index 99). It's a visual
 confirmation that `linspace` produces evenly-spaced values.
 
+**Check it.** The same confirmation, from the array itself — the endpoints, and whether all
+99 consecutive differences (`np.diff(x)`) are equal:
+
+```python
+print(x[0], x[-1])
+print(np.allclose(np.diff(x), np.diff(x)[0]))
+```
+
+This prints:
+
+```
+-6.283185307179586 6.283185307179586
+True
+```
+
+Equal differences everywhere is exactly what "a straight line" means.
+
 There are many ways to visualize 2D data. Here we use `pcolormesh`, which draws a 2D array
 as a grid of colored cells (a "heatmap"), with color encoding each cell's value:
 
@@ -70,9 +90,27 @@ plt.show()
 ```
 
 **What this shows.** `xx` holds the x-coordinate at every point of the grid, so its value
-depends only on the column, not the row. The heatmap therefore looks like smooth vertical
-stripes: dark/low (about −6.28) down the left edge, increasing left-to-right to bright/high
-(about +6.28) at the right edge, identical in every row.
+depends only on the column, not the row. The heatmap is therefore a smooth gradient running
+left to right: dark/low (about −6.28) at the left edge, brightening steadily to high (about
++6.28) at the right edge — and identical in every row, so each thin vertical strip of the
+image is a single color.
+
+**Check it.** "Depends only on the column" means any two rows are identical:
+
+```python
+print(np.allclose(xx[0, :], xx[25, :]))
+print(xx[0, 0], xx[0, -1])
+```
+
+This prints:
+
+```
+True
+-6.283185307179586 6.283185307179586
+```
+
+Row 0 and row 25 match exactly, and a single row runs from −2π to +2π — it is just a copy
+of `x`.
 
 ```python
 plt.pcolormesh(yy)
@@ -80,8 +118,25 @@ plt.show()
 ```
 
 **What this shows.** `yy` holds the y-coordinate, which depends only on the row. So this
-heatmap is horizontal stripes instead of vertical: low (about −3.14) along the bottom row,
-increasing to high (about +3.14) at the top row, identical in every column.
+heatmap is the same idea rotated 90 degrees: a smooth gradient running bottom to top — low
+(about −3.14) along the bottom edge, rising to high (about +3.14) at the top edge, identical
+in every column. (Note that `pcolormesh` draws row 0 at the *bottom* of the image.)
+
+**Check it.**
+
+```python
+print(np.allclose(yy[:, 0], yy[:, 25]))
+print(yy[0, 0], yy[-1, 0])
+```
+
+This prints:
+
+```
+True
+-3.141592653589793 3.141592653589793
+```
+
+Any two columns are identical, and a single column runs from −π to +π — a copy of `y`.
 
 :::{admonition} Try it
 :class: tip
