@@ -1,21 +1,16 @@
-# NumPy and Matplotlib
+# NumPy
 
 :::{admonition} Following along with a screen reader
 :class: important
 Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
 :::
 
-This lecture introduces **NumPy** and **Matplotlib**. These are two of the most fundamental parts of the scientific Python "ecosystem" — most everything else is built on top of them.
-
-**NumPy** is *the fundamental package for scientific computing with Python*.
+This lecture introduces **NumPy**, *the fundamental package for scientific computing with Python* — the fast, N-dimensional array library that almost everything else in the scientific Python ecosystem is built on.
 
 - Website: <https://numpy.org/>
 - GitHub: <https://github.com/numpy/numpy>
 
-**Matplotlib** is *a comprehensive library for creating static, animated, and interactive visualizations in Python*.
-
-- Website: <https://matplotlib.org/>
-- GitHub: <https://github.com/matplotlib/matplotlib>
+To build intuition, this lecture often **visualizes** the arrays it creates, using Matplotlib. The Matplotlib basics — importing it, showing or saving a figure, and exploring plots non-visually — live on the companion page [Visualizing Arrays with Matplotlib](./matplotlib.md). Wherever a plot appears below, it is followed by a **"What this shows"** note describing the result in words and numbers, so you get the insight without seeing the picture. (The import line, when you need it, is `from matplotlib import pyplot as plt`.)
 
 :::{admonition} A note on how output works
 :class: note
@@ -24,9 +19,8 @@ The original lecture is a Jupyter notebook, where the value of the last line of 
 
 :::{admonition} In-class assignment — 10 points
 :class: note
-The **"Try it"** exercises on this page are part of your in-class assignment for this section. Complete them as `.py` scripts, push them to your week folder, and post the link on the matching **Courseworks** assignment. (One 10-point assignment covers all the lecture material in this section.)
+The **"Try it"** exercises on this page (and on the companion Matplotlib page) are part of your in-class assignment for this section. Complete them as `.py` scripts, push them to your week folder, and post the link on the matching **Courseworks** assignment.
 :::
-
 ## Importing and Examining a New Package
 
 This will be our first experience with *importing* a package that is not part of the Python [standard library](https://docs.python.org/3/library/).
@@ -340,55 +334,6 @@ This prints:
 :::{admonition} Try it
 :class: tip
 Create `indexing.py` and rebuild `x`, `y`, `xx`, `yy` with `np.meshgrid` as above. Get the first row of `xx`, its last column, and a central 3×3 block via slicing, printing the shape of each. Then use a **boolean mask** to extract all values of `xx` that are greater than zero — print the shape of the result.
-:::
-
-## Visualizing Arrays with Matplotlib
-
-It can be hard to work with big arrays without actually seeing anything! The original course now brings in **Matplotlib** to visualize these arrays.
-
-:::{admonition} Exploring plots by sound and text
-:class: tip
-Matplotlib plots are images, so they aren't directly readable with a screen reader. Throughout this section, each plotting snippet is followed by a short **"What this shows"** note that describes, in words and numbers, what the plot reveals about the underlying data — so you get the same insight without seeing the picture. As an experiment we're evaluating, many of these charts can also be made **explorable non-visually** — navigated by keyboard and played as sound — using a tool called **MAIDR**. See [Trying MAIDR](trying_maidr.md) for how to set that up and try it yourself.
-:::
-
-You still write and run the plotting code exactly as scripts. To import Matplotlib's plotting interface:
-
-```python
-from matplotlib import pyplot as plt
-```
-
-:::{note}
-When you run a Matplotlib script from the terminal, the figure only appears if you ask for it. Add `plt.show()` at the end of the script to open the plot window, or `plt.savefig("figure.png")` to write it to a file. The course notebook shows plots automatically; in a script you call one of these yourself. The "What this shows" notes below mean you don't need to open the window to follow the lesson.
-:::
-
-For plotting a 1D array as a line, we use the `plot` command:
-
-```python
-plt.plot(x)
-plt.show()
-```
-
-**What this shows.** With a single argument, `plt.plot` puts the array's *index* (0, 1, 2, …, 99) on the horizontal axis and its *value* on the vertical axis. Since `x = np.linspace(-2*np.pi, 2*np.pi, 100)`, the result is a straight line rising steadily from about −6.28 at the left (index 0) to about +6.28 at the right (index 99). It's a visual confirmation that `linspace` produces evenly-spaced values.
-
-There are many ways to visualize 2D data. Here we use `pcolormesh`, which draws a 2D array as a grid of colored cells (a "heatmap"), with color encoding each cell's value:
-
-```python
-plt.pcolormesh(xx)
-plt.show()
-```
-
-**What this shows.** `xx` holds the x-coordinate at every point of the grid, so its value depends only on the column, not the row. The heatmap therefore looks like smooth vertical stripes: dark/low (about −6.28) down the left edge, increasing left-to-right to bright/high (about +6.28) at the right edge, identical in every row.
-
-```python
-plt.pcolormesh(yy)
-plt.show()
-```
-
-**What this shows.** `yy` holds the y-coordinate, which depends only on the row. So this heatmap is horizontal stripes instead of vertical: low (about −3.14) along the bottom row, increasing to high (about +3.14) at the top row, identical in every column.
-
-:::{admonition} Try it
-:class: tip
-Create `plotting.py`. Use `plt.plot` to plot `np.cos(x)` against `x` (`plt.plot(x, np.cos(x))`). Then use `plt.pcolormesh` to visualize the 2D array `xx + yy`. End the script with `plt.show()`. (Don't worry about axis labels yet — those come in the next notebook.) If you've set up MAIDR, try exploring these plots non-visually too.
 :::
 
 ## Array Operations
@@ -757,9 +702,9 @@ Create `datafiles.py` with `arr3d = np.ones((100, 50, 25))`. Save the 3D array t
 
 ## Recap
 
-In this lecture you met the two foundations of scientific Python:
+In this lecture you met **NumPy**, the foundation of scientific Python:
 
 - **NumPy** gives you the `ndarray`: a fast, N-dimensional, single-dtype container. You learned to **create** arrays (`np.array`, `np.zeros`/`np.ones`/`np.full`, `np.arange`, `np.linspace`/`np.logspace`, `np.meshgrid`), **inspect** them (`.dtype`, `.shape`), **index and slice** them (comma-separated per dimension, plus boolean masks), do **element-wise math** (`np.sin`, `*`, etc.), **manipulate dimensions** (`transpose`, `reshape`, `tile`, and `None` to add axes), combine different-sized arrays with **broadcasting**, **reduce** them (`sum`, `mean`, `std`, optionally `axis=...`), and **save/load** them (`np.save`, `np.load`).
-- **Matplotlib** (`plt.plot` for 1D lines, `plt.pcolormesh` for 2D heatmaps) is how the course *visualizes* arrays. Since plots are images, this page pairs every plot with a data-first "What this shows" description, and points to [Trying MAIDR](trying_maidr.md) for exploring charts non-visually.
+- Along the way you **visualized** arrays with Matplotlib. For the plotting basics — and for exploring charts non-visually — see [Visualizing Arrays with Matplotlib](./matplotlib.md) and [Trying MAIDR](./trying_maidr.md).
 
 The NumPy documentation is your best reference as you go: <https://numpy.org/doc/stable/reference/>.

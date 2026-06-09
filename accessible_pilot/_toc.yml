@@ -25,5 +25,6 @@ parts:
   - caption: Scientific Python Fundamentals
     chapters:
       - file: lectures_DS/sci_python/overview
-      - file: lectures_DS/sci_python/numpy_and_matplotlib
+      - file: lectures_DS/sci_python/numpy
+      - file: lectures_DS/sci_python/matplotlib
       - file: lectures_DS/sci_python/trying_maidr
