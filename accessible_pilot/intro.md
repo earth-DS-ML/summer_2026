@@ -1,8 +1,9 @@
 # Accessible course pages (preview)
 
 This is an accessible, screen-reader-friendly version of the course's lecture material,
-prepared as a pilot. It currently covers the first three sections — **The Interactive
-Computing Environment**, **Data**, and **The Core Python Language**. The teaching content matches the
+prepared as a pilot. It currently covers three full sections — **The Interactive
+Computing Environment**, **Data**, and **The Core Python Language** — plus the start of
+**Scientific Python Fundamentals** (NumPy, and a pilot for exploring plots by sound and text). The teaching content matches the
 main course site; the differences are in *how you do the work*:
 
 - a workflow built on **VS Code and Python scripts** instead of the in-browser
