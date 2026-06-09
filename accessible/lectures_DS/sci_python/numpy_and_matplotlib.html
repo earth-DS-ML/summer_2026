@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>NumPy and Matplotlib &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/numpy_and_matplotlib';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Trying MAIDR (a pilot)" href="trying_maidr.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages (preview)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/sci_python/numpy_and_matplotlib.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NumPy and Matplotlib</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-examining-a-new-package">Importing and Examining a New Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndarrays">NDArrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-creation">Array Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-arrays-with-matplotlib">Visualizing Arrays with Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-math">Basic Math</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-array-dimensions">Manipulating Array Dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">Reduction Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="numpy-and-matplotlib">
+<h1>NumPy and Matplotlib<a class="headerlink" href="#numpy-and-matplotlib" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the output.</p>
+</div>
+<p>This lecture introduces <strong>NumPy</strong>, <em>the fundamental package for scientific computing with Python</em> — the fast, N-dimensional array library that almost everything else in the scientific Python ecosystem is built on.</p>
+<ul class="simple">
+<li><p>Website: <a class="reference external" href="https://numpy.org/" rel="noreferer noopener" target="_blank">https://numpy.org/</a></p></li>
+<li><p>GitHub: <a class="github reference external" href="https://github.com/numpy/numpy" rel="noreferer noopener" target="_blank">numpy/numpy</a></p></li>
+</ul>
+<p>To build intuition, this lecture often <strong>visualizes</strong> the arrays it creates, using <strong>Matplotlib</strong> — introduced partway down this page, in the <em>Visualizing Arrays with Matplotlib</em> section, right before the first plots appear. Wherever a plot appears below, it is followed by a <strong>“What this shows”</strong> note describing the result in words and numbers, and usually by a <strong>“Check it”</strong> block — code that confirms the same conclusion directly from the array, no eyes required.</p>
+<div class="tip admonition">
+<p class="admonition-title">Checking an array without a picture</p>
+<p>For sighted readers, the quick plots in this lecture act as an <em>array microscope</em> — a two-second glance to confirm an operation did what they think it did. You can get the same confirmation directly from the array, and this page practices that style at every step:</p>
+<ul class="simple">
+<li><p><strong>Shape first.</strong> <code class="docutils literal notranslate"><span class="pre">print(a.shape)</span></code> before and after an operation — most mistakes change the shape.</p></li>
+<li><p><strong>Spot-check values.</strong> Print a value you can predict (<code class="docutils literal notranslate"><span class="pre">a[0,</span> <span class="pre">0]</span></code>), or test a whole slice at once with <code class="docutils literal notranslate"><span class="pre">np.allclose(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">np.array_equal(...)</span></code>.</p></li>
+<li><p><strong>Summary statistics.</strong> <code class="docutils literal notranslate"><span class="pre">a.min()</span></code>, <code class="docutils literal notranslate"><span class="pre">a.max()</span></code>, <code class="docutils literal notranslate"><span class="pre">a.mean()</span></code> — the non-visual equivalent of glancing at a colorbar.</p></li>
+<li><p><strong>1D profiles.</strong> Slice out one row or column and you have an ordinary 1D array: <code class="docutils literal notranslate"><span class="pre">a[25,</span> <span class="pre">:]</span></code> is row 25. You can print it, plot it as a line with <code class="docutils literal notranslate"><span class="pre">plt.plot(...)</span></code>, or explore that line plot by sound with <a class="reference internal" href="trying_maidr.html"><span class="std std-doc">MAIDR</span></a> — MAIDR handles line plots well, though not (yet) 2D heatmaps like <code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code>.</p></li>
+</ul>
+<p>These checks are not a workaround — printing shapes and verifying values is exactly how experienced programmers debug arrays, with or without sight.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">A note on how output works</p>
+<p>The original lecture is a Jupyter notebook, where the value of the last line of a cell is shown automatically — so it often relies on a bare expression like <code class="docutils literal notranslate"><span class="pre">a.shape</span></code> to display a result. In a script that does <strong>not</strong> happen: nothing is shown unless you <code class="docutils literal notranslate"><span class="pre">print()</span></code> it. So as you copy these examples into <code class="docutils literal notranslate"><span class="pre">.py</span></code> files, <strong>wrap the thing you want to see in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code></strong>. Each “This prints:” block below shows what you’ll hear after running the code and pressing <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>The <strong>“Try it”</strong> exercises on this page (and on the companion Matplotlib page) are part of your in-class assignment for this section. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment.</p>
+</div>
+<section id="importing-and-examining-a-new-package">
+<h2>Importing and Examining a New Package<a class="headerlink" href="#importing-and-examining-a-new-package" title="Link to this heading">#</a></h2>
+<p>This will be our first experience with <em>importing</em> a package that is not part of the Python <a class="reference external" href="https://docs.python.org/3/library/" rel="noreferer noopener" target="_blank">standard library</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<p>What did we just do? We <strong>imported</strong> a package. This makes new variables (mostly functions) available to use in our script — we access them with the <code class="docutils literal notranslate"><span class="pre">np.</span></code> prefix, as you’ll see throughout this page.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">dir()</span></code> to see the variables we currently have access to — <code class="docutils literal notranslate"><span class="pre">np</span></code> should now be one of them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints a list of the names defined in your script right now. The exact list depends on what else you’ve written, but <code class="docutils literal notranslate"><span class="pre">'np'</span></code> will be one of the entries.</p>
+<p>NumPy has hundreds of functions and types — <code class="docutils literal notranslate"><span class="pre">dir(np)</span></code> lists them all (too many to read out loud). A common pattern is to filter that list for names containing a keyword you care about. This is a list comprehension, like the ones from the Core Python material:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">np</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;lin&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;linalg&#39;</span><span class="p">,</span> <span class="s1">&#39;linspace&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>So the two NumPy names containing <code class="docutils literal notranslate"><span class="pre">'lin'</span></code> are <code class="docutils literal notranslate"><span class="pre">linalg</span></code> (the linear-algebra sub-package) and <code class="docutils literal notranslate"><span class="pre">linspace</span></code> (a function we’ll use below).</p>
+<p>You can check the version of any package via its <code class="docutils literal notranslate"><span class="pre">__version__</span></code> attribute — useful when reproducing results or filing bug reports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints a version string such as <code class="docutils literal notranslate"><span class="pre">2.4.4</span></code> (yours may differ).</p>
+<p>There is no way we could explicitly teach each of these functions. The NumPy documentation is crucial:
+<a class="reference external" href="https://numpy.org/doc/stable/reference/" rel="noreferer noopener" target="_blank">https://numpy.org/doc/stable/reference/</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">examine.py</span></code>. Import the <code class="docutils literal notranslate"><span class="pre">math</span></code> module (<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>). Use <code class="docutils literal notranslate"><span class="pre">print(dir(math))</span></code> to peek at what’s inside. Pick a function that looks interesting (e.g., <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">factorial</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>) and call <code class="docutils literal notranslate"><span class="pre">help()</span></code> on it to read its signature and docstring — add a line like <code class="docutils literal notranslate"><span class="pre">help(math.sqrt)</span></code>, run the script, and read the help text with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+</div>
+</section>
+<section id="ndarrays">
+<h2>NDArrays<a class="headerlink" href="#ndarrays" title="Link to this heading">#</a></h2>
+<p>The core class is the NumPy <strong>ndarray</strong> (n-dimensional array).</p>
+<p>Compared to a regular Python <code class="docutils literal notranslate"><span class="pre">list</span></code>, NumPy arrays have a few key differences:</p>
+<ul class="simple">
+<li><p>NumPy arrays can have N dimensions (lists, tuples, etc. are 1D).</p></li>
+<li><p>NumPy arrays hold values of a single datatype (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>); lists can hold anything.</p></li>
+<li><p>NumPy optimizes numerical operations on arrays — NumPy is <em>fast!</em></p></li>
+</ul>
+<p>Let’s create a 1D array from a Python list, then inspect its properties.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">9</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Every array has a <code class="docutils literal notranslate"><span class="pre">dtype</span></code> (the type of its elements) and a <code class="docutils literal notranslate"><span class="pre">shape</span></code> (its size along each dimension):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int64</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>So the elements are 64-bit integers, and the shape is <code class="docutils literal notranslate"><span class="pre">(5,)</span></code> — a 1D array of length 5. (The trailing comma is how Python writes a one-element tuple.)</p>
+<p>The shape is returned as a <strong>tuple</strong>, which means we can index it like any other tuple — useful when we want to grab a specific dimension’s length.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;tuple&#39;&gt;
+</pre></div>
+</div>
+<p>Arrays can also be <strong>multi-dimensional</strong> and have an explicit dtype. Here we pass a list of lists and ask for 64-bit floats:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">float64</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">b</span></code> is a 2-row, 4-column array of floats.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The fastest-varying dimension is the <strong>last</strong> dimension; the outer level of the hierarchy is the first dimension. (This is called “C-style” indexing.)</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">ndarrays.py</span></code>. Build three arrays:</p>
+<ul class="simple">
+<li><p>A 1D array from <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code>.</p></li>
+<li><p>A 2D array from <code class="docutils literal notranslate"><span class="pre">[[1,</span> <span class="pre">2],</span> <span class="pre">[3,</span> <span class="pre">4]]</span></code>.</p></li>
+<li><p>A 3D array of your choice (a list of lists of lists).</p></li>
+</ul>
+<p>Print the <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of each with <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>. Then create a 1D array that includes a decimal value (e.g. <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3.5]</span></code>) and confirm the dtype is now <code class="docutils literal notranslate"><span class="pre">float64</span></code>.</p>
+</div>
+</section>
+<section id="array-creation">
+<h2>Array Creation<a class="headerlink" href="#array-creation" title="Link to this heading">#</a></h2>
+<p>There are several ways to build arrays in NumPy beyond passing a list to <code class="docutils literal notranslate"><span class="pre">np.array</span></code>. The functions below come up constantly:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros</span></code> / <code class="docutils literal notranslate"><span class="pre">np.ones</span></code> / <code class="docutils literal notranslate"><span class="pre">np.full</span></code> — blank arrays of a given shape.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.arange</span></code> / <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code> / <code class="docutils literal notranslate"><span class="pre">np.logspace</span></code> — evenly-spaced values along a range.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> — combine 1D arrays into 2D coordinate grids.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These create, in order: a 9×9 array of zeros; a 3×6×3 array of ones holding complex numbers; a 3×3 array filled with the value of pi; then <code class="docutils literal notranslate"><span class="pre">np.ones_like</span></code> and <code class="docutils literal notranslate"><span class="pre">np.zeros_like</span></code>, which make new arrays of ones and zeros that copy the <strong>shape and dtype</strong> of an existing array (<code class="docutils literal notranslate"><span class="pre">c</span></code> and <code class="docutils literal notranslate"><span class="pre">d</span></code> here).</p>
+<p><code class="docutils literal notranslate"><span class="pre">arange</span></code> works very similarly to <code class="docutils literal notranslate"><span class="pre">range</span></code>, but it populates the array “eagerly” (i.e. immediately), rather than generating the values upon iteration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">arange</span></code> is left inclusive, right exclusive, just like <code class="docutils literal notranslate"><span class="pre">range</span></code>, but also works with floating-point numbers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">2.</span>   <span class="mf">2.25</span> <span class="mf">2.5</span>  <span class="mf">2.75</span> <span class="mf">3.</span>   <span class="mf">3.25</span> <span class="mf">3.5</span>  <span class="mf">3.75</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A frequent need is to generate an array of N numbers, evenly spaced between two values. That is what <code class="docutils literal notranslate"><span class="pre">linspace</span></code> is for:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints 20 values evenly spaced from 2 to 4 (inclusive of both ends):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">2.</span>         <span class="mf">2.10526316</span> <span class="mf">2.21052632</span> <span class="mf">2.31578947</span> <span class="mf">2.42105263</span> <span class="mf">2.52631579</span>
+ <span class="mf">2.63157895</span> <span class="mf">2.73684211</span> <span class="mf">2.84210526</span> <span class="mf">2.94736842</span> <span class="mf">3.05263158</span> <span class="mf">3.15789474</span>
+ <span class="mf">3.26315789</span> <span class="mf">3.36842105</span> <span class="mf">3.47368421</span> <span class="mf">3.57894737</span> <span class="mf">3.68421053</span> <span class="mf">3.78947368</span>
+ <span class="mf">3.89473684</span> <span class="mf">4.</span>        <span class="p">]</span>
+</pre></div>
+</div>
+<p>The first value is exactly 2, the last is exactly 4, and the spacing between consecutive values is constant (about 0.105).</p>
+<p>Log-spaced values are useful when working with quantities spanning multiple orders of magnitude (e.g., frequencies, energy scales):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints 10 values spaced evenly on a logarithmic scale, from 10¹ to 10²:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mf">10.</span>          <span class="mf">12.91549665</span>  <span class="mf">16.68100537</span>  <span class="mf">21.5443469</span>   <span class="mf">27.82559402</span>
+  <span class="mf">35.93813664</span>  <span class="mf">46.41588834</span>  <span class="mf">59.94842503</span>  <span class="mf">77.42636827</span> <span class="mf">100.</span>        <span class="p">]</span>
+</pre></div>
+</div>
+<p>The first value is 10, the last is 100, and each value is a constant <em>ratio</em> larger than the previous one (not a constant difference).</p>
+<p>NumPy also has utilities for generating multi-dimensional arrays. <code class="docutils literal notranslate"><span class="pre">meshgrid</span></code> creates 2D arrays out of a combination of 1D arrays. Meshgrid essentially tiles the 1D arrays to a shape that is the combined shape of the inputs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">100</span><span class="p">,)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,)</span>
+<span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So the 1D inputs have lengths 100 and 50, and <code class="docutils literal notranslate"><span class="pre">meshgrid</span></code> produces two 2D arrays of shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> — 50 rows (one per <code class="docutils literal notranslate"><span class="pre">y</span></code> value) and 100 columns (one per <code class="docutils literal notranslate"><span class="pre">x</span></code> value). <code class="docutils literal notranslate"><span class="pre">xx</span></code> holds the x-coordinate at every grid point, and <code class="docutils literal notranslate"><span class="pre">yy</span></code> holds the y-coordinate. We’ll reuse <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">xx</span></code>, and <code class="docutils literal notranslate"><span class="pre">yy</span></code> throughout the rest of this page.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">creation.py</span></code>. Use <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code> to create an array of 100 evenly-spaced values between 0 and 1, and <code class="docutils literal notranslate"><span class="pre">np.arange</span></code> to create the integers from 0 to 10. Print the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">shape</span></code> of each. Then use <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> to build a 2D grid from these two arrays and print its shape.</p>
+</div>
+</section>
+<section id="indexing">
+<h2>Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h2>
+<p>Basic indexing in NumPy is similar to lists — single brackets, zero-based, and negative indices count from the end. The key extension is that for N-dimensional arrays, you separate the index for each dimension with a comma. Slicing (e.g. <code class="docutils literal notranslate"><span class="pre">[2:5]</span></code>, <code class="docutils literal notranslate"><span class="pre">[:,</span> <span class="pre">0]</span></code>) and boolean masks also work, as we’ll see below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints (using the <code class="docutils literal notranslate"><span class="pre">y</span></code> array from the meshgrid section above):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">1.8593099378388573</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.01336438</span> <span class="o">-</span><span class="mf">2.88513611</span> <span class="o">-</span><span class="mf">2.75690784</span> <span class="o">-</span><span class="mf">2.62867957</span><span class="p">]</span> <span class="mf">2.628679567289418</span>
+</pre></div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">y[10]</span></code> is the single value at index 10, <code class="docutils literal notranslate"><span class="pre">y[1:5]</span></code> is a 4-element slice (indices 1 through 4), and <code class="docutils literal notranslate"><span class="pre">y[-5]</span></code> is the fifth value from the end.</p>
+<p>For multi-dimensional arrays, use a comma to separate the index for each dimension:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xx</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">6.283185307179586</span> <span class="mf">6.283185307179586</span> <span class="mf">5.775453161144872</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xx[0,</span> <span class="pre">0]</span></code> is the top-left corner (the smallest x, about −2π), <code class="docutils literal notranslate"><span class="pre">xx[-1,</span> <span class="pre">-1]</span></code> is the bottom-right corner (the largest x, about +2π), and <code class="docutils literal notranslate"><span class="pre">xx[3,</span> <span class="pre">-5]</span></code> is the value in row 3, fifth column from the end.</p>
+<p>Slicing returns whole rows or columns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">xx</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">100</span><span class="p">,)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xx[0]</span></code> is the first <strong>row</strong> (length 100, one per column), and <code class="docutils literal notranslate"><span class="pre">xx[:,</span> <span class="pre">-1]</span></code> is the last <strong>column</strong> (length 50, one per row).</p>
+<p>You can take <strong>ranges</strong> across multiple dimensions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rows 3 through 9 (7 rows) and columns 30 through 39 (10 columns) give a 7×10 sub-block.</p>
+<p>There are many advanced ways to index arrays. You can <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.indexing.html" rel="noreferer noopener" target="_blank">read about them</a> in the manual. Here is one example — a <strong>boolean mask</strong>. The expression <code class="docutils literal notranslate"><span class="pre">xx</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> builds an array of <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> the same shape as <code class="docutils literal notranslate"><span class="pre">xx</span></code>, and indexing with it keeps only the elements where the mask is <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">xx</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">2500</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>Note that a boolean index always returns a <strong>flat (1D) array</strong>, regardless of the input shape. Here <code class="docutils literal notranslate"><span class="pre">xx</span></code> has 50 × 100 = 5000 elements, and exactly half of them are negative, giving 2500. The <code class="docutils literal notranslate"><span class="pre">ravel</span></code> method does the same flattening explicitly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5000</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">indexing.py</span></code> and rebuild <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">xx</span></code>, <code class="docutils literal notranslate"><span class="pre">yy</span></code> with <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> as above. Get the first row of <code class="docutils literal notranslate"><span class="pre">xx</span></code>, its last column, and a central 3×3 block via slicing, printing the shape of each. Then use a <strong>boolean mask</strong> to extract all values of <code class="docutils literal notranslate"><span class="pre">xx</span></code> that are greater than zero — print the shape of the result.</p>
+</div>
+</section>
+<section id="visualizing-arrays-with-matplotlib">
+<h2>Visualizing Arrays with Matplotlib<a class="headerlink" href="#visualizing-arrays-with-matplotlib" title="Link to this heading">#</a></h2>
+<p>It can be hard to work with big arrays without seeing them, so we turn arrays into pictures with <strong>Matplotlib</strong>, the plotting library the course uses throughout. To import its plotting interface:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you run a Matplotlib script from the terminal, the figure only appears if you ask for it. Add <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> at the end of the script to open the plot window, or <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;figure.png&quot;)</span></code> to write it to a file. The course notebook shows plots automatically; in a script you call one of these yourself. The “What this shows” notes mean you don’t need to open the window to follow the lesson.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Exploring plots by sound and text</p>
+<p>Matplotlib plots are images, so a screen reader cannot read them directly — that is exactly why every plot on this page is paired with a “What this shows” note and a “Check it” block. As an experiment we’re evaluating, many of these charts can also be made <strong>explorable non-visually</strong> — navigated by keyboard and played as sound — using a tool called <strong>MAIDR</strong>. See <a class="reference internal" href="trying_maidr.html"><span class="std std-doc">Trying MAIDR</span></a> for how to set that up and try it yourself.</p>
+</div>
+<p>For plotting a 1D array as a line, we use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> With a single argument, <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> puts the array’s <em>index</em> (0, 1, 2, …, 99) on the horizontal axis and its <em>value</em> on the vertical axis. Since <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.linspace(-2*np.pi,</span> <span class="pre">2*np.pi,</span> <span class="pre">100)</span></code>, the result is a straight line rising steadily from about −6.28 at the left (index 0) to about +6.28 at the right (index 99). It’s a visual confirmation that <code class="docutils literal notranslate"><span class="pre">linspace</span></code> produces evenly-spaced values.</p>
+<p><strong>Check it.</strong> The same confirmation, from the array itself — the endpoints, and whether all 99 consecutive differences (<code class="docutils literal notranslate"><span class="pre">np.diff(x)</span></code>) are equal:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">6.283185307179586</span> <span class="mf">6.283185307179586</span>
+<span class="kc">True</span>
+</pre></div>
+</div>
+<p>Equal differences everywhere is exactly what “a straight line” means.</p>
+<p>There are many ways to visualize 2D data. Here we use <code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code>, which draws a 2D array as a grid of colored cells (a “heatmap”), with color encoding each cell’s value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">xx</span></code> holds the x-coordinate at every point of the grid, so its value depends only on the column, not the row. The heatmap is therefore a smooth gradient running left to right: dark/low (about −6.28) at the left edge, brightening steadily to high (about +6.28) at the right edge — and identical in every row, so each thin vertical strip of the image is a single color.</p>
+<p><strong>Check it.</strong> “Depends only on the column” means any two rows are identical:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xx</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="p">:]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+<span class="o">-</span><span class="mf">6.283185307179586</span> <span class="mf">6.283185307179586</span>
+</pre></div>
+</div>
+<p>Row 0 and row 25 match exactly, and a single row runs from −2π to +2π — it is just a copy of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">yy</span></code> holds the y-coordinate, which depends only on the row. So this heatmap is the same idea rotated 90 degrees: a smooth gradient running bottom to top — low (about −3.14) along the bottom edge, rising to high (about +3.14) at the top edge, identical in every column. (Note that <code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code> draws row 0 at the <em>bottom</em> of the image.)</p>
+<p><strong>Check it.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">yy</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">yy</span><span class="p">[:,</span> <span class="mi">25</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">yy</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">yy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+<span class="o">-</span><span class="mf">3.141592653589793</span> <span class="mf">3.141592653589793</span>
+</pre></div>
+</div>
+<p>Any two columns are identical, and a single column runs from −π to +π — a copy of <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">plotting.py</span></code>, rebuilding <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">xx</span></code>, <code class="docutils literal notranslate"><span class="pre">yy</span></code> with <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> as above. Use <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> to plot <code class="docutils literal notranslate"><span class="pre">np.cos(x)</span></code> against <code class="docutils literal notranslate"><span class="pre">x</span></code> (<code class="docutils literal notranslate"><span class="pre">plt.plot(x,</span> <span class="pre">np.cos(x))</span></code>). Then use <code class="docutils literal notranslate"><span class="pre">plt.pcolormesh</span></code> to visualize the 2D array <code class="docutils literal notranslate"><span class="pre">xx</span> <span class="pre">+</span> <span class="pre">yy</span></code>. End the script with <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>. (Don’t worry about axis labels yet — those come later.) If you’ve set up MAIDR, try exploring these plots non-visually too.</p>
+</div>
+</section>
+<section id="array-operations">
+<h2>Array Operations<a class="headerlink" href="#array-operations" title="Link to this heading">#</a></h2>
+<p>There are a huge number of operations available on arrays. All the familiar arithmetic operators are applied on an <strong>element-by-element</strong> basis.</p>
+<section id="basic-math">
+<h3>Basic Math<a class="headerlink" href="#basic-math" title="Link to this heading">#</a></h3>
+<p>NumPy provides “universal functions” like <code class="docutils literal notranslate"><span class="pre">np.sin</span></code> that act on every element of an array at once:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> This plots <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code> against <code class="docutils literal notranslate"><span class="pre">x</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> runs from −2π to +2π. The curve is a smooth sine wave that completes <strong>two full oscillations</strong> across the range: it passes through zero at x = −2π, −π, 0, π, and 2π, peaks at +1, and dips to −1, in the classic wave shape.</p>
+<p>Now let’s compute a function of two variables — a 2D surface. We use the 2D <code class="docutils literal notranslate"><span class="pre">xx</span></code>/<code class="docutils literal notranslate"><span class="pre">yy</span></code> arrays (from <code class="docutils literal notranslate"><span class="pre">meshgrid</span></code> earlier) so the function is evaluated at every grid point:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">yy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">f</span></code> now has shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>, one value per grid point. Passing <code class="docutils literal notranslate"><span class="pre">xx,</span> <span class="pre">yy,</span> <span class="pre">f</span></code> to <code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code> plots it with real coordinates on the axes (x from −2π to +2π, y from −π to +π). The pattern is a grid of “blobs”: along the x-direction it oscillates between bright (+) and dark (−) following <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code> (two full cycles), while along the y-direction the amplitude is gently modulated by <code class="docutils literal notranslate"><span class="pre">cos(0.5·y)</span></code>, which is strongest (close to 1) near the middle row (y = 0) and tapers toward the top and bottom edges. We reuse this <code class="docutils literal notranslate"><span class="pre">f</span></code> (shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>) in the sections below.</p>
+<p><strong>Check it.</strong> Everything the plot shows is verifiable straight from the array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">f</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.9993604085457249</span> <span class="mf">0.9993604085457249</span>
+<span class="mf">0.0005137191281501252</span>
+</pre></div>
+</div>
+<p>The shape says one value per grid point; the min/max say the values span roughly −1 to +1. The third line checks the <em>structure</em>: <code class="docutils literal notranslate"><span class="pre">f[25,</span> <span class="pre">:]</span></code> is the middle row — the row closest to y = 0, where <code class="docutils literal notranslate"><span class="pre">cos(0.5·y)</span> <span class="pre">≈</span> <span class="pre">1</span></code> — and it differs from plain <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code> by at most 0.0005. That slice is also your <strong>1D profile</strong>: an ordinary length-100 array, so</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>draws the familiar two-cycle sine wave — a line plot you can read with <code class="docutils literal notranslate"><span class="pre">print</span></code>, or explore by sound with MAIDR. Slicing a single row or column out of a 2D array and examining it as a curve is one of the most useful moves in this whole lecture: it turns a heatmap question into a 1D question.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">basic_math.py</span></code> with <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">xx</span></code>, <code class="docutils literal notranslate"><span class="pre">yy</span></code> rebuilt. Compute a 2D Gaussian on the grid: <code class="docutils literal notranslate"><span class="pre">gaussian</span> <span class="pre">=</span> <span class="pre">np.exp(-(xx**2</span> <span class="pre">+</span> <span class="pre">yy**2))</span></code>. Visualize it with <code class="docutils literal notranslate"><span class="pre">plt.pcolormesh(xx,</span> <span class="pre">yy,</span> <span class="pre">gaussian)</span></code> then <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>. Where is the array largest, and where is it smallest? (Hint: <code class="docutils literal notranslate"><span class="pre">exp(0)</span> <span class="pre">=</span> <span class="pre">1</span></code> at the center where <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code> are both 0, and the values fall toward 0 far from the center.) Then answer the same question <em>without</em> the picture: print <code class="docutils literal notranslate"><span class="pre">gaussian.max()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.unravel_index(gaussian.argmax(),</span> <span class="pre">gaussian.shape)</span></code> (the row and column of the maximum — it should be near the center of the grid), and plot the middle-row profile with <code class="docutils literal notranslate"><span class="pre">plt.plot(x,</span> <span class="pre">gaussian[25,</span> <span class="pre">:])</span></code> — a bell curve centered at x = 0.</p>
+</div>
+</section>
+</section>
+<section id="manipulating-array-dimensions">
+<h2>Manipulating Array Dimensions<a class="headerlink" href="#manipulating-array-dimensions" title="Link to this heading">#</a></h2>
+<p>Once you have an array, you often need to reshape it without changing the underlying data — to swap the dimension order (transpose), reorganize the layout (<code class="docutils literal notranslate"><span class="pre">reshape</span></code>), repeat the array (<code class="docutils literal notranslate"><span class="pre">tile</span></code>), or add a new axis (with <code class="docutils literal notranslate"><span class="pre">None</span></code>) so it lines up with a higher-dimensional array. These all return a <em>view</em> or new array; they don’t usually copy the data.</p>
+<p>Swapping the dimension order is accomplished by calling <code class="docutils literal notranslate"><span class="pre">transpose</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_transposed</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f_transposed</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">f_transposed</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> Transposing turns the <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> array into <code class="docutils literal notranslate"><span class="pre">(100,</span> <span class="pre">50)</span></code> — rows become columns and vice versa. The heatmap looks like the earlier <code class="docutils literal notranslate"><span class="pre">f</span></code> plot rotated/flipped across its diagonal: the blob pattern that ran left-to-right now runs top-to-bottom.</p>
+<p><strong>Check it.</strong> Transposing means every element swaps its row and column index — <code class="docutils literal notranslate"><span class="pre">f_transposed[j,</span> <span class="pre">i]</span></code> equals <code class="docutils literal notranslate"><span class="pre">f[i,</span> <span class="pre">j]</span></code> for any pair of indices:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">f_transposed</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This prints the same number twice:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.18253780301831585</span> <span class="mf">0.18253780301831585</span>
+</pre></div>
+</div>
+<p>We can also manually change the shape of an array — as long as the new shape has the <strong>same number of elements</strong>. <code class="docutils literal notranslate"><span class="pre">f</span></code> has 50 × 100 = 5000 elements. Watch what happens when the new shape doesn’t match:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This raises an error, because 8 × 9 = 72, not 5000. The last line of the traceback reads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">reshape</span> <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">5000</span> <span class="n">into</span> <span class="n">shape</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a useful error to recognize: when <code class="docutils literal notranslate"><span class="pre">reshape</span></code> complains, it almost always means your target shape multiplies out to a different number of elements than the array actually has.</p>
+<p>A shape that <em>does</em> multiply to 5000 works fine. But be careful with reshaping data — you can accidentally lose the structure of the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> The reshape succeeds (200 × 25 = 5000), but it has scrambled the spatial pattern. NumPy refills the new <code class="docutils literal notranslate"><span class="pre">(200,</span> <span class="pre">25)</span></code> array by reading <code class="docutils literal notranslate"><span class="pre">f</span></code>’s values in order, so the smooth blobs from before are sliced and re-wrapped — the heatmap appears as fine horizontal striping rather than smooth blobs, no longer resembling the original surface. A reminder that reshaping reorganizes numbers without respecting their original 2D meaning.</p>
+<p><strong>Check it.</strong> Reshaping never changes the values or their order — only where the row breaks fall:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">25</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+<span class="kc">True</span>
+</pre></div>
+</div>
+<p>Flattened out, the two arrays are identical. But <code class="docutils literal notranslate"><span class="pre">g</span></code>’s first row holds only the first 25 values of <code class="docutils literal notranslate"><span class="pre">f</span></code>’s first row — each original row of 100 values now wraps across four rows of 25. That re-wrapping is exactly why the spatial pattern scrambles.</p>
+<p>We can also “tile” an array to repeat it many times:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_tiled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f_tiled</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">f_tiled</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">np.tile(f,</span> <span class="pre">(3,</span> <span class="pre">2))</span></code> stacks the <code class="docutils literal notranslate"><span class="pre">f</span></code> pattern <strong>3 times vertically and 2 times horizontally</strong>, giving a <code class="docutils literal notranslate"><span class="pre">(150,</span> <span class="pre">200)</span></code> array. The heatmap shows the same blob pattern repeated as a 3-by-2 grid of identical copies, like wallpaper.</p>
+<p><strong>Check it.</strong> Every 50×100 block should be an exact copy of <code class="docutils literal notranslate"><span class="pre">f</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">f_tiled</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">f_tiled</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">],</span> <span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This prints <code class="docutils literal notranslate"><span class="pre">True</span></code> twice — the first line checks the block in the first 50 rows and 100 columns, the second checks the block in the last 50 rows and last 100 columns.</p>
+<p>Another common need is to add an extra dimension to an array. This can be accomplished via indexing with <code class="docutils literal notranslate"><span class="pre">None</span></code>. Start by checking the shape of <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>Insert a new length-1 axis at the front:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can insert several new axes at once:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">None</span></code> in the index inserts a new length-1 dimension at that position. This is the key trick behind <strong>broadcasting</strong>, which is next.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">dimensions.py</span></code> with <code class="docutils literal notranslate"><span class="pre">f</span></code> rebuilt (<code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">np.sin(xx)</span> <span class="pre">*</span> <span class="pre">np.cos(0.5*yy)</span></code>). Transpose <code class="docutils literal notranslate"><span class="pre">f</span></code> and print the shape. Then reshape it to <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">500)</span></code> and print the shape (check: 10 × 500 = 5000). Finally, add a new leading axis so the shape becomes <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">50,</span> <span class="pre">100)</span></code> — use <code class="docutils literal notranslate"><span class="pre">f[None,</span> <span class="pre">:,</span> <span class="pre">:]</span></code> and verify with <code class="docutils literal notranslate"><span class="pre">.shape</span></code>.</p>
+</div>
+</section>
+<section id="broadcasting">
+<h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
+<p>Not all the arrays we want to work with will have the same size. One approach would be to manually “expand” our arrays to all be the same size, e.g. using <code class="docutils literal notranslate"><span class="pre">tile</span></code>. <strong>Broadcasting</strong> is a more efficient way to combine arrays of different sizes. NumPy has specific rules for how broadcasting works. These can be confusing but are worth learning if you plan to work with NumPy data a lot.</p>
+<p>The core concept of broadcasting is telling NumPy which dimensions are supposed to line up with each other.</p>
+<div class="note admonition">
+<p class="admonition-title">Broadcasting, described</p>
+<p>The original course shows a diagram here. In words: imagine writing the two arrays’ shapes one above the other, <strong>right-aligned</strong> (lining up their last/trailing dimensions). NumPy then compares the shapes column by column, moving right to left, and applies the rules below. Wherever a shape has a length-1 dimension (or no dimension at all), that array is “stretched” — its single row or column is reused — to match the other array’s length in that position. The result has, in each position, the larger of the two lengths.</p>
+</div>
+<p><strong>General Broadcasting Rules.</strong> When performing operations on two arrays, NumPy compares their shapes element-wise starting from the trailing dimensions (right to left). It follows these rules:</p>
+<ul class="simple">
+<li><p>If the dimensions are equal, they’re compatible.</p></li>
+<li><p>If one of the dimensions is 1, it’s “stretched” to match the other.</p></li>
+<li><p>If the dimensions are unequal and neither is 1, the arrays are not broadcastable.</p></li>
+</ul>
+<p>Here <code class="docutils literal notranslate"><span class="pre">f</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(100,)</span></code>. Lining them up on the right, the trailing dimensions are 100 and 100 — they match — and <code class="docutils literal notranslate"><span class="pre">f</span></code>’s leading 50 has no counterpart, so <code class="docutils literal notranslate"><span class="pre">x</span></code> is reused for every row:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+<span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So multiplying a <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> array by a <code class="docutils literal notranslate"><span class="pre">(100,)</span></code> array gives a <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> result — each row of <code class="docutils literal notranslate"><span class="pre">f</span></code> is multiplied element-wise by <code class="docutils literal notranslate"><span class="pre">x</span></code>. We’ll keep this <code class="docutils literal notranslate"><span class="pre">g</span></code> (shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>) for the reductions section.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> This is the original blob surface <code class="docutils literal notranslate"><span class="pre">f</span></code> (sine in x, modulated by cosine in y), shown here for comparison with <code class="docutils literal notranslate"><span class="pre">g</span></code> below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">*</span> <span class="pre">x</span></code> multiplies each column of the pattern by that column’s <code class="docutils literal notranslate"><span class="pre">x</span></code> value, which runs from about −6.28 on the left to +6.28 on the right. Down the <strong>middle</strong> of the plot (x ≈ 0) the values are washed out to near zero, and the amplitude grows as you move outward — but it does <em>not</em> keep growing all the way to the edges: <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code> itself returns to zero at x = ±2π, so the outermost columns fade back toward zero too. The most extreme cells sit about three-quarters of the way out, near x ≈ ±4.9, where the array reaches its minimum of about −4.8; bright maxima of about +1.8 sit near x ≈ ±2. And because multiplying by a <em>negative</em> <code class="docutils literal notranslate"><span class="pre">x</span></code> flips the sign of the whole left half, the pattern is mirror-symmetric about the center instead of simply repeating.</p>
+<p><strong>Check it.</strong> Broadcasting claims that each column of <code class="docutils literal notranslate"><span class="pre">g</span></code> equals <code class="docutils literal notranslate"><span class="pre">f</span></code>’s column times that column’s single <code class="docutils literal notranslate"><span class="pre">x</span></code> value — test it directly for, say, column 12:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">g</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">f</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">12</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+</pre></div>
+</div>
+<p>And the middle row of <code class="docutils literal notranslate"><span class="pre">g</span></code> is a 1D profile of the whole structure. Since <code class="docutils literal notranslate"><span class="pre">f</span></code>’s middle row is nearly <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code>, this row is nearly <code class="docutils literal notranslate"><span class="pre">x·sin(x)</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> A mirror-symmetric W-shaped curve: zero at x = 0, rising to about +1.8 near x = ±2, plunging to about −4.8 near x = ±4.9, and returning to zero at the edges (x = ±2π). One curve captures the whole story — the quiet center, the strong lobes three-quarters of the way out, and the quiet edges.</p>
+<p>However, if the last (trailing) dimensions are <em>not</em> the same, NumPy cannot just automatically figure it out. Here <code class="docutils literal notranslate"><span class="pre">y</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(50,)</span></code>, and its 50 does <strong>not</strong> match <code class="docutils literal notranslate"><span class="pre">f</span></code>’s trailing dimension of 100:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>This raises an error. The last line of the traceback reads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">operands</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">broadcast</span> <span class="n">together</span> <span class="k">with</span> <span class="n">shapes</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>We can help NumPy by adding an extra dimension to <code class="docutils literal notranslate"><span class="pre">y</span></code> at the end (with <code class="docutils literal notranslate"><span class="pre">None</span></code>). Then <code class="docutils literal notranslate"><span class="pre">y</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">1)</span></code>, whose leading 50 lines up with <code class="docutils literal notranslate"><span class="pre">f</span></code>’s leading 50, and whose trailing 1 is stretched to 100:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">*</span> <span class="pre">y[:,</span> <span class="pre">None]</span></code> multiplies each <strong>row</strong> of the pattern by that row’s <code class="docutils literal notranslate"><span class="pre">y</span></code> value, which runs from about −3.14 at the bottom to +3.14 at the top. The middle row (y ≈ 0) is washed out to near zero, and the amplitude grows as you move away from it — but, as with <code class="docutils literal notranslate"><span class="pre">g</span></code>, not all the way out: the <code class="docutils literal notranslate"><span class="pre">cos(0.5·y)</span></code> factor in <code class="docutils literal notranslate"><span class="pre">f</span></code> vanishes at y = ±π, so the top and bottom edges fade back to zero as well. The strongest lobes sit a little over halfway out, near y ≈ ±1.7, where the values reach about ±1.12. And because the lower half is multiplied by <em>negative</em> y values, every lobe in the lower half has the opposite sign of the lobe directly above it in the upper half — a sign-flipped checkerboard, the row-wise counterpart of the <code class="docutils literal notranslate"><span class="pre">g</span></code> plot.</p>
+<p><strong>Check it.</strong> Same column test as before, plus a <strong>column profile</strong> this time — column 12 sits where <code class="docutils literal notranslate"><span class="pre">f</span></code> is near its maximum, so <code class="docutils literal notranslate"><span class="pre">h[:,</span> <span class="pre">12]</span></code> traces the vertical structure cleanly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">f</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">print</span></code> gives <code class="docutils literal notranslate"><span class="pre">True</span></code>. <strong>What the plot shows:</strong> an antisymmetric curve along y — zero at the bottom edge (y = −π), dipping to about −1.12 at y ≈ −1.7, crossing zero exactly at y = 0, peaking at about +1.12 at y ≈ +1.7, and returning to zero at the top edge. The two halves are equal and opposite, which is the sign flip the heatmap shows.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">broadcasting.py</span></code>. Build the surface <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">np.sin(xx)</span> <span class="pre">*</span> <span class="pre">np.cos(0.5*yy)</span></code> two ways and compare. First the 2D way (using <code class="docutils literal notranslate"><span class="pre">xx</span></code>, <code class="docutils literal notranslate"><span class="pre">yy</span></code>). Then rebuild it from the <strong>1D</strong> <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> arrays plus broadcasting: add a <code class="docutils literal notranslate"><span class="pre">None</span></code> axis on each in the right place so that <code class="docutils literal notranslate"><span class="pre">np.sin(x[None,</span> <span class="pre">:])</span> <span class="pre">*</span> <span class="pre">np.cos(0.5</span> <span class="pre">*</span> <span class="pre">y[:,</span> <span class="pre">None])</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>. Verify the two results match — e.g. <code class="docutils literal notranslate"><span class="pre">print(np.allclose(f_2d,</span> <span class="pre">f_broadcast))</span></code> should print <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</section>
+<section id="reduction-operations">
+<h2>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Link to this heading">#</a></h2>
+<p>In scientific data analysis, we usually start with a lot of data and want to <strong>reduce</strong> it down in order to make plots or summary tables. Operations that reduce the size of NumPy arrays are called “reductions”. There are many different reduction operations; here we look at some of the most common.</p>
+<p>The usual statistical reductions — sum, mean, standard deviation — work as you’d expect when applied to the whole array. (These use the <code class="docutils literal notranslate"><span class="pre">g</span></code> array from the broadcasting section, shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>.)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints (your exact digits may differ slightly):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">3083.038387807155</span>
+<span class="o">-</span><span class="mf">0.616607677561431</span>
+<span class="mf">1.6402280119141424</span>
+</pre></div>
+</div>
+<p>So summing all 5000 elements gives about −3083, the mean is about −0.62, and the standard deviation is about 1.64. Each of these collapses the entire array to a single number.</p>
+<p>A key property of NumPy reductions is the ability to operate on just <strong>one axis</strong>. First, here’s <code class="docutils literal notranslate"><span class="pre">g</span></code> as a heatmap with a colorbar (the colorbar is the labeled color scale that maps colors to values):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> This is the <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">*</span> <span class="pre">x</span></code> surface again (washed out down the center, strongest about three-quarters of the way toward the sides), now with a colorbar so you can read off the value range — the data runs from about −4.8 to +1.8, with the most negative cells in the two dark lobes near x ≈ ±4.9.</p>
+<p><strong>Check it.</strong> The non-visual equivalent of reading a colorbar is asking the array for its range directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">4.810205904698232</span> <span class="mf">1.8137647229935456</span>
+</pre></div>
+</div>
+<p>We can reduce along <strong>specific axes</strong>. <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> reduces along the first dimension (down the rows of <code class="docutils literal notranslate"><span class="pre">g</span></code>), leaving the <strong>column</strong> means — one value per column, so a length-100 result. <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> reduces along the second dimension (across the columns), leaving the <strong>row</strong> means — a length-50 result.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g_ymean</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">g_xmean</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_ymean</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">g_xmean</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">100</span><span class="p">,)</span> <span class="p">(</span><span class="mi">50</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_ymean</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> <code class="docutils literal notranslate"><span class="pre">g_ymean</span></code> is the average over all 50 rows, one value per x-column, plotted against <code class="docutils literal notranslate"><span class="pre">x</span></code> (−2π to +2π). Averaging over y does <strong>not</strong> flatten the structure, because <code class="docutils literal notranslate"><span class="pre">g</span></code>’s oscillation runs along x — every column of <code class="docutils literal notranslate"><span class="pre">g</span></code> is <code class="docutils literal notranslate"><span class="pre">x·sin(x)</span></code> times <code class="docutils literal notranslate"><span class="pre">cos(0.5·y)</span></code>, and averaging the rows just replaces the cosine factor by its mean, about 0.62. So the curve is a scaled-down copy of the <code class="docutils literal notranslate"><span class="pre">x·sin(x)</span></code> W-shape from the broadcasting section: zero at x = 0 and at x = ±2π, local peaks of about +1.1 near x = ±2, and deep minima of about −3.0 near x = ±4.9, mirror-symmetric about the center.</p>
+<p><strong>Check it.</strong> The claimed extremes, straight from the array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">g_ymean</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">g_ymean</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">3.001540809618145</span> <span class="mf">1.1317787518811862</span>
+</pre></div>
+</div>
+<p>Notice what just happened, because it is the central move of non-visual data analysis: a reduction turned a 2D heatmap question into a <strong>1D line plot</strong> — exactly the kind of plot you can print as numbers or explore by sonification with MAIDR.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_xmean</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>What this shows.</strong> Here the averaged row values <code class="docutils literal notranslate"><span class="pre">g_xmean</span></code> are on the <strong>horizontal</strong> axis and <code class="docutils literal notranslate"><span class="pre">y</span></code> (−π to +π) is on the <strong>vertical</strong> axis (the arguments are swapped to make <code class="docutils literal notranslate"><span class="pre">y</span></code> the vertical coordinate). This time the average runs <em>along</em> the oscillation, and it does not cancel either: averaging <code class="docutils literal notranslate"><span class="pre">x·sin(x)</span></code> over the full −2π..+2π range gives about −1, because its negative lobes occur at larger |x| and outweigh the positive ones. Each row’s mean is therefore about <code class="docutils literal notranslate"><span class="pre">−cos(0.5·y)</span></code>, and the curve is a smooth C-shaped bow opening to the right: it starts at 0 at the bottom (y = −π), bulges left to its most negative value of about −0.99 at the middle (y = 0), and returns to 0 at the top (y = +π). All values are ≤ 0.</p>
+<p><strong>Check it.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">g_xmean</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">g_xmean</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">0.9881624404319173</span> <span class="o">-</span><span class="mf">6.053860223869245e-17</span>
+</pre></div>
+</div>
+<p>The first number is the −0.99 bulge at y = 0. The second looks odd, but read the <code class="docutils literal notranslate"><span class="pre">e-17</span></code> suffix: it is −6×10⁻¹⁷, i.e. zero up to floating-point round-off — the curve’s value at the two ends.</p>
+<p>Reductions can also operate on <strong>multiple axes at once</strong> — useful for higher-dimensional data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr3d</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>   <span class="c1"># reduce across all three axes</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">arr3d</span></code> is filled entirely with ones, so the mean over all three axes is exactly <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. (Reducing over every axis is the same as <code class="docutils literal notranslate"><span class="pre">arr3d.mean()</span></code> with no axis argument.)</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">reductions.py</span></code> with <code class="docutils literal notranslate"><span class="pre">g</span></code> rebuilt. Compute its overall sum, mean, and standard deviation (each in a <code class="docutils literal notranslate"><span class="pre">print</span></code>). Then take the mean <strong>along axis 0</strong> (the column means) and plot it against <code class="docutils literal notranslate"><span class="pre">x</span></code>. Take the standard deviation <strong>along axis 1</strong> (the row stds, <code class="docutils literal notranslate"><span class="pre">g.std(axis=1)</span></code>) and plot it against <code class="docutils literal notranslate"><span class="pre">y</span></code>. End with <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>.</p>
+</div>
+</section>
+<section id="data-files">
+<h2>Data Files<a class="headerlink" href="#data-files" title="Link to this heading">#</a></h2>
+<p>It’s often useful to save a NumPy array to disk so you can reload it later or share it with someone else. NumPy provides a simple <code class="docutils literal notranslate"><span class="pre">.npy</span></code> binary format for this, plus loaders for plain text and other common formats.</p>
+<p>Save the array <code class="docutils literal notranslate"><span class="pre">g</span></code> to a file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;g.npy&#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This writes a file named <code class="docutils literal notranslate"><span class="pre">g.npy</span></code> in your working directory. It produces no output.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>NumPy <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files are convenient for temporary data, but are not a robust archival format. Later we’ll meet NetCDF, the recommended format for earth and environmental data.</p>
+</div>
+<p>Load it back into a new variable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g_loaded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;g.npy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_loaded</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints the array you saved — the same <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> block of numbers as <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<p>NumPy provides <code class="docutils literal notranslate"><span class="pre">np.testing.assert_equal</span></code> to check that two arrays are element-wise equal. To confirm that it really checks equality, here’s a <strong>deliberate failure</strong> — we scale <code class="docutils literal notranslate"><span class="pre">g_loaded</span></code> by <code class="docutils literal notranslate"><span class="pre">0.5</span></code> first, so the arrays no longer match:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">g_loaded</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This raises an error. The traceback begins with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">AssertionError</span><span class="p">:</span>
+<span class="n">Arrays</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">equal</span>
+</pre></div>
+</div>
+<p>(It then prints details about how many elements differ and by how much.)</p>
+<p>Now the real comparison, which <strong>passes</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">g_loaded</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>No output means the assertion <strong>passed</strong> — the loaded array is element-wise equal to the original. (Unlike a bare expression in a notebook, a passing assertion prints nothing; silence here is success.)</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">datafiles.py</span></code> with <code class="docutils literal notranslate"><span class="pre">arr3d</span> <span class="pre">=</span> <span class="pre">np.ones((100,</span> <span class="pre">50,</span> <span class="pre">25))</span></code>. Save the 3D array to a file called <code class="docutils literal notranslate"><span class="pre">arr3d.npy</span></code> with <code class="docutils literal notranslate"><span class="pre">np.save</span></code>. Load it back into a new variable with <code class="docutils literal notranslate"><span class="pre">np.load</span></code> and verify they’re equal using <code class="docutils literal notranslate"><span class="pre">np.testing.assert_equal(arr3d,</span> <span class="pre">arr3d_loaded)</span></code>. If it prints nothing, the round-trip worked.</p>
+</div>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>In this lecture you met <strong>NumPy</strong> and <strong>Matplotlib</strong>, the foundations of scientific Python:</p>
+<ul class="simple">
+<li><p><strong>NumPy</strong> gives you the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>: a fast, N-dimensional, single-dtype container. You learned to <strong>create</strong> arrays (<code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>/<code class="docutils literal notranslate"><span class="pre">np.ones</span></code>/<code class="docutils literal notranslate"><span class="pre">np.full</span></code>, <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>, <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>/<code class="docutils literal notranslate"><span class="pre">np.logspace</span></code>, <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code>), <strong>inspect</strong> them (<code class="docutils literal notranslate"><span class="pre">.dtype</span></code>, <code class="docutils literal notranslate"><span class="pre">.shape</span></code>), <strong>index and slice</strong> them (comma-separated per dimension, plus boolean masks), do <strong>element-wise math</strong> (<code class="docutils literal notranslate"><span class="pre">np.sin</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, etc.), <strong>manipulate dimensions</strong> (<code class="docutils literal notranslate"><span class="pre">transpose</span></code>, <code class="docutils literal notranslate"><span class="pre">reshape</span></code>, <code class="docutils literal notranslate"><span class="pre">tile</span></code>, and <code class="docutils literal notranslate"><span class="pre">None</span></code> to add axes), combine different-sized arrays with <strong>broadcasting</strong>, <strong>reduce</strong> them (<code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, optionally <code class="docutils literal notranslate"><span class="pre">axis=...</span></code>), and <strong>save/load</strong> them (<code class="docutils literal notranslate"><span class="pre">np.save</span></code>, <code class="docutils literal notranslate"><span class="pre">np.load</span></code>).</p></li>
+<li><p>You also met <strong>Matplotlib</strong>: <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> for 1D lines, <code class="docutils literal notranslate"><span class="pre">plt.pcolormesh</span></code> for 2D heatmaps, and <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> / <code class="docutils literal notranslate"><span class="pre">plt.savefig()</span></code> to display or save a figure from a script. A later page, <em>More Matplotlib</em>, goes deeper into figure and axis control and more plot types; for exploring charts by sound and text, see <a class="reference internal" href="trying_maidr.html"><span class="std std-doc">Trying MAIDR</span></a>.</p></li>
+<li><p>Just as importantly, you practiced <strong>checking arrays without a picture</strong>: shape before and after, spot-checking predictable values, <code class="docutils literal notranslate"><span class="pre">np.allclose</span></code>/<code class="docutils literal notranslate"><span class="pre">np.array_equal</span></code> on whole slices, <code class="docutils literal notranslate"><span class="pre">min</span></code>/<code class="docutils literal notranslate"><span class="pre">max</span></code>/<code class="docutils literal notranslate"><span class="pre">mean</span></code> as a textual colorbar, and slicing out <strong>1D profiles</strong> (a single row, column, or axis-reduction) to turn a 2D question into a curve you can print or sonify. This habit is how you verify your own work in the assignments — and how working scientists debug arrays, sighted or not.</p></li>
+</ul>
+<p>The NumPy documentation is your best reference as you go: <a class="reference external" href="https://numpy.org/doc/stable/reference/" rel="noreferer noopener" target="_blank">https://numpy.org/doc/stable/reference/</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/sci_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="trying_maidr.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Trying MAIDR (a pilot)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-and-examining-a-new-package">Importing and Examining a New Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndarrays">NDArrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-creation">Array Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-arrays-with-matplotlib">Visualizing Arrays with Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-math">Basic Math</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-array-dimensions">Manipulating Array Dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">Reduction Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

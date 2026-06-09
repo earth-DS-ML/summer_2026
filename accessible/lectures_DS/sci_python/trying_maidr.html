@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+    <title>Trying MAIDR (a pilot) &#8212; Accessible Pilot — The Interactive Computing Environment</title>
   
   
   
@@ -60,11 +60,10 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/core_python/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/trying_maidr';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python Fundamentals" href="python_fundamentals.html" />
-    <link rel="prev" title="Assignment 2: Explore a climate dataset" href="../data/assignment2.html" />
+    <link rel="prev" title="NumPy and Matplotlib" href="numpy_and_matplotlib.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -179,18 +178,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python_fundamentals.html">Python Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions_classes.html">Python Functions and Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="organization_and_packaging.html">Organizing Python Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment3.html">Assignment 3: Core Python</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Trying MAIDR (a pilot)</a></li>
 </ul>
 
     </div>
@@ -250,7 +249,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/core_python/overview.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/sci_python/trying_maidr.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +325,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
+    <h1>Trying MAIDR (a pilot)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -336,9 +335,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-it">Install it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-the-mauna-loa-co2-curve">Try it: the Mauna Loa CO₂ curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-explore-the-chart">How to explore the chart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-d-love-to-know">What we’d love to know</a></li>
 </ul>
             </nav>
         </div>
@@ -350,56 +350,84 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>This section is your introduction to <strong>the Python language itself</strong>: the basic data
-types, control flow, how to write reusable functions, and how to organize code across
-files. The next two sections (Scientific Python and Pandas) build directly on this
-material.</p>
-<section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p>By the end of this section, you should be able to:</p>
-<ol class="arabic simple">
-<li><p><strong>Use Python’s basic data types</strong> — numbers, strings, booleans — and check the type of
-any value.</p></li>
-<li><p><strong>Use core data structures</strong> — lists, tuples, and dictionaries — including indexing,
-slicing, and basic iteration.</p></li>
-<li><p><strong>Write conditional logic and loops</strong> to make decisions and process collections.</p></li>
-<li><p><strong>Define and call functions</strong> with positional and keyword arguments, and explain the
-difference between pure and impure functions.</p></li>
-<li><p><strong>Read and write a simple class definition</strong> — understand the role of <code class="docutils literal notranslate"><span class="pre">__init__</span></code>,
-attributes, and methods.</p></li>
-<li><p><strong>Organize related code into a module</strong> (a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file) and import it from another
-script.</p></li>
-</ol>
-</section>
-<section id="pages-in-this-section">
-<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="python_fundamentals.html"><span class="std std-doc">Python fundamentals</span></a> — types, math, conditionals, loops,
-lists, tuples, dictionaries.</p></li>
-<li><p><a class="reference internal" href="functions_classes.html"><span class="std std-doc">Functions and classes</span></a> — defining functions, namespaces, and
-reading classes.</p></li>
-<li><p><a class="reference internal" href="organization_and_packaging.html"><span class="std std-doc">Organizing Python projects</span></a> — project structure,
-reproducibility, and using <code class="docutils literal notranslate"><span class="pre">.py</span></code> modules.</p></li>
-<li><p><a class="reference internal" href="assignment3.html"><span class="std std-doc">Assignment 3</span></a> — practice with lists, dictionaries, and functions.</p></li>
-</ul>
-</section>
-<section id="working-through-the-lectures">
-<h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
-<p>These pages are written to be worked through as <strong>Python scripts</strong>. As you read each one,
-type the examples into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in VS Code and run them in your Git Bash terminal with
-<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, reading the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The <strong>Try it</strong> boxes invite you to
-experiment before moving on. If you haven’t set up VS Code yet, start with <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an
-accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python
-scripts</span></a>.</p>
-<div class="note admonition">
-<p class="admonition-title">In-class assignment — 10 points</p>
-<p>Your in-class assignment for this section is to complete the <strong>“Try it”</strong> exercises in the
-lecture pages above, as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts. To submit, push your scripts to your week folder and
-post a link to that folder on the matching <strong>Courseworks</strong> assignment. (Your at-home
-assignment — Assignment 3 — is graded separately, 10 points.)</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="trying-maidr-a-pilot">
+<h1>Trying MAIDR (a pilot)<a class="headerlink" href="#trying-maidr-a-pilot" title="Link to this heading">#</a></h1>
+<p>This page is an <strong>experiment</strong>, and we’d love your feedback on it.</p>
+<p>Starting in this section, the course uses <strong>plots</strong> — which a screen reader can’t read on
+its own. <strong>MAIDR</strong> is a tool that turns a Matplotlib chart into something you <em>can</em> explore:
+by <strong>sound</strong> (sonification — you hear the data as a changing pitch), by <strong>text</strong> (read each
+value), and by <strong>braille</strong> (on a refreshable braille display) — all keyboard-navigable.</p>
+<p>It’s research software and still fairly new, so some things may be rough. Trying it and
+telling us what helps (and what doesn’t) is exactly the point.</p>
+<section id="install-it">
+<h2>Install it<a class="headerlink" href="#install-it" title="Link to this heading">#</a></h2>
+<p>In your terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">maidr</span> <span class="n">scipy</span> <span class="n">seaborn</span>
+</pre></div>
 </div>
+<p>(MAIDR needs <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> but doesn’t install them automatically — without them, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">maidr</span></code> fails with a <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code>.)</p>
+<p>One more note: the accessible chart loads its interaction code from the internet when it opens, so be online when you run it.</p>
+</section>
+<section id="try-it-the-mauna-loa-co2-curve">
+<h2>Try it: the Mauna Loa CO₂ curve<a class="headerlink" href="#try-it-the-mauna-loa-co2-curve" title="Link to this heading">#</a></h2>
+<p>This plots the atmospheric CO₂ record you met in the Data section and opens it as an
+accessible chart. Put it in a file called <code class="docutils literal notranslate"><span class="pre">maidr_co2.py</span></code> and run it with
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">maidr_co2.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">maidr</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/monthly_in_situ_co2_mlo.csv&quot;</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date_excel&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_seasonally_adjusted&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;fit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_seasonally_adjusted&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled_seasonally_adjusted&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;station&quot;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=-</span><span class="mf">99.99</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;co2&quot;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;co2&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;CO2 (ppm)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mauna Loa monthly CO2&quot;</span><span class="p">)</span>
+
+<span class="n">maidr</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>   <span class="c1"># opens the accessible chart in your web browser</span>
+</pre></div>
+</div>
+<p>When you run it, an accessible version of the line chart opens in your browser.</p>
+<div class="tip admonition">
+<p class="admonition-title">If a browser doesn’t open</p>
+<p>On some setups <code class="docutils literal notranslate"><span class="pre">maidr.show(ax)</span></code> may not pop open a browser. If so, replace that last line
+with <code class="docutils literal notranslate"><span class="pre">maidr.save_html(ax,</span> <span class="pre">file=&quot;co2.html&quot;)</span></code>, run the script again, then open the
+<code class="docutils literal notranslate"><span class="pre">co2.html</span></code> file it creates in your browser.</p>
+</div>
+</section>
+<section id="how-to-explore-the-chart">
+<h2>How to explore the chart<a class="headerlink" href="#how-to-explore-the-chart" title="Link to this heading">#</a></h2>
+<p>Once the chart is open and has keyboard focus:</p>
+<ul class="simple">
+<li><p><strong>Arrow keys</strong> — move left and right through the data points; you hear and/or read each
+one (its year and CO₂ value).</p></li>
+<li><p><strong>S</strong> — toggle <strong>Sonification</strong> on and off. With it on, moving through the points plays a
+tone whose pitch rises and falls with the CO₂ value. Listen for the steady climb over the
+decades, with a small up-and-down wiggle each year (the seasonal cycle). That “shape” is
+what a sighted reader sees in the curve.</p></li>
+<li><p><strong>T</strong> — toggle <strong>Text</strong> mode (a written description and per-point readout).</p></li>
+<li><p><strong>B</strong> — toggle <strong>Braille</strong> mode (useful with a refreshable braille display).</p></li>
+</ul>
+<p>The chart panel lists its own keyboard shortcuts, so if a key above behaves differently,
+check that list (and tell us — it helps us write better instructions).</p>
+</section>
+<section id="what-we-d-love-to-know">
+<h2>What we’d love to know<a class="headerlink" href="#what-we-d-love-to-know" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Could you navigate the chart and hear/read the values?</p></li>
+<li><p>Did the <strong>sonification</strong> give you a useful sense of the <em>shape</em> of the data — the rising
+trend, and the yearly cycle?</p></li>
+<li><p>Was anything confusing, broken, or hard to use?</p></li>
+</ul>
+<p>This is one option we’re evaluating. MAIDR currently handles common chart types — line, bar,
+scatter, histogram, heatmap, boxplot — but <strong>not yet</strong> the 2D map-style plots (filled
+contours, <code class="docutils literal notranslate"><span class="pre">quiver</span></code>/<code class="docutils literal notranslate"><span class="pre">streamplot</span></code>). So we’ll likely pair it with plain-language descriptions
+of the data throughout. Your experience here will tell us how much to lean on each.</p>
 </section>
 </section>
 
@@ -416,7 +444,7 @@ assignment — Assignment 3 — is graded separately, 10 points.)</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures_DS/core_python"
+            path: "./lectures_DS/sci_python"
         },
         predefinedOutput: true
     }
@@ -434,22 +462,13 @@ assignment — Assignment 3 — is graded separately, 10 points.)</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../data/assignment2.html"
+       href="numpy_and_matplotlib.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assignment 2: Explore a climate dataset</p>
+        <p class="prev-next-title">NumPy and Matplotlib</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="python_fundamentals.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python Fundamentals</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -469,9 +488,10 @@ assignment — Assignment 3 — is graded separately, 10 points.)</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-it">Install it</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-the-mauna-loa-co2-curve">Try it: the Mauna Loa CO₂ curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-explore-the-chart">How to explore the chart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-d-love-to-know">What we’d love to know</a></li>
 </ul>
   </nav></div>
 

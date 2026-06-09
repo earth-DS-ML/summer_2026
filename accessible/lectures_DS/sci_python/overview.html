@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/core_python/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python Fundamentals" href="python_fundamentals.html" />
-    <link rel="prev" title="Assignment 2: Explore a climate dataset" href="../data/assignment2.html" />
+    <link rel="next" title="NumPy and Matplotlib" href="numpy_and_matplotlib.html" />
+    <link rel="prev" title="Assignment 3: Core Python" href="../core_python/assignment3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -179,18 +179,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python_fundamentals.html">Python Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions_classes.html">Python Functions and Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="organization_and_packaging.html">Organizing Python Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment3.html">Assignment 3: Core Python</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trying_maidr.html">Trying MAIDR (a pilot)</a></li>
 </ul>
 
     </div>
@@ -250,7 +250,7 @@
       
       
       
-      <li><a href="../../_sources/lectures_DS/core_python/overview.md" target="_blank"
+      <li><a href="../../_sources/lectures_DS/sci_python/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,53 +352,65 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>This section is your introduction to <strong>the Python language itself</strong>: the basic data
-types, control flow, how to write reusable functions, and how to organize code across
-files. The next two sections (Scientific Python and Pandas) build directly on this
-material.</p>
+<p>This section introduces the <strong>scientific Python ecosystem</strong> that powers most data analysis
+in earth and environmental science: <strong>NumPy</strong> for numerical arrays, and <strong>Matplotlib</strong> for
+visualization. Both libraries underpin everything that comes after (pandas, xarray,
+scikit-learn, …), so the fundamentals here pay off across the rest of the course.</p>
+<div class="important admonition">
+<p class="admonition-title">A note on visualization and this accessible version</p>
+<p>This is the first section where the course leans heavily on <strong>plots</strong>. <em>Producing</em> a plot
+with Matplotlib is a normal coding skill, and you’ll learn it. But “reading” a plot
+visually isn’t how you’ll work — so in this accessible version, wherever the course would
+have you look at a figure, we instead <strong>(a)</strong> describe what the data shows in words and
+numbers, and <strong>(b)</strong> point you to tools that let you explore a chart by <strong>sound and text</strong>.
+The main one is a pilot we’re trying out, called MAIDR — see <a class="reference internal" href="trying_maidr.html"><span class="std std-doc">Trying
+MAIDR</span></a>. Your feedback on what helps will shape how we build the rest of
+this section.</p>
+</div>
 <section id="learning-objectives">
 <h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <p>By the end of this section, you should be able to:</p>
 <ol class="arabic simple">
-<li><p><strong>Use Python’s basic data types</strong> — numbers, strings, booleans — and check the type of
-any value.</p></li>
-<li><p><strong>Use core data structures</strong> — lists, tuples, and dictionaries — including indexing,
-slicing, and basic iteration.</p></li>
-<li><p><strong>Write conditional logic and loops</strong> to make decisions and process collections.</p></li>
-<li><p><strong>Define and call functions</strong> with positional and keyword arguments, and explain the
-difference between pure and impure functions.</p></li>
-<li><p><strong>Read and write a simple class definition</strong> — understand the role of <code class="docutils literal notranslate"><span class="pre">__init__</span></code>,
-attributes, and methods.</p></li>
-<li><p><strong>Organize related code into a module</strong> (a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file) and import it from another
-script.</p></li>
+<li><p><strong>Create and inspect NumPy arrays</strong> — using <code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>, <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>,
+<code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">np.ones</span></code>, and check shape and dtype.</p></li>
+<li><p><strong>Index and slice arrays</strong> — basic indexing, slicing, fancy indexing, and boolean masks,
+on both 1D and 2D arrays.</p></li>
+<li><p><strong>Vectorize operations</strong> — apply element-wise math and reductions (<code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>)
+along specific axes.</p></li>
+<li><p><strong>Reshape and combine arrays</strong> — using <code class="docutils literal notranslate"><span class="pre">reshape</span></code>, <code class="docutils literal notranslate"><span class="pre">transpose</span></code>, <code class="docutils literal notranslate"><span class="pre">tile</span></code>, and adding new
+axes via <code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">:]</span></code>.</p></li>
+<li><p><strong>Understand broadcasting</strong> — the rules and common gotchas.</p></li>
+<li><p><strong>Build a Matplotlib figure</strong> — using the explicit Figure / Axes mental model
+(<code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code>).</p></li>
+<li><p><strong>Make common plots</strong> — line, scatter, bar — and understand what each is meant to
+reveal about the data.</p></li>
 </ol>
 </section>
 <section id="pages-in-this-section">
 <h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="python_fundamentals.html"><span class="std std-doc">Python fundamentals</span></a> — types, math, conditionals, loops,
-lists, tuples, dictionaries.</p></li>
-<li><p><a class="reference internal" href="functions_classes.html"><span class="std std-doc">Functions and classes</span></a> — defining functions, namespaces, and
-reading classes.</p></li>
-<li><p><a class="reference internal" href="organization_and_packaging.html"><span class="std std-doc">Organizing Python projects</span></a> — project structure,
-reproducibility, and using <code class="docutils literal notranslate"><span class="pre">.py</span></code> modules.</p></li>
-<li><p><a class="reference internal" href="assignment3.html"><span class="std std-doc">Assignment 3</span></a> — practice with lists, dictionaries, and functions.</p></li>
+<li><p><a class="reference internal" href="numpy_and_matplotlib.html"><span class="std std-doc">NumPy and Matplotlib</span></a> — creating, indexing, and operating on
+arrays, and the Matplotlib basics for visualizing them (with accessible descriptions and
+verify-it-yourself checks along the way).</p></li>
+<li><p><a class="reference internal" href="trying_maidr.html"><span class="std std-doc">Trying MAIDR</span></a> — a pilot tool for exploring Matplotlib charts by sound,
+text, and braille.</p></li>
 </ul>
+<p><em>(The remaining, more visualization-heavy pages — More Matplotlib, and Assignments 4a and
+4b — are being adapted with this same approach and will appear here as they’re ready.)</em></p>
 </section>
 <section id="working-through-the-lectures">
 <h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
-<p>These pages are written to be worked through as <strong>Python scripts</strong>. As you read each one,
-type the examples into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in VS Code and run them in your Git Bash terminal with
-<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, reading the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The <strong>Try it</strong> boxes invite you to
-experiment before moving on. If you haven’t set up VS Code yet, start with <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an
-accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python
-scripts</span></a>.</p>
+<p>Work through the pages as <strong>Python scripts</strong> in VS Code — type the examples into a <code class="docutils literal notranslate"><span class="pre">.py</span></code>
+file, run them in your Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and read the output
+with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The <strong>Try it</strong> boxes invite you to experiment. If you haven’t set up VS Code
+yet, start with <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a>
+and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>.</p>
 <div class="note admonition">
 <p class="admonition-title">In-class assignment — 10 points</p>
 <p>Your in-class assignment for this section is to complete the <strong>“Try it”</strong> exercises in the
 lecture pages above, as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts. To submit, push your scripts to your week folder and
-post a link to that folder on the matching <strong>Courseworks</strong> assignment. (Your at-home
-assignment — Assignment 3 — is graded separately, 10 points.)</p>
+post a link to that folder on the matching <strong>Courseworks</strong> assignment. (The two at-home
+assignments, 4a and 4b, are graded separately, 10 points each.)</p>
 </div>
 </section>
 </section>
@@ -416,7 +428,7 @@ assignment — Assignment 3 — is graded separately, 10 points.)</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures_DS/core_python"
+            path: "./lectures_DS/sci_python"
         },
         predefinedOutput: true
     }
@@ -434,20 +446,20 @@ assignment — Assignment 3 — is graded separately, 10 points.)</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../data/assignment2.html"
+       href="../core_python/assignment3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Assignment 2: Explore a climate dataset</p>
+        <p class="prev-next-title">Assignment 3: Core Python</p>
       </div>
     </a>
     <a class="right-next"
-       href="python_fundamentals.html"
+       href="numpy_and_matplotlib.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python Fundamentals</p>
+        <p class="prev-next-title">NumPy and Matplotlib</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
