@@ -1,4 +1,4 @@
-# NumPy
+# NumPy and Matplotlib
 
 :::{admonition} Following along with a screen reader
 :class: important
@@ -10,7 +10,7 @@ This lecture introduces **NumPy**, *the fundamental package for scientific compu
 - Website: <https://numpy.org/>
 - GitHub: <https://github.com/numpy/numpy>
 
-To build intuition, this lecture often **visualizes** the arrays it creates, using Matplotlib. The Matplotlib basics — importing it, showing or saving a figure, and exploring plots non-visually — live on the companion page [Visualizing Arrays with Matplotlib](./matplotlib.md). Wherever a plot appears below, it is followed by a **"What this shows"** note describing the result in words and numbers, and usually by a **"Check it"** block — code that confirms the same conclusion directly from the array, no eyes required. (The import line, when you need it, is `from matplotlib import pyplot as plt`.)
+To build intuition, this lecture often **visualizes** the arrays it creates, using **Matplotlib** — introduced partway down this page, in the *Visualizing Arrays with Matplotlib* section, right before the first plots appear. Wherever a plot appears below, it is followed by a **"What this shows"** note describing the result in words and numbers, and usually by a **"Check it"** block — code that confirms the same conclusion directly from the array, no eyes required.
 
 :::{admonition} Checking an array without a picture
 :class: tip
@@ -346,6 +346,101 @@ This prints:
 :::{admonition} Try it
 :class: tip
 Create `indexing.py` and rebuild `x`, `y`, `xx`, `yy` with `np.meshgrid` as above. Get the first row of `xx`, its last column, and a central 3×3 block via slicing, printing the shape of each. Then use a **boolean mask** to extract all values of `xx` that are greater than zero — print the shape of the result.
+:::
+
+## Visualizing Arrays with Matplotlib
+
+It can be hard to work with big arrays without seeing them, so we turn arrays into pictures with **Matplotlib**, the plotting library the course uses throughout. To import its plotting interface:
+
+```python
+from matplotlib import pyplot as plt
+```
+
+:::{note}
+When you run a Matplotlib script from the terminal, the figure only appears if you ask for it. Add `plt.show()` at the end of the script to open the plot window, or `plt.savefig("figure.png")` to write it to a file. The course notebook shows plots automatically; in a script you call one of these yourself. The "What this shows" notes mean you don't need to open the window to follow the lesson.
+:::
+
+:::{admonition} Exploring plots by sound and text
+:class: tip
+Matplotlib plots are images, so a screen reader cannot read them directly — that is exactly why every plot on this page is paired with a "What this shows" note and a "Check it" block. As an experiment we're evaluating, many of these charts can also be made **explorable non-visually** — navigated by keyboard and played as sound — using a tool called **MAIDR**. See [Trying MAIDR](./trying_maidr.md) for how to set that up and try it yourself.
+:::
+
+For plotting a 1D array as a line, we use the `plot` command:
+
+```python
+plt.plot(x)
+plt.show()
+```
+
+**What this shows.** With a single argument, `plt.plot` puts the array's *index* (0, 1, 2, …, 99) on the horizontal axis and its *value* on the vertical axis. Since `x = np.linspace(-2*np.pi, 2*np.pi, 100)`, the result is a straight line rising steadily from about −6.28 at the left (index 0) to about +6.28 at the right (index 99). It's a visual confirmation that `linspace` produces evenly-spaced values.
+
+**Check it.** The same confirmation, from the array itself — the endpoints, and whether all 99 consecutive differences (`np.diff(x)`) are equal:
+
+```python
+print(x[0], x[-1])
+print(np.allclose(np.diff(x), np.diff(x)[0]))
+```
+
+This prints:
+
+```
+-6.283185307179586 6.283185307179586
+True
+```
+
+Equal differences everywhere is exactly what "a straight line" means.
+
+There are many ways to visualize 2D data. Here we use `pcolormesh`, which draws a 2D array as a grid of colored cells (a "heatmap"), with color encoding each cell's value:
+
+```python
+plt.pcolormesh(xx)
+plt.show()
+```
+
+**What this shows.** `xx` holds the x-coordinate at every point of the grid, so its value depends only on the column, not the row. The heatmap is therefore a smooth gradient running left to right: dark/low (about −6.28) at the left edge, brightening steadily to high (about +6.28) at the right edge — and identical in every row, so each thin vertical strip of the image is a single color.
+
+**Check it.** "Depends only on the column" means any two rows are identical:
+
+```python
+print(np.allclose(xx[0, :], xx[25, :]))
+print(xx[0, 0], xx[0, -1])
+```
+
+This prints:
+
+```
+True
+-6.283185307179586 6.283185307179586
+```
+
+Row 0 and row 25 match exactly, and a single row runs from −2π to +2π — it is just a copy of `x`.
+
+```python
+plt.pcolormesh(yy)
+plt.show()
+```
+
+**What this shows.** `yy` holds the y-coordinate, which depends only on the row. So this heatmap is the same idea rotated 90 degrees: a smooth gradient running bottom to top — low (about −3.14) along the bottom edge, rising to high (about +3.14) at the top edge, identical in every column. (Note that `pcolormesh` draws row 0 at the *bottom* of the image.)
+
+**Check it.**
+
+```python
+print(np.allclose(yy[:, 0], yy[:, 25]))
+print(yy[0, 0], yy[-1, 0])
+```
+
+This prints:
+
+```
+True
+-3.141592653589793 3.141592653589793
+```
+
+Any two columns are identical, and a single column runs from −π to +π — a copy of `y`.
+
+:::{admonition} Try it
+:class: tip
+Create `plotting.py`, rebuilding `x`, `y`, `xx`, `yy` with `np.meshgrid` as above. Use `plt.plot` to plot `np.cos(x)` against `x` (`plt.plot(x, np.cos(x))`). Then use `plt.pcolormesh` to visualize the 2D array `xx + yy`. End the script with `plt.show()`. (Don't worry about axis labels yet — those come later.) If you've set up MAIDR, try exploring these plots non-visually too.
 :::
 
 ## Array Operations
@@ -847,10 +942,10 @@ Create `datafiles.py` with `arr3d = np.ones((100, 50, 25))`. Save the 3D array t
 
 ## Recap
 
-In this lecture you met **NumPy**, the foundation of scientific Python:
+In this lecture you met **NumPy** and **Matplotlib**, the foundations of scientific Python:
 
 - **NumPy** gives you the `ndarray`: a fast, N-dimensional, single-dtype container. You learned to **create** arrays (`np.array`, `np.zeros`/`np.ones`/`np.full`, `np.arange`, `np.linspace`/`np.logspace`, `np.meshgrid`), **inspect** them (`.dtype`, `.shape`), **index and slice** them (comma-separated per dimension, plus boolean masks), do **element-wise math** (`np.sin`, `*`, etc.), **manipulate dimensions** (`transpose`, `reshape`, `tile`, and `None` to add axes), combine different-sized arrays with **broadcasting**, **reduce** them (`sum`, `mean`, `std`, optionally `axis=...`), and **save/load** them (`np.save`, `np.load`).
-- Along the way you **visualized** arrays with Matplotlib. For the plotting basics — and for exploring charts non-visually — see [Visualizing Arrays with Matplotlib](./matplotlib.md) and [Trying MAIDR](./trying_maidr.md).
+- You also met **Matplotlib**: `plt.plot` for 1D lines, `plt.pcolormesh` for 2D heatmaps, and `plt.show()` / `plt.savefig()` to display or save a figure from a script. A later page, *More Matplotlib*, goes deeper into figure and axis control and more plot types; for exploring charts by sound and text, see [Trying MAIDR](./trying_maidr.md).
 - Just as importantly, you practiced **checking arrays without a picture**: shape before and after, spot-checking predictable values, `np.allclose`/`np.array_equal` on whole slices, `min`/`max`/`mean` as a textual colorbar, and slicing out **1D profiles** (a single row, column, or axis-reduction) to turn a 2D question into a curve you can print or sonify. This habit is how you verify your own work in the assignments — and how working scientists debug arrays, sighted or not.
 
 The NumPy documentation is your best reference as you go: <https://numpy.org/doc/stable/reference/>.

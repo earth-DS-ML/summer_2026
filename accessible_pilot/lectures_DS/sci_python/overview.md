@@ -37,10 +37,9 @@ By the end of this section, you should be able to:
 
 ## Pages in this section
 
-- [NumPy](./numpy.md) — creating, indexing, and operating on arrays (visualized along the
-  way, with accessible descriptions).
-- [Visualizing Arrays with Matplotlib](./matplotlib.md) — the Matplotlib basics for plotting
-  arrays.
+- [NumPy and Matplotlib](./numpy_and_matplotlib.md) — creating, indexing, and operating on
+  arrays, and the Matplotlib basics for visualizing them (with accessible descriptions and
+  verify-it-yourself checks along the way).
 - [Trying MAIDR](./trying_maidr.md) — a pilot tool for exploring Matplotlib charts by sound,
   text, and braille.
 
