@@ -15,8 +15,12 @@ telling us what helps (and what doesn't) is exactly the point.
 In your terminal:
 
 ~~~
-pip install -U maidr
+pip install -U maidr scipy seaborn
 ~~~
+
+(MAIDR needs `scipy` and `seaborn` but doesn't install them automatically — without them, `import maidr` fails with a `ModuleNotFoundError`.)
+
+One more note: the accessible chart loads its interaction code from the internet when it opens, so be online when you run it.
 
 ## Try it: the Mauna Loa CO₂ curve
 
