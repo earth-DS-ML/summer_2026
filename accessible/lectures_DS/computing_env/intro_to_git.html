@@ -375,7 +375,7 @@
 <h2>Why version control?<a class="headerlink" href="#why-version-control" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Version_control" rel="noreferer noopener" target="_blank"><em>Version control</em></a> is a way to keep track of changes to a set of files over time. A version control system takes <strong>snapshots</strong> of your project at points you choose, and lets you go back to any earlier snapshot — or compare two snapshots to see exactly what changed.</p>
 <p>Without version control, projects tend to grow tails like this:</p>
-<p><strong>Example:</strong></p>
+<p>The following is an example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_code</span><span class="o">.</span><span class="n">py</span>
 <span class="n">my_code_version2</span><span class="o">.</span><span class="n">py</span>
 <span class="n">my_code_version2B</span><span class="o">-</span><span class="n">RPA</span><span class="o">-</span><span class="n">edit</span><span class="o">.</span><span class="n">py</span>
@@ -383,7 +383,7 @@
 <span class="n">my_code_THIS_IS_ACTUALLY_THE_FINAL_VERSION</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p><strong>End of example.</strong></p>
+<p>End of example.</p>
 <p>Version control replaces all of that with a single file you keep editing, while the history of every change is recorded behind the scenes. It also lets you share code with collaborators, make simultaneous edits, and merge changes in a controlled way.</p>
 <p>The tool we’ll use is called <a class="reference external" href="https://git-scm.com" rel="noreferer noopener" target="_blank">Git</a>. Git is powerful and has a somewhat steep learning curve, but in this class we’ll only use a small subset of it. That subset will get you very far.</p>
 <blockquote>
@@ -396,14 +396,14 @@
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>Open a terminal and run these four commands, replacing the placeholders with your own name and the email associated with your GitHub account:</p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Your Name&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;you@example.com&quot;</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">init</span><span class="o">.</span><span class="n">defaultBranch</span> <span class="n">main</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">pager</span> <span class="n">cat</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>The third line tells git to call the default branch <code class="docutils literal notranslate"><span class="pre">main</span></code> (matching GitHub’s convention). The fourth line turns off git’s <strong>pager</strong>: by default, commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> open their output in a scrolling viewer (<code class="docutils literal notranslate"><span class="pre">less</span></code>) that is awkward with a screen reader; <code class="docutils literal notranslate"><span class="pre">core.pager</span> <span class="pre">cat</span></code> makes git print the output straight into the terminal instead, so you can read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
 </div>
 <div class="admonition note">
@@ -426,13 +426,13 @@
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>Create a fresh directory to play with, then initialize it as a git repo:</p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">git_practice</span>
 <span class="n">cd</span> <span class="n">git_practice</span>
 <span class="n">git</span> <span class="n">init</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>You should see a message like <code class="docutils literal notranslate"><span class="pre">Initialized</span> <span class="pre">empty</span> <span class="pre">Git</span> <span class="pre">repository</span> <span class="pre">in</span> <span class="pre">/.../git_practice/.git/</span></code>.</p>
 </div>
 <div class="admonition note">
@@ -455,28 +455,28 @@
 <p class="admonition-title">Try it</p>
 <p>We’ll create a file, stage it, and commit it — in three steps. <strong>Run each command, then read the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> before moving on.</strong></p>
 <p><strong>1. Create the file:</strong></p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
 <span class="n">git</span> <span class="n">status</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>You should see <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> listed as <strong>untracked</strong> — git knows it’s there but isn’t tracking it yet.</p>
 <p><strong>2. Stage it:</strong></p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
 <span class="n">git</span> <span class="n">status</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>Now <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> shows up as a <strong>staged change</strong>, ready to be committed.</p>
 <p><strong>3. Commit it:</strong></p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add an empty hello file&quot;</span>
 <span class="n">git</span> <span class="n">status</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>The output should say “nothing to commit, working tree clean” — your snapshot is now part of the repo’s history.</p>
 </div>
 </section>
@@ -486,21 +486,21 @@
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>Add some content to <code class="docutils literal notranslate"><span class="pre">hello.md</span></code>. The quickest way that works in any environment is shell redirection — the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol sends a command’s output into a file:</p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;# My first file&quot;</span> <span class="o">&gt;</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>(You can also open <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> in the VS Code editor and type into it if you prefer.)</p>
 <p>To check that the line was written, print the file’s contents in the terminal with <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">hello.md</span></code>, then read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
 <p>Then stage and commit:</p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
 <span class="n">git</span> <span class="n">add</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
 <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add a heading&quot;</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>You now have two commits recording the file’s history.</p>
 </div>
 </section>
@@ -548,19 +548,19 @@
 <li><p>On GitHub, <a class="reference external" href="https://github.com/new" rel="noreferer noopener" target="_blank">create a new empty repository</a> called <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. Don’t add a README or any other files — leave it completely empty.</p></li>
 <li><p>In your terminal, in the <code class="docutils literal notranslate"><span class="pre">git_practice</span></code> directory, add the GitHub repo as a remote (replace <code class="docutils literal notranslate"><span class="pre">your-username</span></code> with your GitHub username):</p></li>
 </ol>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">/</span><span class="n">git_practice</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <ol class="arabic simple" start="3">
 <li><p>Push your commits to GitHub:</p></li>
 </ol>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">main</span></code> part tells git to remember this remote and branch as the default, so future <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> work without arguments.</p>
 <ol class="arabic simple" start="4">
 <li><p>Refresh your GitHub repo page — you should see <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> and your two commits.</p></li>
@@ -570,11 +570,11 @@
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>On the GitHub website, open <code class="docutils literal notranslate"><span class="pre">hello.md</span></code>, edit it (add a new line), and commit the change through the web UI. Then back in your terminal, run:</p>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <p>Your local copy should now have the change you made on GitHub.</p>
 </div>
 <blockquote>

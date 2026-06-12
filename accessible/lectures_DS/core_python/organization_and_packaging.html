@@ -423,7 +423,7 @@
 <section id="project-layout">
 <h3>Project Layout<a class="headerlink" href="#project-layout" title="Link to this heading">#</a></h3>
 <p>A reproducible single-paper project directory structure might look something like this. Read it top to bottom; each line is one file, and the <code class="docutils literal notranslate"><span class="pre">/</span></code> characters separate folders from the files inside them:</p>
-<p><strong>Example:</strong></p>
+<p>The following is an example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">README</span><span class="o">.</span><span class="n">md</span>
 <span class="n">LICENSE</span>
 <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
@@ -435,7 +435,7 @@
 <span class="n">manuscript</span><span class="o">/</span><span class="n">manuscript</span><span class="o">.</span><span class="n">tex</span>
 </pre></div>
 </div>
-<p><strong>End of example.</strong></p>
+<p>End of example.</p>
 <p>So this project has three files at the top level (<code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, and an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> describing the software environment), a <code class="docutils literal notranslate"><span class="pre">data</span></code> folder holding a results file, a <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> folder holding the analysis files and a shared <code class="docutils literal notranslate"><span class="pre">helper.py</span></code> module, and a <code class="docutils literal notranslate"><span class="pre">manuscript</span></code> folder holding the paper itself. In your workflow, the analysis files would simply be <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts instead of <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebooks — for example <code class="docutils literal notranslate"><span class="pre">notebooks/figure1.py</span></code> — but the organizing idea is identical: code, data, and manuscript each have a clear place.</p>
 <p>A great example of such a paper is <a class="reference external" href="https://crocha700.github.io/" rel="noreferer noopener" target="_blank">Cesar Rocha</a>’s Upper Ocean Seasonality project: <a class="github reference external" href="https://github.com/crocha700/UpperOceanSeasonality" rel="noreferer noopener" target="_blank">crocha700/UpperOceanSeasonality</a>.</p>
 </section>
@@ -454,7 +454,7 @@ d = r \, \arccos\!\big( \sin\phi_1 \sin\phi_2 + \cos\phi_1 \cos\phi_2 \cos\Delta
 \]</div>
 <p>(Note that this formula requires 64-bit precision for adequate accuracy.)</p>
 <p>Let’s write a module to do this calculation. In VS Code, create a file called <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>. (The file should be in the <strong>same directory</strong> as any script that will import it.) Populate it with the following code:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A python module for computing great circle distance</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -493,17 +493,18 @@ d = r \, \arccos\!\big( \sin\phi_1 \sin\phi_2 + \cos\phi_1 \cos\phi_2 \cos\Delta
         <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lambda2</span> <span class="o">-</span> <span class="n">lambda1</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
+<p>End of code.</p>
 <p>The module begins with a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/" rel="noreferer noopener" target="_blank">docstring</a> (the triple-quoted text at the top) explaining what it does. Then it contains some data (just a constant <code class="docutils literal notranslate"><span class="pre">R</span></code>, the radius of the Earth in meters) and a single function. The function takes two <code class="docutils literal notranslate"><span class="pre">(lat,</span> <span class="pre">lon)</span></code> pairs, converts the degree values to radians, and applies the formula above. This is the same <code class="docutils literal notranslate"><span class="pre">r</span></code> and the same formula from the math above, written in code: <code class="docutils literal notranslate"><span class="pre">R</span></code> is the radius <span class="math notranslate nohighlight">\(r\)</span>, and <code class="docutils literal notranslate"><span class="pre">np.arccos(...)</span></code> is the <span class="math notranslate nohighlight">\(\arccos\)</span> of the sines-and-cosines expression.</p>
 <p>This <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code> is a real, working module — it is part of the course repository. You can write it yourself by typing the code above into a new file in VS Code and saving it as <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>.</p>
 <p>Now let’s import our module. Create a second file in the same folder — call it <code class="docutils literal notranslate"><span class="pre">try_gcdistance.py</span></code> — and start with:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
 <span class="n">help</span><span class="p">(</span><span class="n">gcdistance</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
+<p>End of code.</p>
 <p>Run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">try_gcdistance.py</span></code> and read the result with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The <code class="docutils literal notranslate"><span class="pre">help()</span></code> function prints the module’s docstring and the documentation for everything it contains. This prints:</p>
+<p>The following is the expected output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">module</span> <span class="n">gcdistance</span><span class="p">:</span>
 
 <span class="n">NAME</span>
@@ -531,45 +532,45 @@ d = r \, \arccos\!\big( \sin\phi_1 \sin\phi_2 + \cos\phi_1 \cos\phi_2 \cos\Delta
     <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">gcdistance</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p><strong>End of output.</strong></p>
+<p>End of output.</p>
 <p>(The last line, <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, will show the actual path to your own <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>, so it will differ from what is shown here.)</p>
 <p>And let’s try using it to make a calculation. We’ll <code class="docutils literal notranslate"><span class="pre">print()</span></code> the result so it shows up in the terminal — remember that, unlike a notebook, a script only displays a value if you explicitly print it:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">gcdistance</span><span class="o">.</span><span class="n">great_circle_distance</span><span class="p">((</span><span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
-<p>This prints:</p>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1460007.189049398</span>
 </pre></div>
 </div>
-<p><strong>End of output.</strong></p>
+<p>End of output.</p>
 <p>The result is the distance in <strong>meters</strong> between the point at latitude 60, longitude 0 and the point at latitude 50, longitude 15 — about 1,460 km.</p>
 <blockquote>
 <div><p><em>Note:</em> depending on your NumPy version, the value may print wrapped as <code class="docutils literal notranslate"><span class="pre">np.float64(1460007.189049398)</span></code> instead of the bare number. That is just how newer NumPy displays a floating-point number; the value is the same, and you can do arithmetic on it (such as dividing by 1000) exactly as you would with any number.</p>
 </div></blockquote>
 <p>We could instead import just the pieces we need, by name. Notice we can pull in both the function and the constant <code class="docutils literal notranslate"><span class="pre">R</span></code>:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gcdistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span><span class="p">,</span> <span class="n">great_circle_distance</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
-<p>This prints:</p>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">6371000.0</span>
 </pre></div>
 </div>
-<p><strong>End of output.</strong></p>
+<p>End of output.</p>
 <p>That is the Earth radius constant, <code class="docutils literal notranslate"><span class="pre">6.371e6</span></code> written out in full. After a <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">gcdistance</span> <span class="pre">import</span> <span class="pre">...</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">great_circle_distance</span></code> directly, without the <code class="docutils literal notranslate"><span class="pre">gcdistance.</span></code> prefix.</p>
 <p>If you change the module while working, a script picks up the change automatically the next time you run it — that is one quiet advantage of the script workflow: every <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">try_gcdistance.py</span></code> starts fresh and re-reads <code class="docutils literal notranslate"><span class="pre">gcdistance.py</span></code>. In a long-running notebook (or an interactive Python session) this is not automatic; there you would have to restart the kernel or reload the module:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gcdistance</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload</span>
 <span class="n">reload</span><span class="p">(</span><span class="n">gcdistance</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
+<p>End of code.</p>
 <p>(Note that a function imported via <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">func</span></code> cannot be reloaded this way.) You generally will not need <code class="docutils literal notranslate"><span class="pre">reload</span></code> in the scripts workflow — it is mentioned here so you recognize it if you see it in notebook-based materials.</p>
 <p>Modules are a simple way to share code between different scripts in the same project. <em>Module files must reside in the same directory as any script which imports them!</em> This is a big limitation; it means you can’t easily share modules between different projects.</p>
 <p>Once you have a piece of code that is general-purpose enough to share between projects, you need to create a package.</p>

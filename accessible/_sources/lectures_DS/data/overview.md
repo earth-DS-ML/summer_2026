@@ -33,11 +33,11 @@ the output with `Alt+F2` (see [Setting up an accessible
 workflow](../computing_env/accessible_setup.md)). This section also uses a few extra Python
 packages — install them once with:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 pip install pandas xarray pooch netcdf4 pydap
 ~~~
 
-**End of command.**
+End of command.
 :::

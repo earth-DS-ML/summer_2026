@@ -93,7 +93,7 @@ Check for 3 different values of height in meters.
 
 When you're done, save your completed script as `assignment3.py` inside a new `week3/` folder in your private `clmt5405-assignments` GitHub repo (the one you set up in Assignment 1). Then push the commit from the Git Bash terminal:
 
-**Code:**
+The following is Python code:
 
 ~~~bash
 git add week3/assignment3.py
@@ -101,6 +101,6 @@ git commit -m "Submit assignment 3"
 git push
 ~~~
 
-**End of code.**
+End of code.
 
 Due Sunday night.

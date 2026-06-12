@@ -26,13 +26,13 @@ So let's open one:
 
 When the terminal is ready, it prints a **prompt** and waits for you to type. The prompt ends with a character such as `$` — for example:
 
-**Example:**
+The following is an example:
 
 ~~~
 yourname@yourcomputer:~$
 ~~~
 
-**End of example.**
+End of example.
 
 The character at the end — `$` here — tells you the shell is waiting for input. Different environments use different prompt characters (you may see `$`, `%`, `#`, or others). Everything before it is informational: your username and machine name, and often the current directory (where `~` is shorthand for "home"). From now on, we'll just show `$` in our examples.
 
@@ -62,20 +62,20 @@ Most of your work in the shell involves moving around the file system, looking a
 Run `pwd` in your terminal, then press `Alt+F2` to read the result. You should hear a path — your **current working directory**. On the LEAP hub this looks like `/home/jovyan`; on your own Windows computer it will look different (for example, a path under `C:\Users\`). The *idea* — "this is the folder I'm currently in" — is the same everywhere.
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ pwd
 /home/jovyan
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 > *Reference:* The exact path depends on your environment. The concept of a "home directory" — the directory that's "yours" by default — is the same everywhere.
 
 To picture what a path like `/home/jovyan` means, here is how a Unix file system is organized as a tree. The block below is a **text version** of that tree: read it top to bottom, where indentation shows what is contained inside what.
 
-**Example:**
+The following is an example:
 
 ~~~
 /
@@ -85,7 +85,7 @@ To picture what a path like `/home/jovyan` means, here is how a Unix file system
     └── jovyan
 ~~~
 
-**End of example.**
+End of example.
 
 At the top is the **root directory**, written as `/`. Inside it are directories like `home` (where user directories live), `bin` (built-in programs), and `etc` (system configuration). Your username's directory (`jovyan` in this example) sits inside `home`, so its full path — its address starting from the root — is `/home/jovyan`. A path is just the list of directories you pass through from the root, written with `/` between each step.
 
@@ -100,7 +100,7 @@ At the top is the **root directory**, written as `/`. Inside it are directories 
 Run `ls` in your home directory, then `Alt+F2` to read the list. Then run `ls -F` — the `-F` adds a trailing `/` to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as `*` for programs you can run.)
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ ls
@@ -110,7 +110,7 @@ $ ls -F
 config.yaml  examples/  work/
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 > *Note:* Your output will look different — every environment has its own files. The examples here are just illustrative. As you follow along below, use the names that actually appear in your own `ls` output (e.g., if you don't have an `examples` folder, pick whatever directory you do see).
 
@@ -129,7 +129,7 @@ The `-F` is a **flag** — an option that modifies how a command behaves. Most c
 From your home directory, move into the `examples` directory (or any directory you saw from `ls`) by running `cd examples`. Run `pwd` to confirm you moved. Then `cd ..` to go back up one level — `..` is shorthand for "the parent directory."
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ cd examples
@@ -140,7 +140,7 @@ $ pwd
 /home/jovyan
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 You'll also notice the text before the prompt usually updates as you navigate — after `cd examples`, the part of the prompt that shows your current directory changes from `~` to `~/examples`. This is a quick cue showing where you are (read the prompt with `Alt+F2` if you want to confirm it).
 
@@ -175,7 +175,7 @@ Now that you can navigate, the next set of commands lets you create, copy, move,
 From your home directory, run `mkdir project` to create a directory called `project`. Then run `ls -F` to confirm it appears (with a trailing `/`).
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ mkdir project
@@ -183,7 +183,7 @@ $ ls -F
 config.yaml  examples/  project/  work/
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 ### Create an empty file — `touch`
 
@@ -194,7 +194,7 @@ config.yaml  examples/  project/  work/
 Move into your new `project` directory with `cd project`, then create an empty file with `touch draft.txt`. Confirm with `ls`. You can also open `draft.txt` in the VS Code editor if you want to add content to it.
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ cd project
@@ -203,7 +203,7 @@ $ ls
 draft.txt
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 > *Reference:* When naming files and directories, avoid whitespace (use `-` or `_` instead), avoid starting with `-` (the shell treats names starting with `-` as flags), and stick to letters, numbers, `.`, `-`, and `_`. Special characters can cause unexpected behavior.
 
@@ -220,14 +220,14 @@ The Unix shell **does not have a trash bin**. When you `rm` something, it's gone
 Delete the `draft.txt` you just created by running `rm draft.txt`. Confirm with `ls` — the file should be gone (the listing will be empty).
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ rm draft.txt
 $ ls
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 ### Remove a directory — `rm -r`
 
@@ -238,14 +238,14 @@ By default, `rm` only deletes files. To delete a directory and everything in it,
 Move back to your home directory with `cd ..`, then delete the entire `project` directory by running `rm -r project`. Confirm with `ls`.
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ cd ..
 $ rm -r project
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 > *Reference:* Add `-i` (interactive) to either `rm` or `rm -r` to be prompted before each deletion — useful when you're unsure exactly what you're about to delete.
 
@@ -258,7 +258,7 @@ $ rm -r project
 First set things up again with `mkdir project` and `touch project/draft.txt`. Then rename `draft.txt` to `quotes.txt` by running `mv project/draft.txt project/quotes.txt`. Confirm with `ls project`.
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ mkdir project
@@ -268,7 +268,7 @@ $ ls project
 quotes.txt
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 > *Reference:* `mv` silently overwrites if the destination already exists. Use `mv -i` if you want to be asked first.
 
@@ -281,7 +281,7 @@ quotes.txt
 Copy `quotes.txt` into a new file in the same directory by running `cp project/quotes.txt project/quotations.txt`. Then `ls project` to confirm you have both files.
 :::
 
-**Terminal session:**
+The following is a terminal session:
 
 ~~~
 $ cp project/quotes.txt project/quotations.txt
@@ -289,7 +289,7 @@ $ ls project
 quotations.txt  quotes.txt
 ~~~
 
-**End of terminal session.**
+End of terminal session.
 
 ### Clean up
 

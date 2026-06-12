@@ -373,6 +373,16 @@ the same data — no guessing about which file you used or where you stored it.<
 <p>For each example below, put the code in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script, run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>,
 and read what comes back with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. Each example already wraps its last line in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> so the result shows in the
 terminal — in a script (unlike a notebook), a bare expression prints nothing.</p>
+<div class="important admonition">
+<p class="admonition-title">Reading a table by ear</p>
+<p>A pandas <strong>DataFrame</strong> normally prints as a grid of aligned columns. That grid is quick to
+scan by eye, but a screen reader reads it as a stream of numbers with the column headers left
+far behind at the top — very hard to follow. So throughout this course, when we want to
+<em>look at</em> a table, we print it in a screen-reader-friendly way instead: first its <strong>shape</strong>
+and <strong>column names</strong>, then each row as a <code class="docutils literal notranslate"><span class="pre">dict</span></code>, so every value is spoken together with its
+column name (<code class="docutils literal notranslate"><span class="pre">'co2':</span> <span class="pre">315.71</span></code>) rather than as a bare number in a grid. (This approach was
+worked out and tested with a screen-reader user in this course.)</p>
+</div>
 <section id="csv-over-http-pandas-read-csv">
 <h2>1. CSV over HTTP — <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code><a class="headerlink" href="#csv-over-http-pandas-read-csv" title="Link to this heading">#</a></h2>
 <p>The simplest case: a CSV file sitting at a public URL. <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code> can read directly
@@ -384,7 +394,7 @@ isn’t reachable from every environment (the LEAP hub can’t reach it, for exa
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/monthly_in_situ_co2_mlo.csv&quot;</span>
@@ -392,15 +402,33 @@ isn’t reachable from every environment (the LEAP hub can’t reach it, for exa
            <span class="s2">&quot;fit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_seasonally_adjusted&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled&quot;</span><span class="p">,</span> <span class="s2">&quot;co2_filled_seasonally_adjusted&quot;</span><span class="p">,</span>
            <span class="s2">&quot;station&quot;</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=-</span><span class="mf">99.99</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">df1</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
-<p>You should see those four columns — year, month, date, and CO2 — read with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. (We
-print just those four so they fit and read cleanly; printing the whole <code class="docutils literal notranslate"><span class="pre">df</span></code> in a terminal
-hides the middle columns behind <code class="docutils literal notranslate"><span class="pre">...</span></code>. The full table has 11 columns.)
-Notice that you didn’t have to download anything to your computer — <code class="docutils literal notranslate"><span class="pre">pandas</span></code> streamed the
-data from the URL directly into memory.</p>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="p">:</span> <span class="p">(</span><span class="mi">828</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">Columns</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">]</span>
+<span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mf">1958.0</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="mf">1958.0411</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mf">1958.0</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="mf">1958.126</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mf">1958.0</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="mf">1958.2027</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="mf">315.71</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mf">1958.0</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="mf">1958.2877</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="mf">317.45</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mf">1958.0</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="mf">1958.3699</span><span class="p">,</span> <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="mf">317.51</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The first two lines give the table’s <strong>shape</strong> (828 rows, 4 columns)
+and its <strong>column names</strong>; then each row prints as a <code class="docutils literal notranslate"><span class="pre">dict</span></code>, so you hear every value attached
+to its column name instead of a grid of bare numbers. The first two rows show <code class="docutils literal notranslate"><span class="pre">nan</span></code> for
+<code class="docutils literal notranslate"><span class="pre">co2</span></code> — the missing values that <code class="docutils literal notranslate"><span class="pre">na_values=-99.99</span></code> converted. (We pick just these four
+columns so each row reads cleanly; the full table has 11.) And notice you didn’t download
+anything — <code class="docutils literal notranslate"><span class="pre">pandas</span></code> streamed the data straight from the URL into memory.</p>
 </div>
 <p>Real files often need a few options. This one opens with a long comment header followed by a
 three-row column header — 64 lines in all — so <code class="docutils literal notranslate"><span class="pre">skiprows=64</span></code> jumps past it. We then give
@@ -424,7 +452,7 @@ global monthly rain estimates.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://iridl.ldeo.columbia.edu/expert/SOURCES/.NOAA/.NCEP/.CPC/.UNIFIED_PRCP/.GAUGE_BASED/.GLOBAL/.v1p0/.Monthly/.RETRO/.rain/dods&quot;</span>
@@ -432,7 +460,7 @@ global monthly rain estimates.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
+<p>End of code.</p>
 <p>You’ll see a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object with dimensions <code class="docutils literal notranslate"><span class="pre">Y</span></code> (latitude), <code class="docutils literal notranslate"><span class="pre">X</span></code> (longitude), and <code class="docutils literal notranslate"><span class="pre">T</span></code>
 (time). This is <strong>a lot richer</strong> than a pandas DataFrame — it carries coordinates, units,
 and other metadata along with the data values. (Reading a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> summary with a screen
@@ -461,7 +489,7 @@ FAIR-canonical way to access a published dataset.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
-<p><strong>Code:</strong></p>
+<p>The following is Python code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
@@ -472,13 +500,27 @@ FAIR-canonical way to access a published dataset.</p>
     <span class="n">known_hash</span><span class="o">=</span><span class="s2">&quot;md5:cf059b73d6831282c5580776ac07309a&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><strong>End of code.</strong></p>
-<p>The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse
-the cached copy (and verify it hasn’t been corrupted). Notice the DOI in the URL — the
-dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="p">:</span> <span class="p">(</span><span class="mi">8760</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">Columns</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;date.time&#39;</span><span class="p">,</span> <span class="s1">&#39;ny_1_onshore&#39;</span><span class="p">,</span> <span class="s1">&#39;ny_2_onshore&#39;</span><span class="p">,</span> <span class="s1">&#39;newe_onshore&#39;</span><span class="p">,</span> <span class="s1">&#39;mw_onshore&#39;</span><span class="p">,</span> <span class="s1">&#39;newe_offshore&#39;</span><span class="p">,</span> <span class="s1">&#39;ny_offshore&#39;</span><span class="p">,</span> <span class="s1">&#39;rfce_offshore&#39;</span><span class="p">,</span> <span class="s1">&#39;srvc_offshore&#39;</span><span class="p">]</span>
+<span class="p">{</span><span class="s1">&#39;date.time&#39;</span><span class="p">:</span> <span class="s1">&#39;1/1/2011 0:00&#39;</span><span class="p">,</span> <span class="s1">&#39;ny_1_onshore&#39;</span><span class="p">:</span> <span class="mf">0.725240495</span><span class="p">,</span> <span class="s1">&#39;ny_2_onshore&#39;</span><span class="p">:</span> <span class="mf">0.450003616</span><span class="p">,</span> <span class="s1">&#39;newe_onshore&#39;</span><span class="p">:</span> <span class="mf">0.693996266</span><span class="p">,</span> <span class="s1">&#39;mw_onshore&#39;</span><span class="p">:</span> <span class="mf">0.646463288</span><span class="p">,</span> <span class="s1">&#39;newe_offshore&#39;</span><span class="p">:</span> <span class="mf">0.759451462</span><span class="p">,</span> <span class="s1">&#39;ny_offshore&#39;</span><span class="p">:</span> <span class="mf">0.528019073</span><span class="p">,</span> <span class="s1">&#39;rfce_offshore&#39;</span><span class="p">:</span> <span class="mf">0.353946234</span><span class="p">,</span> <span class="s1">&#39;srvc_offshore&#39;</span><span class="p">:</span> <span class="mf">0.189322848</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;date.time&#39;</span><span class="p">:</span> <span class="s1">&#39;1/1/2011 1:00&#39;</span><span class="p">,</span> <span class="s1">&#39;ny_1_onshore&#39;</span><span class="p">:</span> <span class="mf">0.702001288</span><span class="p">,</span> <span class="s1">&#39;ny_2_onshore&#39;</span><span class="p">:</span> <span class="mf">0.446461542</span><span class="p">,</span> <span class="s1">&#39;newe_onshore&#39;</span><span class="p">:</span> <span class="mf">0.677913327</span><span class="p">,</span> <span class="s1">&#39;mw_onshore&#39;</span><span class="p">:</span> <span class="mf">0.68888967</span><span class="p">,</span> <span class="s1">&#39;newe_offshore&#39;</span><span class="p">:</span> <span class="mf">0.767230863</span><span class="p">,</span> <span class="s1">&#39;ny_offshore&#39;</span><span class="p">:</span> <span class="mf">0.530821811</span><span class="p">,</span> <span class="s1">&#39;rfce_offshore&#39;</span><span class="p">:</span> <span class="mf">0.357297022</span><span class="p">,</span> <span class="s1">&#39;srvc_offshore&#39;</span><span class="p">:</span> <span class="mf">0.21296533</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Same shape/columns/rows pattern as before (here showing the first two rows of an 8760-row,
+9-column table of hourly wind data). The first run downloads the file from Zenodo and caches
+it locally; later runs reuse the cached copy and verify it against the hash. Notice the DOI
+in the URL — the dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>
 </div>
 <blockquote>
 <div><p><em>Reference:</em> Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3

@@ -339,11 +339,14 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-different-setup">Why a different setup?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-install">What to install</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-caps-lock-as-the-nvda-key-recommended">Use Caps Lock as the NVDA key (recommended)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal">Open a terminal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-accessible-view">Read the output with the Accessible View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-terminal-s-accessible-view">Read the output with the terminal’s Accessible View</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">If you can’t re-read earlier commands: turn on shell integration</a></li>
 </ul>
 </li>
@@ -405,27 +408,52 @@ just use the LEAP hub, which already has them. You don’t need those yet.)</p>
 </section>
 <section id="turning-on-vs-code-s-accessibility-features">
 <h2>Turning on VS Code’s accessibility features<a class="headerlink" href="#turning-on-vs-code-s-accessibility-features" title="Link to this heading">#</a></h2>
-<p>VS Code has strong, built-in support for screen readers, and it <strong>detects NVDA
-automatically</strong>. When a screen reader is running, the status bar shows <strong>“Screen Reader
-Optimized”</strong>. If you ever need to set it by hand, open the Command Palette
-(<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>) and run <strong>“Toggle Screen Reader Accessibility Mode”</strong>.</p>
-<p>Three commands are worth memorizing — they work in the editor, the terminal, and
-notebooks:</p>
+<p>VS Code has strong, built-in support for screen readers. Turn it on <strong>once</strong>, explicitly, so
+it stays on every time VS Code opens:</p>
+<ol class="arabic simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> to open the Command Palette.</p></li>
+<li><p>Type <strong>Open User Settings (JSON)</strong> and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p></li>
+<li><p>Inside the curly braces, add this line: <code class="docutils literal notranslate"><span class="pre">&quot;editor.accessibilitySupport&quot;:</span> <span class="pre">&quot;on&quot;</span></code></p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code> to save.</p></li>
+</ol>
+<p>After this, the status bar shows <strong>“Screen Reader Optimized”</strong> every time VS Code opens.</p>
+<div class="note admonition">
+<p class="admonition-title">A note on these shortcuts</p>
+<p>The shortcuts on this page were tested on <strong>Windows with NVDA</strong> by the course assistant. A
+few are still being confirmed and are marked <em>(being confirmed)</em> — if one doesn’t behave as
+described on your machine, that’s useful to tell us. Also, keys written as <code class="docutils literal notranslate"><span class="pre">Fn+...</span></code> assume a
+keyboard where the function keys need <code class="docutils literal notranslate"><span class="pre">Fn</span></code>; if yours sends <code class="docutils literal notranslate"><span class="pre">F1</span></code>–<code class="docutils literal notranslate"><span class="pre">F12</span></code> directly, drop the
+<code class="docutils literal notranslate"><span class="pre">Fn</span></code>.</p>
+</div>
+<p>Two commands are worth memorizing first:</p>
 <ul class="simple">
-<li><p><strong>Accessibility Help — <code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code>.</strong> Press this in any view to hear a summary of what you
-can do there and the relevant shortcuts. When in doubt, press <code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code>.</p></li>
-<li><p><strong>Accessible View — <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</strong> This opens the current content — <em>terminal output</em>,
-error messages, notebook output, hovers — as plain text you can read line by line and
-character by character. This is the single most important command for you: it is how
-you read things a screen reader would otherwise skip.</p></li>
-<li><p><strong>Audio cues</strong> are normally enabled automatically when a screen reader is attached (for
-example, a sound when a line has an error). To hear the full list, run <strong>“Help: List
-Signal Sounds”</strong> from the Command Palette.</p></li>
+<li><p><strong>Accessibility Help — <code class="docutils literal notranslate"><span class="pre">Fn+Alt+F1</span></code>.</strong> Press this in any view to hear a summary of what you
+can do there and the relevant shortcuts. When in doubt, press it — it’s the “what can I do
+here?” button.</p></li>
+<li><p><strong>Accessible View — <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</strong> Opens the current editor content — your Python script,
+error messages, hovers — as plain text you can read line by line. (The <em>terminal</em> has its
+own keys for this, covered in the terminal section below.)</p></li>
 </ul>
+<p><strong>Audio cues</strong> are normally on automatically with a screen reader attached (for example, a
+sound when a line has an error); run <strong>“Help: List Signal Sounds”</strong> from the Command Palette
+to hear the full list.</p>
+<section id="use-caps-lock-as-the-nvda-key-recommended">
+<h3>Use Caps Lock as the NVDA key (recommended)<a class="headerlink" href="#use-caps-lock-as-the-nvda-key-recommended" title="Link to this heading">#</a></h3>
+<p>Several reading shortcuts below use the <strong>NVDA modifier key</strong>. By default that’s <code class="docutils literal notranslate"><span class="pre">Insert</span></code>,
+but <code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock</span></code> is easier to reach, so it helps to enable it as a second NVDA key:</p>
+<ol class="arabic simple">
+<li><p>With NVDA running, press <code class="docutils literal notranslate"><span class="pre">Insert+N</span></code> to open the NVDA menu.</p></li>
+<li><p>Go to <strong>Preferences → Settings → Keyboard</strong>.</p></li>
+<li><p>Under <strong>NVDA Modifier Keys</strong>, check the box for <strong>Caps Lock</strong>.</p></li>
+<li><p>Select <strong>OK</strong>.</p></li>
+</ol>
+<p>Now both <code class="docutils literal notranslate"><span class="pre">Insert</span></code> and <code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock</span></code> act as the NVDA key. The terminal-reading steps below
+assume this.</p>
 <blockquote>
-<div><p><em>NVDA tip:</em> VS Code’s own guidance is to <strong>stay in focus mode and use the hotkeys</strong>
-above, rather than switching NVDA to browse mode.</p>
+<div><p><em>NVDA tip:</em> VS Code’s own guidance is to <strong>stay in focus mode and use the hotkeys</strong>,
+rather than switching NVDA to browse mode.</p>
 </div></blockquote>
+</section>
 </section>
 <section id="the-terminal-the-key-fix">
 <h2>The terminal — the key fix<a class="headerlink" href="#the-terminal-the-key-fix" title="Link to this heading">#</a></h2>
@@ -456,25 +484,24 @@ you type goes straight to the terminal.</p></li>
 the next line.</p></li>
 </ol>
 </section>
-<section id="read-the-output-with-the-accessible-view">
-<h3>Read the output with the Accessible View<a class="headerlink" href="#read-the-output-with-the-accessible-view" title="Link to this heading">#</a></h3>
+<section id="read-the-output-with-the-terminal-s-accessible-view">
+<h3>Read the output with the terminal’s Accessible View<a class="headerlink" href="#read-the-output-with-the-terminal-s-accessible-view" title="Link to this heading">#</a></h3>
 <p>A sighted user just looks at the output. With a screen reader, you read it through the
-<strong>Accessible View</strong>, which turns the terminal’s contents into plain text you can move
-through one line at a time:</p>
+terminal’s <strong>Accessible View</strong>, which turns its contents into plain text you can move through
+one line at a time. These keys were tested with NVDA on Windows:</p>
 <ol class="arabic simple">
 <li><p>Make sure focus is in the terminal. If you’re not sure, press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> to jump back
-into it — <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> reads whatever is currently focused, so this matters.</p></li>
-<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong>. This opens the Accessible View of the whole terminal buffer.</p></li>
-<li><p>Read with the <strong>Up and Down arrow keys</strong> — your screen reader speaks one line at a time.
-You can arrow <em>up</em> past your most recent command to re-read earlier output that’s still
-on screen.</p></li>
-<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Escape</span></code></strong> to close the Accessible View and return to the terminal.</p></li>
+into it.</p></li>
+<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code></strong> to open the terminal’s Accessible View.</p></li>
+<li><p>Move through it with <strong><code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock+Up</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock+Down</span></code></strong> — your screen reader
+speaks one line at a time, so you can go back up to re-read earlier output. (<code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock</span></code>
+is the NVDA key you enabled above.)</p></li>
+<li><p>Press <strong><code class="docutils literal notranslate"><span class="pre">Ctrl+Down</span></code></strong> to close the Accessible View and return to the terminal.</p></li>
 </ol>
 <div class="tip admonition">
 <p class="admonition-title">If you forget these keys</p>
-<p>Any time focus is in the terminal, press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code></strong> (Accessibility Help). VS Code reads
-out the keys that work where you are, including the Accessible View — it’s the “what can I
-do here?” button.</p>
+<p>Any time focus is in the terminal, press <strong><code class="docutils literal notranslate"><span class="pre">Fn+Alt+F1</span></code></strong> (Accessibility Help). VS Code reads
+out the keys that work where you are — it’s the “what can I do here?” button.</p>
 </div>
 </section>
 <section id="if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">
@@ -489,11 +516,11 @@ once:</p>
 <li><p>In the terminal, run this single command. It adds shell integration to Git Bash’s
 startup file:</p></li>
 </ol>
-<p><strong>Command:</strong></p>
+<p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;[[ &quot;$TERM_PROGRAM&quot; == &quot;vscode&quot; ]] &amp;&amp; . &quot;$(code --locate-shell-integration-path bash)&quot;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
 </pre></div>
 </div>
-<p><strong>End of command.</strong></p>
+<p>End of command.</p>
 <ol class="arabic simple" start="2">
 <li><p>Close the terminal (type <code class="docutils literal notranslate"><span class="pre">exit</span></code> and press Enter), then open a fresh one with <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>.</p></li>
 </ol>
@@ -539,15 +566,41 @@ written mainly around opening notebooks; you can ignore those parts and simply u
 </section>
 <section id="keystroke-quick-reference">
 <h2>Keystroke quick reference<a class="headerlink" href="#keystroke-quick-reference" title="Link to this heading">#</a></h2>
+<p><em>Tested on Windows with NVDA by the course assistant. Items marked <strong>(being confirmed)</strong> are
+still being verified — <code class="docutils literal notranslate"><span class="pre">Fn+...</span></code> keys assume a keyboard where the function keys need <code class="docutils literal notranslate"><span class="pre">Fn</span></code>.</em></p>
+<p><strong>Accessibility &amp; help</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Alt+F1</span></code> — Accessibility Help (what can I do here?)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> — Accessible View (read terminal / notebook / error output)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> — open a terminal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> — move between commands in the Accessible View</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Escape</span></code> — close the Accessible View</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> — Command Palette (run any command by name)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code> — save the current file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fn+Alt+F1</span></code> — Accessibility Help (what can I do here?)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> — Accessible View of the editor (read your script and code-check results)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Escape</span></code> — close the accessibility help / view</p></li>
 </ul>
+<p><strong>Reading terminal output</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code> — open a terminal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> — open the terminal’s Accessible View</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock+Up</span></code> / <code class="docutils literal notranslate"><span class="pre">Caps</span> <span class="pre">Lock+Down</span></code> — move up / down between lines in the Accessible View</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Down</span></code> — close the terminal’s Accessible View</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> — move between commands in the Accessible View <em>(being confirmed)</em></p></li>
+</ul>
+<p><strong>Moving around the window</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> — Command Palette (run any command by name)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fn+F6</span></code> / <code class="docutils literal notranslate"><span class="pre">Fn+Shift+F6</span></code> — move focus to the next / previous panel (editor, terminal, sidebar)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+1</span></code> — return focus to the editor</p></li>
+</ul>
+<p><strong>Working with files</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+N</span></code> — new file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+P</span></code> — quick-open a file by name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+S</span></code> — save the current file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl+W</span></code> — close the current editor tab</p></li>
+</ul>
+<p><strong>Errors and code suggestions</strong> <em>(being confirmed)</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F8</span></code> / <code class="docutils literal notranslate"><span class="pre">Shift+F8</span></code> — go to the next / previous error or warning (NVDA announces it)</p></li>
+</ul>
+<p>To switch a <strong>Markdown</strong> file from preview to editable text: <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> → <strong>Reopen Editor
+With Text Editor</strong>.</p>
 <p>You’re set. Continue to <strong><a class="reference internal" href="intro_to_unix.html"><span class="std std-doc">Intro to Unix</span></a></strong>, and do each “Try it” in the
 Git Bash terminal you just set up.</p>
 </section>
@@ -621,11 +674,14 @@ Git Bash terminal you just set up.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-different-setup">Why a different setup?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-install">What to install</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-on-vs-code-s-accessibility-features">Turning on VS Code’s accessibility features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-caps-lock-as-the-nvda-key-recommended">Use Caps Lock as the NVDA key (recommended)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-key-fix">The terminal — the key fix</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-your-terminal-use-git-bash">Make your terminal use Git Bash</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-a-terminal">Open a terminal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-accessible-view">Read the output with the Accessible View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-output-with-the-terminal-s-accessible-view">Read the output with the terminal’s Accessible View</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-can-t-re-read-earlier-commands-turn-on-shell-integration">If you can’t re-read earlier commands: turn on shell integration</a></li>
 </ul>
 </li>

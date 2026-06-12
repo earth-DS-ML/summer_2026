@@ -37,57 +37,57 @@ The **"Try it"** exercises on this page (and on the companion Matplotlib page) a
 
 This will be our first experience with *importing* a package that is not part of the Python [standard library](https://docs.python.org/3/library/).
 
-**Code:**
+The following is Python code:
 
 ```python
 import numpy as np
 ```
 
-**End of code.**
+End of code.
 
 What did we just do? We **imported** a package. This makes new variables (mostly functions) available to use in our script — we access them with the `np.` prefix, as you'll see throughout this page.
 
 We can use `dir()` to see the variables we currently have access to — `np` should now be one of them.
 
-**Code:**
+The following is Python code:
 
 ```python
 print(dir())
 ```
 
-**End of code.**
+End of code.
 
 This prints a list of the names defined in your script right now. The exact list depends on what else you've written, but `'np'` will be one of the entries.
 
 NumPy has hundreds of functions and types — `dir(np)` lists them all (too many to read out loud). A common pattern is to filter that list for names containing a keyword you care about. This is a list comprehension, like the ones from the Core Python material:
 
-**Code:**
+The following is Python code:
 
 ```python
 print([name for name in dir(np) if 'lin' in name])
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 ['linalg', 'linspace']
 ```
 
-**End of output.**
+End of output.
 
 So the two NumPy names containing `'lin'` are `linalg` (the linear-algebra sub-package) and `linspace` (a function we'll use below).
 
 You can check the version of any package via its `__version__` attribute — useful when reproducing results or filing bug reports:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.__version__)
 ```
 
-**End of code.**
+End of code.
 
 This prints a version string such as `2.4.4` (yours may differ).
 
@@ -111,81 +111,81 @@ Compared to a regular Python `list`, NumPy arrays have a few key differences:
 
 Let's create a 1D array from a Python list, then inspect its properties.
 
-**Code:**
+The following is Python code:
 
 ```python
 a = np.array([9, 0, 2, 1, 0])
 print(a)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 [9 0 2 1 0]
 ```
 
-**End of output.**
+End of output.
 
 Every array has a `dtype` (the type of its elements) and a `shape` (its size along each dimension):
 
-**Code:**
+The following is Python code:
 
 ```python
 print(a.dtype)
 print(a.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 int64
 (5,)
 ```
 
-**End of output.**
+End of output.
 
 So the elements are 64-bit integers, and the shape is `(5,)` — a 1D array of length 5. (The trailing comma is how Python writes a one-element tuple.)
 
 The shape is returned as a **tuple**, which means we can index it like any other tuple — useful when we want to grab a specific dimension's length.
 
-**Code:**
+The following is Python code:
 
 ```python
 print(type(a.shape))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 <class 'tuple'>
 ```
 
-**End of output.**
+End of output.
 
 Arrays can also be **multi-dimensional** and have an explicit dtype. Here we pass a list of lists and ask for 64-bit floats:
 
-**Code:**
+The following is Python code:
 
 ```python
 b = np.array([[5, 3, 1, 9], [9, 2, 3, 0]], dtype=np.float64)
 print(b.dtype, b.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 float64 (2, 4)
 ```
 
-**End of output.**
+End of output.
 
 So `b` is a 2-row, 4-column array of floats.
 
@@ -212,7 +212,7 @@ There are several ways to build arrays in NumPy beyond passing a list to `np.arr
 - `np.arange` / `np.linspace` / `np.logspace` — evenly-spaced values along a range.
 - `np.meshgrid` — combine 1D arrays into 2D coordinate grids.
 
-**Code:**
+The following is Python code:
 
 ```python
 c = np.zeros((9, 9))
@@ -222,57 +222,59 @@ e = np.ones_like(c)
 f = np.zeros_like(d)
 ```
 
-**End of code.**
+End of code.
 
 These create, in order: a 9×9 array of zeros; a 3×6×3 array of ones holding complex numbers; a 3×3 array filled with the value of pi; then `np.ones_like` and `np.zeros_like`, which make new arrays of ones and zeros that copy the **shape and dtype** of an existing array (`c` and `d` here).
 
 `arange` works very similarly to `range`, but it populates the array "eagerly" (i.e. immediately), rather than generating the values upon iteration:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.arange(10))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 [0 1 2 3 4 5 6 7 8 9]
 ```
 
-**End of output.**
+End of output.
 
 `arange` is left inclusive, right exclusive, just like `range`, but also works with floating-point numbers:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.arange(2, 4, 0.25))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 [2.   2.25 2.5  2.75 3.   3.25 3.5  3.75]
 ```
 
-**End of output.**
+End of output.
 
 A frequent need is to generate an array of N numbers, evenly spaced between two values. That is what `linspace` is for:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.linspace(2, 4, 20))
 ```
 
-**End of code.**
+End of code.
 
 This prints 20 values evenly spaced from 2 to 4 (inclusive of both ends):
+
+The following is the expected output:
 
 ```
 [2.         2.10526316 2.21052632 2.31578947 2.42105263 2.52631579
@@ -281,34 +283,36 @@ This prints 20 values evenly spaced from 2 to 4 (inclusive of both ends):
  3.89473684 4.        ]
 ```
 
-**End of output.**
+End of output.
 
 The first value is exactly 2, the last is exactly 4, and the spacing between consecutive values is constant (about 0.105).
 
 Log-spaced values are useful when working with quantities spanning multiple orders of magnitude (e.g., frequencies, energy scales):
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.logspace(1, 2, 10))
 ```
 
-**End of code.**
+End of code.
 
 This prints 10 values spaced evenly on a logarithmic scale, from 10¹ to 10²:
+
+The following is the expected output:
 
 ```
 [ 10.          12.91549665  16.68100537  21.5443469   27.82559402
   35.93813664  46.41588834  59.94842503  77.42636827 100.        ]
 ```
 
-**End of output.**
+End of output.
 
 The first value is 10, the last is 100, and each value is a constant *ratio* larger than the previous one (not a constant difference).
 
 NumPy also has utilities for generating multi-dimensional arrays. `meshgrid` creates 2D arrays out of a combination of 1D arrays. Meshgrid essentially tiles the 1D arrays to a shape that is the combined shape of the inputs:
 
-**Code:**
+The following is Python code:
 
 ```python
 x = np.linspace(-2*np.pi, 2*np.pi, 100)
@@ -318,16 +322,16 @@ print(x.shape, y.shape)
 print(xx.shape, yy.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (100,) (50,)
 (50, 100) (50, 100)
 ```
 
-**End of output.**
+End of output.
 
 So the 1D inputs have lengths 100 and 50, and `meshgrid` produces two 2D arrays of shape `(50, 100)` — 50 rows (one per `y` value) and 100 columns (one per `x` value). `xx` holds the x-coordinate at every grid point, and `yy` holds the y-coordinate. We'll reuse `x`, `y`, `xx`, and `yy` throughout the rest of this page.
 
@@ -340,120 +344,122 @@ Create `creation.py`. Use `np.linspace` to create an array of 100 evenly-spaced 
 
 Basic indexing in NumPy is similar to lists — single brackets, zero-based, and negative indices count from the end. The key extension is that for N-dimensional arrays, you separate the index for each dimension with a comma. Slicing (e.g. `[2:5]`, `[:, 0]`) and boolean masks also work, as we'll see below.
 
-**Code:**
+The following is Python code:
 
 ```python
 print(y[10], y[1:5], y[-5])
 ```
 
-**End of code.**
+End of code.
 
 This prints (using the `y` array from the meshgrid section above):
+
+The following is the expected output:
 
 ```
 -1.8593099378388573 [-3.01336438 -2.88513611 -2.75690784 -2.62867957] 2.628679567289418
 ```
 
-**End of output.**
+End of output.
 
 So `y[10]` is the single value at index 10, `y[1:5]` is a 4-element slice (indices 1 through 4), and `y[-5]` is the fifth value from the end.
 
 For multi-dimensional arrays, use a comma to separate the index for each dimension:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(xx[0, 0], xx[-1, -1], xx[3, -5])
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 -6.283185307179586 6.283185307179586 5.775453161144872
 ```
 
-**End of output.**
+End of output.
 
 `xx[0, 0]` is the top-left corner (the smallest x, about −2π), `xx[-1, -1]` is the bottom-right corner (the largest x, about +2π), and `xx[3, -5]` is the value in row 3, fifth column from the end.
 
 Slicing returns whole rows or columns:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(xx[0].shape, xx[:, -1].shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (100,) (50,)
 ```
 
-**End of output.**
+End of output.
 
 `xx[0]` is the first **row** (length 100, one per column), and `xx[:, -1]` is the last **column** (length 50, one per row).
 
 You can take **ranges** across multiple dimensions:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(xx[3:10, 30:40].shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (7, 10)
 ```
 
-**End of output.**
+End of output.
 
 Rows 3 through 9 (7 rows) and columns 30 through 39 (10 columns) give a 7×10 sub-block.
 
 There are many advanced ways to index arrays. You can [read about them](https://numpy.org/doc/stable/reference/arrays.indexing.html) in the manual. Here is one example — a **boolean mask**. The expression `xx < 0` builds an array of `True`/`False` the same shape as `xx`, and indexing with it keeps only the elements where the mask is `True`:
 
-**Code:**
+The following is Python code:
 
 ```python
 idx = xx < 0
 print(xx[idx].shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (2500,)
 ```
 
-**End of output.**
+End of output.
 
 Note that a boolean index always returns a **flat (1D) array**, regardless of the input shape. Here `xx` has 50 × 100 = 5000 elements, and exactly half of them are negative, giving 2500. The `ravel` method does the same flattening explicitly:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(xx.ravel().shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (5000,)
 ```
 
-**End of output.**
+End of output.
 
 :::{admonition} Try it
 :class: tip
@@ -464,13 +470,13 @@ Create `indexing.py` and rebuild `x`, `y`, `xx`, `yy` with `np.meshgrid` as abov
 
 It can be hard to work with big arrays without seeing them, so we turn arrays into pictures with **Matplotlib**, the plotting library the course uses throughout. To import its plotting interface:
 
-**Code:**
+The following is Python code:
 
 ```python
 from matplotlib import pyplot as plt
 ```
 
-**End of code.**
+End of code.
 
 :::{note}
 When you run a Matplotlib script from the terminal, the figure only appears if you ask for it. Add `plt.show()` at the end of the script to open the plot window, or `plt.savefig("figure.png")` to write it to a file. The course notebook shows plots automatically; in a script you call one of these yourself. The "What this shows" notes mean you don't need to open the window to follow the lesson.
@@ -483,104 +489,104 @@ Matplotlib plots are images, so a screen reader cannot read them directly — th
 
 For plotting a 1D array as a line, we use the `plot` command:
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.plot(x)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** With a single argument, `plt.plot` puts the array's *index* (0, 1, 2, …, 99) on the horizontal axis and its *value* on the vertical axis. Since `x = np.linspace(-2*np.pi, 2*np.pi, 100)`, the result is a straight line rising steadily from about −6.28 at the left (index 0) to about +6.28 at the right (index 99). It's a visual confirmation that `linspace` produces evenly-spaced values.
 
 **Check it.** The same confirmation, from the array itself — the endpoints, and whether all 99 consecutive differences (`np.diff(x)`) are equal:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(x[0], x[-1])
 print(np.allclose(np.diff(x), np.diff(x)[0]))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 -6.283185307179586 6.283185307179586
 True
 ```
 
-**End of output.**
+End of output.
 
 Equal differences everywhere is exactly what "a straight line" means.
 
 There are many ways to visualize 2D data. Here we use `pcolormesh`, which draws a 2D array as a grid of colored cells (a "heatmap"), with color encoding each cell's value:
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(xx)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `xx` holds the x-coordinate at every point of the grid, so its value depends only on the column, not the row. The heatmap is therefore a smooth gradient running left to right: dark/low (about −6.28) at the left edge, brightening steadily to high (about +6.28) at the right edge — and identical in every row, so each thin vertical strip of the image is a single color.
 
 **Check it.** "Depends only on the column" means any two rows are identical:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.allclose(xx[0, :], xx[25, :]))
 print(xx[0, 0], xx[0, -1])
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 True
 -6.283185307179586 6.283185307179586
 ```
 
-**End of output.**
+End of output.
 
 Row 0 and row 25 match exactly, and a single row runs from −2π to +2π — it is just a copy of `x`.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(yy)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `yy` holds the y-coordinate, which depends only on the row. So this heatmap is the same idea rotated 90 degrees: a smooth gradient running bottom to top — low (about −3.14) along the bottom edge, rising to high (about +3.14) at the top edge, identical in every column. (Note that `pcolormesh` draws row 0 at the *bottom* of the image.)
 
 **Check it.**
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.allclose(yy[:, 0], yy[:, 25]))
 print(yy[0, 0], yy[-1, 0])
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 True
 -3.141592653589793 3.141592653589793
 ```
 
-**End of output.**
+End of output.
 
 Any two columns are identical, and a single column runs from −π to +π — a copy of `y`.
 
@@ -597,7 +603,7 @@ There are a huge number of operations available on arrays. All the familiar arit
 
 NumPy provides "universal functions" like `np.sin` that act on every element of an array at once:
 
-**Code:**
+The following is Python code:
 
 ```python
 f = np.sin(x)
@@ -605,13 +611,13 @@ plt.plot(x, f)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** This plots `sin(x)` against `x`, where `x` runs from −2π to +2π. The curve is a smooth sine wave that completes **two full oscillations** across the range: it passes through zero at x = −2π, −π, 0, π, and 2π, peaks at +1, and dips to −1, in the classic wave shape.
 
 Now let's compute a function of two variables — a 2D surface. We use the 2D `xx`/`yy` arrays (from `meshgrid` earlier) so the function is evaluated at every grid point:
 
-**Code:**
+The following is Python code:
 
 ```python
 f = np.sin(xx) * np.cos(0.5 * yy)
@@ -619,13 +625,13 @@ plt.pcolormesh(xx, yy, f)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `f` now has shape `(50, 100)`, one value per grid point. Passing `xx, yy, f` to `pcolormesh` plots it with real coordinates on the axes (x from −2π to +2π, y from −π to +π). The pattern is a grid of "blobs": along the x-direction it oscillates between bright (+) and dark (−) following `sin(x)` (two full cycles), while along the y-direction the amplitude is gently modulated by `cos(0.5·y)`, which is strongest (close to 1) near the middle row (y = 0) and tapers toward the top and bottom edges. We reuse this `f` (shape `(50, 100)`) in the sections below.
 
 **Check it.** Everything the plot shows is verifiable straight from the array:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(f.shape)
@@ -633,9 +639,9 @@ print(f.min(), f.max())
 print(np.abs(f[25, :] - np.sin(x)).max())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (50, 100)
@@ -643,18 +649,18 @@ This prints:
 0.0005137191281501252
 ```
 
-**End of output.**
+End of output.
 
 The shape says one value per grid point; the min/max say the values span roughly −1 to +1. The third line checks the *structure*: `f[25, :]` is the middle row — the row closest to y = 0, where `cos(0.5·y) ≈ 1` — and it differs from plain `sin(x)` by at most 0.0005. That slice is also your **1D profile**: an ordinary length-100 array, so
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.plot(x, f[25, :])
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 draws the familiar two-cycle sine wave — a line plot you can read with `print`, or explore by sound with MAIDR. Slicing a single row or column out of a 2D array and examining it as a curve is one of the most useful moves in this whole lecture: it turns a heatmap question into a 1D question.
 
@@ -669,7 +675,7 @@ Once you have an array, you often need to reshape it without changing the underl
 
 Swapping the dimension order is accomplished by calling `transpose`:
 
-**Code:**
+The following is Python code:
 
 ```python
 f_transposed = f.transpose()
@@ -678,59 +684,63 @@ plt.pcolormesh(f_transposed)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (100, 50)
 ```
 
-**End of output.**
+End of output.
 
 **What this shows.** Transposing turns the `(50, 100)` array into `(100, 50)` — rows become columns and vice versa. The heatmap looks like the earlier `f` plot rotated/flipped across its diagonal: the blob pattern that ran left-to-right now runs top-to-bottom.
 
 **Check it.** Transposing means every element swaps its row and column index — `f_transposed[j, i]` equals `f[i, j]` for any pair of indices:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(f[3, 10], f_transposed[10, 3])
 ```
 
-**End of code.**
+End of code.
 
 This prints the same number twice:
+
+The following is the expected output:
 
 ```
 0.18253780301831585 0.18253780301831585
 ```
 
-**End of output.**
+End of output.
 
 We can also manually change the shape of an array — as long as the new shape has the **same number of elements**. `f` has 50 × 100 = 5000 elements. Watch what happens when the new shape doesn't match:
 
-**Code:**
+The following is Python code:
 
 ```python
 g = np.reshape(f, (8, 9))
 ```
 
-**End of code.**
+End of code.
 
 This raises an error, because 8 × 9 = 72, not 5000. The last line of the traceback reads:
+
+The following is the expected output:
 
 ```
 ValueError: cannot reshape array of size 5000 into shape (8,9)
 ```
 
-**End of output.**
+End of output.
 
 This is a useful error to recognize: when `reshape` complains, it almost always means your target shape multiplies out to a different number of elements than the array actually has.
 
 A shape that *does* multiply to 5000 works fine. But be careful with reshaping data — you can accidentally lose the structure of the data:
 
-**Code:**
+The following is Python code:
 
 ```python
 g = np.reshape(f, (200, 25))
@@ -739,43 +749,43 @@ plt.pcolormesh(g)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (200, 25)
 ```
 
-**End of output.**
+End of output.
 
 **What this shows.** The reshape succeeds (200 × 25 = 5000), but it has scrambled the spatial pattern. NumPy refills the new `(200, 25)` array by reading `f`'s values in order, so the smooth blobs from before are sliced and re-wrapped — the heatmap appears as fine horizontal striping rather than smooth blobs, no longer resembling the original surface. A reminder that reshaping reorganizes numbers without respecting their original 2D meaning.
 
 **Check it.** Reshaping never changes the values or their order — only where the row breaks fall:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.allclose(f.ravel(), g.ravel()))
 print(np.allclose(g[0, :], f[0, :25]))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 True
 True
 ```
 
-**End of output.**
+End of output.
 
 Flattened out, the two arrays are identical. But `g`'s first row holds only the first 25 values of `f`'s first row — each original row of 100 values now wraps across four rows of 25. That re-wrapping is exactly why the spatial pattern scrambles.
 
 We can also "tile" an array to repeat it many times:
 
-**Code:**
+The following is Python code:
 
 ```python
 f_tiled = np.tile(f, (3, 2))
@@ -784,84 +794,84 @@ plt.pcolormesh(f_tiled)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (150, 200)
 ```
 
-**End of output.**
+End of output.
 
 **What this shows.** `np.tile(f, (3, 2))` stacks the `f` pattern **3 times vertically and 2 times horizontally**, giving a `(150, 200)` array. The heatmap shows the same blob pattern repeated as a 3-by-2 grid of identical copies, like wallpaper.
 
 **Check it.** Every 50×100 block should be an exact copy of `f`:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.array_equal(f_tiled[:50, :100], f))
 print(np.array_equal(f_tiled[100:150, 100:200], f))
 ```
 
-**End of code.**
+End of code.
 
 This prints `True` twice — the first line checks the block in the first 50 rows and 100 columns, the second checks the block in the last 50 rows and last 100 columns.
 
 Another common need is to add an extra dimension to an array. This can be accomplished via indexing with `None`. Start by checking the shape of `x`:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(x.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (100,)
 ```
 
-**End of output.**
+End of output.
 
 Insert a new length-1 axis at the front:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(x[None, :].shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (1, 100)
 ```
 
-**End of output.**
+End of output.
 
 You can insert several new axes at once:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(x[None, :, None, None].shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (1, 100, 1, 1)
 ```
 
-**End of output.**
+End of output.
 
 Each `None` in the index inserts a new length-1 dimension at that position. This is the key trick behind **broadcasting**, which is next.
 
@@ -889,7 +899,7 @@ The original course shows a diagram here. In words: imagine writing the two arra
 
 Here `f` has shape `(50, 100)` and `x` has shape `(100,)`. Lining them up on the right, the trailing dimensions are 100 and 100 — they match — and `f`'s leading 50 has no counterpart, so `x` is reused for every row:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(f.shape, x.shape)
@@ -897,94 +907,96 @@ g = f * x
 print(g.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (50, 100) (100,)
 (50, 100)
 ```
 
-**End of output.**
+End of output.
 
 So multiplying a `(50, 100)` array by a `(100,)` array gives a `(50, 100)` result — each row of `f` is multiplied element-wise by `x`. We'll keep this `g` (shape `(50, 100)`) for the reductions section.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(f)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** This is the original blob surface `f` (sine in x, modulated by cosine in y), shown here for comparison with `g` below.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(g)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `g = f * x` multiplies each column of the pattern by that column's `x` value, which runs from about −6.28 on the left to +6.28 on the right. Down the **middle** of the plot (x ≈ 0) the values are washed out to near zero, and the amplitude grows as you move outward — but it does *not* keep growing all the way to the edges: `sin(x)` itself returns to zero at x = ±2π, so the outermost columns fade back toward zero too. The most extreme cells sit about three-quarters of the way out, near x ≈ ±4.9, where the array reaches its minimum of about −4.8; bright maxima of about +1.8 sit near x ≈ ±2. And because multiplying by a *negative* `x` flips the sign of the whole left half, the pattern is mirror-symmetric about the center instead of simply repeating.
 
 **Check it.** Broadcasting claims that each column of `g` equals `f`'s column times that column's single `x` value — test it directly for, say, column 12:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.allclose(g[:, 12], f[:, 12] * x[12]))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 True
 ```
 
-**End of output.**
+End of output.
 
 And the middle row of `g` is a 1D profile of the whole structure. Since `f`'s middle row is nearly `sin(x)`, this row is nearly `x·sin(x)`:
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.plot(x, g[25, :])
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** A mirror-symmetric W-shaped curve: zero at x = 0, rising to about +1.8 near x = ±2, plunging to about −4.8 near x = ±4.9, and returning to zero at the edges (x = ±2π). One curve captures the whole story — the quiet center, the strong lobes three-quarters of the way out, and the quiet edges.
 
 However, if the last (trailing) dimensions are *not* the same, NumPy cannot just automatically figure it out. Here `y` has shape `(50,)`, and its 50 does **not** match `f`'s trailing dimension of 100:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(f.shape, y.shape)
 h = f * y
 ```
 
-**End of code.**
+End of code.
 
 This raises an error. The last line of the traceback reads:
+
+The following is the expected output:
 
 ```
 ValueError: operands could not be broadcast together with shapes (50,100) (50,)
 ```
 
-**End of output.**
+End of output.
 
 We can help NumPy by adding an extra dimension to `y` at the end (with `None`). Then `y` has shape `(50, 1)`, whose leading 50 lines up with `f`'s leading 50, and whose trailing 1 is stretched to 100:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(f.shape, y[:, None].shape)
@@ -992,31 +1004,31 @@ h = f * y[:, None]
 print(h.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (50, 100) (50, 1)
 (50, 100)
 ```
 
-**End of output.**
+End of output.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(h)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `h = f * y[:, None]` multiplies each **row** of the pattern by that row's `y` value, which runs from about −3.14 at the bottom to +3.14 at the top. The middle row (y ≈ 0) is washed out to near zero, and the amplitude grows as you move away from it — but, as with `g`, not all the way out: the `cos(0.5·y)` factor in `f` vanishes at y = ±π, so the top and bottom edges fade back to zero as well. The strongest lobes sit a little over halfway out, near y ≈ ±1.7, where the values reach about ±1.12. And because the lower half is multiplied by *negative* y values, every lobe in the lower half has the opposite sign of the lobe directly above it in the upper half — a sign-flipped checkerboard, the row-wise counterpart of the `g` plot.
 
 **Check it.** Same column test as before, plus a **column profile** this time — column 12 sits where `f` is near its maximum, so `h[:, 12]` traces the vertical structure cleanly:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(np.allclose(h[:, 12], f[:, 12] * y))
@@ -1024,7 +1036,7 @@ plt.plot(y, h[:, 12])
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 The `print` gives `True`. **What the plot shows:** an antisymmetric curve along y — zero at the bottom edge (y = −π), dipping to about −1.12 at y ≈ −1.7, crossing zero exactly at y = 0, peaking at about +1.12 at y ≈ +1.7, and returning to zero at the top edge. The two halves are equal and opposite, which is the sign flip the heatmap shows.
 
@@ -1039,7 +1051,7 @@ In scientific data analysis, we usually start with a lot of data and want to **r
 
 The usual statistical reductions — sum, mean, standard deviation — work as you'd expect when applied to the whole array. (These use the `g` array from the broadcasting section, shape `(50, 100)`.)
 
-**Code:**
+The following is Python code:
 
 ```python
 print(g.sum())
@@ -1047,9 +1059,11 @@ print(g.mean())
 print(g.std())
 ```
 
-**End of code.**
+End of code.
 
 This prints (your exact digits may differ slightly):
+
+The following is the expected output:
 
 ```
 -3083.038387807155
@@ -1057,13 +1071,13 @@ This prints (your exact digits may differ slightly):
 1.6402280119141424
 ```
 
-**End of output.**
+End of output.
 
 So summing all 5000 elements gives about −3083, the mean is about −0.62, and the standard deviation is about 1.64. Each of these collapses the entire array to a single number.
 
 A key property of NumPy reductions is the ability to operate on just **one axis**. First, here's `g` as a heatmap with a colorbar (the colorbar is the labeled color scale that maps colors to values):
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.pcolormesh(g)
@@ -1071,31 +1085,31 @@ plt.colorbar()
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** This is the `g = f * x` surface again (washed out down the center, strongest about three-quarters of the way toward the sides), now with a colorbar so you can read off the value range — the data runs from about −4.8 to +1.8, with the most negative cells in the two dark lobes near x ≈ ±4.9.
 
 **Check it.** The non-visual equivalent of reading a colorbar is asking the array for its range directly:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(g.min(), g.max())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 -4.810205904698232 1.8137647229935456
 ```
 
-**End of output.**
+End of output.
 
 We can reduce along **specific axes**. `axis=0` reduces along the first dimension (down the rows of `g`), leaving the **column** means — one value per column, so a length-100 result. `axis=1` reduces along the second dimension (across the columns), leaving the **row** means — a length-50 result.
 
-**Code:**
+The following is Python code:
 
 ```python
 g_ymean = g.mean(axis=0)
@@ -1103,96 +1117,96 @@ g_xmean = g.mean(axis=1)
 print(g_ymean.shape, g_xmean.shape)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 (100,) (50,)
 ```
 
-**End of output.**
+End of output.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.plot(x, g_ymean)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** `g_ymean` is the average over all 50 rows, one value per x-column, plotted against `x` (−2π to +2π). Averaging over y does **not** flatten the structure, because `g`'s oscillation runs along x — every column of `g` is `x·sin(x)` times `cos(0.5·y)`, and averaging the rows just replaces the cosine factor by its mean, about 0.62. So the curve is a scaled-down copy of the `x·sin(x)` W-shape from the broadcasting section: zero at x = 0 and at x = ±2π, local peaks of about +1.1 near x = ±2, and deep minima of about −3.0 near x = ±4.9, mirror-symmetric about the center.
 
 **Check it.** The claimed extremes, straight from the array:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(g_ymean.min(), g_ymean.max())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 -3.001540809618145 1.1317787518811862
 ```
 
-**End of output.**
+End of output.
 
 Notice what just happened, because it is the central move of non-visual data analysis: a reduction turned a 2D heatmap question into a **1D line plot** — exactly the kind of plot you can print as numbers or explore by sonification with MAIDR.
 
-**Code:**
+The following is Python code:
 
 ```python
 plt.plot(g_xmean, y)
 plt.show()
 ```
 
-**End of code.**
+End of code.
 
 **What this shows.** Here the averaged row values `g_xmean` are on the **horizontal** axis and `y` (−π to +π) is on the **vertical** axis (the arguments are swapped to make `y` the vertical coordinate). This time the average runs *along* the oscillation, and it does not cancel either: averaging `x·sin(x)` over the full −2π..+2π range gives about −1, because its negative lobes occur at larger |x| and outweigh the positive ones. Each row's mean is therefore about `−cos(0.5·y)`, and the curve is a smooth C-shaped bow opening to the right: it starts at 0 at the bottom (y = −π), bulges left to its most negative value of about −0.99 at the middle (y = 0), and returns to 0 at the top (y = +π). All values are ≤ 0.
 
 **Check it.**
 
-**Code:**
+The following is Python code:
 
 ```python
 print(g_xmean.min(), g_xmean.max())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 -0.9881624404319173 -6.053860223869245e-17
 ```
 
-**End of output.**
+End of output.
 
 The first number is the −0.99 bulge at y = 0. The second looks odd, but read the `e-17` suffix: it is −6×10⁻¹⁷, i.e. zero up to floating-point round-off — the curve's value at the two ends.
 
 Reductions can also operate on **multiple axes at once** — useful for higher-dimensional data:
 
-**Code:**
+The following is Python code:
 
 ```python
 arr3d = np.ones((100, 50, 25))
 print(arr3d.mean(axis=(0, 1, 2)))   # reduce across all three axes
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 1.0
 ```
 
-**End of output.**
+End of output.
 
 `arr3d` is filled entirely with ones, so the mean over all three axes is exactly `1.0`. (Reducing over every axis is the same as `arr3d.mean()` with no axis argument.)
 
@@ -1207,13 +1221,13 @@ It's often useful to save a NumPy array to disk so you can reload it later or sh
 
 Save the array `g` to a file:
 
-**Code:**
+The following is Python code:
 
 ```python
 np.save('g.npy', g)
 ```
 
-**End of code.**
+End of code.
 
 This writes a file named `g.npy` in your working directory. It produces no output.
 
@@ -1223,47 +1237,49 @@ NumPy `.npy` files are convenient for temporary data, but are not a robust archi
 
 Load it back into a new variable:
 
-**Code:**
+The following is Python code:
 
 ```python
 g_loaded = np.load('g.npy')
 print(g_loaded)
 ```
 
-**End of code.**
+End of code.
 
 This prints the array you saved — the same `(50, 100)` block of numbers as `g`.
 
 NumPy provides `np.testing.assert_equal` to check that two arrays are element-wise equal. To confirm that it really checks equality, here's a **deliberate failure** — we scale `g_loaded` by `0.5` first, so the arrays no longer match:
 
-**Code:**
+The following is Python code:
 
 ```python
 np.testing.assert_equal(g, g_loaded*0.5)
 ```
 
-**End of code.**
+End of code.
 
 This raises an error. The traceback begins with:
+
+The following is the expected output:
 
 ```
 AssertionError:
 Arrays are not equal
 ```
 
-**End of output.**
+End of output.
 
 (It then prints details about how many elements differ and by how much.)
 
 Now the real comparison, which **passes**:
 
-**Code:**
+The following is Python code:
 
 ```python
 np.testing.assert_equal(g, g_loaded)
 ```
 
-**End of code.**
+End of code.
 
 No output means the assertion **passed** — the loaded array is element-wise equal to the original. (Unlike a bare expression in a notebook, a passing assertion prints nothing; silence here is success.)
 
