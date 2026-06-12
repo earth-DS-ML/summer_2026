@@ -166,15 +166,23 @@ The most important FAIR practice for getting data is the **Digital Object Identi
 (DOI)** — a permanent, citeable URL for a dataset (or paper, or piece of software). A DOI
 looks like:
 
+**Example:**
+
 ~~~
 10.5281/zenodo.5739406
 ~~~
 
+**End of example.**
+
 and is resolved by prepending `https://doi.org/`:
+
+**Example:**
 
 ~~~
 https://doi.org/10.5281/zenodo.5739406
 ~~~
+
+**End of example.**
 
 Publishers and data repositories commit to keeping DOIs working "forever." If your code
 references data by DOI (rather than an arbitrary URL), it stays reproducible even if the

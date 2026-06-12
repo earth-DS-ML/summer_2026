@@ -126,9 +126,13 @@ once:
 1. In the terminal, run this single command. It adds shell integration to Git Bash's
    startup file:
 
+**Command:**
+
    ~~~
    echo '[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"' >> ~/.bashrc
    ~~~
+
+**End of command.**
 
 2. Close the terminal (type `exit` and press Enter), then open a fresh one with `` Ctrl+` ``.
 
