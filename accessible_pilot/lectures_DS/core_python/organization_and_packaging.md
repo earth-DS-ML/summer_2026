@@ -70,7 +70,7 @@ These principles suggest a certain structure for a project.
 
 A reproducible single-paper project directory structure might look something like this. Read it top to bottom; each line is one file, and the `/` characters separate folders from the files inside them:
 
-**Example:**
+The following is an example:
 
 ~~~
 README.md
@@ -84,7 +84,7 @@ notebooks/helper.py
 manuscript/manuscript.tex
 ~~~
 
-**End of example.**
+End of example.
 
 So this project has three files at the top level (`README.md`, `LICENSE`, and an `environment.yml` describing the software environment), a `data` folder holding a results file, a `notebooks` folder holding the analysis files and a shared `helper.py` module, and a `manuscript` folder holding the paper itself. In your workflow, the analysis files would simply be `.py` scripts instead of `.ipynb` notebooks — for example `notebooks/figure1.py` — but the organizing idea is identical: code, data, and manuscript each have a clear place.
 
@@ -110,7 +110,7 @@ $$
 
 Let's write a module to do this calculation. In VS Code, create a file called `gcdistance.py`. (The file should be in the **same directory** as any script that will import it.) Populate it with the following code:
 
-**Code:**
+The following is Python code:
 
 ```python
 """
@@ -151,7 +151,7 @@ def great_circle_distance(point1, point2):
         np.cos(phi1)*np.cos(phi2)*np.cos(lambda2 - lambda1))
 ```
 
-**End of code.**
+End of code.
 
 The module begins with a [docstring](https://www.python.org/dev/peps/pep-0257/) (the triple-quoted text at the top) explaining what it does. Then it contains some data (just a constant `R`, the radius of the Earth in meters) and a single function. The function takes two `(lat, lon)` pairs, converts the degree values to radians, and applies the formula above. This is the same `r` and the same formula from the math above, written in code: `R` is the radius $r$, and `np.arccos(...)` is the $\arccos$ of the sines-and-cosines expression.
 
@@ -159,16 +159,18 @@ This `gcdistance.py` is a real, working module — it is part of the course repo
 
 Now let's import our module. Create a second file in the same folder — call it `try_gcdistance.py` — and start with:
 
-**Code:**
+The following is Python code:
 
 ```python
 import gcdistance
 help(gcdistance)
 ```
 
-**End of code.**
+End of code.
 
 Run it with `python try_gcdistance.py` and read the result with `Alt+F2`. The `help()` function prints the module's docstring and the documentation for everything it contains. This prints:
+
+The following is the expected output:
 
 ```
 Help on module gcdistance:
@@ -198,28 +200,28 @@ FILE
     /path/to/your/gcdistance.py
 ```
 
-**End of output.**
+End of output.
 
 (The last line, `FILE`, will show the actual path to your own `gcdistance.py`, so it will differ from what is shown here.)
 
 And let's try using it to make a calculation. We'll `print()` the result so it shows up in the terminal — remember that, unlike a notebook, a script only displays a value if you explicitly print it:
 
-**Code:**
+The following is Python code:
 
 ```python
 import gcdistance
 print(gcdistance.great_circle_distance((60, 0), (50, 15)))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 1460007.189049398
 ```
 
-**End of output.**
+End of output.
 
 The result is the distance in **meters** between the point at latitude 60, longitude 0 and the point at latitude 50, longitude 15 — about 1,460 km.
 
@@ -227,28 +229,28 @@ The result is the distance in **meters** between the point at latitude 60, longi
 
 We could instead import just the pieces we need, by name. Notice we can pull in both the function and the constant `R`:
 
-**Code:**
+The following is Python code:
 
 ```python
 from gcdistance import R, great_circle_distance
 print(R)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 6371000.0
 ```
 
-**End of output.**
+End of output.
 
 That is the Earth radius constant, `6.371e6` written out in full. After a `from gcdistance import ...`, you can use `R` and `great_circle_distance` directly, without the `gcdistance.` prefix.
 
 If you change the module while working, a script picks up the change automatically the next time you run it — that is one quiet advantage of the script workflow: every `python try_gcdistance.py` starts fresh and re-reads `gcdistance.py`. In a long-running notebook (or an interactive Python session) this is not automatic; there you would have to restart the kernel or reload the module:
 
-**Code:**
+The following is Python code:
 
 ```python
 import gcdistance
@@ -256,7 +258,7 @@ from importlib import reload
 reload(gcdistance)
 ```
 
-**End of code.**
+End of code.
 
 (Note that a function imported via `from module import func` cannot be reloaded this way.) You generally will not need `reload` in the scripts workflow — it is mentioned here so you recognize it if you see it in notebook-based materials.
 

@@ -11,7 +11,7 @@ Run the commands below in the **Git Bash terminal** in VS Code (the one you set 
 
 Without version control, projects tend to grow tails like this:
 
-**Example:**
+The following is an example:
 
 ~~~
 my_code.py
@@ -21,7 +21,7 @@ my_code_FINAL_VERSION.py
 my_code_THIS_IS_ACTUALLY_THE_FINAL_VERSION.py
 ~~~
 
-**End of example.**
+End of example.
 
 Version control replaces all of that with a single file you keep editing, while the history of every change is recorded behind the scenes. It also lets you share code with collaborators, make simultaneous edits, and merge changes in a controlled way.
 
@@ -37,7 +37,7 @@ The first time you use git on a new machine, tell git who you are. This name and
 :class: tip
 Open a terminal and run these four commands, replacing the placeholders with your own name and the email associated with your GitHub account:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 git config --global user.name "Your Name"
@@ -46,7 +46,7 @@ git config --global init.defaultBranch main
 git config --global core.pager cat
 ~~~
 
-**End of command.**
+End of command.
 
 The third line tells git to call the default branch `main` (matching GitHub's convention). The fourth line turns off git's **pager**: by default, commands like `git log` open their output in a scrolling viewer (`less`) that is awkward with a screen reader; `core.pager cat` makes git print the output straight into the terminal instead, so you can read it with `Alt+F2`.
 :::
@@ -73,7 +73,7 @@ You move files from working → staging with `git add`, and from staging → rep
 :class: tip
 Create a fresh directory to play with, then initialize it as a git repo:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 mkdir git_practice
@@ -81,7 +81,7 @@ cd git_practice
 git init
 ~~~
 
-**End of command.**
+End of command.
 
 You should see a message like `Initialized empty Git repository in /.../git_practice/.git/`.
 :::
@@ -109,40 +109,40 @@ We'll create a file, stage it, and commit it — in three steps. **Run each comm
 
 **1. Create the file:**
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 touch hello.md
 git status
 ~~~
 
-**End of command.**
+End of command.
 
 You should see `hello.md` listed as **untracked** — git knows it's there but isn't tracking it yet.
 
 **2. Stage it:**
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 git add hello.md
 git status
 ~~~
 
-**End of command.**
+End of command.
 
 Now `hello.md` shows up as a **staged change**, ready to be committed.
 
 **3. Commit it:**
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 git commit -m "Add an empty hello file"
 git status
 ~~~
 
-**End of command.**
+End of command.
 
 The output should say "nothing to commit, working tree clean" — your snapshot is now part of the repo's history.
 :::
@@ -155,13 +155,13 @@ The real value of git shows up once you have a history of commits, not just one.
 :class: tip
 Add some content to `hello.md`. The quickest way that works in any environment is shell redirection — the `>` symbol sends a command's output into a file:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 echo "# My first file" > hello.md
 ~~~
 
-**End of command.**
+End of command.
 
 (You can also open `hello.md` in the VS Code editor and type into it if you prefer.)
 
@@ -169,7 +169,7 @@ To check that the line was written, print the file's contents in the terminal wi
 
 Then stage and commit:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 git status
@@ -177,7 +177,7 @@ git add hello.md
 git commit -m "Add a heading"
 ~~~
 
-**End of command.**
+End of command.
 
 You now have two commits recording the file's history.
 :::
@@ -227,23 +227,23 @@ Once authentication is set up, you can connect your local `git_practice` repo to
 1. On GitHub, [create a new empty repository](https://github.com/new) called `git_practice`. Don't add a README or any other files — leave it completely empty.
 2. In your terminal, in the `git_practice` directory, add the GitHub repo as a remote (replace `your-username` with your GitHub username):
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    git remote add origin https://github.com/your-username/git_practice.git
    ~~~
 
-**End of command.**
+End of command.
 
 3. Push your commits to GitHub:
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    git push -u origin main
    ~~~
 
-**End of command.**
+End of command.
 
    The `-u origin main` part tells git to remember this remote and branch as the default, so future `git push` and `git pull` work without arguments.
 
@@ -256,13 +256,13 @@ To bring changes from the remote back down (e.g., a collaborator pushed somethin
 :class: tip
 On the GitHub website, open `hello.md`, edit it (add a new line), and commit the change through the web UI. Then back in your terminal, run:
 
-**Command:**
+The following is a terminal command:
 
 ~~~
 git pull
 ~~~
 
-**End of command.**
+End of command.
 
 Your local copy should now have the change you made on GitHub.
 :::

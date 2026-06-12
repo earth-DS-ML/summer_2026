@@ -18,7 +18,7 @@ A **function** is a named block of code that takes some inputs (called **argumen
 
 Defining a function uses the `def` keyword; calling it uses the function name followed by parentheses with the arguments inside.
 
-**Code:**
+The following is Python code:
 
 ```python
 # define a function
@@ -27,59 +27,59 @@ def say_hello():
     return 'Hello'
 ```
 
-**End of code.**
+End of code.
 
 Functions are themselves **objects** in Python, just like numbers, strings, and lists. You can check the type of the function object:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(type(say_hello))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 <class 'function'>
 ```
 
-**End of output.**
+End of output.
 
 Notice we wrote `say_hello` here **without** parentheses. The bare name refers to the function object itself; it does **not** run the function. To actually *call* the function — to run its code and get the return value — you add parentheses:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(say_hello())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Hello
 ```
 
-**End of output.**
+End of output.
 
 In a notebook you can also type `say_hello?` to read a function's documentation (its docstring). In a script, the equivalent is the built-in `help` function:
 
-**Code:**
+The following is Python code:
 
 ```python
 help(say_hello)
 ```
 
-**End of code.**
+End of code.
 
 This prints a short help page that includes the docstring, `Return the word hello.`
 
 You can assign the result of a call to a variable, just like any other value:
 
-**Code:**
+The following is Python code:
 
 ```python
 # assign the result to something
@@ -87,19 +87,19 @@ res = say_hello()
 print(res)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Hello
 ```
 
-**End of output.**
+End of output.
 
 Functions get more useful when they take **arguments** — values passed in that the function can use:
 
-**Code:**
+The following is Python code:
 
 ```python
 # take some arguments
@@ -108,47 +108,49 @@ def say_hello_to(name):
     return 'Hello ' + name
 ```
 
-**End of code.**
+End of code.
 
 Calling it with a string works as intended:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(say_hello_to('World'))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Hello World
 ```
 
-**End of output.**
+End of output.
 
 If we call this with a non-string argument like an integer, Python can't concatenate it to `'Hello '` and raises a `TypeError`:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(say_hello_to(10))
 ```
 
-**End of code.**
+End of code.
 
 This raises an error whose last line reads:
+
+The following is the expected output:
 
 ```
 TypeError: can only concatenate str (not "int") to str
 ```
 
-**End of output.**
+End of output.
 
 We can make the function more robust by redefining it to convert the argument to a string first:
 
-**Code:**
+The following is Python code:
 
 ```python
 # redefine the function
@@ -159,15 +161,15 @@ def say_hello_to(name):
 print(say_hello_to(10))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Hello 10
 ```
 
-**End of output.**
+End of output.
 
 Wrapping the argument in `str(...)` converts whatever the caller passes into a string before concatenation, so the function now works regardless of the input type.
 
@@ -175,7 +177,7 @@ Wrapping the argument in `str(...)` converts whatever the caller passes into a s
 
 Arguments can have **default values**, making them **keyword arguments**. The caller can leave them out (and get the default) or specify them by name:
 
-**Code:**
+The following is Python code:
 
 ```python
 # take an optional keyword argument
@@ -191,16 +193,16 @@ print(say_hello_or_hola('Ryan'))
 print(say_hello_or_hola('Juan', spanish=True))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Hello Ryan
 Hola Juan
 ```
 
-**End of output.**
+End of output.
 
 The first call leaves `spanish` out, so it uses the default `False` and greets in English. The second call passes `spanish=True` by name, switching the greeting to Spanish.
 
@@ -208,7 +210,7 @@ The first call leaves `spanish` out, so it uses the default `False` and greets i
 
 A function can also accept a flexible number of arguments using `*args` — the leading `*` tells Python to collect any extra positional arguments into a tuple:
 
-**Code:**
+The following is Python code:
 
 ```python
 # flexible number of arguments
@@ -218,15 +220,15 @@ def say_hello_to_everyone(*args):
 print(say_hello_to_everyone('Ryan', 'Juan', 'Xiaomeng'))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 ['hello Ryan', 'hello Juan', 'hello Xiaomeng']
 ```
 
-**End of output.**
+End of output.
 
 :::{admonition} Try it
 :class: tip
@@ -241,18 +243,18 @@ Functions that modify their arguments or cause other actions to occur are called
 
 Below is an impure function:
 
-**Code:**
+The following is Python code:
 
 ```python
 def remove_last_from_list(input_list):
     input_list.pop()
 ```
 
-**End of code.**
+End of code.
 
 Watch what happens when we call it twice on the same list:
 
-**Code:**
+The following is Python code:
 
 ```python
 names = ['Ryan', 'Juan', 'Xiaomeng']
@@ -262,22 +264,22 @@ remove_last_from_list(names)
 print(names)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 ['Ryan', 'Juan']
 ['Ryan']
 ```
 
-**End of output.**
+End of output.
 
 Notice what happened: each call to `remove_last_from_list(names)` modified the **same `names` list outside the function**. After the first call it dropped to `['Ryan', 'Juan']`; after the second, to `['Ryan']`. The function had a **side effect** — calling it silently changed the input. That's what makes it impure.
 
 Here's a **pure** version that does the same conceptual job (remove the last item) without modifying the original. It makes a copy of the input, modifies the copy, and returns it:
 
-**Code:**
+The following is Python code:
 
 ```python
 def remove_last_from_list_pure(input_list):
@@ -286,11 +288,11 @@ def remove_last_from_list_pure(input_list):
     return new_list
 ```
 
-**End of code.**
+End of code.
 
 Calling the pure version:
 
-**Code:**
+The following is Python code:
 
 ```python
 names = ['Ryan', 'Juan', 'Xiaomeng']
@@ -299,16 +301,16 @@ print(names)
 print(new_names)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 ['Ryan', 'Juan', 'Xiaomeng']
 ['Ryan', 'Juan']
 ```
 
-**End of output.**
+End of output.
 
 Notice the difference: this time `names` is **unchanged** after the call — the function returned a new list (`new_names`) instead of mutating the input. Pure functions are usually safer and easier to reason about, because the inputs you pass in won't be silently altered somewhere down the line.
 
@@ -318,7 +320,7 @@ When you create a variable inside a function, it's **local** to that function �
 
 The example below illustrates: `print_name_v2` changes `name` locally without affecting the outer `name`.
 
-**Code:**
+The following is Python code:
 
 ```python
 name = 'Ryan'
@@ -335,9 +337,9 @@ print_name_v2()
 print(name)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 Ryan
@@ -345,7 +347,7 @@ Kerry
 Ryan
 ```
 
-**End of output.**
+End of output.
 
 Reading the three lines: `print_name()` reads the outer `name` and prints `Ryan`. `print_name_v2()` creates its own local `name` set to `Kerry` and prints that. The final `print(name)` shows the outer `name` is still `Ryan` — the assignment inside `print_name_v2` never touched it.
 
@@ -353,7 +355,7 @@ Reading the three lines: `print_name()` reads the outer `name` and prints `Ryan`
 
 The [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) is `1, 1, 2, 3, 5, 8, 13, …` — each number is the sum of the previous two. Here's a function that returns the first `n` Fibonacci numbers as a list. It uses list methods (`append`) and negative indexing (`[-1]`, `[-2]`) to build the sequence step by step.
 
-**Code:**
+The following is Python code:
 
 ```python
 def fib(n):
@@ -365,15 +367,15 @@ def fib(n):
 print(fib(10))
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
-**End of output.**
+End of output.
 
 The function starts with the first two numbers, then loops `n - 2` more times, each time appending the sum of the last two items (`l[-1]` is the last item, `l[-2]` is the second-to-last).
 
@@ -400,7 +402,7 @@ Three things to notice in the code below:
 - `__init__` is a **special method** that runs automatically every time you make a new `Hurricane` — for example, when you write `h = Hurricane('florence')` in the next snippet. The arguments after `self` (here, just `name`) are the values you put inside those parentheses.
 - `self` refers to the new object being built. The line `self.name = name` says: *store the `name` you passed in as an attribute on this object*, so later you can read it back as `h.name`.
 
-**Code:**
+The following is Python code:
 
 ```python
 class Hurricane:
@@ -409,50 +411,52 @@ class Hurricane:
         self.name = name
 ```
 
-**End of code.**
+End of code.
 
 Now create an instance and print it:
 
-**Code:**
+The following is Python code:
 
 ```python
 h = Hurricane('florence')
 print(h)
 ```
 
-**End of code.**
+End of code.
 
 This prints something like:
+
+The following is the expected output:
 
 ```
 <__main__.Hurricane object at 0x102996d20>
 ```
 
-**End of output.**
+End of output.
 
 Notice that printing `h` just shows the class name and a memory address (the long hexadecimal number after `at` will differ each time you run it) — not very useful. We'll fix this later by adding a `__repr__` method.
 
 Our class only has a single attribute so far. We can read it back with `h.name`:
 
-**Code:**
+The following is Python code:
 
 ```python
 print(h.name)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 florence
 ```
 
-**End of output.**
+End of output.
 
 Let's grow the class. We'll add two more attributes (`category` and `lon`), uppercase the `name` as it's stored, and add **input validation** — a check that raises a `ValueError` if the longitude is outside the valid range.
 
-**Code:**
+The following is Python code:
 
 ```python
 class Hurricane:
@@ -466,46 +470,48 @@ class Hurricane:
         self.lon = lon
 ```
 
-**End of code.**
+End of code.
 
 Create a valid instance and read its name back:
 
-**Code:**
+The following is Python code:
 
 ```python
 h = Hurricane('florence', 4, -46)
 print(h.name)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 FLORENCE
 ```
 
-**End of output.**
+End of output.
 
 Notice the name came back as `'FLORENCE'`, not `'florence'` — that's because `__init__` ran `name.upper()` and stored the uppercased version as the attribute.
 
 Now try creating one with an out-of-range longitude:
 
-**Code:**
+The following is Python code:
 
 ```python
 h = Hurricane('ryan', 5, 300)
 ```
 
-**End of code.**
+End of code.
 
 This raises an error whose last line reads:
+
+The following is the expected output:
 
 ```
 ValueError: Invalid lon 300
 ```
 
-**End of output.**
+End of output.
 
 The validation check inside `__init__` (`if lon > 180 or lon < -180: raise ValueError(...)`) caught the bad longitude and stopped construction with a `ValueError`. The instance was never created.
 
@@ -513,7 +519,7 @@ The validation check inside `__init__` (`if lon > 180 or lon < -180: raise Value
 
 Now let's add a custom method. A **method** is just a function defined inside a class; its first argument is always `self`, the instance it's called on.
 
-**Code:**
+The following is Python code:
 
 ```python
 class Hurricane:
@@ -530,26 +536,26 @@ class Hurricane:
         return self.category > 1
 ```
 
-**End of code.**
+End of code.
 
 Create an instance and call the method:
 
-**Code:**
+The following is Python code:
 
 ```python
 f = Hurricane('florence', 4, -46)
 print(f.is_dangerous())
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 True
 ```
 
-**End of output.**
+End of output.
 
 `f` was created with `category=4`, so `self.category > 1` is `True` and the method returns `True`.
 
@@ -557,7 +563,7 @@ True
 
 Methods whose names begin and end with double underscores (`__init__`, `__repr__`, etc.) — pronounced "dunder" for *double-underscore* — are special: Python calls them automatically in particular situations. We've already met `__init__`, which Python calls when you create an instance. Another useful one is `__repr__`, which Python calls when it needs to display the object (for example, when you `print` it). By default `__repr__` returns the ugly memory address we saw earlier; defining your own gives a nicer display.
 
-**Code:**
+The following is Python code:
 
 ```python
 class Hurricane:
@@ -577,26 +583,26 @@ class Hurricane:
         return self.category > 1
 ```
 
-**End of code.**
+End of code.
 
 Now print an instance:
 
-**Code:**
+The following is Python code:
 
 ```python
 f = Hurricane('florence', 4, -46)
 print(f)
 ```
 
-**End of code.**
+End of code.
 
-This prints:
+The following is the expected output:
 
 ```
 <Hurricane FLORENCE (cat 4)>
 ```
 
-**End of output.**
+End of output.
 
 Now printing `f` shows the formatted string from our `__repr__` instead of the memory-address gibberish we saw earlier. That's the point of `__repr__`.
 

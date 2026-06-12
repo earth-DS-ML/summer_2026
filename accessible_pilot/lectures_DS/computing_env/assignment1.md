@@ -34,7 +34,7 @@ Every assignment you submit in this course will live in one private GitHub repos
 
 1. **Create a local directory and initialize git:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    mkdir clmt5405-assignments
@@ -42,11 +42,11 @@ Every assignment you submit in this course will live in one private GitHub repos
    git init
    ~~~
 
-**End of command.**
+End of command.
 
 2. **Add a Readme and make a first commit:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    echo "# My CLMT5405 assignments" > Readme.md
@@ -54,7 +54,7 @@ Every assignment you submit in this course will live in one private GitHub repos
    git commit -m "Initial commit"
    ~~~
 
-**End of command.**
+End of command.
 
 3. **Create a private repository on GitHub:**
    - Go to [github.com/new](https://github.com/new).
@@ -64,14 +64,14 @@ Every assignment you submit in this course will live in one private GitHub repos
 
 4. **Connect your local repo to GitHub and push:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    git remote add origin https://github.com/<your-username>/clmt5405-assignments.git
    git push -u origin main
    ~~~
 
-**End of command.**
+End of command.
 
 5. **Add the instructors as collaborators.** On GitHub, go to your repo → **Settings** → **Collaborators and teams** → **Add people**. Add:
    - `dhruvbalwada` (Dhruv, instructor)
@@ -89,7 +89,7 @@ Every week, you'll submit your assignment as a folder inside your `clmt5405-assi
 
 1. **From inside your `clmt5405-assignments` repo, create the `week1` folder and an empty resume file:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    mkdir week1
@@ -97,7 +97,7 @@ Every week, you'll submit your assignment as a folder inside your `clmt5405-assi
    touch resume.md
    ~~~
 
-**End of command.**
+End of command.
 
 2. **Edit `resume.md`** to include:
    - A top-level heading with your name.
@@ -109,7 +109,7 @@ Every week, you'll submit your assignment as a folder inside your `clmt5405-assi
 
 3. **Commit and push:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    cd ..
@@ -119,13 +119,13 @@ Every week, you'll submit your assignment as a folder inside your `clmt5405-assi
    git push
    ~~~
 
-**End of command.**
+End of command.
 
 4. **Verify on GitHub.** Refresh your `clmt5405-assignments` repo page. You should see a `week1/` folder; click into it to see your rendered `resume.md`.
 
 5. **Practice the iterative loop.** Add a `## Project Interests` section to `week1/resume.md` — some potential ideas of climate-data projects you might want to work on for this course. These are just starting thoughts; you can absolutely change your mind or refine them as the term goes on. Commit and push:
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    git add week1/resume.md
@@ -133,7 +133,7 @@ Every week, you'll submit your assignment as a folder inside your `clmt5405-assi
    git push
    ~~~
 
-**End of command.**
+End of command.
 
    Refresh the GitHub page and confirm the new section appears.
 

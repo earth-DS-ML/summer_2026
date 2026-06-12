@@ -44,7 +44,7 @@ Throughout the steps below, replace `<weekN>` with the current week's folder nam
    already have your repo locally, `git clone` it down first, then open the folder in VS
    Code.)
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    cd clmt5405-assignments
@@ -52,7 +52,7 @@ Throughout the steps below, replace `<weekN>` with the current week's folder nam
    cd <weekN>
    ~~~
 
-**End of command.**
+End of command.
 
 3. **Write `dataset.md`** inside `<weekN>/` describing:
    - **What it is** — one sentence about the dataset (variable, region, time period).
@@ -74,7 +74,7 @@ Throughout the steps below, replace `<weekN>` with the current week's folder nam
 
 5. **Commit and push:**
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    cd ..
@@ -84,6 +84,6 @@ Throughout the steps below, replace `<weekN>` with the current week's folder nam
    git push
    ~~~
 
-**End of command.**
+End of command.
 
 Refresh your repo page on GitHub and confirm both files appear in `<weekN>/`.
