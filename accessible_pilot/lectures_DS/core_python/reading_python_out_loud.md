@@ -139,47 +139,51 @@ hold in your head.
 
 Putting it together. **This code:**
 
-**Code:**
+The following is Python code:
 
 ```python
 sea_surface_temp = 21.5
 print(type(sea_surface_temp))
 ```
 
-**End of code.**
+End of code.
 
 reads as "sea underscore surface underscore temp **equals** twenty-one point five", then
 "print, **open paren**, type, **open paren**, sea underscore surface underscore temp, **close
 paren**, **close paren**". **This prints:**
 
+The following is the expected output:
+
 ```
 <class 'float'>
 ```
 
-**End of output.**
+End of output.
 
 — telling you the value is a `float` (a decimal number).
 
 **This code** indexes a list:
 
-**Code:**
+The following is Python code:
 
 ```python
 readings = [10, 20, 30]
 print(readings[0])
 ```
 
-**End of code.**
+End of code.
 
 "readings **equals open square bracket** ten **comma** twenty **comma** thirty **close square
 bracket**", then we ask for `readings[0]` — item **zero**, because Python counts from 0.
 **This prints:**
 
+The following is the expected output:
+
 ```
 10
 ```
 
-**End of output.**
+End of output.
 
 ## Using this page
 

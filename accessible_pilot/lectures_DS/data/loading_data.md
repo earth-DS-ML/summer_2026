@@ -22,6 +22,17 @@ For each example below, put the code in a `.py` script, run it with `python your
 and read what comes back with `Alt+F2`. Each example already wraps its last line in `print(...)` so the result shows in the
 terminal — in a script (unlike a notebook), a bare expression prints nothing.
 
+:::{admonition} Reading a table by ear
+:class: important
+A pandas **DataFrame** normally prints as a grid of aligned columns. That grid is quick to
+scan by eye, but a screen reader reads it as a stream of numbers with the column headers left
+far behind at the top — very hard to follow. So throughout this course, when we want to
+*look at* a table, we print it in a screen-reader-friendly way instead: first its **shape**
+and **column names**, then each row as a `dict`, so every value is spoken together with its
+column name (`'co2': 315.71`) rather than as a bare number in a grid. (This approach was
+worked out and tested with a screen-reader user in this course.)
+:::
+
 ## 1. CSV over HTTP — `pandas.read_csv`
 
 The simplest case: a CSV file sitting at a public URL. `pandas.read_csv` can read directly
@@ -36,7 +47,7 @@ isn't reachable from every environment (the LEAP hub can't reach it, for example
 :class: tip
 In a script, run:
 
-**Code:**
+The following is Python code:
 
 ~~~python
 import pandas as pd
@@ -46,16 +57,37 @@ columns = ["year", "month", "date_excel", "date", "co2", "co2_seasonally_adjuste
            "fit", "fit_seasonally_adjusted", "co2_filled", "co2_filled_seasonally_adjusted",
            "station"]
 df = pd.read_csv(url, skiprows=64, names=columns, na_values=-99.99)
-print(df[["year", "month", "date", "co2"]].head())
+
+df1 = df[["year", "month", "date", "co2"]]
+print(f"Shape: {df1.shape}")
+print(f"Columns: {df1.columns.tolist()}")
+
+for _, row in df1.head().iterrows():
+    print(row.to_dict())
 ~~~
 
-**End of code.**
+End of code.
 
-You should see those four columns — year, month, date, and CO2 — read with `Alt+F2`. (We
-print just those four so they fit and read cleanly; printing the whole `df` in a terminal
-hides the middle columns behind `...`. The full table has 11 columns.)
-Notice that you didn't have to download anything to your computer — `pandas` streamed the
-data from the URL directly into memory.
+The following is the expected output:
+
+~~~
+Shape: (828, 4)
+Columns: ['year', 'month', 'date', 'co2']
+{'year': 1958.0, 'month': 1.0, 'date': 1958.0411, 'co2': nan}
+{'year': 1958.0, 'month': 2.0, 'date': 1958.126, 'co2': nan}
+{'year': 1958.0, 'month': 3.0, 'date': 1958.2027, 'co2': 315.71}
+{'year': 1958.0, 'month': 4.0, 'date': 1958.2877, 'co2': 317.45}
+{'year': 1958.0, 'month': 5.0, 'date': 1958.3699, 'co2': 317.51}
+~~~
+
+End of output.
+
+Read it with `Alt+F2`. The first two lines give the table's **shape** (828 rows, 4 columns)
+and its **column names**; then each row prints as a `dict`, so you hear every value attached
+to its column name instead of a grid of bare numbers. The first two rows show `nan` for
+`co2` — the missing values that `na_values=-99.99` converted. (We pick just these four
+columns so each row reads cleanly; the full table has 11.) And notice you didn't download
+anything — `pandas` streamed the data straight from the URL into memory.
 :::
 
 Real files often need a few options. This one opens with a long comment header followed by a
@@ -82,7 +114,7 @@ global monthly rain estimates.
 :class: tip
 In a script, run:
 
-**Code:**
+The following is Python code:
 
 ~~~python
 import xarray as xr
@@ -92,7 +124,7 @@ ds = xr.open_dataset(url, decode_times=False)
 print(ds)
 ~~~
 
-**End of code.**
+End of code.
 
 You'll see a `Dataset` object with dimensions `Y` (latitude), `X` (longitude), and `T`
 (time). This is **a lot richer** than a pandas DataFrame — it carries coordinates, units,
@@ -125,7 +157,7 @@ FAIR-canonical way to access a published dataset.
 :class: tip
 In a script, run:
 
-**Code:**
+The following is Python code:
 
 ~~~python
 import pooch
@@ -138,14 +170,31 @@ file_path = pooch.retrieve(
     known_hash="md5:cf059b73d6831282c5580776ac07309a",
 )
 
-print(pd.read_csv(file_path).head())
+df = pd.read_csv(file_path)
+print(f"Shape: {df.shape}")
+print(f"Columns: {df.columns.tolist()}")
+
+for _, row in df.head(2).iterrows():
+    print(row.to_dict())
 ~~~
 
-**End of code.**
+End of code.
 
-The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse
-the cached copy (and verify it hasn't been corrupted). Notice the DOI in the URL — the
-dataset is reproducibly addressable by its DOI, not just an arbitrary URL.
+The following is the expected output:
+
+~~~
+Shape: (8760, 9)
+Columns: ['date.time', 'ny_1_onshore', 'ny_2_onshore', 'newe_onshore', 'mw_onshore', 'newe_offshore', 'ny_offshore', 'rfce_offshore', 'srvc_offshore']
+{'date.time': '1/1/2011 0:00', 'ny_1_onshore': 0.725240495, 'ny_2_onshore': 0.450003616, 'newe_onshore': 0.693996266, 'mw_onshore': 0.646463288, 'newe_offshore': 0.759451462, 'ny_offshore': 0.528019073, 'rfce_offshore': 0.353946234, 'srvc_offshore': 0.189322848}
+{'date.time': '1/1/2011 1:00', 'ny_1_onshore': 0.702001288, 'ny_2_onshore': 0.446461542, 'newe_onshore': 0.677913327, 'mw_onshore': 0.68888967, 'newe_offshore': 0.767230863, 'ny_offshore': 0.530821811, 'rfce_offshore': 0.357297022, 'srvc_offshore': 0.21296533}
+~~~
+
+End of output.
+
+Same shape/columns/rows pattern as before (here showing the first two rows of an 8760-row,
+9-column table of hourly wind data). The first run downloads the file from Zenodo and caches
+it locally; later runs reuse the cached copy and verify it against the hash. Notice the DOI
+in the URL — the dataset is reproducibly addressable by its DOI, not just an arbitrary URL.
 :::
 
 > *Reference:* Pooch supports many remote-data patterns beyond DOIs (plain HTTP URLs, S3

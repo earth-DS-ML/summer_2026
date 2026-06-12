@@ -44,26 +44,53 @@ just use the LEAP hub, which already has them. You don't need those yet.)
 
 ## Turning on VS Code's accessibility features
 
-VS Code has strong, built-in support for screen readers, and it **detects NVDA
-automatically**. When a screen reader is running, the status bar shows **"Screen Reader
-Optimized"**. If you ever need to set it by hand, open the Command Palette
-(`Ctrl+Shift+P`) and run **"Toggle Screen Reader Accessibility Mode"**.
+VS Code has strong, built-in support for screen readers. Turn it on **once**, explicitly, so
+it stays on every time VS Code opens:
 
-Three commands are worth memorizing — they work in the editor, the terminal, and
-notebooks:
+1. Press `Ctrl+Shift+P` to open the Command Palette.
+2. Type **Open User Settings (JSON)** and press `Enter`.
+3. Inside the curly braces, add this line: `"editor.accessibilitySupport": "on"`
+4. Press `Ctrl+S` to save.
 
-- **Accessibility Help — `Alt+F1`.** Press this in any view to hear a summary of what you
-  can do there and the relevant shortcuts. When in doubt, press `Alt+F1`.
-- **Accessible View — `Alt+F2`.** This opens the current content — *terminal output*,
-  error messages, notebook output, hovers — as plain text you can read line by line and
-  character by character. This is the single most important command for you: it is how
-  you read things a screen reader would otherwise skip.
-- **Audio cues** are normally enabled automatically when a screen reader is attached (for
-  example, a sound when a line has an error). To hear the full list, run **"Help: List
-  Signal Sounds"** from the Command Palette.
+After this, the status bar shows **"Screen Reader Optimized"** every time VS Code opens.
 
-> *NVDA tip:* VS Code's own guidance is to **stay in focus mode and use the hotkeys**
-> above, rather than switching NVDA to browse mode.
+:::{admonition} A note on these shortcuts
+:class: note
+The shortcuts on this page were tested on **Windows with NVDA** by the course assistant. A
+few are still being confirmed and are marked *(being confirmed)* — if one doesn't behave as
+described on your machine, that's useful to tell us. Also, keys written as `Fn+...` assume a
+keyboard where the function keys need `Fn`; if yours sends `F1`–`F12` directly, drop the
+`Fn`.
+:::
+
+Two commands are worth memorizing first:
+
+- **Accessibility Help — `Fn+Alt+F1`.** Press this in any view to hear a summary of what you
+  can do there and the relevant shortcuts. When in doubt, press it — it's the "what can I do
+  here?" button.
+- **Accessible View — `Alt+F2`.** Opens the current editor content — your Python script,
+  error messages, hovers — as plain text you can read line by line. (The *terminal* has its
+  own keys for this, covered in the terminal section below.)
+
+**Audio cues** are normally on automatically with a screen reader attached (for example, a
+sound when a line has an error); run **"Help: List Signal Sounds"** from the Command Palette
+to hear the full list.
+
+### Use Caps Lock as the NVDA key (recommended)
+
+Several reading shortcuts below use the **NVDA modifier key**. By default that's `Insert`,
+but `Caps Lock` is easier to reach, so it helps to enable it as a second NVDA key:
+
+1. With NVDA running, press `Insert+N` to open the NVDA menu.
+2. Go to **Preferences → Settings → Keyboard**.
+3. Under **NVDA Modifier Keys**, check the box for **Caps Lock**.
+4. Select **OK**.
+
+Now both `Insert` and `Caps Lock` act as the NVDA key. The terminal-reading steps below
+assume this.
+
+> *NVDA tip:* VS Code's own guidance is to **stay in focus mode and use the hotkeys**,
+> rather than switching NVDA to browse mode.
 
 ## The terminal — the key fix
 
@@ -93,25 +120,24 @@ these same commands also work — so nothing you learn here goes to waste.)*
 2. Type a command and press Enter as usual — for example, `pwd`. The result is printed on
    the next line.
 
-### Read the output with the Accessible View
+### Read the output with the terminal's Accessible View
 
 A sighted user just looks at the output. With a screen reader, you read it through the
-**Accessible View**, which turns the terminal's contents into plain text you can move
-through one line at a time:
+terminal's **Accessible View**, which turns its contents into plain text you can move through
+one line at a time. These keys were tested with NVDA on Windows:
 
 1. Make sure focus is in the terminal. If you're not sure, press `` Ctrl+` `` to jump back
-   into it — `Alt+F2` reads whatever is currently focused, so this matters.
-2. Press **`Alt+F2`**. This opens the Accessible View of the whole terminal buffer.
-3. Read with the **Up and Down arrow keys** — your screen reader speaks one line at a time.
-   You can arrow *up* past your most recent command to re-read earlier output that's still
-   on screen.
-4. Press **`Escape`** to close the Accessible View and return to the terminal.
+   into it.
+2. Press **`Ctrl+Up`** to open the terminal's Accessible View.
+3. Move through it with **`Caps Lock+Up`** and **`Caps Lock+Down`** — your screen reader
+   speaks one line at a time, so you can go back up to re-read earlier output. (`Caps Lock`
+   is the NVDA key you enabled above.)
+4. Press **`Ctrl+Down`** to close the Accessible View and return to the terminal.
 
 :::{admonition} If you forget these keys
 :class: tip
-Any time focus is in the terminal, press **`Alt+F1`** (Accessibility Help). VS Code reads
-out the keys that work where you are, including the Accessible View — it's the "what can I
-do here?" button.
+Any time focus is in the terminal, press **`Fn+Alt+F1`** (Accessibility Help). VS Code reads
+out the keys that work where you are — it's the "what can I do here?" button.
 :::
 
 ### If you can't re-read earlier commands: turn on shell integration
@@ -126,13 +152,13 @@ once:
 1. In the terminal, run this single command. It adds shell integration to Git Bash's
    startup file:
 
-**Command:**
+The following is a terminal command:
 
    ~~~
    echo '[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"' >> ~/.bashrc
    ~~~
 
-**End of command.**
+End of command.
 
 2. Close the terminal (type `exit` and press Enter), then open a fresh one with `` Ctrl+` ``.
 
@@ -178,13 +204,37 @@ written mainly around opening notebooks; you can ignore those parts and simply u
 
 ## Keystroke quick reference
 
-- `Alt+F1` — Accessibility Help (what can I do here?)
-- `Alt+F2` — Accessible View (read terminal / notebook / error output)
+*Tested on Windows with NVDA by the course assistant. Items marked **(being confirmed)** are
+still being verified — `Fn+...` keys assume a keyboard where the function keys need `Fn`.*
+
+**Accessibility & help**
+- `Fn+Alt+F1` — Accessibility Help (what can I do here?)
+- `Alt+F2` — Accessible View of the editor (read your script and code-check results)
+- `Escape` — close the accessibility help / view
+
+**Reading terminal output**
 - `` Ctrl+` `` — open a terminal
-- `Ctrl+Shift+O` — move between commands in the Accessible View
-- `Escape` — close the Accessible View
+- `Ctrl+Up` — open the terminal's Accessible View
+- `Caps Lock+Up` / `Caps Lock+Down` — move up / down between lines in the Accessible View
+- `Ctrl+Down` — close the terminal's Accessible View
+- `Ctrl+Shift+O` — move between commands in the Accessible View *(being confirmed)*
+
+**Moving around the window**
 - `Ctrl+Shift+P` — Command Palette (run any command by name)
+- `Fn+F6` / `Fn+Shift+F6` — move focus to the next / previous panel (editor, terminal, sidebar)
+- `Ctrl+1` — return focus to the editor
+
+**Working with files**
+- `Ctrl+N` — new file
+- `Ctrl+P` — quick-open a file by name
 - `Ctrl+S` — save the current file
+- `Ctrl+W` — close the current editor tab
+
+**Errors and code suggestions** *(being confirmed)*
+- `F8` / `Shift+F8` — go to the next / previous error or warning (NVDA announces it)
+
+To switch a **Markdown** file from preview to editable text: `Ctrl+Shift+P` → **Reopen Editor
+With Text Editor**.
 
 You're set. Continue to **[Intro to Unix](intro_to_unix.md)**, and do each "Try it" in the
 Git Bash terminal you just set up.
