@@ -181,6 +181,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
@@ -484,13 +485,16 @@ there to move from one command’s output to another — relies on a VS Code fea
 doesn’t, and then re-reading past output can fail. If that happens, switch it on by hand.
 This is a <strong>one-time</strong> step, and a sighted helper or the course assistant can do it with you
 once:</p>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p>In the terminal, run this single command. It adds shell integration to Git Bash’s
-startup file:</p>
+startup file:</p></li>
+</ol>
+<p><strong>Command:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;[[ &quot;$TERM_PROGRAM&quot; == &quot;vscode&quot; ]] &amp;&amp; . &quot;$(code --locate-shell-integration-path bash)&quot;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
 </pre></div>
 </div>
-</li>
+<p><strong>End of command.</strong></p>
+<ol class="arabic simple" start="2">
 <li><p>Close the terminal (type <code class="docutils literal notranslate"><span class="pre">exit</span></code> and press Enter), then open a fresh one with <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>.</p></li>
 </ol>
 <p>Now <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+O</span></code> inside the Accessible View lists your recent commands, so you can jump

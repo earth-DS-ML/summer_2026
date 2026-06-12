@@ -14,9 +14,13 @@ telling us what helps (and what doesn't) is exactly the point.
 
 In your terminal:
 
+**Command:**
+
 ~~~
 pip install -U maidr scipy seaborn
 ~~~
+
+**End of command.**
 
 (MAIDR needs `scipy` and `seaborn` but doesn't install them automatically — without them, `import maidr` fails with a `ModuleNotFoundError`.)
 
@@ -27,6 +31,8 @@ One more note: the accessible chart loads its interaction code from the internet
 This plots the atmospheric CO₂ record you met in the Data section and opens it as an
 accessible chart. Put it in a file called `maidr_co2.py` and run it with
 `python maidr_co2.py`:
+
+**Code:**
 
 ~~~python
 import pandas as pd
@@ -47,6 +53,8 @@ ax.set_title("Mauna Loa monthly CO2")
 
 maidr.show(ax)   # opens the accessible chart in your web browser
 ~~~
+
+**End of code.**
 
 When you run it, an accessible version of the line chart opens in your browser.
 

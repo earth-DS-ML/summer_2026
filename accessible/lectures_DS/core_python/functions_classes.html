@@ -181,6 +181,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reading_python_out_loud.html">Reading Python Out Loud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Python Functions and Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organization_and_packaging.html">Organizing Python Projects</a></li>
@@ -376,67 +377,89 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <p>A <strong>function</strong> is a named block of code that takes some inputs (called <strong>arguments</strong>), does something, and usually gives back a result (called the <strong>return value</strong>). Once you’ve defined a function, you can call it as many times as you like with different inputs, instead of copy-pasting the same code (the DRY principle from above).</p>
 <p>Defining a function uses the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword; calling it uses the function name followed by parentheses with the arguments inside.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the word hello.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s1">&#39;Hello&#39;</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Functions are themselves <strong>objects</strong> in Python, just like numbers, strings, and lists. You can check the type of the function object:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">say_hello</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;function&#39;&gt;
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Notice we wrote <code class="docutils literal notranslate"><span class="pre">say_hello</span></code> here <strong>without</strong> parentheses. The bare name refers to the function object itself; it does <strong>not</strong> run the function. To actually <em>call</em> the function — to run its code and get the return value — you add parentheses:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">say_hello</span><span class="p">())</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>In a notebook you can also type <code class="docutils literal notranslate"><span class="pre">say_hello?</span></code> to read a function’s documentation (its docstring). In a script, the equivalent is the built-in <code class="docutils literal notranslate"><span class="pre">help</span></code> function:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">say_hello</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints a short help page that includes the docstring, <code class="docutils literal notranslate"><span class="pre">Return</span> <span class="pre">the</span> <span class="pre">word</span> <span class="pre">hello.</span></code></p>
 <p>You can assign the result of a call to a variable, just like any other value:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># assign the result to something</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">say_hello</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Functions get more useful when they take <strong>arguments</strong> — values passed in that the function can use:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># take some arguments</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">say_hello_to</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a greeting to `name`&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s1">&#39;Hello &#39;</span> <span class="o">+</span> <span class="n">name</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Calling it with a string works as intended:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">say_hello_to</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span> <span class="n">World</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>If we call this with a non-string argument like an integer, Python can’t concatenate it to <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">'</span></code> and raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">say_hello_to</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This raises an error whose last line reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span><span class="p">:</span> <span class="n">can</span> <span class="n">only</span> <span class="n">concatenate</span> <span class="nb">str</span> <span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;int&quot;</span><span class="p">)</span> <span class="n">to</span> <span class="nb">str</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>We can make the function more robust by redefining it to convert the argument to a string first:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># redefine the function</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">say_hello_to</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a greeting to `name`&quot;&quot;&quot;</span>
@@ -445,14 +468,17 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">say_hello_to</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span> <span class="mi">10</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Wrapping the argument in <code class="docutils literal notranslate"><span class="pre">str(...)</span></code> converts whatever the caller passes into a string before concatenation, so the function now works regardless of the input type.</p>
 <section id="keyword-arguments-and-default-values">
 <h3>Keyword arguments and default values<a class="headerlink" href="#keyword-arguments-and-default-values" title="Link to this heading">#</a></h3>
 <p>Arguments can have <strong>default values</strong>, making them <strong>keyword arguments</strong>. The caller can leave them out (and get the default) or specify them by name:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># take an optional keyword argument</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">say_hello_or_hola</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">spanish</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Say hello in multiple languages.&quot;&quot;&quot;</span>
@@ -466,16 +492,19 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">say_hello_or_hola</span><span class="p">(</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="n">spanish</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hello</span> <span class="n">Ryan</span>
 <span class="n">Hola</span> <span class="n">Juan</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>The first call leaves <code class="docutils literal notranslate"><span class="pre">spanish</span></code> out, so it uses the default <code class="docutils literal notranslate"><span class="pre">False</span></code> and greets in English. The second call passes <code class="docutils literal notranslate"><span class="pre">spanish=True</span></code> by name, switching the greeting to Spanish.</p>
 </section>
 <section id="a-flexible-number-of-arguments">
 <h3>A flexible number of arguments<a class="headerlink" href="#a-flexible-number-of-arguments" title="Link to this heading">#</a></h3>
 <p>A function can also accept a flexible number of arguments using <code class="docutils literal notranslate"><span class="pre">*args</span></code> — the leading <code class="docutils literal notranslate"><span class="pre">*</span></code> tells Python to collect any extra positional arguments into a tuple:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># flexible number of arguments</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">say_hello_to_everyone</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;hello &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
@@ -483,10 +512,12 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">say_hello_to_everyone</span><span class="p">(</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Xiaomeng&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;hello Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;hello Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;hello Xiaomeng&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>Create a file (for example <code class="docutils literal notranslate"><span class="pre">functions_practice.py</span></code>). Write a function <code class="docutils literal notranslate"><span class="pre">square(x)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">x</span></code> squared, and call it with a few numbers, printing each result. Then extend it: define a function <code class="docutils literal notranslate"><span class="pre">power(x,</span> <span class="pre">n=2)</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span></code> as an optional keyword argument so the user can compute other powers. Add <code class="docutils literal notranslate"><span class="pre">print(power(3))</span></code> and <code class="docutils literal notranslate"><span class="pre">print(power(3,</span> <span class="pre">n=3))</span></code>, save, and run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">functions_practice.py</span></code>. Press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> and verify that <code class="docutils literal notranslate"><span class="pre">power(3)</span></code> gives <code class="docutils literal notranslate"><span class="pre">9</span></code> and <code class="docutils literal notranslate"><span class="pre">power(3,</span> <span class="pre">n=3)</span></code> gives <code class="docutils literal notranslate"><span class="pre">27</span></code>.</p>
@@ -497,11 +528,14 @@
 <p>Functions that don’t modify their arguments or produce any other side-effects are called <a class="reference external" href="https://en.wikipedia.org/wiki/Pure_function" rel="noreferer noopener" target="_blank"><em>pure</em></a>.</p>
 <p>Functions that modify their arguments or cause other actions to occur are called <em>impure</em>.</p>
 <p>Below is an impure function:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_last_from_list</span><span class="p">(</span><span class="n">input_list</span><span class="p">):</span>
     <span class="n">input_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Watch what happens when we call it twice on the same list:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Xiaomeng&#39;</span><span class="p">]</span>
 <span class="n">remove_last_from_list</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
@@ -509,37 +543,45 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">]</span>
 <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Notice what happened: each call to <code class="docutils literal notranslate"><span class="pre">remove_last_from_list(names)</span></code> modified the <strong>same <code class="docutils literal notranslate"><span class="pre">names</span></code> list outside the function</strong>. After the first call it dropped to <code class="docutils literal notranslate"><span class="pre">['Ryan',</span> <span class="pre">'Juan']</span></code>; after the second, to <code class="docutils literal notranslate"><span class="pre">['Ryan']</span></code>. The function had a <strong>side effect</strong> — calling it silently changed the input. That’s what makes it impure.</p>
 <p>Here’s a <strong>pure</strong> version that does the same conceptual job (remove the last item) without modifying the original. It makes a copy of the input, modifies the copy, and returns it:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_last_from_list_pure</span><span class="p">(</span><span class="n">input_list</span><span class="p">):</span>
     <span class="n">new_list</span> <span class="o">=</span> <span class="n">input_list</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">new_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">new_list</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Calling the pure version:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Xiaomeng&#39;</span><span class="p">]</span>
 <span class="n">new_names</span> <span class="o">=</span> <span class="n">remove_last_from_list_pure</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_names</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Xiaomeng&#39;</span><span class="p">]</span>
 <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Notice the difference: this time <code class="docutils literal notranslate"><span class="pre">names</span></code> is <strong>unchanged</strong> after the call — the function returned a new list (<code class="docutils literal notranslate"><span class="pre">new_names</span></code>) instead of mutating the input. Pure functions are usually safer and easier to reason about, because the inputs you pass in won’t be silently altered somewhere down the line.</p>
 </section>
 <section id="namespaces-and-scope">
 <h3>Namespaces and scope<a class="headerlink" href="#namespaces-and-scope" title="Link to this heading">#</a></h3>
 <p>When you create a variable inside a function, it’s <strong>local</strong> to that function — it doesn’t affect variables of the same name outside. Functions can <em>read</em> variables from the outer (parent) scope, but assigning to a name inside a function creates a fresh local variable that shadows any outer one. This is called <strong>scoping</strong>, and it’s a common source of confusion for new programmers.</p>
 <p>The example below illustrates: <code class="docutils literal notranslate"><span class="pre">print_name_v2</span></code> changes <code class="docutils literal notranslate"><span class="pre">name</span></code> locally without affecting the outer <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Ryan&#39;</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">print_name</span><span class="p">():</span>
@@ -554,17 +596,20 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ryan</span>
 <span class="n">Kerry</span>
 <span class="n">Ryan</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Reading the three lines: <code class="docutils literal notranslate"><span class="pre">print_name()</span></code> reads the outer <code class="docutils literal notranslate"><span class="pre">name</span></code> and prints <code class="docutils literal notranslate"><span class="pre">Ryan</span></code>. <code class="docutils literal notranslate"><span class="pre">print_name_v2()</span></code> creates its own local <code class="docutils literal notranslate"><span class="pre">name</span></code> set to <code class="docutils literal notranslate"><span class="pre">Kerry</span></code> and prints that. The final <code class="docutils literal notranslate"><span class="pre">print(name)</span></code> shows the outer <code class="docutils literal notranslate"><span class="pre">name</span></code> is still <code class="docutils literal notranslate"><span class="pre">Ryan</span></code> — the assignment inside <code class="docutils literal notranslate"><span class="pre">print_name_v2</span></code> never touched it.</p>
 </section>
 <section id="a-more-complex-function-fibonacci-sequence">
 <h3>A more complex function: Fibonacci Sequence<a class="headerlink" href="#a-more-complex-function-fibonacci-sequence" title="Link to this heading">#</a></h3>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_sequence" rel="noreferer noopener" target="_blank">Fibonacci sequence</a> is <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">…</span></code> — each number is the sum of the previous two. Here’s a function that returns the first <code class="docutils literal notranslate"><span class="pre">n</span></code> Fibonacci numbers as a list. It uses list methods (<code class="docutils literal notranslate"><span class="pre">append</span></code>) and negative indexing (<code class="docutils literal notranslate"><span class="pre">[-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">[-2]</span></code>) to build the sequence step by step.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
@@ -574,10 +619,12 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>The function starts with the first two numbers, then loops <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">2</span></code> more times, each time appending the sum of the last two items (<code class="docutils literal notranslate"><span class="pre">l[-1]</span></code> is the last item, <code class="docutils literal notranslate"><span class="pre">l[-2]</span></code> is the second-to-last).</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
@@ -599,31 +646,40 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> is a <strong>special method</strong> that runs automatically every time you make a new <code class="docutils literal notranslate"><span class="pre">Hurricane</span></code> — for example, when you write <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">Hurricane('florence')</span></code> in the next snippet. The arguments after <code class="docutils literal notranslate"><span class="pre">self</span></code> (here, just <code class="docutils literal notranslate"><span class="pre">name</span></code>) are the values you put inside those parentheses.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">self</span></code> refers to the new object being built. The line <code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code> says: <em>store the <code class="docutils literal notranslate"><span class="pre">name</span></code> you passed in as an attribute on this object</em>, so later you can read it back as <code class="docutils literal notranslate"><span class="pre">h.name</span></code>.</p></li>
 </ul>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Now create an instance and print it:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;florence&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints something like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Hurricane</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x102996d20</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Notice that printing <code class="docutils literal notranslate"><span class="pre">h</span></code> just shows the class name and a memory address (the long hexadecimal number after <code class="docutils literal notranslate"><span class="pre">at</span></code> will differ each time you run it) — not very useful. We’ll fix this later by adding a <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method.</p>
 <p>Our class only has a single attribute so far. We can read it back with <code class="docutils literal notranslate"><span class="pre">h.name</span></code>:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">florence</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Let’s grow the class. We’ll add two more attributes (<code class="docutils literal notranslate"><span class="pre">category</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code>), uppercase the <code class="docutils literal notranslate"><span class="pre">name</span></code> as it’s stored, and add <strong>input validation</strong> — a check that raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if the longitude is outside the valid range.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
@@ -635,29 +691,37 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">lon</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Create a valid instance and read its name back:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;florence&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">46</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FLORENCE</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Notice the name came back as <code class="docutils literal notranslate"><span class="pre">'FLORENCE'</span></code>, not <code class="docutils literal notranslate"><span class="pre">'florence'</span></code> — that’s because <code class="docutils literal notranslate"><span class="pre">__init__</span></code> ran <code class="docutils literal notranslate"><span class="pre">name.upper()</span></code> and stored the uppercased version as the attribute.</p>
 <p>Now try creating one with an out-of-range longitude:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;ryan&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This raises an error whose last line reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Invalid</span> <span class="n">lon</span> <span class="mi">300</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>The validation check inside <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">lon</span> <span class="pre">&gt;</span> <span class="pre">180</span> <span class="pre">or</span> <span class="pre">lon</span> <span class="pre">&lt;</span> <span class="pre">-180:</span> <span class="pre">raise</span> <span class="pre">ValueError(...)</span></code>) caught the bad longitude and stopped construction with a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. The instance was never created.</p>
 </section>
 <section id="adding-a-method">
 <h3>Adding a method<a class="headerlink" href="#adding-a-method" title="Link to this heading">#</a></h3>
 <p>Now let’s add a custom method. A <strong>method</strong> is just a function defined inside a class; its first argument is always <code class="docutils literal notranslate"><span class="pre">self</span></code>, the instance it’s called on.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
@@ -672,20 +736,25 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">&gt;</span> <span class="mi">1</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Create an instance and call the method:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;florence&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">46</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">is_dangerous</span><span class="p">())</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">f</span></code> was created with <code class="docutils literal notranslate"><span class="pre">category=4</span></code>, so <code class="docutils literal notranslate"><span class="pre">self.category</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and the method returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </section>
 <section id="magic-dunder-methods">
 <h3>Magic / dunder methods<a class="headerlink" href="#magic-dunder-methods" title="Link to this heading">#</a></h3>
 <p>Methods whose names begin and end with double underscores (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, etc.) — pronounced “dunder” for <em>double-underscore</em> — are special: Python calls them automatically in particular situations. We’ve already met <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, which Python calls when you create an instance. Another useful one is <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, which Python calls when it needs to display the object (for example, when you <code class="docutils literal notranslate"><span class="pre">print</span></code> it). By default <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> returns the ugly memory address we saw earlier; defining your own gives a nicer display.</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Hurricane</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
@@ -703,15 +772,19 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">&gt;</span> <span class="mi">1</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>Now print an instance:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Hurricane</span><span class="p">(</span><span class="s1">&#39;florence&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">46</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>This prints:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Hurricane</span> <span class="n">FLORENCE</span> <span class="p">(</span><span class="n">cat</span> <span class="mi">4</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p><strong>End of output.</strong></p>
 <p>Now printing <code class="docutils literal notranslate"><span class="pre">f</span></code> shows the formatted string from our <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> instead of the memory-address gibberish we saw earlier. That’s the point of <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>

@@ -181,6 +181,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
@@ -383,6 +384,7 @@ isn’t reachable from every environment (the LEAP hub can’t reach it, for exa
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/monthly_in_situ_co2_mlo.csv&quot;</span>
@@ -393,6 +395,7 @@ isn’t reachable from every environment (the LEAP hub can’t reach it, for exa
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>You should see those four columns — year, month, date, and CO2 — read with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. (We
 print just those four so they fit and read cleanly; printing the whole <code class="docutils literal notranslate"><span class="pre">df</span></code> in a terminal
 hides the middle columns behind <code class="docutils literal notranslate"><span class="pre">...</span></code>. The full table has 11 columns.)
@@ -421,6 +424,7 @@ global monthly rain estimates.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://iridl.ldeo.columbia.edu/expert/SOURCES/.NOAA/.NCEP/.CPC/.UNIFIED_PRCP/.GAUGE_BASED/.GLOBAL/.v1p0/.Monthly/.RETRO/.rain/dods&quot;</span>
@@ -428,6 +432,7 @@ global monthly rain estimates.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>You’ll see a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object with dimensions <code class="docutils literal notranslate"><span class="pre">Y</span></code> (latitude), <code class="docutils literal notranslate"><span class="pre">X</span></code> (longitude), and <code class="docutils literal notranslate"><span class="pre">T</span></code>
 (time). This is <strong>a lot richer</strong> than a pandas DataFrame — it carries coordinates, units,
 and other metadata along with the data values. (Reading a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> summary with a screen
@@ -456,6 +461,7 @@ FAIR-canonical way to access a published dataset.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
 <p>In a script, run:</p>
+<p><strong>Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
@@ -469,6 +475,7 @@ FAIR-canonical way to access a published dataset.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
+<p><strong>End of code.</strong></p>
 <p>The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse
 the cached copy (and verify it hasn’t been corrupted). Notice the DOI in the URL — the
 dataset is reproducibly addressable by its DOI, not just an arbitrary URL.</p>

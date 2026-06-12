@@ -181,6 +181,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
@@ -392,9 +393,11 @@
 <li><p><em>Later, on the LEAP hub:</em> once you connect VS Code to the hub, the terminal works exactly the same way — the commands just run in the cloud.</p></li>
 </ul>
 <p>When the terminal is ready, it prints a <strong>prompt</strong> and waits for you to type. The prompt ends with a character such as <code class="docutils literal notranslate"><span class="pre">$</span></code> — for example:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>yourname@yourcomputer:~$
 </pre></div>
 </div>
+<p><strong>End of example.</strong></p>
 <p>The character at the end — <code class="docutils literal notranslate"><span class="pre">$</span></code> here — tells you the shell is waiting for input. Different environments use different prompt characters (you may see <code class="docutils literal notranslate"><span class="pre">$</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>, <code class="docutils literal notranslate"><span class="pre">#</span></code>, or others). Everything before it is informational: your username and machine name, and often the current directory (where <code class="docutils literal notranslate"><span class="pre">~</span></code> is shorthand for “home”). From now on, we’ll just show <code class="docutils literal notranslate"><span class="pre">$</span></code> in our examples.</p>
 <section id="why-bother-learning-this-if-guis-exist">
 <h3>Why bother learning this if GUIs exist?<a class="headerlink" href="#why-bother-learning-this-if-guis-exist" title="Link to this heading">#</a></h3>
@@ -420,14 +423,17 @@
 <p class="admonition-title">Try it</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">pwd</span></code> in your terminal, then press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the result. You should hear a path — your <strong>current working directory</strong>. On the LEAP hub this looks like <code class="docutils literal notranslate"><span class="pre">/home/jovyan</span></code>; on your own Windows computer it will look different (for example, a path under <code class="docutils literal notranslate"><span class="pre">C:\Users\</span></code>). The <em>idea</em> — “this is the folder I’m currently in” — is the same everywhere.</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pwd
 /home/jovyan
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <blockquote>
 <div><p><em>Reference:</em> The exact path depends on your environment. The concept of a “home directory” — the directory that’s “yours” by default — is the same everywhere.</p>
 </div></blockquote>
 <p>To picture what a path like <code class="docutils literal notranslate"><span class="pre">/home/jovyan</span></code> means, here is how a Unix file system is organized as a tree. The block below is a <strong>text version</strong> of that tree: read it top to bottom, where indentation shows what is contained inside what.</p>
+<p><strong>Example:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/
 ├── bin
 ├── etc
@@ -435,6 +441,7 @@
     └── jovyan
 </pre></div>
 </div>
+<p><strong>End of example.</strong></p>
 <p>At the top is the <strong>root directory</strong>, written as <code class="docutils literal notranslate"><span class="pre">/</span></code>. Inside it are directories like <code class="docutils literal notranslate"><span class="pre">home</span></code> (where user directories live), <code class="docutils literal notranslate"><span class="pre">bin</span></code> (built-in programs), and <code class="docutils literal notranslate"><span class="pre">etc</span></code> (system configuration). Your username’s directory (<code class="docutils literal notranslate"><span class="pre">jovyan</span></code> in this example) sits inside <code class="docutils literal notranslate"><span class="pre">home</span></code>, so its full path — its address starting from the root — is <code class="docutils literal notranslate"><span class="pre">/home/jovyan</span></code>. A path is just the list of directories you pass through from the root, written with <code class="docutils literal notranslate"><span class="pre">/</span></code> between each step.</p>
 <blockquote>
 <div><p><em>Reference:</em> If you ever want to confirm who you are or which machine you’re on, <code class="docutils literal notranslate"><span class="pre">whoami</span></code> prints your username and <code class="docutils literal notranslate"><span class="pre">hostname</span></code> prints the machine name.</p>
@@ -447,6 +454,7 @@
 <p class="admonition-title">Try it</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">ls</span></code> in your home directory, then <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the list. Then run <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-F</span></code> — the <code class="docutils literal notranslate"><span class="pre">-F</span></code> adds a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as <code class="docutils literal notranslate"><span class="pre">*</span></code> for programs you can run.)</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
 config.yaml  examples  work
 
@@ -454,6 +462,7 @@ $ ls -F
 config.yaml  examples/  work/
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <blockquote>
 <div><p><em>Note:</em> Your output will look different — every environment has its own files. The examples here are just illustrative. As you follow along below, use the names that actually appear in your own <code class="docutils literal notranslate"><span class="pre">ls</span></code> output (e.g., if you don’t have an <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder, pick whatever directory you do see).</p>
 </div></blockquote>
@@ -470,6 +479,7 @@ config.yaml  examples/  work/
 <p class="admonition-title">Try it</p>
 <p>From your home directory, move into the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory (or any directory you saw from <code class="docutils literal notranslate"><span class="pre">ls</span></code>) by running <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">examples</span></code>. Run <code class="docutils literal notranslate"><span class="pre">pwd</span></code> to confirm you moved. Then <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code> to go back up one level — <code class="docutils literal notranslate"><span class="pre">..</span></code> is shorthand for “the parent directory.”</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples
 $ pwd
 /home/jovyan/examples
@@ -478,6 +488,7 @@ $ pwd
 /home/jovyan
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <p>You’ll also notice the text before the prompt usually updates as you navigate — after <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">examples</span></code>, the part of the prompt that shows your current directory changes from <code class="docutils literal notranslate"><span class="pre">~</span></code> to <code class="docutils literal notranslate"><span class="pre">~/examples</span></code>. This is a quick cue showing where you are (read the prompt with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> if you want to confirm it).</p>
 <p>A few more <code class="docutils literal notranslate"><span class="pre">cd</span></code> patterns worth knowing:</p>
 <ul class="simple">
@@ -509,11 +520,13 @@ $ pwd
 <p class="admonition-title">Try it</p>
 <p>From your home directory, run <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">project</span></code> to create a directory called <code class="docutils literal notranslate"><span class="pre">project</span></code>. Then run <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-F</span></code> to confirm it appears (with a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code>).</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir project
 $ ls -F
 config.yaml  examples/  project/  work/
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 </section>
 <section id="create-an-empty-file-touch">
 <h3>Create an empty file — <code class="docutils literal notranslate"><span class="pre">touch</span></code><a class="headerlink" href="#create-an-empty-file-touch" title="Link to this heading">#</a></h3>
@@ -522,12 +535,14 @@ config.yaml  examples/  project/  work/
 <p class="admonition-title">Try it</p>
 <p>Move into your new <code class="docutils literal notranslate"><span class="pre">project</span></code> directory with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">project</span></code>, then create an empty file with <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">draft.txt</span></code>. Confirm with <code class="docutils literal notranslate"><span class="pre">ls</span></code>. You can also open <code class="docutils literal notranslate"><span class="pre">draft.txt</span></code> in the VS Code editor if you want to add content to it.</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd project
 $ touch draft.txt
 $ ls
 draft.txt
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <blockquote>
 <div><p><em>Reference:</em> When naming files and directories, avoid whitespace (use <code class="docutils literal notranslate"><span class="pre">-</span></code> or <code class="docutils literal notranslate"><span class="pre">_</span></code> instead), avoid starting with <code class="docutils literal notranslate"><span class="pre">-</span></code> (the shell treats names starting with <code class="docutils literal notranslate"><span class="pre">-</span></code> as flags), and stick to letters, numbers, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, and <code class="docutils literal notranslate"><span class="pre">_</span></code>. Special characters can cause unexpected behavior.</p>
 </div></blockquote>
@@ -543,10 +558,12 @@ draft.txt
 <p class="admonition-title">Try it</p>
 <p>Delete the <code class="docutils literal notranslate"><span class="pre">draft.txt</span></code> you just created by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">draft.txt</span></code>. Confirm with <code class="docutils literal notranslate"><span class="pre">ls</span></code> — the file should be gone (the listing will be empty).</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rm draft.txt
 $ ls
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 </section>
 <section id="remove-a-directory-rm-r">
 <h3>Remove a directory — <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span></code><a class="headerlink" href="#remove-a-directory-rm-r" title="Link to this heading">#</a></h3>
@@ -555,10 +572,12 @@ $ ls
 <p class="admonition-title">Try it</p>
 <p>Move back to your home directory with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code>, then delete the entire <code class="docutils literal notranslate"><span class="pre">project</span></code> directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">project</span></code>. Confirm with <code class="docutils literal notranslate"><span class="pre">ls</span></code>.</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ..
 $ rm -r project
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <blockquote>
 <div><p><em>Reference:</em> Add <code class="docutils literal notranslate"><span class="pre">-i</span></code> (interactive) to either <code class="docutils literal notranslate"><span class="pre">rm</span></code> or <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span></code> to be prompted before each deletion — useful when you’re unsure exactly what you’re about to delete.</p>
 </div></blockquote>
@@ -570,6 +589,7 @@ $ rm -r project
 <p class="admonition-title">Try it</p>
 <p>First set things up again with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">project</span></code> and <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">project/draft.txt</span></code>. Then rename <code class="docutils literal notranslate"><span class="pre">draft.txt</span></code> to <code class="docutils literal notranslate"><span class="pre">quotes.txt</span></code> by running <code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">project/draft.txt</span> <span class="pre">project/quotes.txt</span></code>. Confirm with <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">project</span></code>.</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir project
 $ touch project/draft.txt
 $ mv project/draft.txt project/quotes.txt
@@ -577,6 +597,7 @@ $ ls project
 quotes.txt
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 <blockquote>
 <div><p><em>Reference:</em> <code class="docutils literal notranslate"><span class="pre">mv</span></code> silently overwrites if the destination already exists. Use <code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">-i</span></code> if you want to be asked first.</p>
 </div></blockquote>
@@ -588,11 +609,13 @@ quotes.txt
 <p class="admonition-title">Try it</p>
 <p>Copy <code class="docutils literal notranslate"><span class="pre">quotes.txt</span></code> into a new file in the same directory by running <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">project/quotes.txt</span> <span class="pre">project/quotations.txt</span></code>. Then <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">project</span></code> to confirm you have both files.</p>
 </div>
+<p><strong>Terminal session:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp project/quotes.txt project/quotations.txt
 $ ls project
 quotations.txt  quotes.txt
 </pre></div>
 </div>
+<p><strong>End of terminal session.</strong></p>
 </section>
 <section id="clean-up">
 <h3>Clean up<a class="headerlink" href="#clean-up" title="Link to this heading">#</a></h3>

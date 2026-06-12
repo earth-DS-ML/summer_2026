@@ -26,6 +26,8 @@ it's just a list of instructions in a text file.
 
 For example, here is a short script:
 
+**Code:**
+
 ~~~python
 # lesson1.py
 name = "Sam"
@@ -35,6 +37,8 @@ temperature_c = 25
 temperature_f = temperature_c * 9 / 5 + 32
 print("Temperature in Fahrenheit:", temperature_f)
 ~~~
+
+**End of code.**
 
 Reading top to bottom: it stores a name, prints a greeting, computes a temperature in
 Fahrenheit, and prints it. Nothing happens out of order, which makes a script easy to
@@ -56,9 +60,13 @@ This is the core cycle you'll repeat constantly:
 2. Type the example script above into it, and save again.
 3. Open a terminal (`` Ctrl+` ``) and run it:
 
+**Command:**
+
    ~~~
    python lesson1.py
    ~~~
+
+**End of command.**
 
 4. Press `Alt+F2` to read the output. You should hear the greeting and the temperature.
 :::
