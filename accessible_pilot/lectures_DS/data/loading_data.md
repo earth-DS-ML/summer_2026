@@ -36,6 +36,8 @@ isn't reachable from every environment (the LEAP hub can't reach it, for example
 :class: tip
 In a script, run:
 
+**Code:**
+
 ~~~python
 import pandas as pd
 
@@ -46,6 +48,8 @@ columns = ["year", "month", "date_excel", "date", "co2", "co2_seasonally_adjuste
 df = pd.read_csv(url, skiprows=64, names=columns, na_values=-99.99)
 print(df[["year", "month", "date", "co2"]].head())
 ~~~
+
+**End of code.**
 
 You should see those four columns — year, month, date, and CO2 — read with `Alt+F2`. (We
 print just those four so they fit and read cleanly; printing the whole `df` in a terminal
@@ -78,6 +82,8 @@ global monthly rain estimates.
 :class: tip
 In a script, run:
 
+**Code:**
+
 ~~~python
 import xarray as xr
 
@@ -85,6 +91,8 @@ url = "http://iridl.ldeo.columbia.edu/expert/SOURCES/.NOAA/.NCEP/.CPC/.UNIFIED_P
 ds = xr.open_dataset(url, decode_times=False)
 print(ds)
 ~~~
+
+**End of code.**
 
 You'll see a `Dataset` object with dimensions `Y` (latitude), `X` (longitude), and `T`
 (time). This is **a lot richer** than a pandas DataFrame — it carries coordinates, units,
@@ -117,6 +125,8 @@ FAIR-canonical way to access a published dataset.
 :class: tip
 In a script, run:
 
+**Code:**
+
 ~~~python
 import pooch
 import pandas as pd
@@ -130,6 +140,8 @@ file_path = pooch.retrieve(
 
 print(pd.read_csv(file_path).head())
 ~~~
+
+**End of code.**
 
 The first run downloads the file from Zenodo and saves it to a local cache. Later runs reuse
 the cached copy (and verify it hasn't been corrupted). Notice the DOI in the URL — the

@@ -18,6 +18,7 @@ parts:
   - caption: The Core Python Language
     chapters:
       - file: lectures_DS/core_python/overview
+      - file: lectures_DS/core_python/reading_python_out_loud
       - file: lectures_DS/core_python/python_fundamentals
       - file: lectures_DS/core_python/functions_classes
       - file: lectures_DS/core_python/organization_and_packaging
