@@ -477,6 +477,18 @@
 <h2>1) Opening data and examining the metadata<a class="headerlink" href="#opening-data-and-examining-the-metadata" title="Link to this heading">#</a></h2>
 <section id="open-the-dataset-and-display-its-contents">
 <h3>1.1) Open the dataset and display its contents<a class="headerlink" href="#open-the-dataset-and-display-its-contents" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">Heads up — open this dataset with <code class="docutils literal notranslate"><span class="pre">chunks</span></code></p>
+<p>This OPeNDAP server quietly returns <strong>all zeros</strong> (you’ll get blank maps and flat
+timeseries) if you request the whole array in a single shot — which several tasks below
+do (the time-mean in 2.1, the spatial mean in 2.3, the ENSO index in part 4). Avoid it by
+opening the data in pieces with Dask, so xarray fetches it chunk-by-chunk:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Everything else works exactly as usual — reductions like <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> pull the data in as
+needed. (You can combine this with other keywords, e.g. <code class="docutils literal notranslate"><span class="pre">drop_variables=['time_bnds']</span></code>.)</p>
+</div>
 </section>
 <section id="print-out-the-long-name-attribute-of-each-variable-and-coordinate">
 <h3>1.2) Print out the <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attribute of each variable and coordinate<a class="headerlink" href="#print-out-the-long-name-attribute-of-each-variable-and-coordinate" title="Link to this heading">#</a></h3>

@@ -46,12 +46,12 @@ The results of this analysis will be figures — beautiful figures that clearly 
 
 Your final project must meet the following technical requirements
 
-*   **One Jupyter notebook per group member**, each carrying out a complementary part of the project and each able to stand on its own
+*   **One Jupyter notebook per group member** (`.ipynb`, *not* a plain `.py` script), each carrying out a complementary part of the project and each able to stand on its own. The notebook is what you submit and present, so it must be **readable and presentable**: a narrative of markdown cells (explaining the question, the steps, and the figures) interleaved with the code and its output — think of it like the in-class assignment notebooks, not a code file.
 *   Stored in a standalone public github repo
 *   Each group member contributes their own commits, under their own GitHub account
-*   All data is either stored in the repo itself or downloaded / accessed from within the notebook (no manual download steps)
+*   **Self-contained and reproducible, exactly like our in-class assignment notebooks.** All data is either stored in the repo itself or downloaded / accessed from within the notebook — *no manual download steps*. Anyone should be able to open your repo on the Leap hub, run the notebook top to bottom, and reproduce your results without doing anything outside the notebook.
 *   Complete explanatory text / equations included in each notebook as markdown cells
-*   Each notebook must execute in sequence with no errors
+*   Each notebook must execute in sequence with no errors (Kernel → Restart & Run All should run cleanly from a fresh kernel)
 *   The whole github repo must be configured to run on [Leap pangeo hub](https://leap.2i2c.cloud/)
 
 You _must_ use either Pandas or Xarray (or both) in some part of your project. You _may_ use other scientific python libraries as well, if you wish, to facilitate some analysis that is not possible with Xarray / Pandas alone. 
