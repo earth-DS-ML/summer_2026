@@ -52,7 +52,7 @@ This is the core cycle you'll repeat constantly:
 2. **Save** — press `Ctrl+S`.
 3. **Run** — in the VS Code terminal, type `python` followed by the file name, then press
    Enter.
-4. **Read the output** — press `Alt+F2` to read what the program printed.
+4. **Read the output** — press `Ctrl+Up` to read what the program printed.
 
 :::{admonition} Try it
 :class: tip
@@ -68,11 +68,11 @@ The following is a terminal command:
 
 End of command.
 
-4. Press `Alt+F2` to read the output. You should hear the greeting and the temperature.
+4. Press `Ctrl+Up` to read the output. You should hear the greeting and the temperature.
 :::
 
 When something is wrong, Python prints an **error message** (a "traceback") that ends with
-the type of error and the line number. Read it with `Alt+F2` — the last line is usually
+the type of error and the line number. Read it with `Ctrl+Up` — the last line is usually
 the most useful, and the line number tells you where to look.
 
 ## Running code piece by piece (optional)
@@ -123,7 +123,7 @@ About 15 minutes; ask if you get stuck.
 
 1. **Open VS Code** and open a terminal (`` Ctrl+` ``).
 2. **Write a script.** Create `hello.py`, put `print("Hello, world!")` in it, and save.
-3. **Run it.** In the terminal, run `python hello.py`, then press `Alt+F2` to confirm the
+3. **Run it.** In the terminal, run `python hello.py`, then press `Ctrl+Up` to confirm the
    output reads `Hello, world!`.
 4. **Make a Markdown file.** Create `notes.md`, add a top-level heading (`# My notes`) and
    a short sentence, and save. (You can open the Markdown preview from the Command Palette,

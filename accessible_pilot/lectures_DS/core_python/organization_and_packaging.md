@@ -2,7 +2,7 @@
 
 :::{admonition} Following along with a screen reader
 :class: important
-Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
+Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 A complex research project often relies on many different programs and software packages to accomplish the research goals. An important part of data science or scientific computing is deciding how to organize and structure the code you use for data analysis and research. A well-structured project can make you a more efficient and effective researcher. It is also a key component of [scientific reproducibility](http://lorenabarba.com/blog/barbagroup-reproducibility-syllabus/).
@@ -25,7 +25,7 @@ This page outlines some suggested practices for each category.
 :class: tip
 The first half of this page (project organization and reproducibility) is reading material — no code to run.
 
-The **Modules** section below has runnable code that imports a small `gcdistance.py` module. The full contents of that module are shown in the Modules section — create it yourself as a file named `gcdistance.py` in VS Code, then put the example scripts in the **same folder** so they can import it. Run each script in the Git Bash terminal with `python yourfile.py` and read the output with `Alt+F2`.
+The **Modules** section below has runnable code that imports a small `gcdistance.py` module. The full contents of that module are shown in the Modules section — create it yourself as a file named `gcdistance.py` in VS Code, then put the example scripts in the **same folder** so they can import it. Run each script in the Git Bash terminal with `python yourfile.py` and read the output with `Ctrl+Up`.
 :::
 
 :::{admonition} In-class assignment — 10 points
@@ -35,7 +35,7 @@ The **"Try it"** exercises on this page are part of your in-class assignment for
 
 ## Exploratory Analysis
 
-When starting something new, you're often motivated to just start coding and get results quickly. This is fine! In the standard course, Jupyter notebooks are used for open-ended exploratory analysis because they keep text, code, and figures in one place. In your scripts-based workflow, the equivalent is a single `.py` file where you write a bit of code, run it, read the output with `Alt+F2`, and keep going — the same quick, iterative loop, in a linear text file your screen reader handles well.
+When starting something new, you're often motivated to just start coding and get results quickly. This is fine! In the standard course, Jupyter notebooks are used for open-ended exploratory analysis because they keep text, code, and figures in one place. In your scripts-based workflow, the equivalent is a single `.py` file where you write a bit of code, run it, read the output with `Ctrl+Up`, and keep going — the same quick, iterative loop, in a linear text file your screen reader handles well.
 
 If you find something cool or useful, preserve it. The simplest option is a single script (or notebook) in a folder of your project repo (e.g., the GitHub repo from Assignment 1).
 
@@ -168,7 +168,7 @@ help(gcdistance)
 
 End of code.
 
-Run it with `python try_gcdistance.py` and read the result with `Alt+F2`. The `help()` function prints the module's docstring and the documentation for everything it contains. This prints:
+Run it with `python try_gcdistance.py` and read the result with `Ctrl+Up`. The `help()` function prints the module's docstring and the documentation for everything it contains. This prints:
 
 The following is the expected output:
 
@@ -270,7 +270,7 @@ Once you have a piece of code that is general-purpose enough to share between pr
 :class: tip
 1. In VS Code, create `gcdistance.py` with the module code shown above (or download it from the course repo), and save it.
 2. In the **same folder**, create a new file — for example `city_distances.py` — that imports the module and uses `gcdistance.great_circle_distance` to compute the distance between **three pairs of cities** you're interested in. Lat/lon coordinates are easy to find online (search "latitude longitude of <city>"). The result is in meters, so divide by 1000 for kilometers, and `print()` each one.
-3. Save, then run it in the Git Bash terminal with `python city_distances.py`, and press `Alt+F2` to read the distances.
+3. Save, then run it in the Git Bash terminal with `python city_distances.py`, and press `Ctrl+Up` to read the distances.
 4. Cross-check one of your answers against the distance shown on Google Maps.
 
 For example, the distance from New York City `(40.7128, -74.0060)` to London `(51.5074, -0.1278)` comes out to about 5,570 km.

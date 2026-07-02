@@ -6,7 +6,7 @@
 
 :::{admonition} Doing this lesson with a screen reader
 :class: important
-Do the **"Try it"** activities in the **Git Bash terminal** in VS Code that you set up in [Setting up an accessible workflow](accessible_setup.md) — not the in-browser JupyterLab terminal. After running a command, press **`Alt+F2`** (Accessible View) to read its output as text. We won't repeat that reminder on every command; the habit is simply: *run the command, then press `Alt+F2` to read what it printed.*
+Do the **"Try it"** activities in the **Git Bash terminal** in VS Code that you set up in [Setting up an accessible workflow](accessible_setup.md) — not the in-browser JupyterLab terminal. After running a command, press **`Ctrl+Up`** (the terminal's Accessible View) to read its output as text. We won't repeat that reminder on every command; the habit is simply: *run the command, then press `Ctrl+Up` to read what it printed.*
 :::
 
 ## Unix and the file system
@@ -21,7 +21,7 @@ A terminal is a **text-based interface to your computer**: you type a command, t
 
 So let's open one:
 
-- **In VS Code (recommended):** open a terminal with **Terminal → New Terminal** (or press `` Ctrl+` ``) — it should be the **Git Bash** terminal you set as your default in the [setup page](accessible_setup.md). Run the commands below here, and press `Alt+F2` to read the output.
+- **In VS Code (recommended):** open a terminal with **Terminal → New Terminal** (or press `` Ctrl+` ``) — it should be the **Git Bash** terminal you set as your default in the [setup page](accessible_setup.md). Run the commands below here, and press `Ctrl+Up` to read the output.
 - *Later, on the LEAP hub:* once you connect VS Code to the hub, the terminal works exactly the same way — the commands just run in the cloud.
 
 When the terminal is ready, it prints a **prompt** and waits for you to type. The prompt ends with a character such as `$` — for example:
@@ -45,7 +45,7 @@ A few reasons it's worth the effort, especially for scientific computing:
 - **Speed.** Once you know a few commands, typing them is much faster than clicking through menus and dialogs.
 - **Remote machines.** When you connect to many remote servers (HPC clusters, cloud VMs), the only interface available is a terminal.
 - **Portability.** The same Unix commands work on Macs, Linux, and the LEAP hub. Learn them once, use them everywhere.
-- **Accessibility.** Because it is pure text, the terminal works well with a screen reader once you read its output with the Accessible View (`Alt+F2`).
+- **Accessibility.** Because it is pure text, the terminal works well with a screen reader once you read its output with the terminal's Accessible View (`Ctrl+Up`).
 
 You won't replace your GUI overnight, and there's nothing wrong with using both. But the terminal will quickly become indispensable.
 
@@ -59,7 +59,7 @@ Most of your work in the shell involves moving around the file system, looking a
 
 :::{admonition} Try it
 :class: tip
-Run `pwd` in your terminal, then press `Alt+F2` to read the result. You should hear a path — your **current working directory**. On the LEAP hub this looks like `/home/jovyan`; on your own Windows computer it will look different (for example, a path under `C:\Users\`). The *idea* — "this is the folder I'm currently in" — is the same everywhere.
+Run `pwd` in your terminal, then press `Ctrl+Up` to read the result. You should hear a path — your **current working directory**. On the LEAP hub this looks like `/home/jovyan`; on your own Windows computer it will look different (for example, a path under `C:\Users\`). The *idea* — "this is the folder I'm currently in" — is the same everywhere.
 :::
 
 The following is a terminal session:
@@ -97,7 +97,7 @@ At the top is the **root directory**, written as `/`. Inside it are directories 
 
 :::{admonition} Try it
 :class: tip
-Run `ls` in your home directory, then `Alt+F2` to read the list. Then run `ls -F` — the `-F` adds a trailing `/` to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as `*` for programs you can run.)
+Run `ls` in your home directory, then `Ctrl+Up` to read the list. Then run `ls -F` — the `-F` adds a trailing `/` to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as `*` for programs you can run.)
 :::
 
 The following is a terminal session:
@@ -116,7 +116,7 @@ End of terminal session.
 
 The `-F` is a **flag** — an option that modifies how a command behaves. Most commands have many flags; `ls` alone has dozens.
 
-> *Reference:* To read the manual for a command, you can run `man ls`. The `man` page opens in a scrolling pager that can be awkward with a screen reader; an easier alternative is `ls --help`, which prints the same kind of information as plain, linear text you can read with `Alt+F2`. Most commands accept `--help`.
+> *Reference:* To read the manual for a command, you can run `man ls`. The `man` page opens in a scrolling pager that can be awkward with a screen reader; an easier alternative is `ls --help`, which prints the same kind of information as plain, linear text you can read with `Ctrl+Up`. Most commands accept `--help`.
 >
 > *Reference:* `ls -a` shows all files including hidden ones (those starting with `.`). You won't need this often, but it exists.
 
@@ -142,7 +142,7 @@ $ pwd
 
 End of terminal session.
 
-You'll also notice the text before the prompt usually updates as you navigate — after `cd examples`, the part of the prompt that shows your current directory changes from `~` to `~/examples`. This is a quick cue showing where you are (read the prompt with `Alt+F2` if you want to confirm it).
+You'll also notice the text before the prompt usually updates as you navigate — after `cd examples`, the part of the prompt that shows your current directory changes from `~` to `~/examples`. This is a quick cue showing where you are (read the prompt with `Ctrl+Up` if you want to confirm it).
 
 A few more `cd` patterns worth knowing:
 
@@ -307,4 +307,4 @@ You've now used the basic Unix commands for navigating and manipulating files:
 
 These are enough to do most file management from the command line. There's much more to the Unix shell — pipes, redirection, regular expressions, scripting — but you'll pick those up as you need them. For a fuller tutorial, see the [Software Carpentry Unix Shell Lesson](https://swcarpentry.github.io/shell-novice/) this material is based on.
 
-Remember, throughout all of the above: **run the command, then press `Alt+F2`** to read what it printed.
+Remember, throughout all of the above: **run the command, then press `Ctrl+Up`** to read what it printed.

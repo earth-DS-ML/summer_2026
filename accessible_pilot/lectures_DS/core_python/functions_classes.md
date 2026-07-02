@@ -2,14 +2,14 @@
 
 :::{admonition} Following along with a screen reader
 :class: important
-Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
+Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 For longer and more complex tasks, it is important to organize your code into reusable elements. For example, if you find yourself cutting and pasting the same or similar lines of code over and over, you probably need to define a _function_ to encapsulate that code and make it reusable. An important principle in programming is **DRY**: "don't repeat yourself". Repetition is tedious and opens you up to errors. Strive for elegance and simplicity in your programs.
 
 :::{admonition} Seeing a result in a script vs. a notebook
 :class: note
-The standard version of this lesson is a notebook, where typing an expression on its own line (for example `say_hello()`) automatically displays its value. A `.py` script does **not** do that — it only shows what you explicitly `print(...)`. So throughout this page, wherever the original notebook would just show a value, we wrap it in `print(...)` so the result actually appears in your terminal. Build each example into a `.py` file, run it with `python yourfile.py`, and press `Alt+F2` to read the output.
+The standard version of this lesson is a notebook, where typing an expression on its own line (for example `say_hello()`) automatically displays its value. A `.py` script does **not** do that — it only shows what you explicitly `print(...)`. So throughout this page, wherever the original notebook would just show a value, we wrap it in `print(...)` so the result actually appears in your terminal. Build each example into a `.py` file, run it with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 ## Functions
@@ -232,7 +232,7 @@ End of output.
 
 :::{admonition} Try it
 :class: tip
-Create a file (for example `functions_practice.py`). Write a function `square(x)` that returns `x` squared, and call it with a few numbers, printing each result. Then extend it: define a function `power(x, n=2)` with `n` as an optional keyword argument so the user can compute other powers. Add `print(power(3))` and `print(power(3, n=3))`, save, and run it with `python functions_practice.py`. Press `Alt+F2` and verify that `power(3)` gives `9` and `power(3, n=3)` gives `27`.
+Create a file (for example `functions_practice.py`). Write a function `square(x)` that returns `x` squared, and call it with a few numbers, printing each result. Then extend it: define a function `power(x, n=2)` with `n` as an optional keyword argument so the user can compute other powers. Add `print(power(3))` and `print(power(3, n=3))`, save, and run it with `python functions_practice.py`. Press `Ctrl+Up` and verify that `power(3)` gives `9` and `power(3, n=3)` gives `27`.
 :::
 
 ### Pure vs. Impure Functions
@@ -381,7 +381,7 @@ The function starts with the first two numbers, then loops `n - 2` more times, e
 
 :::{admonition} Try it
 :class: tip
-Create a file (for example `temperature.py`). Write a function that takes a temperature in Celsius and returns it in Fahrenheit (formula: `F = C * 9/5 + 32`). Then add an optional keyword argument so the user can choose Kelvin output instead (`K = C + 273.15`). Call your function with a few different inputs, printing each result. Save, run with `python temperature.py`, and read the output with `Alt+F2`.
+Create a file (for example `temperature.py`). Write a function that takes a temperature in Celsius and returns it in Fahrenheit (formula: `F = C * 9/5 + 32`). Then add an optional keyword argument so the user can choose Kelvin output instead (`K = C + 273.15`). Call your function with a few different inputs, printing each result. Save, run with `python temperature.py`, and read the output with `Ctrl+Up`.
 
 (This problem will come back in Assignment 3.)
 :::
@@ -608,5 +608,5 @@ Now printing `f` shows the formatted string from our `__repr__` instead of the m
 
 :::{admonition} Try it
 :class: tip
-Create a file (for example `my_class.py`) and define a minimal class of your own — pick a domain (e.g. a `Station` for a weather station, or a `Reading` for a measurement). Give it an `__init__` that takes 2–3 arguments and stores them as attributes. Create an instance, then `print` each of its attributes. Save, run with `python my_class.py`, and read the output with `Alt+F2`. The goal is to build enough familiarity that you can read class definitions confidently when you encounter them.
+Create a file (for example `my_class.py`) and define a minimal class of your own — pick a domain (e.g. a `Station` for a weather station, or a `Reading` for a measurement). Give it an `__init__` that takes 2–3 arguments and stores them as attributes. Create an instance, then `print` each of its attributes. Save, run with `python my_class.py`, and read the output with `Ctrl+Up`. The goal is to build enough familiarity that you can read class definitions confidently when you encounter them.
 :::

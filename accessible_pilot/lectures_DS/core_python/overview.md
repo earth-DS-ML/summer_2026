@@ -35,7 +35,7 @@ By the end of this section, you should be able to:
 
 These pages are written to be worked through as **Python scripts**. As you read each one,
 type the examples into a `.py` file in VS Code and run them in your Git Bash terminal with
-`python yourfile.py`, reading the output with `Alt+F2`. The **Try it** boxes invite you to
+`python yourfile.py`, reading the output with `Ctrl+Up`. The **Try it** boxes invite you to
 experiment before moving on. If you haven't set up VS Code yet, start with [Setting up an
 accessible workflow](../computing_env/accessible_setup.md) and [Working with Python
 scripts](../computing_env/working_with_scripts.md).

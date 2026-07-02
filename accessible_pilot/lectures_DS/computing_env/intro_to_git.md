@@ -2,7 +2,7 @@
 
 :::{admonition} Doing this lesson with a screen reader
 :class: important
-Run the commands below in the **Git Bash terminal** in VS Code (the one you set as your default in [Setting up an accessible workflow](accessible_setup.md)). After each command, press **`Alt+F2`** (Accessible View) to read the output. The `git config` step below also turns off git's scrolling pager, so commands like `git log` print their output straight into the terminal where your screen reader can read it.
+Run the commands below in the **Git Bash terminal** in VS Code (the one you set as your default in [Setting up an accessible workflow](accessible_setup.md)). After each command, press **`Ctrl+Up`** (the terminal's Accessible View) to read the output. The `git config` step below also turns off git's scrolling pager, so commands like `git log` print their output straight into the terminal where your screen reader can read it.
 :::
 
 ## Why version control?
@@ -48,7 +48,7 @@ git config --global core.pager cat
 
 End of command.
 
-The third line tells git to call the default branch `main` (matching GitHub's convention). The fourth line turns off git's **pager**: by default, commands like `git log` open their output in a scrolling viewer (`less`) that is awkward with a screen reader; `core.pager cat` makes git print the output straight into the terminal instead, so you can read it with `Alt+F2`.
+The third line tells git to call the default branch `main` (matching GitHub's convention). The fourth line turns off git's **pager**: by default, commands like `git log` open their output in a scrolling viewer (`less`) that is awkward with a screen reader; `core.pager cat` makes git print the output straight into the terminal instead, so you can read it with `Ctrl+Up`.
 :::
 
 :::{note}
@@ -105,7 +105,7 @@ Run `git status` in `git_practice`. You should see "On branch main" and "No comm
 
 :::{admonition} Try it
 :class: tip
-We'll create a file, stage it, and commit it — in three steps. **Run each command, then read the output with `Alt+F2` before moving on.**
+We'll create a file, stage it, and commit it — in three steps. **Run each command, then read the output with `Ctrl+Up` before moving on.**
 
 **1. Create the file:**
 
@@ -165,7 +165,7 @@ End of command.
 
 (You can also open `hello.md` in the VS Code editor and type into it if you prefer.)
 
-To check that the line was written, print the file's contents in the terminal with `cat hello.md`, then read it with `Alt+F2`.
+To check that the line was written, print the file's contents in the terminal with `cat hello.md`, then read it with `Ctrl+Up`.
 
 Then stage and commit:
 
@@ -188,7 +188,7 @@ You now have two commits recording the file's history.
 
 :::{admonition} Try it
 :class: tip
-Run `git log` in `git_practice`. You should see your two commits with their messages, timestamps, and author info (the name and email you set with `git config`). Because you turned off the pager, the output prints directly into the terminal — read it with `Alt+F2`.
+Run `git log` in `git_practice`. You should see your two commits with their messages, timestamps, and author info (the name and email you set with `git config`). Because you turned off the pager, the output prints directly into the terminal — read it with `Ctrl+Up`.
 :::
 
 > *Reference:* `git diff` shows exactly which lines changed between commits, or between your working directory and the last commit. `git checkout <commit-hash> <filename>` restores a file to an earlier version. You won't need these often at first, but they exist when you want to dig into changes or roll back.
