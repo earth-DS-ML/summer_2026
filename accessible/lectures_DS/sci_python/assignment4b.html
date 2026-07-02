@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 4b: More Matplotlib &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/sci_python/assignment4b';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Assignment 4a: NumPy and Matplotlib" href="assignment4a.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages (preview)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 4b: More Matplotlib</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/sci_python/assignment4b.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 4b: More Matplotlib</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-line-plots">Problem 1: Line plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-contour-plots">Problem 2: Contour Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-scatter-plots">Problem 3: Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-4b-more-matplotlib">
+<h1>Assignment 4b: More Matplotlib<a class="headerlink" href="#assignment-4b-more-matplotlib" title="Link to this heading">#</a></h1>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to your completed work on the matching Courseworks assignment.</p>
+<p>In the standard version of this assignment, each problem shows a <em>picture</em> of a finished figure, and the task is to replicate it as closely as possible using only numpy and matplotlib. In this accessible version the task is the same, but each target figure is specified <strong>in words</strong> instead: a detailed description of its layout and content (verified against the actual image), followed by a checklist of the properties your figure must have. You build the figure from the description, verify it programmatically, and save it as a PNG.</p>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises matplotlib customization skills from this section:</p>
+<ul class="simple">
+<li><p>Build figures with the explicit Figure / Axes (<code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots(...)</span></code>) pattern</p></li>
+<li><p>Customize line styles, colors, markers, and legends</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">contourf</span></code> and colorbars to visualize 2D scalar data</p></li>
+<li><p>Use scatter plots with color and size to encode multiple variables on a 2D plane</p></li>
+</ul>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Working through this assignment with a screen reader</p>
+<p>Write one <code class="docutils literal notranslate"><span class="pre">.py</span></code> script per problem. For each problem, the code block below the problem statement downloads / prepares the data into numpy arrays — copy it to the top of your script. <strong>Don’t worry about how that code works</strong> (some of it uses pandas and xarray, which we haven’t covered yet) — just run it and use the resulting arrays in your plots. You are not allowed to use any packages other than numpy and matplotlib <em>in your own plotting code</em>. You’ll need <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pooch</span> <span class="pre">pandas</span> <span class="pre">xarray</span> <span class="pre">netcdf4</span></code> for the data-prep code, and be online when you run the scripts.</p>
+<p>For each problem, submit three things:</p>
+<ol class="arabic simple">
+<li><p><strong>The script</strong>, ending with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;problem1.png&quot;)</span></code> (etc.) so the figure is saved for a sighted grader.</p></li>
+<li><p><strong>The printed self-checks</strong> listed under the problem — run them and make sure they pass.</p></li>
+<li><p><strong>Two or three sentences, in a comment at the bottom of the script, saying what the data shows</strong> — the description of each target figure tells you the story; put it in your own words, tied to the numbers you printed.</p></li>
+</ol>
+<p>You are graded on the code, the checks, and the understanding — not on pixel-perfect visual matching. (The original images are on the <a class="reference external" href="https://earth-ds-ml.github.io/summer_2026/lectures_DS/sci_python/assignment4b.html" rel="noreferer noopener" target="_blank">main course version of this page</a>, for any sighted helper who wants to compare.)</p>
+</div>
+<section id="problem-1-line-plots">
+<h2>Problem 1: Line plots<a class="headerlink" href="#problem-1-line-plots" title="Link to this heading">#</a></h2>
+<p>In this problem, we will plot some daily weather data from a NOAA station in <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:US1NYDT0008/detail" rel="noreferer noopener" target="_blank">Millbrook, NY</a>. A full description of this dataset is available at: <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data" rel="noreferer noopener" target="_blank">https://www.ncdc.noaa.gov/data-access/land-based-station-data</a></p>
+<p>The code below uses pandas to download the data and populate a bunch of numpy arrays (<code class="docutils literal notranslate"><span class="pre">t_daily_min</span></code>, <code class="docutils literal notranslate"><span class="pre">t_daily_max</span></code>, etc.). Copy it, run it, and then use the numpy arrays to re-create the figure described below.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="n">POOCH</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">os_cache</span><span class="p">(</span><span class="s2">&quot;noaa-data&quot;</span><span class="p">),</span>
+    <span class="c1"># Use the figshare DOI</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;doi:10.5281/zenodo.5553029/&quot;</span><span class="p">,</span>
+    <span class="n">registry</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:2a306ca225fe3ccb72a98953ded2f536&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2016-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:eb69811d14d0573ffa69f70dd9c768d9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2017-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:b911da727ba1bdf26a34a775f25d1088&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2018-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:5b61bc687261596eba83801d7080dc56&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2019-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:9b814430612cd8a770b72020ca4f2b7d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2020-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:cd8de6d5445024ce35fcaafa9b0e7b64&quot;</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="n">dframes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-NY_Millbrook_3_W.txt&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+                     <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
+    <span class="n">dframes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dframes</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">)</span>
+
+<span class="c1">#########################################################</span>
+<span class="c1">#### BELOW ARE THE VARIABLES YOU SHOULD USE IN THE PLOTS!</span>
+<span class="c1">#### (numpy arrays)</span>
+<span class="c1">#### NO PANDAS ALLOWED!</span>
+<span class="c1">#########################################################</span>
+
+<span class="n">t_daily_min</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MIN</span><span class="o">.</span><span class="n">values</span>
+<span class="n">t_daily_max</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MAX</span><span class="o">.</span><span class="n">values</span>
+<span class="n">t_daily_mean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">values</span>
+<span class="n">p_daily_calc</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">P_DAILY_CALC</span><span class="o">.</span><span class="n">values</span>
+<span class="n">soil_moisture_5</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SOIL_MOISTURE_5_DAILY</span><span class="o">.</span><span class="n">values</span>
+<span class="n">soil_moisture_10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SOIL_MOISTURE_10_DAILY</span><span class="o">.</span><span class="n">values</span>
+<span class="n">soil_moisture_20</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SOIL_MOISTURE_20_DAILY</span><span class="o">.</span><span class="n">values</span>
+<span class="n">soil_moisture_50</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SOIL_MOISTURE_50_DAILY</span><span class="o">.</span><span class="n">values</span>
+<span class="n">soil_moisture_100</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SOIL_MOISTURE_100_DAILY</span><span class="o">.</span><span class="n">values</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>(To hear the variable names and units in this dataset, you can also print them: <code class="docutils literal notranslate"><span class="pre">units</span> <span class="pre">=</span> <span class="pre">lines[2].split('</span> <span class="pre">')</span></code>, then loop <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">name,</span> <span class="pre">unit</span> <span class="pre">in</span> <span class="pre">zip(headers,</span> <span class="pre">units):</span> <span class="pre">print(name,</span> <span class="pre">unit)</span></code>.)</p>
+<p><strong>The target figure, in words.</strong> One tall figure of <strong>three stacked panels</strong> that share the same x-axis: time, from January 2016 through December 2018 (1096 days of daily data).</p>
+<ul class="simple">
+<li><p><strong>Top panel — temperature.</strong> A shaded light-gray band spans, for every day, the range from that day’s minimum to its maximum temperature (made with <code class="docutils literal notranslate"><span class="pre">ax.fill_between(date,</span> <span class="pre">t_daily_min,</span> <span class="pre">t_daily_max)</span></code>); a magenta line for the daily mean runs through the middle of the band. A legend in the top-right corner names them “daily range” and “daily mean”. The y-axis is labelled “Temperature [<span class="math notranslate nohighlight">\(^\circ\)</span>C]”. The curve rises and falls through <strong>three annual cycles</strong>: summer peaks near +25 to +30 °C, winter dips below −10 °C (the extremes in the record are −26.0 and +35.7 °C).</p></li>
+<li><p><strong>Middle panel — precipitation.</strong> Daily precipitation as a series of thin blue vertical spikes rising from a zero baseline (a simple <code class="docutils literal notranslate"><span class="pre">ax.plot</span></code> of the array works, though the spiky look comes naturally either way). Most days are small (under 10 mm/day), with isolated storm spikes — the largest reach 66 mm/day, one in February 2016 and a near-equal one in March 2017. Y-axis label: “Precipitation [mm/day]”.</p></li>
+<li><p><strong>Bottom panel — soil moisture.</strong> <strong>Five</strong> lines, one per measurement depth (5, 10, 20, 50, 100 cm), with a legend in the lower left naming each. Values range from about 0.04 to 0.32 m³/m³; y-axis label “Soil Moisture [<span class="math notranslate nohighlight">\(m^3/m^3\)</span>]”, x-axis label “Date”. The story in the lines: the shallow depths swing sharply — jumping with every rain event and drying out hard in late summer — while the deepest (100 cm) line is the smoothest and stays in a narrow 0.11–0.22 band.</p></li>
+</ul>
+<p><strong>Checklist / self-checks.</strong> Print and confirm:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">len(fig.axes)</span></code> is <code class="docutils literal notranslate"><span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">len(t_daily_mean)</span></code> is <code class="docutils literal notranslate"><span class="pre">1096</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.nanmin(t_daily_min)</span></code> ≈ <code class="docutils literal notranslate"><span class="pre">-26.0</span></code>, <code class="docutils literal notranslate"><span class="pre">np.nanmax(t_daily_max)</span></code> ≈ <code class="docutils literal notranslate"><span class="pre">35.7</span></code>, <code class="docutils literal notranslate"><span class="pre">np.nanmax(p_daily_calc)</span></code> ≈ <code class="docutils literal notranslate"><span class="pre">66.0</span></code>.</p></li>
+<li><p>The bottom axes contains 5 lines: <code class="docutils literal notranslate"><span class="pre">len(fig.axes[2].lines)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p>Each panel’s <code class="docutils literal notranslate"><span class="pre">get_ylabel()</span></code> returns the label from the description.</p></li>
+</ul>
+<p>Hint: <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">axes</span> <span class="pre">=</span> <span class="pre">plt.subplots(nrows=3,</span> <span class="pre">figsize=(8,</span> <span class="pre">10),</span> <span class="pre">sharex=True)</span></code> is a good skeleton — <code class="docutils literal notranslate"><span class="pre">sharex=True</span></code> is what links the three time axes.</p>
+</section>
+<section id="problem-2-contour-plots">
+<h2>Problem 2: Contour Plots<a class="headerlink" href="#problem-2-contour-plots" title="Link to this heading">#</a></h2>
+<p>Now we will visualize some global temperature data from the NCEP-NCAR atmospheric reanalysis.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="n">ds_url</span> <span class="o">=</span> <span class="s1">&#39;http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.MONTHLY/.Diagnostic/.surface/.temp/dods&#39;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ds_url</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#########################################################</span>
+<span class="c1">#### BELOW ARE THE VARIABLES YOU SHOULD USE IN THE PLOTS!</span>
+<span class="c1">#### (numpy arrays)</span>
+<span class="c1">#### NO XARRAY ALLOWED!</span>
+<span class="c1">#########################################################</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">temp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="mf">273.15</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">values</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">ds.temp[-1]</span></code> grabs the <strong>most recent month</strong> in the dataset, which updates continuously — so your exact values (and which hemisphere looks coldest) depend on the season when you run it. The <em>structure</em> described below is always there.</p>
+<p><strong>The target figure, in words.</strong> One wide figure with <strong>two panels side by side — the left one about three times wider than the right</strong> (<code class="docutils literal notranslate"><span class="pre">gridspec_kw={'width_ratios':</span> <span class="pre">[3,</span> <span class="pre">1]}</span></code>).</p>
+<ul class="simple">
+<li><p><strong>Left panel — a filled-contour map of surface temperature</strong>, titled “Current Global Temperature”. Longitude 0–360 runs along the x-axis (labelled “Longitude”), latitude −90 to 90 up the y-axis (labelled “Latitude”). It’s drawn with <code class="docutils literal notranslate"><span class="pre">contourf</span></code> using a dark-to-light colormap like <code class="docutils literal notranslate"><span class="pre">magma</span></code> — near-black at the coldest values through purple and orange to pale yellow at the warmest — with a vertical colorbar (labelled “<span class="math notranslate nohighlight">\(^\circ\)</span>C”, roughly −30 to +40, with arrow tips for values beyond) beside the panel. The geography reads as horizontal bands: pale warm colors through the tropics, darkening toward both poles. In the target image (made from a northern-summer month) Antarctica at the bottom is a solid near-black band below −30 °C. On top of the filled colors sits a <strong>single white contour line at exactly 0 °C</strong> — the freezing line — tracing a ring around Antarctica near 60°S and a wandering line across the Arctic near 75–80°N. Dotted horizontal gridlines mark the latitudes.</p></li>
+<li><p><strong>Right panel — the zonal mean</strong>, titled “Zonal Mean Temperature”: a single black line of the temperature averaged over all longitudes (<code class="docutils literal notranslate"><span class="pre">temp.mean(axis=1)</span></code>), plotted <strong>against latitude on the vertical axis</strong> so it reads like a pole-to-pole profile, with a grid. In the target image it starts near −60 °C at the South Pole, climbs steeply across the Southern Hemisphere, flattens into a broad warm plateau near +25 to +28 °C in the tropics, and falls gently to around 0 °C at the North Pole. The two ends are strikingly asymmetric — that’s real (Antarctica is a high, icy continent), though how extreme it looks depends on the month you fetched.</p></li>
+</ul>
+<p><strong>Checklist / self-checks.</strong> Print and confirm:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">temp.shape</span></code> is <code class="docutils literal notranslate"><span class="pre">(94,</span> <span class="pre">192)</span></code>; <code class="docutils literal notranslate"><span class="pre">len(lat)</span></code> is <code class="docutils literal notranslate"><span class="pre">94</span></code>, <code class="docutils literal notranslate"><span class="pre">len(lon)</span></code> is <code class="docutils literal notranslate"><span class="pre">192</span></code> (so the zonal mean — the average over longitude — is <code class="docutils literal notranslate"><span class="pre">temp.mean(axis=1)</span></code>, shape <code class="docutils literal notranslate"><span class="pre">(94,)</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.nanmin(temp)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.nanmax(temp)</span></code> — expect very roughly −50s and +30s (season-dependent).</p></li>
+<li><p>The tropics are the warm plateau: print the zonal mean at the equator (<code class="docutils literal notranslate"><span class="pre">lat</span></code> index 46 or 47) — expect ~+25 to +28 °C.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len(fig.axes)</span></code> is <code class="docutils literal notranslate"><span class="pre">3</span></code> (two panels + the colorbar counts as an axes).</p></li>
+<li><p>The white freezing line is one extra call: <code class="docutils literal notranslate"><span class="pre">ax.contour(lon,</span> <span class="pre">lat,</span> <span class="pre">temp,</span> <span class="pre">[0],</span> <span class="pre">colors='w')</span></code>.</p></li>
+</ul>
+</section>
+<section id="problem-3-scatter-plots">
+<h2>Problem 3: Scatter plots<a class="headerlink" href="#problem-3-scatter-plots" title="Link to this heading">#</a></h2>
+<p>Here we will make a map plot of earthquakes from a USGS catalog of historic large earthquakes. Color the earthquakes by log10(depth) and adjust the marker size to be magnitude<span class="math notranslate nohighlight">\(^4\)</span>/100.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span>
+    <span class="s2">&quot;https://rabernat.github.io/research_computing/signif.txt.tsv.zip&quot;</span><span class="p">,</span>
+    <span class="n">known_hash</span><span class="o">=</span><span class="s1">&#39;22b9f7045bf90fb99e14b95b24c81da3c52a0b4c79acf95d72fbe3a257001dbb&#39;</span><span class="p">,</span>
+    <span class="n">processor</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">Unzip</span><span class="p">()</span>
+<span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">earthquakes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">earthquakes</span><span class="p">[:,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">magnitude</span> <span class="o">=</span> <span class="n">earthquakes</span><span class="p">[:,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">latitude</span> <span class="o">=</span> <span class="n">earthquakes</span><span class="p">[:,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">longitude</span> <span class="o">=</span> <span class="n">earthquakes</span><span class="p">[:,</span> <span class="mi">21</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>The target figure, in words.</strong> A single large panel titled “Location of Significant Earthquakes With Size Indicating Relative Magnitude”. It is a world map made of scatter dots: longitude −180 to 180 on the x-axis (labelled “Longitude (°)”), latitude about −60 to 73 on the y-axis (labelled “Latitude (°)”), with a light grid. Each dot is one earthquake. The dots are not spread evenly — they <strong>trace the boundaries of Earth’s tectonic plates</strong>: a dense line down the west coast of the Americas, a broad arc through the Mediterranean, the Himalayas and Indonesia, and chains outlining the western Pacific “Ring of Fire”. Dot <em>color</em> encodes <code class="docutils literal notranslate"><span class="pre">np.log10(depth)</span></code> on the default viridis colormap, explained by a colorbar labelled “Depth [m]”: most dots are mid-scale teal-green (shallow-to-mid depths), with scattered bright-yellow dots — the deepest quakes, down to 678 km, concentrated where plates dive under one another (western South America, the western Pacific). Dot <em>size</em> encodes <code class="docutils literal notranslate"><span class="pre">magnitude**4</span> <span class="pre">/</span> <span class="pre">100</span></code>, so great quakes stand out strongly: a magnitude 9.5 dot has about 13 times the area of a magnitude 5 dot (and over 1200 times that of the smallest, magnitude 1.6).</p>
+<p><strong>Checklist / self-checks.</strong> Print and confirm:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">earthquakes.shape</span></code> is <code class="docutils literal notranslate"><span class="pre">(5959,</span> <span class="pre">47)</span></code> — 5959 events.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.nanmax(depth)</span></code> is <code class="docutils literal notranslate"><span class="pre">678.0</span></code>; <code class="docutils literal notranslate"><span class="pre">np.nanmin(magnitude)</span></code> / <code class="docutils literal notranslate"><span class="pre">np.nanmax(magnitude)</span></code> are <code class="docutils literal notranslate"><span class="pre">1.6</span></code> / <code class="docutils literal notranslate"><span class="pre">9.5</span></code>.</p></li>
+<li><p>About half the depth values are missing: <code class="docutils literal notranslate"><span class="pre">np.isnan(depth).sum()</span></code> prints <code class="docutils literal notranslate"><span class="pre">2945</span></code> (dots with no depth simply get no color — and <code class="docutils literal notranslate"><span class="pre">np.log10</span></code> will warn about zeros/NaNs; that warning is expected here, not a bug).</p></li>
+<li><p>After plotting: <code class="docutils literal notranslate"><span class="pre">ax.get_title()</span></code> returns the title, and <code class="docutils literal notranslate"><span class="pre">len(fig.axes)</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code> (panel + colorbar).</p></li>
+</ul>
+</section>
+<section id="submission-instructions">
+<h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your scripts and the three PNG figures inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo. Then push the commit:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>week4/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit assignment 4b&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>End of command.</p>
+<p>Due Sunday night.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/sci_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="assignment4a.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Assignment 4a: NumPy and Matplotlib</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-line-plots">Problem 1: Line plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-contour-plots">Problem 2: Contour Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-scatter-plots">Problem 3: Scatter plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
