@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 6: Xarray with Sea Surface Temperature (SST) data &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/xarray/assignment6';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Final Project Requirements" href="../project_require.html" />
+    <link rel="prev" title="Xarray Advanced" href="xarray_advanced.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/xarray/assignment6.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 6: Xarray with Sea Surface Temperature (SST) data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-data-and-examining-the-metadata">1) Opening data and examining the metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-the-dataset-and-display-its-contents">1.1) Open the dataset and display its contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-out-the-long-name-attribute-of-each-variable-and-coordinate">1.2) Print out the <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attribute of each variable and coordinate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-reductions-arithmetic-means-and-plotting">2) Basic reductions, arithmetic, means, and plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-time-mean-of-the-entire-dataset">2.1) Calculate the time-mean of the entire dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-map-of-the-time-mean-that-was-generated-in-the-above-part">2.2) Plot a map of the time-mean that was generated in the above part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">2.3) Calculate a spatial mean for each time, and plot this as a timeseries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-weight-array-proportional-to-cos-lambda">2.4) Create a <code class="docutils literal notranslate"><span class="pre">weight</span></code> array proportional to <span class="math notranslate nohighlight">\(\cos(\lambda)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redo-the-calculation-of-the-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">2.5) Redo the calculation of the spatial mean for each time, and plot this as a timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-and-merging-data">3) Selecting and Merging Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dataset-for-each-point-from-the-global-dataset">3.1) Create a dataset for each point from the global dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-these-four-datasets-into-a-new-dataset-with-the-new-dimension-location">3.2) Combine these four datasets into a new dataset with the new dimension <code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-sst-at-each-location-as-a-timeseries-over-the-last-3-years">3.3) Plot the SST at each location as a timeseries over the last 3 years</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below">4) Group by and ENSO: Reproduce the SST curve from the figure below</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-6-xarray-with-sea-surface-temperature-sst-data">
+<h1>Assignment 6: Xarray with Sea Surface Temperature (SST) data<a class="headerlink" href="#assignment-6-xarray-with-sea-surface-temperature-sst-data" title="Link to this heading">#</a></h1>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to your completed scripts on the matching <strong>Courseworks</strong> assignment.</p>
+<p>In this lab you’ll apply xarray to NOAA’s Extended Reconstructed SST (ERSST v5) dataset, accessed over OPeNDAP:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc" rel="noreferer noopener" target="_blank">https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc</a></p>
+</div></blockquote>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the tasks as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output. You’ll need <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, <code class="docutils literal notranslate"><span class="pre">netcdf4</span></code>, <code class="docutils literal notranslate"><span class="pre">dask</span></code>, and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">xarray</span> <span class="pre">netcdf4</span> <span class="pre">dask</span> <span class="pre">matplotlib</span></code> if you don’t have them), and you must be online — the data is read straight from NOAA’s server, and some steps take a few minutes to pull the data down.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the xarray skills from this section:</p>
+<ul class="simple">
+<li><p>Open a gridded dataset over OPeNDAP and inspect its metadata (<code class="docutils literal notranslate"><span class="pre">attrs</span></code>, <code class="docutils literal notranslate"><span class="pre">long_name</span></code>)</p></li>
+<li><p>Compute time-means and spatial means; plot maps and timeseries</p></li>
+<li><p>Build a latitude weighting (cosine of latitude, <span class="math notranslate nohighlight">\(\cos\lambda\)</span>) and take an area-weighted spatial mean</p></li>
+<li><p>Select point locations with <code class="docutils literal notranslate"><span class="pre">.sel</span></code> and combine them along a new <code class="docutils literal notranslate"><span class="pre">location</span></code> dimension with <code class="docutils literal notranslate"><span class="pre">concat</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to build a climatology and anomalies, and <code class="docutils literal notranslate"><span class="pre">rolling</span></code> for a running mean</p></li>
+<li><p>Compute the Niño 3.4 ENSO index from SST anomalies</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Working through this assignment</p>
+<p>One script per numbered part works well (<code class="docutils literal notranslate"><span class="pre">assignment6_part1.py</span></code>, <code class="docutils literal notranslate"><span class="pre">assignment6_part2.py</span></code>, …), or one big script if you prefer — the parts build on the same opened dataset. Four notes:</p>
+<ul class="simple">
+<li><p><strong>In a script, a bare expression displays nothing</strong> — wrap anything you want to hear in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>.</p></li>
+<li><p><strong>Each task has a <em>Check yourself</em> note</strong> giving numbers your solution should produce, so you can confirm you’re on track without seeing any output or plot. The check numbers on this page were computed against the data as it stood in mid-2026, when the record ran January 1854 through May 2026 — 2069 monthly time steps. <strong>ERSST grows by one month every month</strong>, so your time counts will be a little larger and any number computed over the whole record (means, the ENSO index) can drift by a few hundredths. Treat every check number as “about”.</p></li>
+<li><p><strong>The whole-record reductions are slow over OPeNDAP.</strong> Each mean over the full record (parts 2 and 4) pulls all ~133 MB across the network and can take a few minutes. A good pattern: right after opening the dataset <em>with chunks</em> (see the warning in task 1.1), load it into memory once with <code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.load()</span></code> — that one line takes the few minutes, and everything after it runs instantly. (Loading is only safe <em>because</em> you opened with chunks; see the warning.)</p></li>
+<li><p>For the plotting tasks, end with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;assignment6_task2_2.png&quot;)</span></code> (matching the task number) so a sighted grader can open the PNGs, and add two or three sentences — in a comment at the bottom of the script — saying what the plot shows, tied to the numbers you printed. You are graded on the code, the printed checks, and the understanding, not on visual polish.</p></li>
+</ul>
+<p>When you’re done, follow the <a class="reference internal" href="#submission-instructions-6">submission instructions</a> at the bottom of the page.</p>
+</div>
+<p>Start by importing NumPy, Matplotlib, and Xarray. Set the default figure size to (12, 6) — in a script, that’s a <code class="docutils literal notranslate"><span class="pre">rcParams</span></code> setting:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<section id="opening-data-and-examining-the-metadata">
+<h2>1) Opening data and examining the metadata<a class="headerlink" href="#opening-data-and-examining-the-metadata" title="Link to this heading">#</a></h2>
+<section id="open-the-dataset-and-display-its-contents">
+<h3>1.1) Open the dataset and display its contents<a class="headerlink" href="#open-the-dataset-and-display-its-contents" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">Heads up — open this dataset with <code class="docutils literal notranslate"><span class="pre">chunks</span></code></p>
+<p>This OPeNDAP server quietly returns <strong>all zeros</strong> (you’ll get blank maps and flat
+timeseries) if you request the whole array in a single shot — which several tasks below
+do (the time-mean in 2.1, the spatial mean in 2.3, the ENSO index in part 4). Avoid it by
+opening the data in pieces with Dask, so xarray fetches it chunk-by-chunk.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>Everything else works exactly as usual — reductions like <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> pull the data in as
+needed. (You can combine this with other keywords, e.g. <code class="docutils literal notranslate"><span class="pre">drop_variables=['time_bnds']</span></code>.)</p>
+</div>
+<p>In a script, “display its contents” means <code class="docutils literal notranslate"><span class="pre">print(ds)</span></code> — an xarray <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> prints as plain linear text, which a screen reader handles well (it’s long, but it reads top to bottom):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>This prints the full <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> summary; the attributes listing at the end is abridged here (the real one shows 12 of 39 attributes). The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">133</span><span class="n">MB</span>
+<span class="n">Dimensions</span><span class="p">:</span>    <span class="p">(</span><span class="n">time</span><span class="p">:</span> <span class="mi">2069</span><span class="p">,</span> <span class="n">nbnds</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">lat</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">time</span>       <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">datetime64</span><span class="p">[</span><span class="n">ns</span><span class="p">]</span> <span class="mi">17</span><span class="n">kB</span> <span class="mi">1854</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">1854</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">01</span> <span class="o">...</span> <span class="mi">2026</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span>
+  <span class="o">*</span> <span class="n">lat</span>        <span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">356</span><span class="n">B</span> <span class="mf">88.0</span> <span class="mf">86.0</span> <span class="mf">84.0</span> <span class="mf">82.0</span> <span class="o">...</span> <span class="o">-</span><span class="mf">84.0</span> <span class="o">-</span><span class="mf">86.0</span> <span class="o">-</span><span class="mf">88.0</span>
+  <span class="o">*</span> <span class="n">lon</span>        <span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">720</span><span class="n">B</span> <span class="mf">0.0</span> <span class="mf">2.0</span> <span class="mf">4.0</span> <span class="mf">6.0</span> <span class="o">...</span> <span class="mf">352.0</span> <span class="mf">354.0</span> <span class="mf">356.0</span> <span class="mf">358.0</span>
+<span class="n">Dimensions</span> <span class="n">without</span> <span class="n">coordinates</span><span class="p">:</span> <span class="n">nbnds</span>
+<span class="n">Data</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">time_bnds</span>  <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">nbnds</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">33</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="n">sst</span>        <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">133</span><span class="n">MB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+<span class="n">Attributes</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="o">/</span><span class="mi">39</span><span class="p">)</span>
+    <span class="n">climatology</span><span class="p">:</span>                     <span class="n">Climatology</span> <span class="ow">is</span> <span class="n">based</span> <span class="n">on</span> <span class="mi">1971</span><span class="o">-</span><span class="mi">2000</span> <span class="n">SST</span><span class="p">,</span> <span class="n">X</span><span class="o">...</span>
+    <span class="n">description</span><span class="p">:</span>                     <span class="n">In</span> <span class="n">situ</span> <span class="n">data</span><span class="p">:</span> <span class="n">ICOADS2</span><span class="mf">.5</span> <span class="n">before</span> <span class="mi">2007</span> <span class="ow">and</span> <span class="o">...</span>
+    <span class="o">...</span>
+    <span class="n">dataset_title</span><span class="p">:</span>                   <span class="n">NOAA</span> <span class="n">Extended</span> <span class="n">Reconstructed</span> <span class="n">SST</span> <span class="n">V5</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>How to listen to a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> printout.</strong> Read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>, top to bottom — it always has the same four sections. First the <strong>dimensions line</strong>: this dataset has <code class="docutils literal notranslate"><span class="pre">time:</span> <span class="pre">2069</span></code> (monthly steps — yours will be more), <code class="docutils literal notranslate"><span class="pre">nbnds:</span> <span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">lat:</span> <span class="pre">89</span></code>, and <code class="docutils literal notranslate"><span class="pre">lon:</span> <span class="pre">180</span></code>. Then <strong>coordinates</strong>, one line each — <code class="docutils literal notranslate"><span class="pre">time</span></code> runs from 1854-01-01 to the most recent month; <code class="docutils literal notranslate"><span class="pre">lat</span></code> starts at 88.0 and <em>descends</em> (north to south) in steps of 2 degrees to −88.0; <code class="docutils literal notranslate"><span class="pre">lon</span></code> runs 0.0 to 358.0 in steps of 2 degrees (an eastward 0–360 convention — remember this for part 4). Then <strong>data variables</strong>: <code class="docutils literal notranslate"><span class="pre">sst</span></code>, the sea surface temperature on <code class="docutils literal notranslate"><span class="pre">(time,</span> <span class="pre">lat,</span> <span class="pre">lon)</span></code>, and a small helper variable <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code>. The <code class="docutils literal notranslate"><span class="pre">dask.array&lt;chunksize=(120,</span> <span class="pre">89,</span> <span class="pre">180)...&gt;</span></code> note on each variable confirms the data opened in chunks — no values have been downloaded yet. Last come the <strong>attributes</strong> — free-text metadata about the dataset.</p>
+<p><em>Check yourself:</em> a compact, stable summary to print —</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>Your <code class="docutils literal notranslate"><span class="pre">time</span></code> count will be larger by however many months have passed since May 2026. The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">2069</span><span class="p">,</span> <span class="s1">&#39;nbnds&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">}</span>
+<span class="mf">88.0</span> <span class="o">-</span><span class="mf">88.0</span>
+<span class="mf">0.0</span> <span class="mf">358.0</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+</section>
+<section id="print-out-the-long-name-attribute-of-each-variable-and-coordinate">
+<h3>1.2) Print out the <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attribute of each variable and coordinate<a class="headerlink" href="#print-out-the-long-name-attribute-of-each-variable-and-coordinate" title="Link to this heading">#</a></h3>
+<p>Hint: the names to loop over are <code class="docutils literal notranslate"><span class="pre">list(ds.coords)</span> <span class="pre">+</span> <span class="pre">list(ds.data_vars)</span></code>, and each one’s attributes live in <code class="docutils literal notranslate"><span class="pre">ds[name].attrs</span></code>. (The dimension <code class="docutils literal notranslate"><span class="pre">nbnds</span></code> has no coordinate variable, so it doesn’t appear.)</p>
+<p><em>Check yourself:</em> your loop should print five name / long-name pairs —</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lat</span></code> → <code class="docutils literal notranslate"><span class="pre">Latitude</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lon</span></code> → <code class="docutils literal notranslate"><span class="pre">Longitude</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> → <code class="docutils literal notranslate"><span class="pre">Time</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_bnds</span></code> → <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">Boundaries</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sst</span></code> → <code class="docutils literal notranslate"><span class="pre">Monthly</span> <span class="pre">Means</span> <span class="pre">of</span> <span class="pre">Sea</span> <span class="pre">Surface</span> <span class="pre">Temperature</span></code></p></li>
+</ul>
+<p>(That’s the order the hinted loop visits them in; a different approach may visit them in a different order.)</p>
+</section>
+</section>
+<section id="basic-reductions-arithmetic-means-and-plotting">
+<h2>2) Basic reductions, arithmetic, means, and plotting<a class="headerlink" href="#basic-reductions-arithmetic-means-and-plotting" title="Link to this heading">#</a></h2>
+<section id="calculate-the-time-mean-of-the-entire-dataset">
+<h3>2.1) Calculate the time-mean of the entire dataset<a class="headerlink" href="#calculate-the-time-mean-of-the-entire-dataset" title="Link to this heading">#</a></h3>
+<p>Because the data is chunked, the mean is <em>lazy</em> — nothing downloads until you ask for actual values (by printing a number, plotting, or calling <code class="docutils literal notranslate"><span class="pre">.compute()</span></code> / <code class="docutils literal notranslate"><span class="pre">.load()</span></code>). The first time you do, the whole record comes over the network, so expect a wait unless you pre-loaded as suggested at the top.</p>
+<p><em>Check yourself:</em> the time-mean of <code class="docutils literal notranslate"><span class="pre">sst</span></code> is a 2-D field with <code class="docutils literal notranslate"><span class="pre">{'lat':</span> <span class="pre">89,</span> <span class="pre">'lon':</span> <span class="pre">180}</span></code> — the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension is gone. Print a few values with <code class="docutils literal notranslate"><span class="pre">float(...)</span></code>: at <code class="docutils literal notranslate"><span class="pre">lon=200,</span> <span class="pre">lat=0</span></code> (central equatorial Pacific) the time-mean is about <code class="docutils literal notranslate"><span class="pre">27.0</span></code> °C. Over the whole map the minimum is about <code class="docutils literal notranslate"><span class="pre">-1.8</span></code> °C (polar oceans, pinned near the freezing point of seawater) and the maximum about <code class="docutils literal notranslate"><span class="pre">29.3</span></code> °C. About 31% of the grid is <code class="docutils literal notranslate"><span class="pre">NaN</span></code> — that’s land, and it’s why <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>’s default <code class="docutils literal notranslate"><span class="pre">skipna=True</span></code> matters here.</p>
+</section>
+<section id="plot-a-map-of-the-time-mean-that-was-generated-in-the-above-part">
+<h3>2.2) Plot a map of the time-mean that was generated in the above part<a class="headerlink" href="#plot-a-map-of-the-time-mean-that-was-generated-in-the-above-part" title="Link to this heading">#</a></h3>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> on the 2-D result draws the map; in a script, finish with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;assignment6_task2_2.png&quot;)</span></code> and/or <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>.</p>
+<p><strong>What your plot should show.</strong> A world map of long-term mean SST: longitude 0–358 across the x-axis (labelled “Longitude [degrees_east]”), latitude 88 down to −88 on the y-axis (labelled “Latitude [degrees_north]”), with a colorbar on the right labelled “Monthly Means of Sea Surface Temperature [degC]”. Continents are blank white gaps (NaN). The ocean reads as broad horizontal bands: a dark-red band of 25–29 °C water spanning the tropics roughly 20°S–20°N, fading through mid-latitude oranges to pale, near-zero water poleward of about 55–60° in both hemispheres, with a faint blue tinge right against Antarctica and in the Arctic (slightly below 0 °C). Two finer features to know about: the warmest broad expanse of open ocean (about 29.3 °C along the equator) is the <em>west</em> Pacific “warm pool” near longitude 150 (the single warmest grid cell, also about 29.3 °C, is actually tucked into the Red Sea near longitude 42, latitude 18), and along the equator the <em>eastern</em> Pacific is distinctly cooler (about 24.3 °C at longitude 270) — the equatorial “cold tongue”, which becomes important in part 4.</p>
+<p>A map like this can’t be explored with a screen reader directly — but a 1-D slice of it can. Print the equatorial band to “hear” the warm pool and cold tongue:</p>
+<p><em>Check yourself:</em> select the time-mean at <code class="docutils literal notranslate"><span class="pre">lat=0</span></code> and print <code class="docutils literal notranslate"><span class="pre">float(...)</span></code> at <code class="docutils literal notranslate"><span class="pre">lon=150</span></code> and <code class="docutils literal notranslate"><span class="pre">lon=270</span></code>: about <code class="docutils literal notranslate"><span class="pre">29.3</span></code> and <code class="docutils literal notranslate"><span class="pre">24.3</span></code> °C — the Pacific is about 5 °C colder at its eastern equatorial edge than at its western warm pool. The zonal (all-longitude) mean at <code class="docutils literal notranslate"><span class="pre">lat=-60</span></code> is about <code class="docutils literal notranslate"><span class="pre">0.8</span></code> °C.</p>
+</section>
+<section id="calculate-a-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">
+<h3>2.3) Calculate a spatial mean for each time, and plot this as a timeseries<a class="headerlink" href="#calculate-a-spatial-mean-for-each-time-and-plot-this-as-a-timeseries" title="Link to this heading">#</a></h3>
+<p><em>Check yourself:</em> the result has only <code class="docutils literal notranslate"><span class="pre">time</span></code> left — 2069 values (and counting). Its overall mean is about <code class="docutils literal notranslate"><span class="pre">13.6</span></code> °C, and the monthly values range from about <code class="docutils literal notranslate"><span class="pre">12.9</span></code> to <code class="docutils literal notranslate"><span class="pre">14.8</span></code> °C.</p>
+<p><strong>What your plot should show.</strong> A single line spanning 1854 to the present, y-axis about 12.9–14.8 °C. Up close it’s a dense zigzag — a seasonal cycle about 0.5 °C tall repeating every year. The longer story: the line drifts down to its coolest around 1900–1910 (annual means near 13.2 °C), recovers, and then climbs steadily and ever more steeply from about 1980 onward — the most recent years average about 14.3 °C, the warmest in the record. Save it as <code class="docutils literal notranslate"><span class="pre">assignment6_task2_3.png</span></code>. (Line plots like this can also be explored point-by-point by sound with <a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a>.)</p>
+</section>
+<section id="create-a-weight-array-proportional-to-cos-lambda">
+<h3>2.4) Create a <code class="docutils literal notranslate"><span class="pre">weight</span></code> array proportional to <span class="math notranslate nohighlight">\(\cos(\lambda)\)</span><a class="headerlink" href="#create-a-weight-array-proportional-to-cos-lambda" title="Link to this heading">#</a></h3>
+<p>Think carefully about radians vs. degrees.</p>
+<p>The goal here is to realize that the dataset is provided on a <span class="math notranslate nohighlight">\(2^\circ \times 2^\circ\)</span> lat-lon grid. But we know that the distance between longitude lines shrinks as we approach the poles.</p>
+<p>This means that if we take a naive mean (as done in the above part), we are overemphasizing the influence of the regions away from the equator (since their area is smaller but they contribute the same to the mean). So here we plan to appropriately weight our data.</p>
+<p><em>Check yourself:</em> your weight array should be 1-D along <code class="docutils literal notranslate"><span class="pre">lat</span></code> with 89 values. The cosine of latitude (<span class="math notranslate nohighlight">\(\cos\lambda\)</span>) is <code class="docutils literal notranslate"><span class="pre">1.0</span></code> at the equator, <code class="docutils literal notranslate"><span class="pre">0.5</span></code> at 60° north or south, and only about <code class="docutils literal notranslate"><span class="pre">0.035</span></code> at ±88° — the polar rows should count for almost nothing. If your weight at 60° is not 0.5, you fed degrees to a function expecting radians (<code class="docutils literal notranslate"><span class="pre">np.deg2rad</span></code> is your friend).</p>
+</section>
+<section id="redo-the-calculation-of-the-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">
+<h3>2.5) Redo the calculation of the spatial mean for each time, and plot this as a timeseries<a class="headerlink" href="#redo-the-calculation-of-the-spatial-mean-for-each-time-and-plot-this-as-a-timeseries" title="Link to this heading">#</a></h3>
+<p>Hint: xarray can do the bookkeeping for you — look up <code class="docutils literal notranslate"><span class="pre">.weighted()</span></code> — or you can build the weighted mean by hand from multiply, sum, and divide (be careful that the NaN land points must be excluded from the denominator too).</p>
+<p><em>Check yourself:</em> the weighted timeseries is about <code class="docutils literal notranslate"><span class="pre">4.3</span></code> °C <strong>warmer</strong> than the unweighted one everywhere — overall mean about <code class="docutils literal notranslate"><span class="pre">17.9</span></code> °C, monthly values from about <code class="docutils literal notranslate"><span class="pre">17.2</span></code> to <code class="docutils literal notranslate"><span class="pre">19.0</span></code>, the last year of data averaging about <code class="docutils literal notranslate"><span class="pre">18.7</span></code> °C. That’s the point of the task: the naive mean over-counts the small, cold high-latitude cells; weighting by area hands the vote back to the vast warm tropics. The seasonal zigzag also shrinks (about 0.36 °C peak-to-trough in the weighted climatology versus 0.52 unweighted).</p>
+<p><strong>What your plot should show.</strong> The same shape of story as 2.3 — coolest around 1900–1910, sharp warming after 1980 — but the whole curve now rides between about 17.2 and 19.0 °C. Plotting both series on one axes (worth doing) shows two roughly parallel curves separated by a constant ~4.3 °C gap, the weighted one on top with visibly smaller wiggles. Save it as <code class="docutils literal notranslate"><span class="pre">assignment6_task2_5.png</span></code>.</p>
+</section>
+</section>
+<section id="selecting-and-merging-data">
+<h2>3) Selecting and Merging Data<a class="headerlink" href="#selecting-and-merging-data" title="Link to this heading">#</a></h2>
+<p>For the next problem, use the following approximate locations of four different locations in the ocean:</p>
+<ul class="simple">
+<li><p><strong>Equatorial Pacific (EP):</strong> longitude 250 E, latitude 0 N</p></li>
+<li><p><strong>Southern Ocean (SO):</strong> longitude 50 E, latitude 60 S</p></li>
+<li><p><strong>North Atlantic (NAtl):</strong> longitude 300 E, latitude 30 N</p></li>
+<li><p><strong>Arabian Sea (AS):</strong> longitude 60 E, latitude 20 N</p></li>
+</ul>
+<section id="create-a-dataset-for-each-point-from-the-global-dataset">
+<h3>3.1) Create a dataset for each point from the global dataset<a class="headerlink" href="#create-a-dataset-for-each-point-from-the-global-dataset" title="Link to this heading">#</a></h3>
+<p>Hint: <code class="docutils literal notranslate"><span class="pre">.sel</span></code> with <code class="docutils literal notranslate"><span class="pre">method='nearest'</span></code> is the robust way to grab a point (here all four happen to sit exactly on grid points — remember the grid is every 2 degrees, longitude 0–360 east, and south latitudes are negative).</p>
+<p><em>Check yourself:</em> each point dataset has only <code class="docutils literal notranslate"><span class="pre">time</span></code> left as a dimension. The full-record mean SST at the four points: EP about <code class="docutils literal notranslate"><span class="pre">24.5</span></code> °C, SO about <code class="docutils literal notranslate"><span class="pre">-0.6</span></code> °C, NAtl about <code class="docutils literal notranslate"><span class="pre">24.1</span></code> °C, AS about <code class="docutils literal notranslate"><span class="pre">26.2</span></code> °C.</p>
+</section>
+<section id="combine-these-four-datasets-into-a-new-dataset-with-the-new-dimension-location">
+<h3>3.2) Combine these four datasets into a new dataset with the new dimension <code class="docutils literal notranslate"><span class="pre">location</span></code><a class="headerlink" href="#combine-these-four-datasets-into-a-new-dataset-with-the-new-dimension-location" title="Link to this heading">#</a></h3>
+<p>Create a new dimension coordinate to hold the location name.
+Display the combined dataset.</p>
+<p><em>Check yourself:</em> <code class="docutils literal notranslate"><span class="pre">print(dict(ds_locs.sizes))</span></code> gives <code class="docutils literal notranslate"><span class="pre">{'location':</span> <span class="pre">4,</span> <span class="pre">'time':</span> <span class="pre">2069}</span></code> (plus <code class="docutils literal notranslate"><span class="pre">nbnds:</span> <span class="pre">2</span></code> if you kept <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code>), and <code class="docutils literal notranslate"><span class="pre">print(ds_locs.location.values.tolist())</span></code> speaks your four location names, e.g. <code class="docutils literal notranslate"><span class="pre">['EP',</span> <span class="pre">'SO',</span> <span class="pre">'NAtl',</span> <span class="pre">'AS']</span></code> (<code class="docutils literal notranslate"><span class="pre">.tolist()</span></code> converts them to plain Python strings, which print cleanly). In the <code class="docutils literal notranslate"><span class="pre">print(ds_locs)</span></code> listing, <code class="docutils literal notranslate"><span class="pre">location</span></code> now appears in the coordinates section and <code class="docutils literal notranslate"><span class="pre">sst</span></code> is on <code class="docutils literal notranslate"><span class="pre">(location,</span> <span class="pre">time)</span></code>.</p>
+</section>
+<section id="plot-the-sst-at-each-location-as-a-timeseries-over-the-last-3-years">
+<h3>3.3) Plot the SST at each location as a timeseries over the last 3 years<a class="headerlink" href="#plot-the-sst-at-each-location-as-a-timeseries-over-the-last-3-years" title="Link to this heading">#</a></h3>
+<p>Hint: the last 3 years is the last 36 monthly steps — <code class="docutils literal notranslate"><span class="pre">isel(time=slice(-36,</span> <span class="pre">None))</span></code> gets them without knowing today’s date. Plotting a 2-D DataArray with <code class="docutils literal notranslate"><span class="pre">.plot.line(x='time')</span></code> draws one line per location with a legend.</p>
+<p><em>Check yourself:</em> 36 time steps per location (for the data as of this writing, June 2023 through May 2026). Print each location’s <code class="docutils literal notranslate"><span class="pre">mean</span></code> / <code class="docutils literal notranslate"><span class="pre">min</span></code> / <code class="docutils literal notranslate"><span class="pre">max</span></code> over the window, rounded to one decimal: EP about <code class="docutils literal notranslate"><span class="pre">25.3</span></code> / <code class="docutils literal notranslate"><span class="pre">22.6</span></code> / <code class="docutils literal notranslate"><span class="pre">27.7</span></code>; SO about <code class="docutils literal notranslate"><span class="pre">0.0</span></code> / <code class="docutils literal notranslate"><span class="pre">-1.4</span></code> / <code class="docutils literal notranslate"><span class="pre">1.4</span></code>; NAtl about <code class="docutils literal notranslate"><span class="pre">25.1</span></code> / <code class="docutils literal notranslate"><span class="pre">21.4</span></code> / <code class="docutils literal notranslate"><span class="pre">29.4</span></code>; AS about <code class="docutils literal notranslate"><span class="pre">27.2</span></code> / <code class="docutils literal notranslate"><span class="pre">24.8</span></code> / <code class="docutils literal notranslate"><span class="pre">29.9</span></code>.</p>
+<p><strong>What your plot should show.</strong> Four lines over three annual cycles, with a legend naming the locations. The Southern Ocean line sits alone near the bottom, hugging 0 °C (−1.4 to +1.4), peaking in February — Southern Hemisphere summer, opposite in phase to the others. The other three ride between about 21 and 30 °C: the North Atlantic swings the widest (about 8 °C, warmest in August–September, coolest in late winter (February–March)); the Arabian Sea swings about 5 °C and peaks early, in May, before the summer monsoon winds cool the sea surface; the Equatorial Pacific barely swings at all with the seasons (its April highs and September lows differ by under 4 °C) — its changes are mostly ENSO, year to year, which is where part 4 goes. Save it as <code class="docutils literal notranslate"><span class="pre">assignment6_task3_3.png</span></code>. (Another good plot to explore point-by-point with MAIDR.)</p>
+</section>
+</section>
+<section id="group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below">
+<h2>4) Group by and ENSO: Reproduce the SST curve from the figure below<a class="headerlink" href="#group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below" title="Link to this heading">#</a></h2>
+<p><em>The original page shows NOAA’s Oceanic Niño Index figure (from the National Centers for Environmental Information). In words:</em> the figure is titled “SST Anomaly in Nino 3.4 Region (5N-5S, 120-170W)”. Its x-axis is Year, 1950 to 2020; its y-axis is “Anomaly in Degrees C”, from −3 to +3. A single black curve — labelled “3mth running mean” in the legend — wiggles above and below zero, filled orange where it is above zero and cyan where below. Two dashed horizontal lines mark the thresholds: red at +0.5 °C (“El Nino Threshold”) and blue at −0.5 °C (“La Nina Threshold”). The curve crosses the thresholds every few years — the El Niño / La Niña cycle. The tallest orange peaks come in 1972–73, 1982–83, 1997–98, and 2015–16, the last two reaching about +2.4 to +2.5 °C; the deepest cyan troughs, around −1.5 to −2 °C, come in the mid-1950s, 1973–75, 1988–89, 1999–2000, and 2010–11.</p>
+<p>You don’t have to match the stylistic details, or use different colors above and below zero, just the “3mth running mean” curve.</p>
+<p>Here we will calculate the NINO 3.4 index of El Niño variability (which is the quantity shown in the above plot) and use it to analyze datasets.</p>
+<ul class="simple">
+<li><p>The Niño 3.4 region is defined as the region between +/- 5 deg. lat, 170 W - 120 W lon.</p></li>
+<li><p>Warm or cold phases of the Oceanic Niño Index are defined by a five consecutive 3-month running mean of sea surface temperature (SST) anomalies in the Niño 3.4 region that is above the threshold of +0.5°C (warm), or below the threshold of -0.5°C (cold). This is known as the Oceanic Niño Index (ONI).</p></li>
+</ul>
+<p>(Note that “anomaly” means that the seasonal cycle, also called the “climatology” has been removed.)</p>
+<p>Also for this part: Drop the <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code> variable as we did in class and trim the data to 1950 onward for this assignment.</p>
+<p>Two mechanical hints: this dataset’s longitudes run 0–360 east, so 170 W – 120 W is longitude 190 to 240; and since <code class="docutils literal notranslate"><span class="pre">lat</span></code> descends from north to south, a latitude <code class="docutils literal notranslate"><span class="pre">slice</span></code> must give the northern value first.</p>
+<p><em>Check yourself, step by step:</em></p>
+<ul class="simple">
+<li><p>Trimmed to 1950 onward, the record had <code class="docutils literal notranslate"><span class="pre">917</span></code> months at this writing (yours: more).</p></li>
+<li><p>The Niño 3.4 box is 5 latitude points (4, 2, 0, −2, −4) by 26 longitude points (190 through 240) — print <code class="docutils literal notranslate"><span class="pre">dict(...sizes)</span></code> to confirm <code class="docutils literal notranslate"><span class="pre">{'lat':</span> <span class="pre">5,</span> <span class="pre">'lon':</span> <span class="pre">26}</span></code> alongside <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p></li>
+<li><p>The climatology (mean over years for each of the 12 calendar months, via <code class="docutils literal notranslate"><span class="pre">groupby</span></code>) leaves a <code class="docutils literal notranslate"><span class="pre">month:</span> <span class="pre">12</span></code> dimension; subtracting it from the monthly data (again via <code class="docutils literal notranslate"><span class="pre">groupby</span></code>) gives anomalies with the full <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension back.</p></li>
+<li><p>After averaging the anomalies over the box and taking a 3-month running mean (<code class="docutils literal notranslate"><span class="pre">rolling</span></code>, centered), spot-check some famous ENSO winters, e.g. <code class="docutils literal notranslate"><span class="pre">float(index.sel(time='1997-12-01'))</span></code>. With the whole 1950-onward record as the climatology we got: December 1997 about <code class="docutils literal notranslate"><span class="pre">+2.5</span></code>, December 2015 about <code class="docutils literal notranslate"><span class="pre">+2.8</span></code> (the record maximum), December 1982 about <code class="docutils literal notranslate"><span class="pre">+2.3</span></code>, December 2023 about <code class="docutils literal notranslate"><span class="pre">+2.1</span></code>, December 1988 about <code class="docutils literal notranslate"><span class="pre">-1.8</span></code>, and a record minimum of about <code class="docutils literal notranslate"><span class="pre">-2.1</span></code> in late 1955. Your values will differ by a few hundredths — the climatology shifts as months are added — and they sit a little above NOAA’s official ONI table for recent events (the official index uses sliding 30-year climatology windows; ours uses one fixed window). A centered 3-month rolling mean also leaves a <code class="docutils literal notranslate"><span class="pre">nan</span></code> at the very first and last time step — that’s normal.</p></li>
+</ul>
+<p><strong>What your plot should show.</strong> Your reproduction of the NOAA curve, extended to the present: an irregular wiggle about zero from 1950 on, oscillating between roughly −2 and +2.8 with a period of a few years. The spikes named above should be audible in the numbers and visible in the line: the tallest peaks at 2015–16 (about +2.8), 1997–98 (about +2.5), 1982–83, 1972–73, and 2023–24 (about +2.1); the deepest troughs (about −1.5 to −2.1) in 1955, 1973–75, 1988–89, 1999–2000, and 2010–11. Adding the ±0.5 threshold lines with <code class="docutils literal notranslate"><span class="pre">ax.axhline</span></code> makes a nice finishing touch. Save it as <code class="docutils literal notranslate"><span class="pre">assignment6_task4.png</span></code>, and put a couple of sentences in a comment saying which El Niño and La Niña events your index found.</p>
+</section>
+<section id="submission-instructions">
+<span id="submission-instructions-6"></span><h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your completed scripts (and the PNG figures they produce) as <code class="docutils literal notranslate"><span class="pre">assignment6</span></code> files inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo, then push the commit:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>&lt;weekN&gt;/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit the Xarray SST lab&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>End of command.</p>
+<p>Then post a link to your completed work on the matching <strong>Courseworks</strong> assignment. Due Sunday night.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/xarray"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="xarray_advanced.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Xarray Advanced</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../project_require.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Final Project Requirements</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-data-and-examining-the-metadata">1) Opening data and examining the metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-the-dataset-and-display-its-contents">1.1) Open the dataset and display its contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-out-the-long-name-attribute-of-each-variable-and-coordinate">1.2) Print out the <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attribute of each variable and coordinate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-reductions-arithmetic-means-and-plotting">2) Basic reductions, arithmetic, means, and plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-time-mean-of-the-entire-dataset">2.1) Calculate the time-mean of the entire dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-map-of-the-time-mean-that-was-generated-in-the-above-part">2.2) Plot a map of the time-mean that was generated in the above part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">2.3) Calculate a spatial mean for each time, and plot this as a timeseries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-weight-array-proportional-to-cos-lambda">2.4) Create a <code class="docutils literal notranslate"><span class="pre">weight</span></code> array proportional to <span class="math notranslate nohighlight">\(\cos(\lambda)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redo-the-calculation-of-the-spatial-mean-for-each-time-and-plot-this-as-a-timeseries">2.5) Redo the calculation of the spatial mean for each time, and plot this as a timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-and-merging-data">3) Selecting and Merging Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dataset-for-each-point-from-the-global-dataset">3.1) Create a dataset for each point from the global dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-these-four-datasets-into-a-new-dataset-with-the-new-dimension-location">3.2) Combine these four datasets into a new dataset with the new dimension <code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-sst-at-each-location-as-a-timeseries-over-the-last-3-years">3.3) Plot the SST at each location as a timeseries over the last 3 years</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by-and-enso-reproduce-the-sst-curve-from-the-figure-below">4) Group by and ENSO: Reproduce the SST curve from the figure below</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

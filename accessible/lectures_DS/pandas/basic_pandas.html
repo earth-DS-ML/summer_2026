@@ -1,0 +1,1561 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pandas Fundamentals &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/basic_pandas';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pandas: Groupby" href="pandas_groupby.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/pandas/basic_pandas.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pandas Fundamentals</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-indexes">Time Indexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data-files-weather-station-data">Reading Data Files: Weather Station Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-statistics">Quick Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-values">Plotting Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas-fundamentals">
+<h1>Pandas Fundamentals<a class="headerlink" href="#pandas-fundamentals" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output. This page needs <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">pooch</span></code> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">pooch</span></code> if you don’t have them), and the weather-station section downloads a data file, so be online for that part.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>The <strong>“Try it”</strong> exercises on this page are part of your in-class assignment for this section. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment. (One 10-point assignment covers all the lecture pages in this section.)</p>
+</div>
+<p>One script-writing reminder before we start: in a notebook, a bare expression at the end of a cell displays itself; in a script, a bare expression displays <strong>nothing</strong>. Every example below therefore wraps results in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> — do the same in your own scripts.</p>
+<div class="important admonition">
+<p class="admonition-title">Reading a table by ear</p>
+<p>This is the course’s <em>tables</em> lecture, so the pattern from <a class="reference internal" href="../data/loading_data.html"><span class="std std-doc">Loading data</span></a> matters more than ever. A pandas <strong>DataFrame</strong> normally prints as a grid of aligned columns — quick to scan by eye, but a screen reader reads it as a stream of bare numbers with the column headers left far behind at the top. So throughout this page, when we want to <em>look at</em> a table, we print it in a screen-reader-friendly way instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>                 <span class="c1"># (rows, columns)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>      <span class="c1"># the column names</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="c1"># each row as a dict: every value spoken with its column name</span>
+</pre></div>
+</div>
+<p>For small <strong>Series</strong>, <code class="docutils literal notranslate"><span class="pre">print(s.to_dict())</span></code> does the same job in one line. (This approach was worked out and tested with a screen-reader user in this course.)</p>
+</div>
+<p>Let’s start by importing the libraries we’ll use throughout this lecture: <strong>pandas</strong> (conventionally imported as <code class="docutils literal notranslate"><span class="pre">pd</span></code>), NumPy, and matplotlib’s <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<section id="series">
+<h2>Series<a class="headerlink" href="#series" title="Link to this heading">#</a></h2>
+<p>Pandas gives you two main objects to work with: a <strong>Series</strong> (one-dimensional, like a single column of labelled data) and a <strong>DataFrame</strong> (two-dimensional, like a table or spreadsheet). DataFrames are built up from Series — each column of a DataFrame is itself a Series — so we’ll start with Series and then build up to DataFrame.</p>
+<p>A Series is a one-dimensional array of data with an <em>index</em>: labels we use to access each value.</p>
+<p>There are many ways to <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html" rel="noreferer noopener" target="_blank">create a Series</a>. Let’s start with a simple example using planet names and masses.</p>
+<p>To create a Series, we pass two lists to <code class="docutils literal notranslate"><span class="pre">pd.Series(...)</span></code>: the data <strong>values</strong>, and an <code class="docutils literal notranslate"><span class="pre">index</span></code> containing the <strong>labels</strong> for those values. A printed Series shows the labels on the left and the values on the right — one label–value pair per line, which reads reasonably well by ear (unlike a DataFrame grid), with a final line reporting the data type:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3e24</span><span class="p">,</span> <span class="mf">4.87e24</span><span class="p">,</span> <span class="mf">5.97e24</span><span class="p">]</span>
+<span class="n">masses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mercury</span>    <span class="mf">3.000000e+23</span>
+<span class="n">Venus</span>      <span class="mf">4.870000e+24</span>
+<span class="n">Earth</span>      <span class="mf">5.970000e+24</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>An even easier way to listen to a small Series is to print it as a dictionary:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Series have built in plotting methods. A pandas plot method returns the matplotlib <strong>Axes</strong> it drew into — catch it in a variable so you can interrogate the figure afterwards, just as in the matplotlib lecture:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">masses</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A bar chart with three blue vertical bars, labelled beneath (in vertically rotated text) Mercury, Venus, and Earth. The y-axis runs 0 to 6 with a “1e24” multiplier printed at its top, so it reads in units of 10²⁴ kg: Mercury’s bar is barely visible (0.3), Venus’s reaches 4.87, and Earth’s is tallest at 5.97.</p>
+<p><strong>Check it.</strong> The bar heights and labels can be read straight off the Axes object:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">()])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">3e+23</span><span class="p">,</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="mf">5.97e+24</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="note admonition">
+<p class="admonition-title">Hearing a plot (optional)</p>
+<p>The bar, line, and scatter plots on this page can also be explored non-visually — moved through point by point with arrow keys, values read as text — using <strong><a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a></strong>.</p>
+</div>
+<p>Arithmetic operations and most numpy function can be applied to Series.
+An important point is that the Series keep their index during such operations — notice the planet names still label the results:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span> <span class="o">/</span> <span class="n">masses</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mercury</span>    <span class="mf">6.006452e-46</span>
+<span class="n">Venus</span>      <span class="mf">2.396820e-48</span>
+<span class="n">Earth</span>      <span class="mf">1.600655e-48</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We can access the underlying index object if we need to:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (older pandas versions print <code class="docutils literal notranslate"><span class="pre">dtype='object'</span></code> here instead of <code class="docutils literal notranslate"><span class="pre">dtype='str'</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<section id="indexing">
+<h3>Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h3>
+<p>We can get values back out using the index via the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute, or by raw position using <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (the same value both times — Earth is the third entry, position 2):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.97e+24</span>
+<span class="mf">5.97e+24</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We can pass a list or array to loc to get multiple rows back:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>And we can even use slice notation. Note the difference: a <strong>label</strong> slice with <code class="docutils literal notranslate"><span class="pre">.loc</span></code> includes <em>both</em> endpoints (all three planets come back), while a <strong>position</strong> slice with <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> excludes the stop position, like ordinary Python slicing:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span><span class="s1">&#39;Earth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>If we need to, we can always get the raw data back out as well:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># a numpy array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>   <span class="c1"># a pandas Index object</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">3.00e+23</span> <span class="mf">4.87e+24</span> <span class="mf">5.97e+24</span><span class="p">]</span>
+<span class="n">Index</span><span class="p">([</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a fresh script, build your own <code class="docutils literal notranslate"><span class="pre">Series</span></code> from a Python list of values and a list of labels (any topic of your choice — e.g., capital cities mapped to populations). Use <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> to access one element by label, and <code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code> to access the same element by position. Then slice with <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> over a <em>label</em> range — note that both the start and end labels are included (unlike Python list slicing). Print each result so you can hear it.</p>
+</div>
+</section>
+</section>
+<section id="dataframe">
+<h2>DataFrame<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h2>
+<p>There is a lot more to Series, but they are limited to a single “column”. A more useful Pandas data structure is the DataFrame. A DataFrame is basically a bunch of series that share the same index. It’s a lot like a table in a spreadsheet.</p>
+<p>Now let’s build a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. The most common pattern is to start with a Python dictionary mapping column names to lists of values, then pass it to <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> — and then read it back with the shape / columns / rows-as-dicts pattern:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3e24</span><span class="p">,</span> <span class="mf">4.87e24</span><span class="p">,</span> <span class="mf">5.97e24</span><span class="p">],</span>       <span class="c1"># kg</span>
+        <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">4879e3</span><span class="p">,</span> <span class="mf">12_104e3</span><span class="p">,</span> <span class="mf">12_756e3</span><span class="p">],</span> <span class="c1"># m</span>
+        <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1407.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">23.9</span><span class="p">]</span> <span class="c1"># h</span>
+       <span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">]</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Three rows (the planets), three columns (<code class="docutils literal notranslate"><span class="pre">mass</span></code>, <code class="docutils literal notranslate"><span class="pre">diameter</span></code>, <code class="docutils literal notranslate"><span class="pre">rotation_period</span></code>) — and listen to Venus’s row: its <code class="docutils literal notranslate"><span class="pre">rotation_period</span></code> is <code class="docutils literal notranslate"><span class="pre">nan</span></code>, because we passed <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> there. Pandas handles missing data very elegantly, keeping track of it through all calculations.</p>
+<p>DataFrames come with a lot of built-in inspection and summary methods. A few of the most useful. First <code class="docutils literal notranslate"><span class="pre">.info()</span></code> — its output is a linear listing (not a grid), so it reads well: the index summary, then one line per column giving its name, its count of non-null values, and its dtype:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
+Index: 3 entries, Mercury to Earth
+Data columns (total 3 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   mass             3 non-null      float64
+ 1   diameter         3 non-null      float64
+ 2   rotation_period  2 non-null      float64
+dtypes: float64(3)
+memory usage: 96.0+ bytes
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Note <code class="docutils literal notranslate"><span class="pre">rotation_period</span></code> reports only <strong>2 non-null</strong> out of 3 entries — that’s Venus’s missing value again. (<code class="docutils literal notranslate"><span class="pre">info()</span></code> prints its report itself, so it needs no <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> around it.)</p>
+<p>A wide range of statistical functions are available on both Series and DataFrames. Each reduces the table to one value per column — a small Series, which we print as a dict:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3.713333333333334e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">9913000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">715.75</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3.0067645955966246e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4371743.702460152</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">978.4236531278258</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Notice how the missing value is handled: the mean <code class="docutils literal notranslate"><span class="pre">rotation_period</span></code> of 715.75 hours is the average of Mercury and Earth only — the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> was skipped, not treated as zero.</p>
+<p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code> computes count, mean, standard deviation, min, quartiles, and max for every column at once. It returns a small DataFrame (one row per statistic), so we read it row by row:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">stat</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">}</span>
+<span class="n">mean</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3.7133333333333345e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">9913000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">715.75</span><span class="p">}</span>
+<span class="n">std</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3.0067645955966246e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4371743.7</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">978.42</span><span class="p">}</span>
+<span class="nb">min</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">}</span>
+<span class="mi">25</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">2.585e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">8491500.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">369.82</span><span class="p">}</span>
+<span class="mi">50</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">715.75</span><span class="p">}</span>
+<span class="mi">75</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.42e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12430000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1061.68</span><span class="p">}</span>
+<span class="nb">max</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We can get a single column as a Series using python’s getitem syntax on the DataFrame object — note the <code class="docutils literal notranslate"><span class="pre">Name:</span> <span class="pre">mass</span></code> line at the end, showing the Series remembers which column it was:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mercury</span>    <span class="mf">3.000000e+23</span>
+<span class="n">Venus</span>      <span class="mf">4.870000e+24</span>
+<span class="n">Earth</span>      <span class="mf">5.970000e+24</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">mass</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>…or using attribute syntax:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mass</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Build your own <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> from a dictionary of columns (any topic — e.g. a few cities with <code class="docutils literal notranslate"><span class="pre">population</span></code>, <code class="docutils literal notranslate"><span class="pre">area</span></code>, and <code class="docutils literal notranslate"><span class="pre">elevation</span></code>), passing an <code class="docutils literal notranslate"><span class="pre">index</span></code> of labels. Include at least one <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> so you can see how pandas reports missing data. Inspect its structure with <code class="docutils literal notranslate"><span class="pre">.info()</span></code> and <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> (read <code class="docutils literal notranslate"><span class="pre">describe()</span></code> row by row with <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code>, as above), then compute a few summary statistics with <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">.min()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.std()</span></code> — try them on the whole DataFrame and on a single column (e.g. <code class="docutils literal notranslate"><span class="pre">df['population'].mean()</span></code>). Finally, pull a column out as a Series using both <code class="docutils literal notranslate"><span class="pre">df['col']</span></code> and <code class="docutils literal notranslate"><span class="pre">df.col</span></code>.</p>
+</div>
+<p>Indexing works very similar to series. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> with a row label (or <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> with a row position) returns that whole <strong>row</strong> as a Series — its “index” is now the column names, so <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> reads each value with its column name:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (the same row both ways):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>But we can also specify the column we want to access:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;mass&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (a single number; then the first two rows of the first column):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.97e+24</span>
+<span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>If we make a calculation using columns from the DataFrame, it will keep the same index. Here we compute each planet’s density — mass divided by volume, where volume is <span class="math notranslate nohighlight">\(\frac{4}{3} \pi r^3\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> = half the diameter:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">diameter</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">density</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mass</span> <span class="o">/</span> <span class="n">volume</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (in kilograms per cubic meter — rocky planets all come out around 5000):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mf">4933.2</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mf">5245.0</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mf">5493.3</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Which we can easily add as another column to the DataFrame:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mass</span> <span class="o">/</span> <span class="n">volume</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">]</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+</section>
+<section id="merging-data">
+<h2>Merging Data<a class="headerlink" href="#merging-data" title="Link to this heading">#</a></h2>
+<p>Pandas supports a wide range of methods for merging different datasets. These are described extensively in the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/merging.html" rel="noreferer noopener" target="_blank">documentation</a>. Here we just give a few examples.</p>
+<p>Pandas can merge DataFrames and Series intelligently along their shared index. Let’s create a separate <code class="docutils literal notranslate"><span class="pre">Series</span></code> of planet temperatures and combine it with our existing DataFrame. Note it has a <strong>fourth</strong> planet, Mars, that our DataFrame doesn’t have:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">167</span><span class="p">,</span> <span class="mi">464</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">],</span>
+                     <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;Mars&#39;</span><span class="p">],</span>
+                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;temperature&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="mi">167</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="mi">464</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;Mars&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">65</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joined</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">joined</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">joined</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">joined</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">]</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">167.0</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">464.0</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">join</span></code> keeps the calling DataFrame’s index — a <em>left</em> join — so the result still has 3 rows and Mars is dropped, since it isn’t one of our three planets. The <code class="docutils literal notranslate"><span class="pre">how</span></code> keyword changes this: <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> keeps the <em>other</em> object’s index instead, so Mars appears (with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> for the columns we don’t have for it):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">joined_right</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">joined_right</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">joined_right</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">167.0</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">464.0</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">}</span>
+<span class="n">Mars</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">65.0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><code class="docutils literal notranslate"><span class="pre">reindex</span></code> is a more general tool: it conforms a DataFrame to a brand-new index that you supply, inserting rows of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> wherever a label wasn’t already present:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">everyone</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;Mars&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">everyone</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">everyone</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">}</span>
+<span class="n">Mars</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Create a new <code class="docutils literal notranslate"><span class="pre">Series</span></code> of values indexed by some of the planets — you can include one that isn’t in the DataFrame (e.g. Mars or Jupiter) — and <code class="docutils literal notranslate"><span class="pre">join</span></code> it onto the planets DataFrame. Try <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> and compare the result with the default join (print both with the shape / rows-as-dicts pattern). Then call <code class="docutils literal notranslate"><span class="pre">.reindex(...)</span></code> with your own list of planet names and notice how pandas fills in <code class="docutils literal notranslate"><span class="pre">NaN</span></code> for labels that weren’t present.</p>
+</div>
+<p>Another powerful way to select data is to pick rows based on a <strong>condition</strong> rather than by their label or position. A comparison like <code class="docutils literal notranslate"><span class="pre">df.mass</span> <span class="pre">&gt;</span> <span class="pre">4e24</span></code> is checked for every row and returns a <em>boolean Series</em> — a column of <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> values, one per planet. Placing that inside <code class="docutils literal notranslate"><span class="pre">df[...]</span></code> keeps only the rows where the value is <code class="docutils literal notranslate"><span class="pre">True</span></code>. For example, to get just the planets more massive than <code class="docutils literal notranslate"><span class="pre">4e24</span></code> kg:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">mass</span> <span class="o">&gt;</span> <span class="mf">4e24</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>   <span class="c1"># the boolean Series itself</span>
+
+<span class="n">adults</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mass</span> <span class="o">&gt;</span> <span class="mf">4e24</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">adults</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">adults</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Mercury&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;Venus&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;Earth&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Mercury’s <code class="docutils literal notranslate"><span class="pre">False</span></code> filtered it out — only Venus and Earth remain. Since that condition is itself just a Series of <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> values, we can also store it as a new column — a handy way to flag the rows that meet the criterion:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_big&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mass</span> <span class="o">&gt;</span> <span class="mf">4e24</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">]</span>
+<span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.97e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<section id="modifying-values">
+<h3>Modifying Values<a class="headerlink" href="#modifying-values" title="Link to this heading">#</a></h3>
+<p>We often want to modify values in a dataframe based on some rule. To modify values, we need to use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Earth&#39;</span><span class="p">,</span> <span class="s1">&#39;mass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.98e+24</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Venus&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">planet</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output — listen for Earth’s mass, now 5.98e+24, and Venus’s diameter, now 12104001 (one meter bigger):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mercury</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">3e+23</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">4879000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">1407.6</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">4933.216530312946</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="n">Venus</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">4.87e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12104001.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5244.977069690924</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="n">Earth</span> <span class="p">{</span><span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mf">5.98e+24</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">:</span> <span class="mf">12756000.0</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">:</span> <span class="mf">23.9</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="mf">5493.285577295119</span><span class="p">,</span> <span class="s1">&#39;is_big&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take the planets DataFrame from above. Use <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> to get all of Earth’s data, then <code class="docutils literal notranslate"><span class="pre">.iloc[:3]</span></code> to get the first three rows. Add a new column called <code class="docutils literal notranslate"><span class="pre">density_check</span></code> computed as <code class="docutils literal notranslate"><span class="pre">df.mass</span> <span class="pre">/</span> <span class="pre">(4/3</span> <span class="pre">*</span> <span class="pre">np.pi</span> <span class="pre">*</span> <span class="pre">(df.diameter/2)**3)</span></code>, then filter the DataFrame to planets with mass greater than 1e24. Print each result as you go (rows as dicts).</p>
+</div>
+</section>
+</section>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<p>DataFrames have all kinds of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/visualization.html" rel="noreferer noopener" target="_blank">useful plotting</a> built in.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A scatter plot with three dots on a light grid. The horizontal axis is labelled “mass” and runs to 6 (with a 1e24 multiplier); the vertical axis is labelled “diameter” and runs from about 0.5 to 1.3 (with a 1e7 multiplier, i.e. meters). The dots rise from left to right: Mercury alone in the bottom-left corner (0.3e24, 4.88e6), Venus and Earth close together in the top-right — heavier planets have bigger diameters. Notice pandas labelled both axes for us, straight from the column names.</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlabel</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylabel</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_offsets</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (the axis labels, and the number of plotted points):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mass</span> <span class="n">diameter</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A grouped bar chart: one cluster of bars per planet, with a legend listing <code class="docutils literal notranslate"><span class="pre">mass</span></code>, <code class="docutils literal notranslate"><span class="pre">diameter</span></code>, <code class="docutils literal notranslate"><span class="pre">rotation_period</span></code>, and <code class="docutils literal notranslate"><span class="pre">density</span></code> in four colors (the <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> column <code class="docutils literal notranslate"><span class="pre">is_big</span></code> is left out of the plot). But the y-axis has to stretch to 6×10²⁴ to fit the masses — so only the blue mass bars are actually visible; diameter (about 10⁷), rotation period (about 10³), and density (about 5×10³) are invisibly short at this scale. The lesson: plotting columns with wildly different units on one axis rarely works.</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;rotation_period&#39;</span><span class="p">,</span> <span class="s1">&#39;density&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Make a scatter plot of <code class="docutils literal notranslate"><span class="pre">diameter</span></code> vs <code class="docutils literal notranslate"><span class="pre">mass</span></code> from the planets DataFrame. Then make a bar chart of each planet’s mass. (You can stay with <code class="docutils literal notranslate"><span class="pre">df.plot(kind='...')</span></code>, or use <code class="docutils literal notranslate"><span class="pre">df.plot.scatter(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">df.plot.bar(...)</span></code> — both work.) Check the bar chart without looking by printing <code class="docutils literal notranslate"><span class="pre">[float(p.get_height())</span> <span class="pre">for</span> <span class="pre">p</span> <span class="pre">in</span> <span class="pre">ax.patches]</span></code>.</p>
+</div>
+</section>
+<section id="time-indexes">
+<h2>Time Indexes<a class="headerlink" href="#time-indexes" title="Link to this heading">#</a></h2>
+<p>Indexes are very powerful. They are a big part of why Pandas is so useful. There are different indices for different types of data. Time Indexes are especially great!</p>
+<p>To build a time-indexed Series we first need a sequence of dates. <code class="docutils literal notranslate"><span class="pre">pd.date_range</span></code> generates one for us: we give it a <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> date and a frequency <code class="docutils literal notranslate"><span class="pre">freq</span></code> (here <code class="docutils literal notranslate"><span class="pre">'D'</span></code> for one timestamp per day), and it returns a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> of evenly spaced timestamps. Below we make two years of daily dates, then use them as the index of a <code class="docutils literal notranslate"><span class="pre">Series</span></code> whose values trace a seasonal sine wave — <code class="docutils literal notranslate"><span class="pre">.dayofyear</span></code> counts 1–365 through the year, so one full cycle spans a year:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">two_years</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2016-01-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">timeseries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span><span class="n">two_years</span><span class="o">.</span><span class="n">dayofyear</span> <span class="o">/</span> <span class="mi">365</span><span class="p">),</span>
+                       <span class="n">index</span><span class="o">=</span><span class="n">two_years</span><span class="p">)</span>
+<span class="n">timeseries</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A smooth blue sine wave spanning two full annual cycles. The x-axis runs from Jan 2014 to Jan 2016, automatically labelled with month names (Jan, Apr, Jul, Oct) and years — pandas produced calendar-aware tick labels without being asked. The curve starts at 0 in January 2014, peaks at +1 around the start of April, falls through 0 in July, bottoms out at −1 around the start of October, and repeats identically through 2015.</p>
+<p><strong>Check it.</strong> Confirm the peak and trough dates and values from the data:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timeseries</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">731</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mf">1.0</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="o">-</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We can use python’s slicing notation inside <code class="docutils literal notranslate"><span class="pre">.loc</span></code> to select a date range:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timeseries</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-07-01&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Just the first half of the 2015 cycle — a single smooth arch: rising from 0 on Jan 1, 2015 to the peak of 1.0 at the start of April, then descending back to 0 at Jul 1. The x-axis now shows the months Jan 2015 through Jul.</p>
+<p>The TimeIndex object has lots of useful attributes — for example, the month and day-of-month of every timestamp. These are long (731 entries), so pandas prints the first and last few with <code class="docutils literal notranslate"><span class="pre">...</span></code> in between, and reports the full <code class="docutils literal notranslate"><span class="pre">length</span></code> at the end:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">timeseries</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>
+       <span class="o">...</span>
+       <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">731</span><span class="p">)</span>
+<span class="n">Index</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+       <span class="o">...</span>
+       <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">731</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pd.date_range(start='2023-01-01',</span> <span class="pre">end='2023-12-31',</span> <span class="pre">freq='D')</span></code> to create a year of daily timestamps. Wrap them in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> whose values are <code class="docutils literal notranslate"><span class="pre">np.random.randn(len(...))</span></code>. Slice it to get just March through May 2023 (use <code class="docutils literal notranslate"><span class="pre">.loc['2023-03':'2023-05']</span></code>), then call <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> followed by <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>. Check the slice non-visually: print its length (should be 92 days) and its first and last index entries.</p>
+</div>
+</section>
+<section id="reading-data-files-weather-station-data">
+<h2>Reading Data Files: Weather Station Data<a class="headerlink" href="#reading-data-files-weather-station-data" title="Link to this heading">#</a></h2>
+<p>In this example, we will use NOAA weather station data from <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data" rel="noreferer noopener" target="_blank">https://www.ncdc.noaa.gov/data-access/land-based-station-data</a>.</p>
+<p>The details of files we are going to read are described in this README file (<a class="reference external" href="ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt" rel="noreferer noopener" target="_blank">ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt</a>).</p>
+<p>We fetch the file with <code class="docutils literal notranslate"><span class="pre">pooch</span></code> (the download tool from the <a class="reference internal" href="../data/loading_data.html"><span class="std std-doc">Loading data</span></a> page) — the first run prints a download-progress message; later runs reuse the locally cached copy silently:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="n">POOCH</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">os_cache</span><span class="p">(</span><span class="s2">&quot;noaa-data&quot;</span><span class="p">),</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;doi:10.5281/zenodo.5564850/&quot;</span><span class="p">,</span>
+    <span class="n">registry</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;data.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:5129dcfd19300eb8d4d8d1673fcfbcb4&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">datafile</span> <span class="o">=</span> <span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (the exact path depends on your operating system — on Windows it will start with <code class="docutils literal notranslate"><span class="pre">C:\Users\...</span></code>; what matters is that it ends in <code class="docutils literal notranslate"><span class="pre">noaa-data</span></code> and <code class="docutils literal notranslate"><span class="pre">data.txt</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">you</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Caches</span><span class="o">/</span><span class="n">noaa</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We now have a text file on our hard drive called <code class="docutils literal notranslate"><span class="pre">data.txt</span></code>. Examine it. In the original notebook this was done with the shell command <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">head</span> <span class="pre">data.txt</span></code>; in a script we can just open the file and print its first lines with Python (or run <code class="docutils literal notranslate"><span class="pre">head</span></code> on that printed path in Git Bash):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output — three very long lines. The first is a header of 28 column names; the next two are data rows of whitespace-separated values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WBANNO</span> <span class="n">LST_DATE</span> <span class="n">CRX_VN</span> <span class="n">LONGITUDE</span> <span class="n">LATITUDE</span> <span class="n">T_DAILY_MAX</span> <span class="n">T_DAILY_MIN</span> <span class="n">T_DAILY_MEAN</span> <span class="n">T_DAILY_AVG</span> <span class="n">P_DAILY_CALC</span> <span class="n">SOLARAD_DAILY</span> <span class="n">SUR_TEMP_DAILY_TYPE</span> <span class="n">SUR_TEMP_DAILY_MAX</span> <span class="n">SUR_TEMP_DAILY_MIN</span> <span class="n">SUR_TEMP_DAILY_AVG</span> <span class="n">RH_DAILY_MAX</span> <span class="n">RH_DAILY_MIN</span> <span class="n">RH_DAILY_AVG</span> <span class="n">SOIL_MOISTURE_5_DAILY</span> <span class="n">SOIL_MOISTURE_10_DAILY</span> <span class="n">SOIL_MOISTURE_20_DAILY</span> <span class="n">SOIL_MOISTURE_50_DAILY</span> <span class="n">SOIL_MOISTURE_100_DAILY</span> <span class="n">SOIL_TEMP_5_DAILY</span> <span class="n">SOIL_TEMP_10_DAILY</span> <span class="n">SOIL_TEMP_20_DAILY</span> <span class="n">SOIL_TEMP_50_DAILY</span> <span class="n">SOIL_TEMP_100_DAILY</span> 
+<span class="mi">64756</span> <span class="mi">20170101</span>  <span class="mf">2.422</span>  <span class="o">-</span><span class="mf">73.74</span>   <span class="mf">41.79</span>     <span class="mf">6.6</span>    <span class="o">-</span><span class="mf">5.4</span>     <span class="mf">0.6</span>     <span class="mf">2.2</span>     <span class="mf">0.0</span>     <span class="mf">8.68</span> <span class="n">C</span>     <span class="mf">7.9</span>    <span class="o">-</span><span class="mf">6.6</span>    <span class="o">-</span><span class="mf">0.5</span>    <span class="mf">84.8</span>    <span class="mf">30.7</span>    <span class="mf">53.7</span> <span class="o">-</span><span class="mf">99.000</span> <span class="o">-</span><span class="mf">99.000</span>   <span class="mf">0.207</span>   <span class="mf">0.152</span>   <span class="mf">0.175</span>    <span class="o">-</span><span class="mf">0.1</span>     <span class="mf">0.0</span>     <span class="mf">0.6</span>     <span class="mf">1.5</span>     <span class="mf">3.4</span>
+<span class="mi">64756</span> <span class="mi">20170102</span>  <span class="mf">2.422</span>  <span class="o">-</span><span class="mf">73.74</span>   <span class="mf">41.79</span>     <span class="mf">4.0</span>    <span class="o">-</span><span class="mf">6.8</span>    <span class="o">-</span><span class="mf">1.4</span>    <span class="o">-</span><span class="mf">1.2</span>     <span class="mf">0.0</span>     <span class="mf">2.08</span> <span class="n">C</span>     <span class="mf">4.1</span>    <span class="o">-</span><span class="mf">7.1</span>    <span class="o">-</span><span class="mf">1.6</span>    <span class="mf">91.1</span>    <span class="mf">49.1</span>    <span class="mf">77.4</span> <span class="o">-</span><span class="mf">99.000</span> <span class="o">-</span><span class="mf">99.000</span>   <span class="mf">0.205</span>   <span class="mf">0.151</span>   <span class="mf">0.173</span>    <span class="o">-</span><span class="mf">0.2</span>     <span class="mf">0.0</span>     <span class="mf">0.6</span>     <span class="mf">1.5</span>     <span class="mf">3.3</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>(It’s daily data for 2017 from one station — longitude −73.74, latitude 41.79, which is Millbrook in New York State — with daily temperatures, precipitation, solar radiation, humidity, and soil measurements.)</p>
+<p>To read it into pandas, we will use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html" rel="noreferer noopener" target="_blank">read_csv</a> function. This function is incredibly complex and powerful. You can use it to extract data from almost any text file. However, you need to understand how to use its various options.</p>
+<p>With no options, this is what we get. (In a notebook you’d glance at <code class="docutils literal notranslate"><span class="pre">df.head()</span></code> here; the shape and column list tell the same story more directly.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;WBANNO LST_DATE CRX_VN LONGITUDE LATITUDE T_DAILY_MAX T_DAILY_MIN T_DAILY_MEAN T_DAILY_AVG P_DAILY_CALC SOLARAD_DAILY SUR_TEMP_DAILY_TYPE SUR_TEMP_DAILY_MAX SUR_TEMP_DAILY_MIN SUR_TEMP_DAILY_AVG RH_DAILY_MAX RH_DAILY_MIN RH_DAILY_AVG SOIL_MOISTURE_5_DAILY SOIL_MOISTURE_10_DAILY SOIL_MOISTURE_20_DAILY SOIL_MOISTURE_50_DAILY SOIL_MOISTURE_100_DAILY SOIL_TEMP_5_DAILY SOIL_TEMP_10_DAILY SOIL_TEMP_20_DAILY SOIL_TEMP_50_DAILY SOIL_TEMP_100_DAILY &#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>365 rows but only <strong>one</strong> column, whose “name” is the entire header line! Pandas failed to identify the different columns. This is because it expected a standard CSV (comma-separated values) file, but in our file the values are separated by whitespace instead — and not by a single space: the amount of whitespace between columns varies. We tell pandas how the columns are separated with the <code class="docutils literal notranslate"><span class="pre">sep</span></code> keyword.</p>
+<p>The value <code class="docutils literal notranslate"><span class="pre">r'\s+'</span></code> is a small <em>regular expression</em> — a pattern for matching text. Here <code class="docutils literal notranslate"><span class="pre">\s</span></code> stands for any whitespace character (a space or a tab) and <code class="docutils literal notranslate"><span class="pre">+</span></code> means “one or more in a row,” so together they match any run of whitespace, however wide. The leading <code class="docutils literal notranslate"><span class="pre">r</span></code> makes it a <em>raw string</em>, which tells Python to leave the backslash alone instead of treating it as a special character.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;WBANNO&#39;</span><span class="p">,</span> <span class="s1">&#39;LST_DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;CRX_VN&#39;</span><span class="p">,</span> <span class="s1">&#39;LONGITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;LATITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_AVG&#39;</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">,</span> <span class="s1">&#39;SOLARAD_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_AVG&#39;</span><span class="p">,</span> <span class="s1">&#39;RH_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;RH_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;RH_DAILY_AVG&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_5_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_10_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_20_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_50_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_100_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_TEMP_5_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_TEMP_10_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_TEMP_20_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_TEMP_50_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_TEMP_100_DAILY&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Great! It worked — 365 rows and 28 properly separated columns. Listen to a few fields of the first row:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_5_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_10_DAILY&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">:</span> <span class="mf">20170101.0</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_5_DAILY&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_10_DAILY&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>If we look closely, we will see there are lots of -99 and -9999 values in the file — like the two soil-moisture values you just heard. The README file (<a class="reference external" href="ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt" rel="noreferer noopener" target="_blank">ftp://ftp.ncdc.noaa.gov/pub/data/uscrn/products/daily01/README.txt</a>) tells us that these are values used to represent missing data. Let’s tell this to pandas:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
+
+<span class="n">first</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_5_DAILY&#39;</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_10_DAILY&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">:</span> <span class="mf">20170101.0</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_5_DAILY&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;SOIL_MOISTURE_10_DAILY&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="mi">149</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Great. The missing data is now represented by <code class="docutils literal notranslate"><span class="pre">NaN</span></code> — the same two fields now read <code class="docutils literal notranslate"><span class="pre">nan</span></code>, and the second line counts 149 missing cells across the whole table.</p>
+<p>What data types did pandas infer?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (with pandas 3.x; older versions print <code class="docutils literal notranslate"><span class="pre">object</span></code> instead of <code class="docutils literal notranslate"><span class="pre">str</span></code> for the one text column, and slightly different memory usage):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
+RangeIndex: 365 entries, 0 to 364
+Data columns (total 28 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   WBANNO                   365 non-null    int64  
+ 1   LST_DATE                 365 non-null    int64  
+ 2   CRX_VN                   365 non-null    float64
+ 3   LONGITUDE                365 non-null    float64
+ 4   LATITUDE                 365 non-null    float64
+ 5   T_DAILY_MAX              364 non-null    float64
+ 6   T_DAILY_MIN              364 non-null    float64
+ 7   T_DAILY_MEAN             364 non-null    float64
+ 8   T_DAILY_AVG              364 non-null    float64
+ 9   P_DAILY_CALC             364 non-null    float64
+ 10  SOLARAD_DAILY            364 non-null    float64
+ 11  SUR_TEMP_DAILY_TYPE      365 non-null    str    
+ 12  SUR_TEMP_DAILY_MAX       364 non-null    float64
+ 13  SUR_TEMP_DAILY_MIN       364 non-null    float64
+ 14  SUR_TEMP_DAILY_AVG       364 non-null    float64
+ 15  RH_DAILY_MAX             364 non-null    float64
+ 16  RH_DAILY_MIN             364 non-null    float64
+ 17  RH_DAILY_AVG             364 non-null    float64
+ 18  SOIL_MOISTURE_5_DAILY    317 non-null    float64
+ 19  SOIL_MOISTURE_10_DAILY   317 non-null    float64
+ 20  SOIL_MOISTURE_20_DAILY   336 non-null    float64
+ 21  SOIL_MOISTURE_50_DAILY   364 non-null    float64
+ 22  SOIL_MOISTURE_100_DAILY  359 non-null    float64
+ 23  SOIL_TEMP_5_DAILY        364 non-null    float64
+ 24  SOIL_TEMP_10_DAILY       364 non-null    float64
+ 25  SOIL_TEMP_20_DAILY       364 non-null    float64
+ 26  SOIL_TEMP_50_DAILY       364 non-null    float64
+ 27  SOIL_TEMP_100_DAILY      364 non-null    float64
+dtypes: float64(25), int64(2), str(1)
+memory usage: 80.0 KB
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Listen for the non-null counts: most columns have 364 of 365 values, but the shallow soil-moisture sensors are missing over a month of data (317 non-null). One problem here is that pandas did not recognize the <code class="docutils literal notranslate"><span class="pre">LST_DATE</span></code> column as a date — it’s listed as plain <code class="docutils literal notranslate"><span class="pre">int64</span></code> (the number 20170101). Let’s help it.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">datafile</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+                 <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">],</span>
+                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output — identical to before except for column 1 and the dtypes summary, so we show just the changed lines (older pandas prints <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> rather than <code class="docutils literal notranslate"><span class="pre">datetime64[us]</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
+RangeIndex: 365 entries, 0 to 364
+Data columns (total 28 columns):
+ #   Column                   Non-Null Count  Dtype         
+---  ------                   --------------  -----         
+ 0   WBANNO                   365 non-null    int64         
+ 1   LST_DATE                 365 non-null    datetime64[us]
+...
+dtypes: datetime64[us](1), float64(25), int64(1), str(1)
+memory usage: 80.0 KB
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>It worked! <code class="docutils literal notranslate"><span class="pre">LST_DATE</span></code> is now a true datetime column. Finally, let’s tell pandas to use the date column as the index:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">5.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">6.6</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">6.8</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The table now has 27 columns (LST_DATE moved from column to index), and the index runs over the whole of 2017. We can now access values by time. A single day comes back as a Series — printed as one “column-name, value” pair per line, which reads well with a screen reader:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-08-07&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WBANNO</span>                     <span class="mi">64756</span>
+<span class="n">CRX_VN</span>                     <span class="mf">2.422</span>
+<span class="n">LONGITUDE</span>                 <span class="o">-</span><span class="mf">73.74</span>
+<span class="n">LATITUDE</span>                   <span class="mf">41.79</span>
+<span class="n">T_DAILY_MAX</span>                 <span class="mf">19.3</span>
+<span class="n">T_DAILY_MIN</span>                 <span class="mf">12.3</span>
+<span class="n">T_DAILY_MEAN</span>                <span class="mf">15.8</span>
+<span class="n">T_DAILY_AVG</span>                 <span class="mf">16.3</span>
+<span class="n">P_DAILY_CALC</span>                 <span class="mf">4.9</span>
+<span class="n">SOLARAD_DAILY</span>               <span class="mf">3.93</span>
+<span class="n">SUR_TEMP_DAILY_TYPE</span>            <span class="n">C</span>
+<span class="n">SUR_TEMP_DAILY_MAX</span>          <span class="mf">22.3</span>
+<span class="n">SUR_TEMP_DAILY_MIN</span>          <span class="mf">11.9</span>
+<span class="n">SUR_TEMP_DAILY_AVG</span>          <span class="mf">17.7</span>
+<span class="n">RH_DAILY_MAX</span>                <span class="mf">94.7</span>
+<span class="n">RH_DAILY_MIN</span>                <span class="mf">76.4</span>
+<span class="n">RH_DAILY_AVG</span>                <span class="mf">89.5</span>
+<span class="n">SOIL_MOISTURE_5_DAILY</span>      <span class="mf">0.148</span>
+<span class="n">SOIL_MOISTURE_10_DAILY</span>     <span class="mf">0.113</span>
+<span class="n">SOIL_MOISTURE_20_DAILY</span>     <span class="mf">0.094</span>
+<span class="n">SOIL_MOISTURE_50_DAILY</span>     <span class="mf">0.114</span>
+<span class="n">SOIL_MOISTURE_100_DAILY</span>    <span class="mf">0.151</span>
+<span class="n">SOIL_TEMP_5_DAILY</span>           <span class="mf">21.4</span>
+<span class="n">SOIL_TEMP_10_DAILY</span>          <span class="mf">21.7</span>
+<span class="n">SOIL_TEMP_20_DAILY</span>          <span class="mf">22.1</span>
+<span class="n">SOIL_TEMP_50_DAILY</span>          <span class="mf">22.2</span>
+<span class="n">SOIL_TEMP_100_DAILY</span>         <span class="mf">21.5</span>
+<span class="n">Name</span><span class="p">:</span> <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">07</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Or use slicing to get a range — here all of July 2017:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">july</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-07-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-07-31&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">july</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">july</span><span class="p">[</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (31 days, and a pleasant mean July temperature of about 21 °C):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+<span class="mf">21.05</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<section id="quick-statistics">
+<h3>Quick Statistics<a class="headerlink" href="#quick-statistics" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">describe()</span></code> is a fast way to get a feel for a freshly loaded dataset: in one call it reports the count, mean, standard deviation, minimum, the 25/50/75% percentiles, and maximum for every numeric column. It’s a good first sanity check — unrealistic values or columns full of <code class="docutils literal notranslate"><span class="pre">NaN</span></code> often jump out right away. On a 26-numeric-column table the full report is far too wide to listen to, so check its shape, then read the columns you care about row by row:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">desc</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">stat</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">desc</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
+<span class="n">count</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">364.0</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">364.0</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">364.0</span><span class="p">}</span>
+<span class="n">mean</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">4.04</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">9.88</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">15.72</span><span class="p">}</span>
+<span class="n">std</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">9.46</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">9.73</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">10.5</span><span class="p">}</span>
+<span class="nb">min</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">21.8</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">17.0</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">12.3</span><span class="p">}</span>
+<span class="mi">25</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.78</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">2.1</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">6.9</span><span class="p">}</span>
+<span class="mi">50</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">4.35</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">10.85</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">17.45</span><span class="p">}</span>
+<span class="mi">75</span><span class="o">%</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">11.9</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">18.15</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">24.85</span><span class="p">}</span>
+<span class="nb">max</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">20.7</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">25.7</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">33.4</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The numbers pass the sanity check: daily mean temperatures between −17 and +25.7 °C with an annual mean around 10 °C — plausible for New York State.</p>
+</section>
+<section id="plotting-values">
+<h3>Plotting Values<a class="headerlink" href="#plotting-values" title="Link to this heading">#</a></h3>
+<p>We can now quickly make plots of the data:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">14</span><span class="p">:</span><span class="mi">17</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">18</span><span class="p">:</span><span class="mi">22</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A large square canvas with four panels of box-and-whisker plots (each box spans the middle 50% of a column’s values, with a green line at the median; the whiskers reach the most extreme values lying within 1.5 box-lengths of the box, and circles beyond them mark outliers). Top-left, the four air-temperature columns: medians around 17.5 (T_DAILY_MAX), 4.3 (T_DAILY_MIN), and 11 (T_DAILY_MEAN and T_DAILY_AVG), whiskers spanning about −22 to +33 °C. Top-right, the surface-temperature columns — only <strong>three</strong> boxes appear, because the fourth column in that slice (<code class="docutils literal notranslate"><span class="pre">SUR_TEMP_DAILY_TYPE</span></code>) is text and boxplot silently skips it; the ground surface has a wider spread than the air, roughly −30 to +46 °C. Bottom-left, relative humidity: RH_DAILY_MAX hugs the top (median 92.9%, with a trail of low outlier circles), RH_DAILY_MIN has median 44.2%, RH_DAILY_AVG 71.5%. Bottom-right, soil moisture at four depths, all between about 0.08 and 0.32 (volumetric fraction), with deeper sensors showing narrower boxes — its long column names are rotated vertical by the <code class="docutils literal notranslate"><span class="pre">set_xticklabels(...,</span> <span class="pre">rotation=90)</span></code> line so they don’t overlap.</p>
+<p><strong>Check it.</strong> Which columns landed in each panel:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_AVG&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;SUR_TEMP_DAILY_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;SUR_TEMP_DAILY_AVG&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Pandas is very “time aware”:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A single jagged blue line tracing daily mean temperature through 2017, on an x-axis automatically labelled with month names (Jan 2017 through Dec) and titled <code class="docutils literal notranslate"><span class="pre">LST_DATE</span></code>. The line wobbles day to day by several degrees around a clear seasonal arc: winter values mostly between −15 and +5 °C, climbing through spring to a summer plateau around 15–26 °C from June through September, then falling steeply to the year’s minimum of −17 °C on December 31. The maximum is 25.7 °C on June 30. (A single missing day, October 4, makes a tiny break in the line — too small to notice by eye.)</p>
+<p>Note: we could also manually create an axis and plot into it:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Pandas Made This!&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Exactly the same annual temperature curve, now with the title “Pandas Made This!” across the top — demonstrating that pandas plots land on ordinary matplotlib axes you control.</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_title</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Pandas Made This!
+-17.0 25.7
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Passing a list of columns plots them all on one axes, with a legend:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Three jagged lines following the same seasonal arc in parallel, stacked in the expected order: T_DAILY_MIN in blue at the bottom, T_DAILY_MEAN in orange in the middle, T_DAILY_MAX in green on top, typically 5–10 °C apart. A legend box names the three. The full range now spans about −22 °C (coldest night) to +33 °C (hottest day).</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Slice the NOAA <code class="docutils literal notranslate"><span class="pre">df</span></code> to a single month of your choice (e.g., <code class="docutils literal notranslate"><span class="pre">df.loc['2017-06']</span></code> — the file covers 2017). Call <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> on that subset to get summary stats, and read a column or two of it by ear as above. Then plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MEAN</span></code> against the index for that month.</p>
+</div>
+</section>
+<section id="resampling">
+<h3>Resampling<a class="headerlink" href="#resampling" title="Link to this heading">#</a></h3>
+<p>Because pandas understands time, it can <strong>resample</strong> a time series — change how often the data is reported by grouping together all the timestamps that fall in each new time period. Our data is daily, but we might want monthly values; resampling to a monthly frequency gathers all the days in each month so we can summarize them (mean, max, …). It’s much like <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, except the groups are consecutive time intervals. The target frequency is given by a short code — below, <code class="docutils literal notranslate"><span class="pre">'MS'</span></code> means “month start” (one value per month); other common codes are <code class="docutils literal notranslate"><span class="pre">'D'</span></code> (daily), <code class="docutils literal notranslate"><span class="pre">'W'</span></code> (weekly), and <code class="docutils literal notranslate"><span class="pre">'YE'</span></code> (year end).</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">.resample(...)</span></code> returns a <em>resampler object</em> — a grouping by time frequency. Apply an aggregation (like <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>) to actually get a smaller DataFrame. (The <code class="docutils literal notranslate"><span class="pre">select_dtypes(include='number')</span></code> step drops the one text column, <code class="docutils literal notranslate"><span class="pre">SUR_TEMP_DAILY_TYPE</span></code> — you can’t average text.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rs_obj</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rs_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DatetimeIndexResampler</span> <span class="p">[</span><span class="n">freq</span><span class="o">=&lt;</span><span class="n">MonthBegin</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="n">left</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">left</span><span class="p">,</span> <span class="n">convention</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="n">start_day</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mm</span> <span class="o">=</span> <span class="n">rs_obj</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mm</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>365 daily rows collapsed to 12 monthly rows, one per month start. Listen to the monthly mean temperature, month by month:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mm</span><span class="p">[</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2017</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="o">-</span><span class="mf">0.0</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">01</span> <span class="mf">1.4</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span> <span class="o">-</span><span class="mf">0.1</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">01</span> <span class="mf">11.5</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span> <span class="mf">13.2</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">01</span> <span class="mf">18.8</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span> <span class="mf">21.0</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">01</span> <span class="mf">19.4</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">01</span> <span class="mf">17.7</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">01</span> <span class="mf">14.1</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">01</span> <span class="mf">4.1</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">01</span> <span class="o">-</span><span class="mf">3.0</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The seasonal cycle is now audible at a glance: around freezing January through March, a jump of 11 degrees into April, a July peak of 21.0 °C, and a slide back below zero in December.</p>
+<p>We can chain all of that together:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_mm</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df_mm</span><span class="p">[[</span><span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The same three temperature curves as before, but with only 12 points each the day-to-day jitter is gone — three smooth roughly bell-shaped arcs (min in blue, mean in orange, max in green, legend in the top-left). They rise from January values between about −4 and +4 °C, jump noticeably between March and April, peak in July (monthly mean max reaches about 27 °C, mean 21 °C, min 15 °C), and descend to December values of about −7 to +1.5 °C.</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_ydata</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (three lines, twelve monthly points each):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.select_dtypes(include='number').resample('YE').mean()</span></code> to get yearly means (as above, <code class="docutils literal notranslate"><span class="pre">select_dtypes</span></code> drops the one text column, which has no mean) and plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MAX</span></code> against the resulting index as a line chart. Then do the same with <code class="docutils literal notranslate"><span class="pre">'10D'</span></code> (10-day bins) — the lower-frequency series should look smoother. You can confirm the smoothing without looking: print each resampled series’ length (1 yearly value vs. 37 ten-day values) and its standard deviation — the coarser the bins, the smaller the spread.</p>
+</div>
+</section>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>You’ve now met the two core pandas objects and the everyday ways to work with them:</p>
+<ul class="simple">
+<li><p><strong>Series and DataFrames</strong> — labelled 1-D and 2-D data, with <code class="docutils literal notranslate"><span class="pre">.info()</span></code> and <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> for a quick look — and the screen-reader-friendly way to read any table: <code class="docutils literal notranslate"><span class="pre">shape</span></code>, <code class="docutils literal notranslate"><span class="pre">columns.tolist()</span></code>, then rows as dicts.</p></li>
+<li><p><strong>Indexing</strong> — <code class="docutils literal notranslate"><span class="pre">.loc</span></code> (by label), <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> (by position), and boolean masks to filter rows by a condition.</p></li>
+<li><p><strong>Building and combining</strong> — adding computed columns, and joining a Series or DataFrame on a shared index.</p></li>
+<li><p><strong>Reading real data</strong> — <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> with <code class="docutils literal notranslate"><span class="pre">sep</span></code>, <code class="docutils literal notranslate"><span class="pre">na_values</span></code>, and <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code>, then setting a column as the index.</p></li>
+<li><p><strong>Time series</strong> — a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, slicing by date, plotting straight from a DataFrame, and a first taste of <code class="docutils literal notranslate"><span class="pre">resample</span></code>.</p></li>
+</ul>
+<p>Next we go deeper into grouping operations — <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">resample</span></code>, and <code class="docutils literal notranslate"><span class="pre">rolling</span></code> — in <a class="reference internal" href="pandas_groupby.html"><span class="std std-doc">Pandas: Groupby</span></a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pandas_groupby.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pandas: Groupby</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-values">Modifying Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-indexes">Time Indexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data-files-weather-station-data">Reading Data Files: Weather Station Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-statistics">Quick Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-values">Plotting Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

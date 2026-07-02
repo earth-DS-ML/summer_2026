@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Overview &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/xarray/overview';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Xarray Fundamentals" href="xarray_fundamentals.html" />
+    <link rel="prev" title="Assignment 5b: Pandas Groupby with Hurricane Data" href="../pandas/assignment5b.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/xarray/overview.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Overview</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-1-xarray-fundamentals">Lesson 1: Xarray Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-creation">Dataset Creation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-and-interpolation">Basic Indexing and Interpolation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-computation">Basic Computation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting">Basic Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-2-advanced-usage">Lesson 2: Advanced Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-s-groupby-resample-and-rolling">Xarray’s groupby, resample, and rolling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-and-combining-datasets">Merging and Combining Datasets</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-computations">Advanced Computations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>In the previous module, we saw how Pandas keeps track of the “metadata” surrounding tabular datasets — an <em>index</em> for each row and labels for each column. These features, together with Pandas’ many routines for data munging and analysis, have made it one of the most popular Python packages in the world.</p>
+<p>However, not all Earth and environmental datasets fit the “tabular” (rows-and-columns) model. We often deal with <strong>multidimensional data</strong> (also called <em>N-dimensional</em>): data with many independent dimensions or axes. For example, we might represent Earth’s surface temperature <span class="math notranslate nohighlight">\(T\)</span> as a three-dimensional variable</p>
+<div class="math notranslate nohighlight">
+\[ T(x, y, t) \]</div>
+<p>where <span class="math notranslate nohighlight">\(x\)</span> is longitude, <span class="math notranslate nohighlight">\(y\)</span> is latitude, and <span class="math notranslate nohighlight">\(t\)</span> is time.</p>
+<p><strong>Xarray</strong> brings pandas-level convenience to this kind of labelled, multidimensional data — and it is the workhorse for gridded climate data, from model output and reanalysis to satellite fields.</p>
+<p><em>The original page shows a diagram of the xarray data model. In words:</em> the diagram depicts one <strong>Dataset</strong> and everything inside it. On the left are two 3-D cubes of gridded numbers — one labelled <code class="docutils literal notranslate"><span class="pre">temperature</span></code>, one labelled <code class="docutils literal notranslate"><span class="pre">precipitation</span></code>. These are the <strong>data variables</strong>. Next to them are two flat 2-D grids labelled <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code> — the <strong>coordinates</strong>, which give a physical meaning (a location) to each grid cell of the cubes. On the right are three axis arrows labelled <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">t</span></code> — the <strong>dimensions</strong> (and their indexes) that all these arrays share — plus a single lone point labelled <code class="docutils literal notranslate"><span class="pre">reference_time</span></code>, a scalar coordinate with no dimension at all. Braces underneath group the pieces: the cubes and the coordinate grids are all “Variables”; <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code> are bracketed as “Coordinates”; the axes are bracketed as “Dimensions (&amp; Indexes)”. A wider bracket labelled <strong>DataArray</strong> spans <em>one</em> data variable together with its coordinates and dimensions — that is xarray’s basic object. The widest bracket, spanning everything, is labelled <strong>Dataset</strong>: a collection of DataArrays that share dimensions and coordinates.</p>
+<div class="important admonition">
+<p class="admonition-title">A note on maps and this accessible version</p>
+<p>This is the section where the data goes <strong>multi-dimensional</strong> — and where the course’s figures turn from line plots into <strong>2-D maps</strong> (<code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code>, <code class="docutils literal notranslate"><span class="pre">contourf</span></code>, and friends). Producing those maps is a normal coding skill, and you’ll learn it. But “reading” a map visually isn’t how you’ll work, and <a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a> — the sound-and-text chart explorer from the sci-python section — does <strong>not</strong> handle 2-D maps (it works for the line plots and histograms you’ll also meet here). So in this accessible version, wherever the course would have you look at a map, we instead <strong>(a)</strong> describe the rendered figure in words and verified numbers (the “What this shows” notes), and <strong>(b)</strong> replace map-reading with two habits you’ll practice throughout: the <strong>1-D profile trick</strong> — slice out a single latitude row, longitude column, or time series from the field and plot or print it as a line — and <strong>targeted prints</strong> — pull the value at a named location with <code class="docutils literal notranslate"><span class="pre">.sel(...)</span></code>, or a mean, minimum, or maximum, straight to the terminal. Conveniently, xarray’s labelled selection is exactly the tool that makes both habits easy.</p>
+</div>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>Because xarray is central to gridded-data analysis in the Earth and environmental sciences, we give it a full section. By the end you should be able to:</p>
+<section id="lesson-1-xarray-fundamentals">
+<h3>Lesson 1: Xarray Fundamentals<a class="headerlink" href="#lesson-1-xarray-fundamentals" title="Link to this heading">#</a></h3>
+<section id="dataset-creation">
+<h4>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Describe the core xarray data structures, the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> and the <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>, and the components that make them up, including: Data Variables, Dimensions, Coordinates, Indexes, and Attributes</p></li>
+<li><p>Create xarray <code class="docutils literal notranslate"><span class="pre">DataArrays</span></code> and <code class="docutils literal notranslate"><span class="pre">Datasets</span></code> out of raw numpy arrays</p></li>
+<li><p>Create xarray objects with and without indexes</p></li>
+<li><p>Load xarray datasets from netCDF files and OPeNDAP servers</p></li>
+<li><p>View and set attributes</p></li>
+</ol>
+</section>
+<section id="basic-indexing-and-interpolation">
+<h4>Basic Indexing and Interpolation<a class="headerlink" href="#basic-indexing-and-interpolation" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Select data by position using <code class="docutils literal notranslate"><span class="pre">.isel</span></code> with values or slices</p></li>
+<li><p>Select data by label using <code class="docutils literal notranslate"><span class="pre">.sel</span></code> with values or slices</p></li>
+<li><p>Select timeseries data by date/time with values or slices</p></li>
+<li><p>Use nearest-neighbor lookups with <code class="docutils literal notranslate"><span class="pre">.sel</span></code></p></li>
+<li><p>Mask data with <code class="docutils literal notranslate"><span class="pre">.where</span></code></p></li>
+<li><p>Interpolate data in one and several dimensions</p></li>
+</ol>
+</section>
+<section id="basic-computation">
+<h4>Basic Computation<a class="headerlink" href="#basic-computation" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Do basic arithmetic with DataArrays and Datasets</p></li>
+<li><p>Use numpy universal functions on DataArrays and Datasets, or use corresponding built-in xarray methods</p></li>
+<li><p>Combine multiple xarray objects in arithmetic operations and understand how they are broadcast / aligned</p></li>
+<li><p>Perform aggregation (reduction) along one or multiple dimensions of a DataArray or Dataset</p></li>
+</ol>
+</section>
+<section id="basic-plotting">
+<h4>Basic Plotting<a class="headerlink" href="#basic-plotting" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Use built-in xarray plotting for 1D and 2D DataArrays</p></li>
+<li><p>Customize plots with options</p></li>
+</ol>
+</section>
+</section>
+<section id="lesson-2-advanced-usage">
+<h3>Lesson 2: Advanced Usage<a class="headerlink" href="#lesson-2-advanced-usage" title="Link to this heading">#</a></h3>
+<section id="xarray-s-groupby-resample-and-rolling">
+<h4>Xarray’s groupby, resample, and rolling<a class="headerlink" href="#xarray-s-groupby-resample-and-rolling" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Split xarray objects into groups using <code class="docutils literal notranslate"><span class="pre">groupby</span></code></p></li>
+<li><p>Apply reduction operations to groups (e.g. mean)</p></li>
+<li><p>Apply non-reducing functions to groups (e.g. standardize)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> with time coordinates (e.g. to create climatologies)</p></li>
+<li><p>Use arithmetic between <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects and regular DataArrays / Datasets</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby_bins</span></code> to aggregate data in bins</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">resample</span></code> on time dimensions</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">rolling</span></code> to apply rolling aggregations</p></li>
+</ol>
+</section>
+<section id="merging-and-combining-datasets">
+<h4>Merging and Combining Datasets<a class="headerlink" href="#merging-and-combining-datasets" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Concatenate DataArrays and Datasets along a new or existing dimension</p></li>
+<li><p>Merge multiple datasets with different variables</p></li>
+<li><p>Add a new data variable to an existing Dataset</p></li>
+</ol>
+</section>
+<section id="reshaping-data">
+<h4>Reshaping Data<a class="headerlink" href="#reshaping-data" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Transpose dimension order</p></li>
+<li><p>Swap coordinates</p></li>
+<li><p>Expand and squeeze dimensions</p></li>
+<li><p>Convert between DataArray and Dataset</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">stack</span></code> and <code class="docutils literal notranslate"><span class="pre">unstack</span></code> to transform data</p></li>
+</ol>
+</section>
+<section id="advanced-computations">
+<h4>Advanced Computations<a class="headerlink" href="#advanced-computations" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">differentiate</span></code> to take derivatives of data</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">apply_ufunc</span></code> to apply custom or specialized operations to data</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="pages-in-this-section">
+<h2>Pages in this section<a class="headerlink" href="#pages-in-this-section" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="xarray_fundamentals.html"><span class="std std-doc">Xarray Fundamentals</span></a> — DataArrays and Datasets, label-based selection, computation, broadcasting, reductions, and loading netCDF/Zarr data — with every figure described in words and “Check it” prints along the way.</p></li>
+<li><p><a class="reference internal" href="xarray_advanced.html"><span class="std std-doc">Xarray: Advanced</span></a> — interpolation, <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">resample</span></code>, <code class="docutils literal notranslate"><span class="pre">rolling</span></code>, and <code class="docutils literal notranslate"><span class="pre">coarsen</span></code>; building climatologies and more.</p></li>
+<li><p><a class="reference internal" href="assignment6.html"><span class="std std-doc">Assignment 6: Xarray with SST data</span></a> — apply xarray to NOAA sea-surface-temperature data (the at-home assignment), with “check yourself” numbers for every task.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>Your in-class assignment for this section is to complete the <strong>“Try it”</strong> exercises in the lecture pages above. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment. (The at-home assignment — Assignment 6, the SST lab — is graded separately, 10 points.)</p>
+</div>
+</section>
+<section id="working-through-the-lectures">
+<h2>Working through the lectures<a class="headerlink" href="#working-through-the-lectures" title="Link to this heading">#</a></h2>
+<p>Same workflow as previous modules — work through the pages as <strong>Python scripts</strong> in VS Code: type the examples into a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file, run it in your Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and read the output with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>. Stop at each <strong>Try it</strong> admonition to experiment in your own script before moving on. If you haven’t set up VS Code yet, start with <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>.</p>
+<p>Two practical notes for this section. First, the lectures pull real climate data over the network (netCDF via OPeNDAP servers and cloud Zarr stores), so <strong>be online</strong> when you run the scripts. Second, they need a few extra packages beyond numpy, matplotlib, and pandas — install them once with:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>xarray<span class="w"> </span>netcdf4<span class="w"> </span>pooch<span class="w"> </span>zarr<span class="w"> </span>fsspec<span class="w"> </span>aiohttp<span class="w"> </span>dask
+</pre></div>
+</div>
+<p>End of command.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/xarray"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../pandas/assignment5b.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Assignment 5b: Pandas Groupby with Hurricane Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="xarray_fundamentals.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Xarray Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-1-xarray-fundamentals">Lesson 1: Xarray Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-creation">Dataset Creation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-and-interpolation">Basic Indexing and Interpolation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-computation">Basic Computation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting">Basic Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lesson-2-advanced-usage">Lesson 2: Advanced Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-s-groupby-resample-and-rolling">Xarray’s groupby, resample, and rolling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-and-combining-datasets">Merging and Combining Datasets</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-computations">Advanced Computations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-in-this-section">Pages in this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-lectures">Working through the lectures</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

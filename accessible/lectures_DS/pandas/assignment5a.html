@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 5a: Pandas Fundamentals with Earthquake Data &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/assignment5a';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 5b: Pandas Groupby with Hurricane Data" href="assignment5b.html" />
+    <link rel="prev" title="Pandas: Groupby" href="pandas_groupby.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/pandas/assignment5a.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 5a: Pandas Fundamentals with Earthquake Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe">1) Use Pandas’ read_csv function directly on this URL to open it as a DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#re-read-the-data-in-such-a-way-that-all-date-columns-are-identified-as-dates-and-the-earthquake-id-is-used-as-the-index">2) Re-read the data in such a way that all date columns are identified as dates and the earthquake ID is used as the index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-describe-to-get-the-basic-statistics-of-all-the-columns">3) Use <code class="docutils literal notranslate"><span class="pre">describe</span></code> to get the basic statistics of all the columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-nlargest-to-get-the-top-20-earthquakes-by-magnitude">4) Use <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> to get the top 20 earthquakes by magnitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-the-state-or-country-using-pandas-text-data-functions">5) Extract the state or country using Pandas text data functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-each-unique-value-from-the-new-column">6) Display each unique value from the new column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-filtered-dataset-that-contains-only-earthquakes-with-magnitude-greater-than-4">7) Create a filtered dataset that contains only earthquakes with magnitude greater than 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-filtered-dataset-magnitude-4-count-the-number-of-earthquakes-in-each-country-state-make-a-bar-chart-of-this-number-for-the-top-5-locations-with-the-most-earthquakes">8) Using the filtered dataset (magnitude &gt; 4), count the number of earthquakes in each country/state. Make a bar chart of this number for the top 5 locations with the most earthquakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-histogram-of-the-distribution-of-the-earthquake-magnitudes">9) Make a histogram of the distribution of the Earthquake magnitudes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-locations-of-earthquakes-by-making-a-scatterplot-of-their-latitude-and-longitude">10) Visualize the locations of earthquakes by making a scatterplot of their latitude and longitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-5a-pandas-fundamentals-with-earthquake-data">
+<h1>Assignment 5a: Pandas Fundamentals with Earthquake Data<a class="headerlink" href="#assignment-5a-pandas-fundamentals-with-earthquake-data" title="Link to this heading">#</a></h1>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to your completed scripts on the matching <strong>Courseworks</strong> assignment.</p>
+<p>In this assignment you’ll exercise core pandas skills on a real-world dataset: the USGS Earthquakes catalog.</p>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the tasks as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output. You’ll need <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">matplotlib</span></code> if you don’t have them), and you must be online — the data is read straight from a URL.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the pandas fundamentals from this section:</p>
+<ul class="simple">
+<li><p>Load CSV data directly from a URL into a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+<li><p>Parse dates and use them as a time index</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">describe</span></code>, <code class="docutils literal notranslate"><span class="pre">nlargest</span></code>, and column selection to explore data</p></li>
+<li><p>Filter rows with boolean masks</p></li>
+<li><p>Create a new column derived from existing ones</p></li>
+<li><p>Group by a column and count entries</p></li>
+<li><p>Plot histograms and scatter plots directly from a DataFrame</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Working through this assignment</p>
+<p>One script for the whole assignment works well (<code class="docutils literal notranslate"><span class="pre">assignment5a.py</span></code> — the tasks build on each other), or one script per task if you prefer smaller runs. Three notes:</p>
+<ul class="simple">
+<li><p><strong>In a script, a bare expression displays nothing</strong> — wrap anything you want to hear in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>.</p></li>
+<li><p><strong>Read tables by ear, not as grids.</strong> Where a task says to “display” a DataFrame, don’t try to listen to the raw grid that <code class="docutils literal notranslate"><span class="pre">print(df)</span></code> or <code class="docutils literal notranslate"><span class="pre">df.head()</span></code> produces. Use the screen-reader-friendly pattern from the <a class="reference internal" href="../data/loading_data.html"><span class="std std-doc">Loading data lecture</span></a>: print <code class="docutils literal notranslate"><span class="pre">df.shape</span></code>, print <code class="docutils literal notranslate"><span class="pre">df.columns.tolist()</span></code>, then loop <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">_,</span> <span class="pre">row</span> <span class="pre">in</span> <span class="pre">df.head().iterrows():</span> <span class="pre">print(row.to_dict())</span></code> so every value is spoken together with its column name. For a small Series, <code class="docutils literal notranslate"><span class="pre">print(s.to_dict())</span></code> does the same job.</p></li>
+<li><p><strong>Each task has a <em>Check yourself</em> note</strong> giving numbers your solution should produce, so you can confirm you’re on track without seeing any output grid or plot. For the plotting tasks (8–10), end with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;assignment5a_task8.png&quot;)</span></code> (matching the task number) so a sighted grader can open the PNGs, and add two or three sentences — in a comment at the bottom of the script — saying what the plot shows, tied to the numbers you printed. You are graded on the code, the printed checks, and the understanding, not on visual polish.</p></li>
+</ul>
+<p>When you’re done, follow the <a class="reference internal" href="#submission-instructions-5a">submission instructions</a> at the bottom of the page.</p>
+</div>
+<p>Start your script by importing numpy, pandas, and matplotlib’s pyplot (with conventional short aliases).</p>
+<p>Data for this assignment in .csv format downloaded from the <a class="reference external" href="https://earthquake.usgs.gov/earthquakes/search/" rel="noreferer noopener" target="_blank">USGS Earthquakes Database</a> is available at:</p>
+<p><a class="reference external" href="https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv" rel="noreferer noopener" target="_blank">https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv</a></p>
+<p>You don’t need to download this file. You can open it directly with Pandas.</p>
+<section id="use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe">
+<h2>1) Use Pandas’ read_csv function directly on this URL to open it as a DataFrame<a class="headerlink" href="#use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe" title="Link to this heading">#</a></h2>
+<p>(Don’t use any special options). Display the first few rows and the DataFrame info.</p>
+<p>Display the first few rows with the row-dict pattern from the note above. <code class="docutils literal notranslate"><span class="pre">df.info()</span></code> is already screen-reader-friendly: it prints one line per column — column name, non-null count, dtype — so you can arrow through it or read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>.</p>
+<p><em>Check yourself:</em> <code class="docutils literal notranslate"><span class="pre">df.shape</span></code> prints <code class="docutils literal notranslate"><span class="pre">(10654,</span> <span class="pre">22)</span></code> — 10,654 earthquakes, 22 columns. <code class="docutils literal notranslate"><span class="pre">df.columns.tolist()</span></code> starts with <code class="docutils literal notranslate"><span class="pre">['time',</span> <span class="pre">'latitude',</span> <span class="pre">'longitude',</span> <span class="pre">'depth',</span> <span class="pre">'mag',</span> <span class="pre">...]</span></code>. In the info listing, the <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">updated</span></code> columns show up as plain strings (dtype <code class="docutils literal notranslate"><span class="pre">object</span></code>, or <code class="docutils literal notranslate"><span class="pre">str</span></code> in newer pandas versions), <em>not</em> as dates — that’s the problem the next task fixes. The first row is a magnitude 4.9 quake whose <code class="docutils literal notranslate"><span class="pre">place</span></code> is <code class="docutils literal notranslate"><span class="pre">'206</span> <span class="pre">km</span> <span class="pre">SSW</span> <span class="pre">of</span> <span class="pre">‘Ohonua,</span> <span class="pre">Tonga'</span></code>.</p>
+</section>
+<section id="re-read-the-data-in-such-a-way-that-all-date-columns-are-identified-as-dates-and-the-earthquake-id-is-used-as-the-index">
+<h2>2) Re-read the data in such a way that all date columns are identified as dates and the earthquake ID is used as the index<a class="headerlink" href="#re-read-the-data-in-such-a-way-that-all-date-columns-are-identified-as-dates-and-the-earthquake-id-is-used-as-the-index" title="Link to this heading">#</a></h2>
+<p>Verify that this worked using the <code class="docutils literal notranslate"><span class="pre">head</span></code> and <code class="docutils literal notranslate"><span class="pre">info</span></code> functions.</p>
+<p><em>Check yourself:</em> two columns need date-parsing — you found them in the previous task’s info listing. After the re-read, <code class="docutils literal notranslate"><span class="pre">df.index.name</span></code> prints <code class="docutils literal notranslate"><span class="pre">id</span></code>, and <code class="docutils literal notranslate"><span class="pre">df.shape</span></code> is now <code class="docutils literal notranslate"><span class="pre">(10654,</span> <span class="pre">21)</span></code> (the <code class="docutils literal notranslate"><span class="pre">id</span></code> column moved into the index, so one fewer column). In <code class="docutils literal notranslate"><span class="pre">df.info()</span></code>, both date columns now report a <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> dtype (pandas may add a unit and timezone, like <code class="docutils literal notranslate"><span class="pre">datetime64[ns,</span> <span class="pre">UTC]</span></code> — the <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> part is what matters). Print <code class="docutils literal notranslate"><span class="pre">df['time'].min()</span></code> and <code class="docutils literal notranslate"><span class="pre">df['time'].max()</span></code>: the catalog runs from January 10 to June 17, 2025.</p>
+</section>
+<section id="use-describe-to-get-the-basic-statistics-of-all-the-columns">
+<h2>3) Use <code class="docutils literal notranslate"><span class="pre">describe</span></code> to get the basic statistics of all the columns<a class="headerlink" href="#use-describe-to-get-the-basic-statistics-of-all-the-columns" title="Link to this heading">#</a></h2>
+<p>Note the highest and lowest magnitude of earthquakes in the database.</p>
+<p><code class="docutils literal notranslate"><span class="pre">describe</span></code> returns a DataFrame of its own — 8 statistics by 12 numeric columns — so read it one column at a time as a dict rather than as a grid, for example <code class="docutils literal notranslate"><span class="pre">print(df.describe()['mag'].round(2).to_dict())</span></code>.</p>
+<p><em>Check yourself:</em> the lowest magnitude in the catalog is <code class="docutils literal notranslate"><span class="pre">2.5</span></code> and the highest is <code class="docutils literal notranslate"><span class="pre">7.7</span></code>. The mean magnitude is about <code class="docutils literal notranslate"><span class="pre">3.86</span></code> and the median (the <code class="docutils literal notranslate"><span class="pre">50%</span></code> entry) is <code class="docutils literal notranslate"><span class="pre">4.2</span></code>.</p>
+</section>
+<section id="use-nlargest-to-get-the-top-20-earthquakes-by-magnitude">
+<h2>4) Use <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> to get the top 20 earthquakes by magnitude<a class="headerlink" href="#use-nlargest-to-get-the-top-20-earthquakes-by-magnitude" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.nlargest.html</a></p>
+<p>The result is a Series indexed by earthquake ID — print it with <code class="docutils literal notranslate"><span class="pre">.to_dict()</span></code> so each ID is spoken together with its magnitude.</p>
+<p><em>Check yourself:</em> 20 values, running from <code class="docutils literal notranslate"><span class="pre">7.7</span></code> at the top down to <code class="docutils literal notranslate"><span class="pre">6.3</span></code> at the bottom, with <code class="docutils literal notranslate"><span class="pre">7.6</span></code> in second place. The top entry is id <code class="docutils literal notranslate"><span class="pre">us7000pn9s</span></code> at magnitude 7.7 — look up its full row with <code class="docutils literal notranslate"><span class="pre">df.loc[...]</span></code> and print <code class="docutils literal notranslate"><span class="pre">row.to_dict()</span></code>: it is the March 28, 2025 Mandalay, Burma (Myanmar) earthquake.</p>
+</section>
+<section id="extract-the-state-or-country-using-pandas-text-data-functions">
+<h2>5) Extract the state or country using Pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/text.html" rel="noreferer noopener" target="_blank">text data functions</a><a class="headerlink" href="#extract-the-state-or-country-using-pandas-text-data-functions" title="Link to this heading">#</a></h2>
+<p>Examine the structure of the <code class="docutils literal notranslate"><span class="pre">place</span></code> column. The state / country information seems to be in there. How would you get it out?</p>
+<p>Add it as a new column to the dataframe called <code class="docutils literal notranslate"><span class="pre">country</span></code>. Note that some of the “countries” are actually U.S. states.</p>
+<p><em>Check yourself:</em> print a few <code class="docutils literal notranslate"><span class="pre">place</span></code> values first (<code class="docutils literal notranslate"><span class="pre">df['place'].head().tolist()</span></code>) — the location name sits after the comma, as in <code class="docutils literal notranslate"><span class="pre">'206</span> <span class="pre">km</span> <span class="pre">SSW</span> <span class="pre">of</span> <span class="pre">‘Ohonua,</span> <span class="pre">Tonga'</span></code>. The <code class="docutils literal notranslate"><span class="pre">.str</span></code> methods you want split on the comma, take the last piece, and strip the leading space. The first five values of your new <code class="docutils literal notranslate"><span class="pre">country</span></code> column should be <code class="docutils literal notranslate"><span class="pre">'Tonga'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Nevada'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Tonga'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Nevada'</span></code>, <code class="docutils literal notranslate"><span class="pre">'CA'</span></code>. One wrinkle: 1,148 of the place strings contain no comma at all (for example <code class="docutils literal notranslate"><span class="pre">'southern</span> <span class="pre">Mid-Atlantic</span> <span class="pre">Ridge'</span></code>), so the whole string comes through as the “country” — that’s expected here; leave them as they are.</p>
+</section>
+<section id="display-each-unique-value-from-the-new-column">
+<h2>6) Display each unique value from the new column<a class="headerlink" href="#display-each-unique-value-from-the-new-column" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.unique.html</a></p>
+<p><em>Check yourself:</em> there are <code class="docutils literal notranslate"><span class="pre">228</span></code> unique values — print <code class="docutils literal notranslate"><span class="pre">len(...)</span></code> to confirm. The full array is long to listen to; printing the first ten as a list (<code class="docutils literal notranslate"><span class="pre">list(u[:10])</span></code>) is enough to hear the mix of countries, U.S. states, and comma-less oddities like <code class="docutils literal notranslate"><span class="pre">'southern</span> <span class="pre">Mid-Atlantic</span> <span class="pre">Ridge'</span></code>.</p>
+</section>
+<section id="create-a-filtered-dataset-that-contains-only-earthquakes-with-magnitude-greater-than-4">
+<h2>7) Create a filtered dataset that contains only earthquakes with magnitude greater than 4<a class="headerlink" href="#create-a-filtered-dataset-that-contains-only-earthquakes-with-magnitude-greater-than-4" title="Link to this heading">#</a></h2>
+<p>Store it in a new variable (e.g. <code class="docutils literal notranslate"><span class="pre">df_big</span></code>) — you’ll reuse it in the next tasks.</p>
+<p><em>Check yourself:</em> <code class="docutils literal notranslate"><span class="pre">len(df_big)</span></code> prints <code class="docutils literal notranslate"><span class="pre">5923</span></code> — a bit over half of the 10,654 events survive the cut.</p>
+</section>
+<section id="using-the-filtered-dataset-magnitude-4-count-the-number-of-earthquakes-in-each-country-state-make-a-bar-chart-of-this-number-for-the-top-5-locations-with-the-most-earthquakes">
+<h2>8) Using the filtered dataset (magnitude &gt; 4), count the number of earthquakes in each country/state. Make a bar chart of this number for the top 5 locations with the most earthquakes<a class="headerlink" href="#using-the-filtered-dataset-magnitude-4-count-the-number-of-earthquakes-in-each-country-state-make-a-bar-chart-of-this-number-for-the-top-5-locations-with-the-most-earthquakes" title="Link to this heading">#</a></h2>
+<p>Location name on the x axis, Earthquake count on the y axis.</p>
+<p>Print the counts before you plot them — a five-entry Series reads perfectly as a dict.</p>
+<p><em>Check yourself:</em> the top-5 counts, as a dict, are <code class="docutils literal notranslate"><span class="pre">{'Indonesia':</span> <span class="pre">602,</span> <span class="pre">'Papua</span> <span class="pre">New</span> <span class="pre">Guinea':</span> <span class="pre">518,</span> <span class="pre">'Greece':</span> <span class="pre">377,</span> <span class="pre">'Japan':</span> <span class="pre">295,</span> <span class="pre">'Philippines':</span> <span class="pre">238}</span></code>. The bar chart shows five bars stepping steadily down from left to right, Indonesia tallest at 602. Confirm the figure without looking: <code class="docutils literal notranslate"><span class="pre">len(ax.patches)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code>, and <code class="docutils literal notranslate"><span class="pre">[p.get_height()</span> <span class="pre">for</span> <span class="pre">p</span> <span class="pre">in</span> <span class="pre">ax.patches]</span></code> prints the same five counts in the same order. Save it with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;assignment5a_task8.png&quot;)</span></code>.</p>
+<p>For interest: run the same count on the <em>unfiltered</em> data — Alaska jumps to first place with 2,394 events. Keep that thought for tasks 9 and 10.</p>
+</section>
+<section id="make-a-histogram-of-the-distribution-of-the-earthquake-magnitudes">
+<h2>9) Make a histogram of the distribution of the Earthquake magnitudes<a class="headerlink" href="#make-a-histogram-of-the-distribution-of-the-earthquake-magnitudes" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html" rel="noreferer noopener" target="_blank">https://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.hist.html</a>
+<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html" rel="noreferer noopener" target="_blank">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html</a></p>
+<p>Do one subplot for the filtered and one for the unfiltered dataset.
+Use a Logarithmic scale. What sort of relationship do you see?</p>
+<p>Hint: <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">axes</span> <span class="pre">=</span> <span class="pre">plt.subplots(1,</span> <span class="pre">2)</span></code> gives you the two panels; the log scale is either <code class="docutils literal notranslate"><span class="pre">log=True</span></code> in the <code class="docutils literal notranslate"><span class="pre">hist</span></code> call or <code class="docutils literal notranslate"><span class="pre">ax.set_yscale('log')</span></code> after it.</p>
+<p><em>Check yourself:</em> you can hear the shape of the histogram directly from counts in whole-magnitude bands — print <code class="docutils literal notranslate"><span class="pre">((df['mag']</span> <span class="pre">&gt;=</span> <span class="pre">m)</span> <span class="pre">&amp;</span> <span class="pre">(df['mag']</span> <span class="pre">&lt;</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">1)).sum()</span></code> for m = 4, 5, 6, 7: you should get <code class="docutils literal notranslate"><span class="pre">5491</span></code>, <code class="docutils literal notranslate"><span class="pre">665</span></code>, <code class="docutils literal notranslate"><span class="pre">45</span></code>, and <code class="docutils literal notranslate"><span class="pre">4</span></code>. Each step up of one magnitude unit cuts the count by roughly a factor of ten, which is why the filtered histogram on a log-count axis falls off as a nearly straight line from magnitude 4 to 7.7 — a straight line on a log axis means an exponential relationship (seismologists call this the Gutenberg–Richter law; that’s the relationship the question is after). The unfiltered panel shows the same straight tail plus a second bump below magnitude 3 with a dip near 3.5–4 — a catalog artifact, not physics: only densely instrumented regions (mostly U.S. networks) report the tiny quakes. Save the figure as <code class="docutils literal notranslate"><span class="pre">assignment5a_task9.png</span></code>.</p>
+<p>Histograms and bar charts like these are exactly the kind of plots you can also explore by sound with MAIDR — see <a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">Trying MAIDR</span></a>.</p>
+</section>
+<section id="visualize-the-locations-of-earthquakes-by-making-a-scatterplot-of-their-latitude-and-longitude">
+<h2>10) Visualize the locations of earthquakes by making a scatterplot of their latitude and longitude<a class="headerlink" href="#visualize-the-locations-of-earthquakes-by-making-a-scatterplot-of-their-latitude-and-longitude" title="Link to this heading">#</a></h2>
+<p>Use a two-column subplot with both the filtered and unfiltered datasets. Color the points by magnitude. Make it pretty.</p>
+<p>What difference do you note between the filtered and unfiltered datasets?</p>
+<p>Hint: <code class="docutils literal notranslate"><span class="pre">plt.subplots(1,</span> <span class="pre">2,</span> <span class="pre">figsize=(12,</span> <span class="pre">5),</span> <span class="pre">sharey=True)</span></code> for the layout; pass <code class="docutils literal notranslate"><span class="pre">c=df['mag']</span></code> (with a small marker size like <code class="docutils literal notranslate"><span class="pre">s=4</span></code>) to <code class="docutils literal notranslate"><span class="pre">scatter</span></code>, and add a colorbar labelled with the magnitude.</p>
+<p><em>Check yourself:</em> the dots span longitude −180 to 180 and latitude about −73 to +87 — print <code class="docutils literal notranslate"><span class="pre">df['longitude'].min()</span></code>, <code class="docutils literal notranslate"><span class="pre">df['longitude'].max()</span></code>, and the same for latitude to confirm. With one shared colorbar, <code class="docutils literal notranslate"><span class="pre">len(fig.axes)</span></code> prints <code class="docutils literal notranslate"><span class="pre">3</span></code> (two map panels plus the colorbar). What the panels show: both trace the boundaries of Earth’s tectonic plates — narrow chains of dots down the west coast of the Americas, through the Mediterranean and the Himalayas, and around the western Pacific “Ring of Fire”. The difference: the <em>unfiltered</em> panel is dominated by dense clusters of dark, low-magnitude dots over Alaska, California–Nevada, and Puerto Rico — of the 4,449 quakes below magnitude 4, about 4,000 are in U.S. states and territories (Alaska alone has 2,244), because that’s where the dense seismometer networks are. In the <em>filtered</em> panel those clusters all but vanish (Alaska keeps only 128 events, Puerto Rico 4), leaving the plate boundaries drawn evenly around the whole globe. Save the figure as <code class="docutils literal notranslate"><span class="pre">assignment5a_task10.png</span></code>, and put this filtered-versus-unfiltered story, in your own words, in the comment at the bottom of your script.</p>
+</section>
+<section id="submission-instructions">
+<span id="submission-instructions-5a"></span><h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your completed scripts (and the PNG figures they produce) as <code class="docutils literal notranslate"><span class="pre">assignment5a</span></code> files inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo. Then push the commit:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>&lt;weekN&gt;/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit assignment 5a&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>End of command.</p>
+<p>Due Sunday night.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pandas_groupby.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pandas: Groupby</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="assignment5b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 5b: Pandas Groupby with Hurricane Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pandas-read-csv-function-directly-on-this-url-to-open-it-as-a-dataframe">1) Use Pandas’ read_csv function directly on this URL to open it as a DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#re-read-the-data-in-such-a-way-that-all-date-columns-are-identified-as-dates-and-the-earthquake-id-is-used-as-the-index">2) Re-read the data in such a way that all date columns are identified as dates and the earthquake ID is used as the index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-describe-to-get-the-basic-statistics-of-all-the-columns">3) Use <code class="docutils literal notranslate"><span class="pre">describe</span></code> to get the basic statistics of all the columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-nlargest-to-get-the-top-20-earthquakes-by-magnitude">4) Use <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> to get the top 20 earthquakes by magnitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-the-state-or-country-using-pandas-text-data-functions">5) Extract the state or country using Pandas text data functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-each-unique-value-from-the-new-column">6) Display each unique value from the new column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-filtered-dataset-that-contains-only-earthquakes-with-magnitude-greater-than-4">7) Create a filtered dataset that contains only earthquakes with magnitude greater than 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-filtered-dataset-magnitude-4-count-the-number-of-earthquakes-in-each-country-state-make-a-bar-chart-of-this-number-for-the-top-5-locations-with-the-most-earthquakes">8) Using the filtered dataset (magnitude &gt; 4), count the number of earthquakes in each country/state. Make a bar chart of this number for the top 5 locations with the most earthquakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-histogram-of-the-distribution-of-the-earthquake-magnitudes">9) Make a histogram of the distribution of the Earthquake magnitudes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-locations-of-earthquakes-by-making-a-scatterplot-of-their-latitude-and-longitude">10) Visualize the locations of earthquakes by making a scatterplot of their latitude and longitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

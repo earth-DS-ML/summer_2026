@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A quick tour of further topics in geoscience data science &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/geoscience/final_lec';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Going Further with Computing" href="../advanced/packaging.html" />
+    <link rel="prev" title="Final Project Requirements" href="../project_require.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/geoscience/final_lec.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A quick tour of further topics in geoscience data science</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projections-most-of-our-media-for-visualization-are-flat">Projections: Most of our media for visualization <em>are</em> flat</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map-projections-taking-us-from-spherical-to-flat">[Map] Projections: Taking us from spherical to flat</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-major-problem-with-map-projections">The major problem with map projections</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-cartopy">Introducing Cartopy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-real-data-on-a-map-sst-with-xarray">Putting real data on a map: SST with xarray</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earth-system-model-esm-output">Earth System Model (ESM) Output</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-general-circulation-model">What is a General Circulation Model?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-globe-divided-into-boxes">The globe divided into boxes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-resolution">Grid resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip-climate-model-intercomparison-project">CMIP - Climate Model Intercomparison Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ideas-to-explore">Other ideas to explore:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-quick-tour-of-further-topics-in-geoscience-data-science">
+<h1>A quick tour of further topics in geoscience data science<a class="headerlink" href="#a-quick-tour-of-further-topics-in-geoscience-data-science" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output.</p>
+<p>Two page-specific notes. First, this is an <strong>appendix survey</strong> — you are not expected to run most of it. Every output is reproduced on this page in labelled “expected output” blocks, so you can read along without running anything. Second, most examples here use packages (<code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, <code class="docutils literal notranslate"><span class="pre">xmip</span></code>, <code class="docutils literal notranslate"><span class="pre">intake-esm</span></code>) that are <strong>not part of the local course install</strong>. If you do want to try a piece yourself, this page is best worked through connected to the <strong>LEAP hub</strong>, where those packages exist — use VS Code’s Remote-SSH connection to the hub, described at the end of the <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">setup page</span></a>. The few blocks marked <em>runnable locally</em> below need only the usual course packages plus an internet connection.</p>
+</div>
+<p>The field of data science for the Earth sciences is vast, and the software tools are always growing and changing. If you end up using these tools in your work, you can (and should) expect to keep learning and refining your skills and toolbox. It also means that no single course can cover everything — especially not a six-week one.</p>
+<p>This page is a <strong>survey</strong>: a high-level tour of a few more concepts and software packages that make good starting points for further exploration. It belongs to the appendix and is <strong>not assessed</strong> — read it for orientation, and come back to it when a project (or your later work) pushes you toward one of these tools.</p>
+<div class="note admonition">
+<p class="admonition-title">This is a read-along tour, not a hands-on lab</p>
+<p>Unlike the rest of the course, this page uses specialised packages that are <strong>not installed in the course environment</strong> (<code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, <code class="docutils literal notranslate"><span class="pre">xmip</span></code>, <code class="docutils literal notranslate"><span class="pre">intake-esm</span></code>, …) and pulls large datasets from the cloud. You are <strong>not expected to run it</strong>. The outputs are saved in the page so you can read along; if you want to try a piece yourself, connect to the LEAP hub first (and <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> anything still missing there).</p>
+<p>One script-specific habit, used throughout: where the original notebook ended a cell with a bare expression (like <code class="docutils literal notranslate"><span class="pre">sst</span></code> or <code class="docutils literal notranslate"><span class="pre">ccrs.PlateCarree()</span></code>), a script would display nothing — so on this page those are wrapped in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>.</p>
+</div>
+<section id="maps">
+<h2>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h2>
+<p>This is a derivative of the longer notebook available <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html" rel="noreferer noopener" target="_blank">here</a>.</p>
+<p>Making maps is a fundamental part of geoscience research. Maps differ from regular figures in the following principle ways:</p>
+<ul class="simple">
+<li><p>Maps require a projection of geographic coordinates on the 3D Earth to the 2D space of your figure.</p></li>
+<li><p>Maps often include extra decorations besides just our data (e.g. continents, country borders, etc.)</p></li>
+</ul>
+<p>Mapping is a notoriously hard and complicated problem, mostly due to the complexities of projection.</p>
+<p>In this lecture, we will learn about Cartopy, one of the most common packages for making maps within python.</p>
+<section id="projections-most-of-our-media-for-visualization-are-flat">
+<h3>Projections: Most of our media for visualization <em>are</em> flat<a class="headerlink" href="#projections-most-of-our-media-for-visualization-are-flat" title="Link to this heading">#</a></h3>
+<p>Our two most common media are flat:</p>
+<ul class="simple">
+<li><p>Paper</p></li>
+<li><p>Screen</p></li>
+</ul>
+<p><em>The original page shows a photograph here: a hand holding a printed page up in front of a computer monitor that is displaying a document. In words: both of our everyday media — paper and screen — are flat rectangles.</em></p>
+<section id="map-projections-taking-us-from-spherical-to-flat">
+<h4>[Map] Projections: Taking us from spherical to flat<a class="headerlink" href="#map-projections-taking-us-from-spherical-to-flat" title="Link to this heading">#</a></h4>
+<p>A map projection (or more commonly refered to as just “projection”) is:</p>
+<blockquote>
+<div><p>a systematic transformation of the latitudes and longitudes of locations from the surface of a sphere or an ellipsoid into locations on a plane. [<a class="reference external" href="https://en.wikipedia.org/wiki/Map_projection" rel="noreferer noopener" target="_blank">Wikipedia: Map projection</a>].</p>
+</div></blockquote>
+</section>
+<section id="the-major-problem-with-map-projections">
+<h4>The major problem with map projections<a class="headerlink" href="#the-major-problem-with-map-projections" title="Link to this heading">#</a></h4>
+<p><em>The original page shows a photograph of an orange peel, removed from the fruit and pressed flat on a glass table, with a world map drawn on it in ink. In words: the peel refuses to lie flat as one piece — it splits into lobes with gaps between them, and the inked continents tear apart at the splits. That is exactly the problem with flattening a sphere:</em></p>
+<ul class="simple">
+<li><p>The surface of a sphere is topologically different to a 2D surface, therefore we <em>have</em> to cut the sphere <em>somewhere</em></p></li>
+<li><p>A sphere’s surface cannot be represented on a plane without distortion.</p></li>
+</ul>
+<p>There are many different ways to make a projection, and we will not attempt to explain all of the choices and tradeoffs here. Instead, you can read Phil’s <a class="reference external" href="https://github.com/SciTools/cartopy-tutorial/blob/master/tutorial/projections_crs_and_terms.ipynb" rel="noreferer noopener" target="_blank">original tutorial</a> for a great overview of this topic.
+Instead, we will dive into the more practical sides of Caropy usage.</p>
+</section>
+</section>
+<section id="introducing-cartopy">
+<h3>Introducing Cartopy<a class="headerlink" href="#introducing-cartopy" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/" rel="noreferer noopener" target="_blank">https://scitools.org.uk/cartopy/docs/latest/</a></p>
+<p>Cartopy makes use of the powerful <a class="reference external" href="https://proj4.org/" rel="noreferer noopener" target="_blank">PROJ.4</a>, numpy and shapely libraries and includes a programatic interface built on top of Matplotlib for the creation of publication quality maps.</p>
+<p>Key features of cartopy are its object oriented projection definitions, and its ability to transform points, lines, vectors, polygons and images between those projections.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>A projection in cartopy is an object. Printing its <code class="docutils literal notranslate"><span class="pre">repr</span></code> gives the same multi-line summary a notebook would display — a description of the coordinate reference system (CRS):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Projected</span> <span class="n">CRS</span><span class="p">:</span> <span class="o">+</span><span class="n">proj</span><span class="o">=</span><span class="n">eqc</span> <span class="o">+</span><span class="n">ellps</span><span class="o">=</span><span class="n">WGS84</span> <span class="o">+</span><span class="n">a</span><span class="o">=</span><span class="mf">6378137.0</span> <span class="o">+</span><span class="n">lon_0</span><span class="o">=</span><span class="mf">0.0</span> <span class="o">+</span><span class="n">to</span> <span class="o">...&gt;</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">unknown</span>
+<span class="n">Axis</span> <span class="n">Info</span> <span class="p">[</span><span class="n">cartesian</span><span class="p">]:</span>
+<span class="o">-</span> <span class="n">E</span><span class="p">[</span><span class="n">east</span><span class="p">]:</span> <span class="n">Easting</span> <span class="p">(</span><span class="n">unknown</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">N</span><span class="p">[</span><span class="n">north</span><span class="p">]:</span> <span class="n">Northing</span> <span class="p">(</span><span class="n">unknown</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">up</span><span class="p">]:</span> <span class="n">Ellipsoidal</span> <span class="n">height</span> <span class="p">(</span><span class="n">metre</span><span class="p">)</span>
+<span class="n">Area</span> <span class="n">of</span> <span class="n">Use</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">undefined</span>
+<span class="n">Coordinate</span> <span class="n">Operation</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">unknown</span>
+<span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">Equidistant</span> <span class="n">Cylindrical</span>
+<span class="n">Datum</span><span class="p">:</span> <span class="n">Unknown</span> <span class="n">based</span> <span class="n">on</span> <span class="n">WGS</span> <span class="mi">84</span> <span class="n">ellipsoid</span>
+<span class="o">-</span> <span class="n">Ellipsoid</span><span class="p">:</span> <span class="n">WGS</span> <span class="mi">84</span>
+<span class="o">-</span> <span class="n">Prime</span> <span class="n">Meridian</span><span class="p">:</span> <span class="n">Greenwich</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Listening tips: the useful lines are the <strong>method</strong> (“Equidistant Cylindrical” — the formal name of the Plate Carree projection, where longitude and latitude map directly to x and y) and the <strong>ellipsoid</strong> (WGS 84, the standard model of the Earth’s shape). The various “unknown”s just mean this generic projection isn’t tied to a named, registered CRS.</p>
+<p>Another projection, same kind of summary:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">LambertAzimuthalEqualArea</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Projected</span> <span class="n">CRS</span><span class="p">:</span> <span class="o">+</span><span class="n">proj</span><span class="o">=</span><span class="n">laea</span> <span class="o">+</span><span class="n">ellps</span><span class="o">=</span><span class="n">WGS84</span> <span class="o">+</span><span class="n">lon_0</span><span class="o">=</span><span class="mf">0.0</span> <span class="o">+</span><span class="n">lat_0</span><span class="o">=</span><span class="mf">0.0</span> <span class="o">+</span><span class="n">x_0</span> <span class="o">...&gt;</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">unknown</span>
+<span class="n">Axis</span> <span class="n">Info</span> <span class="p">[</span><span class="n">cartesian</span><span class="p">]:</span>
+<span class="o">-</span> <span class="n">E</span><span class="p">[</span><span class="n">east</span><span class="p">]:</span> <span class="n">Easting</span> <span class="p">(</span><span class="n">metre</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">N</span><span class="p">[</span><span class="n">north</span><span class="p">]:</span> <span class="n">Northing</span> <span class="p">(</span><span class="n">metre</span><span class="p">)</span>
+<span class="n">Area</span> <span class="n">of</span> <span class="n">Use</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">undefined</span>
+<span class="n">Coordinate</span> <span class="n">Operation</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">unknown</span>
+<span class="o">-</span> <span class="n">method</span><span class="p">:</span> <span class="n">Lambert</span> <span class="n">Azimuthal</span> <span class="n">Equal</span> <span class="n">Area</span>
+<span class="n">Datum</span><span class="p">:</span> <span class="n">Unknown</span> <span class="n">based</span> <span class="n">on</span> <span class="n">WGS</span> <span class="mi">84</span> <span class="n">ellipsoid</span>
+<span class="o">-</span> <span class="n">Ellipsoid</span><span class="p">:</span> <span class="n">WGS</span> <span class="mi">84</span>
+<span class="o">-</span> <span class="n">Prime</span> <span class="n">Meridian</span><span class="p">:</span> <span class="n">Greenwich</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Cartopy plugs straight into matplotlib: pass a projection when you create the axes, and you get a special map-aware axes (a <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code>) with extra methods like <code class="docutils literal notranslate"><span class="pre">coastlines()</span></code> and <code class="docutils literal notranslate"><span class="pre">stock_img()</span></code>. It still answers all the usual matplotlib questions (<code class="docutils literal notranslate"><span class="pre">ax.get_title()</span></code>, <code class="docutils literal notranslate"><span class="pre">len(fig.axes)</span></code>, and so on) if you want to interrogate it.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can use with matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A flat rectangular world map, about twice as wide as it is tall: on Plate Carree, longitude maps uniformly left-to-right (180°W to 180°E) and latitude bottom-to-top (90°S to 90°N). The background is cartopy’s built-in “stock image” of Earth — oceans in blue, land shaded tan and green — with black coastlines drawn on top. Shapes near the equator look about right; toward the poles everything is stretched east–west, so Antarctica smears along the entire bottom edge.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">LambertAzimuthalEqualArea</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The entire globe squeezed into a single circular disk, centered on latitude 0, longitude 0 (on the equator, just south of West Africa): Africa and Europe sit near the center, the Americas curve around the left side, Asia around the right, Antarctica at the bottom of the disk. This projection preserves <em>areas</em> exactly — the price is shape distortion, which grows toward the rim, where the continents look bent around the circle.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can make regional maps</span>
+<span class="n">central_lon</span><span class="p">,</span> <span class="n">central_lat</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_lon</span><span class="p">,</span> <span class="n">central_lat</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;50m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A regional line-drawing map (no color fill) of western Europe and the nearby Atlantic — 40°W to 20°E, 30°N to 60°N: black coastlines trace Great Britain and Ireland near top center, the French and Iberian coasts below them, the western Mediterranean with Italy, Corsica and Sardinia at the lower right, and the northwest coast of Africa along the bottom edge. The Azores appear as tiny specks at lower left. Thin gray gridlines arc gently across the frame — on an orthographic view (the Earth as seen from space), circles of latitude are curves, not straight lines. Note <code class="docutils literal notranslate"><span class="pre">resolution='50m'</span></code>: we asked for medium-resolution coastlines, appropriate for a regional map.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can make regional maps</span>
+<span class="n">central_lon</span><span class="p">,</span> <span class="n">central_lat</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">72</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">41</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_lon</span><span class="p">,</span> <span class="n">central_lat</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;50m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A very zoomed-in map of the New York area (75°W to 72°W, 39°N to 41°N): black coastlines showing Long Island, Long Island Sound, and the New Jersey shore. The background gives the figure away: at this zoom the global stock image is far too coarse, so it appears as huge blurry diamond-shaped pixels — greenish-tan across the top (land), flat blue below (ocean). The lesson: the built-in background is a low-resolution <em>global</em> image — fine for whole-Earth maps, useless up close.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can add some default features</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">central_lat</span> <span class="o">=</span> <span class="mf">37.5</span>
+<span class="n">central_lon</span> <span class="o">=</span> <span class="o">-</span><span class="mi">96</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">70</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mf">50.5</span><span class="p">]</span>
+<span class="n">central_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">extent</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">central_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(</span><span class="n">central_lon</span><span class="p">,</span> <span class="n">central_lat</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">LAKES</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cartopy</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">RIVERS</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A map of the contiguous United States on an Albers equal-area projection (the standard choice for the US — the frame itself is a plain rectangle, but the faint gray gridlines bow gently across the map rather than running straight). Land is filled pale beige, the ocean pale blue; the Great Lakes stand out in blue with black outlines, and major rivers — the Mississippi system, the Columbia, the Rio Grande — thread across the interior as thin blue lines. Nothing here is data: OCEAN, LAND, LAKES and RIVERS are ready-made decoration layers from cartopy’s Natural Earth feature library.</p>
+<p>So far we’ve only drawn decorations. The real point of a map is to put <strong>your data</strong> on it. Let’s make a synthetic 2-D field and first plot it on ordinary, non-map axes. <em>(This block and its check are runnable locally — only numpy and matplotlib.)</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">lon2d</span><span class="p">,</span> <span class="n">lat2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat2d</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lon2d</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">lon2d</span><span class="p">,</span> <span class="n">lat2d</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A filled-contour plot on plain axes: x from −80 to 80, y from 30 to 70, in the default viridis colormap. The field forms two large dark-purple ovals (its lowest values, about −2.0) centered near x = −22 and x = +67 at mid-height (y around 45), bright-yellow patches (its highest values, up to about +1.2) hugging the top edge near x = −67 and x = +22 (with smaller yellow wedges on the bottom edge at the same x positions), and green–teal bands in between.</p>
+<p><strong>Check it.</strong> Confirm the extremes from the array itself:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">imin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">argmin</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">lon2d</span><span class="p">[</span><span class="n">imin</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">lat2d</span><span class="p">[</span><span class="n">imin</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">2.0</span> <span class="mf">1.17</span>
+<span class="mf">66.7</span> <span class="mf">45.0</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Now the same field on a map — the identical <code class="docutils literal notranslate"><span class="pre">contourf</span></code> call, but into a map-projection axes. Because these axes are <code class="docutils literal notranslate"><span class="pre">PlateCarree</span></code> and our coordinates are plain longitude/latitude, the data lands in the right place without any extra arguments:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_global</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The whole world drawn only as black coastal outlines on white (<code class="docutils literal notranslate"><span class="pre">set_global()</span></code> keeps the full globe in view), with the colored contour field draped over its true geographic region — a band from 80°W to 80°E and 30°N to 70°N covering the North Atlantic, Europe, and central Asia. One purple low sits over the mid-North-Atlantic (near 22°W), the other over central Asia (near 67°E); the rest of the map is blank. The data didn’t change — the axes just know about the Earth now.</p>
+</section>
+<section id="putting-real-data-on-a-map-sst-with-xarray">
+<h3>Putting real data on a map: SST with xarray<a class="headerlink" href="#putting-real-data-on-a-map-sst-with-xarray" title="Link to this heading">#</a></h3>
+<p>Cartopy integrates cleanly with xarray: an <code class="docutils literal notranslate"><span class="pre">xr.DataArray.plot(...)</span></code> call can draw straight into a map axes. Let’s map sea surface temperature (SST) from the NOAA Extended Reconstructed SST dataset, served over OPeNDAP. <em>(The data-loading and printing parts of this block are runnable locally with the course packages, if you’re online; only the plotting needs cartopy.)</em></p>
+<div class="warning admonition">
+<p class="admonition-title">A gotcha with this NOAA server</p>
+<p>As covered in the xarray module: always pass <code class="docutils literal notranslate"><span class="pre">chunks</span></code> (for example <code class="docutils literal notranslate"><span class="pre">chunks={}</span></code>) when opening this PSL THREDDS dataset. Asking the server for the whole array in one request can <strong>silently return all zeros</strong> — with chunks, xarray fetches the data in pieces and the values come back correct.</p>
+</div>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integration with xarray</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&#39;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time_bnds&#39;</span><span class="p">],</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{})</span>
+<span class="n">sst</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2000-01-01&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sst</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="s1">&#39;sst&#39;</span> <span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="mi">180</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">64</span><span class="n">kB</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">getitem</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="n">chunktype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">lat</span>      <span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">356</span><span class="n">B</span> <span class="mf">88.0</span> <span class="mf">86.0</span> <span class="mf">84.0</span> <span class="mf">82.0</span> <span class="o">...</span> <span class="o">-</span><span class="mf">82.0</span> <span class="o">-</span><span class="mf">84.0</span> <span class="o">-</span><span class="mf">86.0</span> <span class="o">-</span><span class="mf">88.0</span>
+  <span class="o">*</span> <span class="n">lon</span>      <span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">720</span><span class="n">B</span> <span class="mf">0.0</span> <span class="mf">2.0</span> <span class="mf">4.0</span> <span class="mf">6.0</span> <span class="mf">8.0</span> <span class="o">...</span> <span class="mf">352.0</span> <span class="mf">354.0</span> <span class="mf">356.0</span> <span class="mf">358.0</span>
+    <span class="n">time</span>     <span class="n">datetime64</span><span class="p">[</span><span class="n">ns</span><span class="p">]</span> <span class="mi">8</span><span class="n">B</span> <span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">long_name</span><span class="p">:</span>     <span class="n">Monthly</span> <span class="n">Means</span> <span class="n">of</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Temperature</span>
+    <span class="n">units</span><span class="p">:</span>         <span class="n">degC</span>
+    <span class="n">var_desc</span><span class="p">:</span>      <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Temperature</span>
+    <span class="n">level_desc</span><span class="p">:</span>    <span class="n">Surface</span>
+    <span class="n">statistic</span><span class="p">:</span>     <span class="n">Mean</span>
+    <span class="n">dataset</span><span class="p">:</span>       <span class="n">NOAA</span> <span class="n">Extended</span> <span class="n">Reconstructed</span> <span class="n">SST</span> <span class="n">V5</span>
+    <span class="n">parent_stat</span><span class="p">:</span>   <span class="n">Individual</span> <span class="n">Values</span>
+    <span class="n">actual_range</span><span class="p">:</span>  <span class="p">[</span><span class="o">-</span><span class="mf">1.8</span>     <span class="mf">42.32636</span><span class="p">]</span>
+    <span class="n">valid_range</span><span class="p">:</span>   <span class="p">[</span><span class="o">-</span><span class="mf">1.8</span> <span class="mf">45.</span> <span class="p">]</span>
+    <span class="n">_ChunkSizes</span><span class="p">:</span>   <span class="p">[</span>  <span class="mi">1</span>  <span class="mi">89</span> <span class="mi">180</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>How to listen to this printout, top to bottom: the <strong>first line</strong> names the variable (<code class="docutils literal notranslate"><span class="pre">sst</span></code>) and its dimensions — 89 latitudes by 180 longitudes, one 2-degree global grid for the single selected month. The <strong>second line</strong> says the values live in a lazily loaded dask array (because we opened with <code class="docutils literal notranslate"><span class="pre">chunks</span></code>) — nothing is downloaded until we compute or plot. Then <strong>Coordinates</strong>: <code class="docutils literal notranslate"><span class="pre">lat</span></code> runs from 88 down to −88 in 2-degree steps, <code class="docutils literal notranslate"><span class="pre">lon</span></code> from 0 to 358, and <code class="docutils literal notranslate"><span class="pre">time</span></code> is the single date 2000-01-01. Finally <strong>Attributes</strong> carry the metadata — units of degrees Celsius, the dataset name, and its valid range.</p>
+<p>Now the map:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">sst</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+         <span class="n">vmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shrink&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A global map in the Robinson projection — an oval-shaped world map with curved meridians, a common choice for global fields — titled “time = 2000-01-01” (xarray wrote the title from the coordinate automatically). The ocean is colored by January-2000 SST on the viridis colormap, clipped to the range 2–30: a broad bright-yellow band of water warmer than about 28 °C wraps the tropics, widest in the western Pacific and Indian Ocean, grading through green (mid-teens) in the mid-latitudes to dark purple (below 5 °C) poleward of roughly 50–60° in both hemispheres. Continents are blank white — SST is undefined over land — outlined by black coastlines, with pale gridlines over the ocean. A vertical colorbar on the right — shrunk by <code class="docutils literal notranslate"><span class="pre">cbar_kwargs={'shrink':</span> <span class="pre">0.4}</span></code> so it stands noticeably shorter than the map, spanning a bit over half the figure’s height — is labelled “Monthly Means of Sea Surface Temperature [degC]”. Checked against the data: this slice spans −1.8 °C (the freezing point of seawater, at the ice edges) to 30.1 °C; the warm pool at the equator, 160°E reads 29.0 °C, and the North Atlantic at 60°N, 20°W reads 8.7 °C.</p>
+<p>Note the key argument <code class="docutils literal notranslate"><span class="pre">transform=ccrs.PlateCarree()</span></code>: it tells cartopy what coordinate system the <em>data</em> is in (plain longitude/latitude), so it can be re-projected into the Robinson axes. Getting <code class="docutils literal notranslate"><span class="pre">projection=</span></code> (the axes) and <code class="docutils literal notranslate"><span class="pre">transform=</span></code> (the data) right is most of practical cartopy.</p>
+<p>What happens if we strip the decorations away?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+<span class="c1">#ax.coastlines()</span>
+<span class="c1">#ax.gridlines()</span>
+<span class="n">sst</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+         <span class="n">vmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> <span class="c1">#cbar_kwargs={&#39;shrink&#39;: 0.4})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The same Robinson SST map with the coastline and gridline calls commented out (and the colorbar now at full height). The striking part: you can still “see” every continent — as blank white holes in the colored field — because the data itself is masked over land. Sometimes the data draws the map for you.</p>
+<div class="tip admonition">
+<p class="admonition-title">Reading a map by ear</p>
+<p>A 2-D map like this can’t be explored with <a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a> (which handles line, bar, scatter and histogram plots — like the model time series at the end of this page). For maps, use the 1-D profile trick from the matplotlib lecture: slice out one row or column of the field and print it (or plot it as a line). <em>(Runnable locally, continuing from the <code class="docutils literal notranslate"><span class="pre">sst</span></code> block above.)</em></p>
+</div>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># a pole-to-pole temperature profile along the dateline (180 degrees East)</span>
+<span class="n">profile</span> <span class="o">=</span> <span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mf">180.0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">]:</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lat </span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> degC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span> <span class="mi">60</span><span class="p">:</span> <span class="mf">0.7</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="mi">40</span><span class="p">:</span> <span class="mf">12.0</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="mi">20</span><span class="p">:</span> <span class="mf">25.9</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="mi">0</span><span class="p">:</span> <span class="mf">26.9</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="o">-</span><span class="mi">20</span><span class="p">:</span> <span class="mf">28.0</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="o">-</span><span class="mi">40</span><span class="p">:</span> <span class="mf">17.9</span> <span class="n">degC</span>
+<span class="n">lat</span> <span class="o">-</span><span class="mi">60</span><span class="p">:</span> <span class="mf">4.2</span> <span class="n">degC</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>That’s the whole map’s story in seven numbers: near-freezing water at 60°N, warmth rising through the tropics (peaking just <em>south</em> of the equator — this is January, southern-hemisphere summer), then cooling again toward the Southern Ocean.</p>
+</section>
+</section>
+<section id="earth-system-model-esm-output">
+<h2>Earth System Model (ESM) Output<a class="headerlink" href="#earth-system-model-esm-output" title="Link to this heading">#</a></h2>
+<p>ESMs are computer models, which approximately model the earth system. These types of models are used in a variety of contexts in the Earth Science: From idealized experiments to understand meachanisms in the climate systems, to reanalyses and state estimates to synthesize past and current observations, to fully coupled representations of the earth system enabling forecasts of climate conditions under future scenarios.</p>
+<section id="what-is-a-general-circulation-model">
+<h3>What is a General Circulation Model?<a class="headerlink" href="#what-is-a-general-circulation-model" title="Link to this heading">#</a></h3>
+<p>A GCM is a computer model that simulates the circulation of a fluid (e.g., the ocean or atmosphere), and is thus one (but important) component of an ESM. It is based on a set of partial differential equations, which describe the motion of a fluid in 3D space, and integrates these forward in time.  Most fundamentally, these models use a discrete representation of the <a class="reference external" href="https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations" rel="noreferer noopener" target="_blank">Navier-Stokes Equations</a> but can include more equations to represent e.g., the thermodynamics, chemistry or biology of the coupled earth system.
+Depending on the goal these equations are forced with predetermined boundary conditions (e.g. an ocean only simulation is forced by observed atmospheric conditions) or the components of the earth system are coupled together and allowed to influence each other. A ‘climate model’ is often the latter case which is forced by e.g. different scenarios of greenhouse gas emissions. This enables predictions of how the coupled system will evolve in the future.</p>
+</section>
+<section id="the-globe-divided-into-boxes">
+<h3>The globe divided into boxes<a class="headerlink" href="#the-globe-divided-into-boxes" title="Link to this heading">#</a></h3>
+<p>Since there is no analytical solution to the full Navier-Stokes equation, modern GCMs solve them using numerical methods. They use a discretized version of the equations, which approximates them within a finite volume, or grid-cell. Each GCM splits the ocean or atmosphere into many cells, both in the horizontal and vertical.</p>
+<p><em>The original page shows a widely used schematic here (credit: Dr. David Viner, Climatic Research Unit, via <a class="reference external" href="http://www.ipcc-data.org" rel="noreferer noopener" target="_blank">www.ipcc-data.org</a>). In words: a tilted plane carries a latitude–longitude grid over the British Isles, with horizontal grid spacings labelled between about 1.25 and 3.75 degrees. Out of one grid cell a tall column of stacked boxes rises into the atmosphere, and another column descends into the ocean. Arrows between the boxes are labelled “horizontal exchange between columns of momentum, heat and moisture” and “vertical exchange between layers by diffusion, convection and upwelling”. An inset panel lists what is handled inside each box: cloud types, radiatively active gases and aerosols, precipitation, the biosphere, land heat and moisture storage, sea ice, and the surface ocean layers.</em></p>
+<p>It is numerically favorable to shift (or ‘stagger’) the grid points where the model calculates the velocity with regard to the grid point where tracer values (temperature, salinity, or others) are calculated. There are several different ways to shift these points, commonly referred to as <a class="reference external" href="https://en.wikipedia.org/wiki/Arakawa_grids" rel="noreferer noopener" target="_blank">Arakawa grids</a>.</p>
+<p><em>The original page shows the C-grid diagram from the xgcm documentation. In words: two square grid cells, side by side. In the “horizontal view”, the tracer point <code class="docutils literal notranslate"><span class="pre">t</span></code> sits at the center of the cell; the east–west velocity points <code class="docutils literal notranslate"><span class="pre">u</span></code> sit at the middles of the left and right edges; the north–south velocity points <code class="docutils literal notranslate"><span class="pre">v</span></code> at the middles of the top and bottom edges; and vorticity points <code class="docutils literal notranslate"><span class="pre">f</span></code> at the four corners. The “vertical view” is the same idea in the x–z plane: <code class="docutils literal notranslate"><span class="pre">t</span></code> at the center, <code class="docutils literal notranslate"><span class="pre">u</span></code> on the side edges, and vertical-velocity points <code class="docutils literal notranslate"><span class="pre">w</span></code> on the top and bottom faces.</em></p>
+<p>Most GCMs use a <a class="reference external" href="https://en.wikipedia.org/wiki/Curvilinear_coordinates" rel="noreferer noopener" target="_blank">curvilinear grid</a> to avoid infinitely small grid cells at the North Pole. Some examples of curvilinear grids are a tripolar grid (the Arctic region is defined by two poles, placed over landmasses)</p>
+<p><em>The original page shows a globe here (source: <a class="reference external" href="https://www.geomar.de" rel="noreferer noopener" target="_blank">GEOMAR</a>), viewed from above the North Atlantic and Arctic, overlaid with a model mesh. In words: south of a marked circle in the mid-latitudes, the mesh is an ordinary latitude–longitude grid; north of that circle the mesh smoothly deforms so that the meridians converge not at the geographic North Pole but at two poles relocated over land — one over northern Canada, one over Siberia. No singular grid point ends up in the ocean, where the equations would actually have to be solved.</em></p>
+<p>or a cubed-sphere grid or a lat-lon cap (different versions of connected patches of curvilinear grids).</p>
+<p><em>The original page shows a globe covered by a mesh in six colored patches (credit: <a class="reference external" href="http://www.gaelforget.net" rel="noreferer noopener" target="_blank">Gael Forget</a>; more information about the simulation and grid at <a class="reference external" href="https://doi.org/10.5194/gmd-8-3071-2015" rel="noreferer noopener" target="_blank">https://doi.org/10.5194/gmd-8-3071-2015</a>). In words: instead of one global latitude–longitude grid, the sphere is tiled by six quadrilateral patches — like the faces of a cube inflated onto the sphere — each carrying its own nearly regular grid: one patch caps the Arctic, and the others cover the Americas, the Atlantic, the Pacific, and so on, joined edge-to-edge along visible seams.</em></p>
+<p>In most ocean models, due to these ‘warped’ coordinate systems, the boxes described are not perfectly rectangular <a class="reference external" href="https://en.wikipedia.org/wiki/Cuboid" rel="noreferer noopener" target="_blank">cuboids</a>. To accurately represent the volume of the cell, we require so-called grid metrics - the distances, cell areas, and volume to calculate operators like e.g., divergence.</p>
+<p>If you want to compare models with different grids it can sometimes be necessary to regrid your output. However, some calculations should be performed on the native model grid for maximum accuracy. We will discuss these different cases below.</p>
+</section>
+<section id="grid-resolution">
+<h3>Grid resolution<a class="headerlink" href="#grid-resolution" title="Link to this heading">#</a></h3>
+<p>Discretizing the equations has consequences:</p>
+<ul class="simple">
+<li><p>In order to get a realistic representation of the global circulation, the size of grid cells needs to be chosen so that all relevant processes are resolved.  In reality, this usually requires too much computing power for global models and so processes that are too small to be explicitly resolved, like <a class="reference external" href="https://www.gfdl.noaa.gov/ocean-mesoscale-eddies/" rel="noreferer noopener" target="_blank">mesoscale eddies</a> or <a class="reference external" href="https://www.gfdl.noaa.gov/ocean-mixing/" rel="noreferer noopener" target="_blank">vertical mixing</a>, need to be carefully parameterized since they influence the large scale circulation. The following video (watch it at <a class="reference external" href="https://player.vimeo.com/video/259423826" rel="noreferer noopener" target="_blank">https://player.vimeo.com/video/259423826</a>) illustrates the representation of mesoscale eddies in global models of different grid resolution. It shows the surface nutrient fields of three coupled climate models (produced by NOAA/GFDL) around the Antarctic Peninsula with increasing ocean resolution from left to right.</p></li>
+</ul>
+<blockquote>
+<div><p>Nominal model resolution from left to right: 1 degree (CM2.1deg), 0.25 degree (CM2.5) and 0.1 degree (CM2.6). The left ocean model employs a parametrization for both the advective and diffusive effects of mesoscale eddies, while the middle and right model do not.</p>
+</div></blockquote>
+<p><em>In words, for those not watching: the coarse 1-degree model shows smooth, blurry nutrient fields; as resolution increases to 0.25 and then 0.1 degree, the same fields fill with swirling eddies — filaments and vortices tens of kilometres across — that the coarse model can only represent through a parameterization.</em></p>
+</section>
+<section id="cmip-climate-model-intercomparison-project">
+<h3>CMIP - Climate Model Intercomparison Project<a class="headerlink" href="#cmip-climate-model-intercomparison-project" title="Link to this heading">#</a></h3>
+<p>Climate modeling has been a cornerstone of understanding our climate and the <a class="reference external" href="https://www.gfdl.noaa.gov/awards/former-noaa-scientist-suki-manabe-shares-nobel-prize-in-physics-for-pioneering-climate-prediction/" rel="noreferer noopener" target="_blank">consequences of continued emissions of greenhouse gases</a> for decades. Much of the recent efforts in the community have been focus on model intercomparison projects (MIPs), which invite submissions of many different modeling groups around the world to run their models (which are all set up slightly different) under centralized forcing scenarios. These results can then be analyzed and the spread between different models can give an idea about the certainty of these predictions. The recent <a class="reference external" href="https://gmd.copernicus.org/articles/9/1937/2016/" rel="noreferer noopener" target="_blank">Coupled Model Intercomparison Project Phase 6</a> (CMIP6) represents an international effort to represent the state-of-the-art knowledge about how the climate system might evolve in the future and informs much of the <a class="reference external" href="https://github.com/IPCC-WG1/Chapter-9" rel="noreferer noopener" target="_blank">Intergovernmental Panel on Climate Change Report</a>.</p>
+<p><em>The original notebook embeds an illustration here that is not included with the course materials; the surrounding text carries the content.</em></p>
+<p>In this lecture we will learn how to quickly search and analyze CMIP6 data with Pangeo tools in the cloud, a process that using the ‘download and analyze’ workflow often becomes prohibitively slow and inefficient due to the sheer scale of the data.</p>
+<p>The basis for this workflow are the analysis-ready-cloud-optimized repositories of CMIP6 data, which are currently maintained by the pangeo community and publicly available on both <a class="reference external" href="https://medium.com/pangeo/cmip6-in-the-cloud-five-ways-96b177abe396" rel="noreferer noopener" target="_blank">Google Cloud Storage</a> and <a class="reference external" href="https://www.youtube.com/watch?v=C0UhiiGgbWA&amp;amp;t=3267s" rel="noreferer noopener" target="_blank">Amazon S3</a> as a collection of <a class="reference external" href="https://zarr.readthedocs.io/en/stable/" rel="noreferer noopener" target="_blank">zarr</a> stores.</p>
+<p>The cloud native approach enables scientific results to be fully reproducible, encouraging to build onto and collaborate on scientific results.</p>
+<p>Here we use a Python library called <a class="reference external" href="https://cmip6-preprocessing.readthedocs.io/en/latest/?badge=latest" rel="noreferer noopener" target="_blank">xmip</a>.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xmip.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">combined_preprocessing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xmip.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">google_cmip_col</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xmip.postprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">match_metrics</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The first thing we have to do is to get an overview of all the data available. In this case we are using <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/index.html" rel="noreferer noopener" target="_blank">intake-esm</a> to load a collection of zarr stores on Google Cloud Storage, but there are <a class="reference external" href="https://pangeo-data.github.io/pangeo-cmip6-cloud/accessing_data.html" rel="noreferer noopener" target="_blank">other options</a> to access the data too.</p>
+<p>Lets create a collection object and look at it</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col</span> <span class="o">=</span> <span class="n">google_cmip_col</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>In a notebook, displaying <code class="docutils literal notranslate"><span class="pre">col</span></code> produces a rich HTML summary table — one row per search “facet”, giving the number of unique values of each. From a script, the accessible way in is the catalog’s underlying <strong>pandas DataFrame</strong>, <code class="docutils literal notranslate"><span class="pre">col.df</span></code>: one row per zarr store — over 500,000 of them — and one column per facet (<code class="docutils literal notranslate"><span class="pre">activity_id</span></code>, <code class="docutils literal notranslate"><span class="pre">institution_id</span></code>, <code class="docutils literal notranslate"><span class="pre">source_id</span></code>, <code class="docutils literal notranslate"><span class="pre">experiment_id</span></code>, <code class="docutils literal notranslate"><span class="pre">member_id</span></code>, <code class="docutils literal notranslate"><span class="pre">table_id</span></code>, <code class="docutils literal notranslate"><span class="pre">variable_id</span></code>, <code class="docutils literal notranslate"><span class="pre">grid_label</span></code>, plus the store’s cloud address (<code class="docutils literal notranslate"><span class="pre">zstore</span></code>), a <code class="docutils literal notranslate"><span class="pre">dcpp_init_year</span></code> column (used only by decadal-prediction runs), and a <code class="docutils literal notranslate"><span class="pre">version</span></code>). As with any DataFrame, hear its size and columns with:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>This object describes all the available data (over 500k single zarr stores!). The facets can be used to search and query subsets of the data. For detailed info on each of the facets please refer to this <a class="reference external" href="https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit" rel="noreferer noopener" target="_blank">document</a>.</p>
+<p>So obviously we never want to work with <em>all</em> the data. Lets check out how to get a subset.</p>
+<p>First we need to understand a bit better what all these facets mean and how to see which ones are in the full collection. Lets start with the <code class="docutils literal notranslate"><span class="pre">experiment_id</span></code>: This is the prescribed forcing for a particular MIP that is exactly the same across all different models. We can look at the values of the collection as a pandas dataframe to convieniently list all values. In a notebook you’d display the whole <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> array at once; by ear it’s easier to take the count first and then a slice:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exps</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;experiment_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">exps</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">exps</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>This prints the number of distinct experiments, then the first ten names. This is the expected output (as of this page’s last run — the catalog keeps growing):</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">170</span>
+<span class="p">[</span><span class="s1">&#39;highresSST-present&#39;</span><span class="p">,</span> <span class="s1">&#39;piControl&#39;</span><span class="p">,</span> <span class="s1">&#39;control-1950&#39;</span><span class="p">,</span> <span class="s1">&#39;hist-1950&#39;</span><span class="p">,</span> <span class="s1">&#39;historical&#39;</span><span class="p">,</span> <span class="s1">&#39;amip&#39;</span><span class="p">,</span> <span class="s1">&#39;abrupt-4xCO2&#39;</span><span class="p">,</span> <span class="s1">&#39;abrupt-2xCO2&#39;</span><span class="p">,</span> <span class="s1">&#39;abrupt-0p5xCO2&#39;</span><span class="p">,</span> <span class="s1">&#39;1pctCO2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The full list of 170 runs from <code class="docutils literal notranslate"><span class="pre">highresSST-present</span></code> through families like <code class="docutils literal notranslate"><span class="pre">ssp585</span></code>, <code class="docutils literal notranslate"><span class="pre">ssp245</span></code>, <code class="docutils literal notranslate"><span class="pre">hist-GHG</span></code>, <code class="docutils literal notranslate"><span class="pre">piClim-...</span></code>, <code class="docutils literal notranslate"><span class="pre">dcpp...</span></code>, down to <code class="docutils literal notranslate"><span class="pre">pdSST-pdSICSIT</span></code> — print <code class="docutils literal notranslate"><span class="pre">list(exps)</span></code> if you want to hear them all.</p>
+<p>The experiments you are probably most interested in are the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">piControl</span></code>: In most cases this is the ‘spin up’ phase of the model, where it is run with a constant forcing (representing pre-industrial greenhouse gas concentrations)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">historical</span></code>: This experiment is run with the observed forcing in the past.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ssp***</span></code>: A set of <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0959378016300681" rel="noreferer noopener" target="_blank">“Shared Socioeconomic Pathways”</a> which represent different combined scenarios of future greenhouse gas emissions and other socio-economic indicators (<a class="reference external" href="https://www.carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/" rel="noreferer noopener" target="_blank">Explainer</a>). These are a fairly complex topic, but to simplify this for our purposes here we can treat <code class="docutils literal notranslate"><span class="pre">ssp585</span></code> as the ‘worst-case’ and <code class="docutils literal notranslate"><span class="pre">ssp245</span></code> as ‘middle-of-the-road’.</p></li>
+</ul>
+<p>You can explore the available models (<code class="docutils literal notranslate"><span class="pre">source_id</span></code>) in the same way as above:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;source_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">models</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">models</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">88</span>
+<span class="p">[</span><span class="s1">&#39;CMCC-CM2-HR4&#39;</span><span class="p">,</span> <span class="s1">&#39;EC-Earth3P-HR&#39;</span><span class="p">,</span> <span class="s1">&#39;HadGEM3-GC31-MM&#39;</span><span class="p">,</span> <span class="s1">&#39;HadGEM3-GC31-HM&#39;</span><span class="p">,</span> <span class="s1">&#39;HadGEM3-GC31-LM&#39;</span><span class="p">,</span> <span class="s1">&#39;EC-Earth3P&#39;</span><span class="p">,</span> <span class="s1">&#39;ECMWF-IFS-HR&#39;</span><span class="p">,</span> <span class="s1">&#39;ECMWF-IFS-LR&#39;</span><span class="p">,</span> <span class="s1">&#39;HadGEM3-GC31-LL&#39;</span><span class="p">,</span> <span class="s1">&#39;CMCC-CM2-VHR4&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Eighty-eight models, from dozens of modeling centers worldwide — GFDL, IPSL, MPI, CESM, UKESM, MIROC, and many more.</p>
+<p>Now you want to decide what variable (<code class="docutils literal notranslate"><span class="pre">variable_id</span></code>) you want to look at and in conjunction what time frequency of output (<code class="docutils literal notranslate"><span class="pre">table_id</span></code>) is available. This handy <a class="reference external" href="https://docs.google.com/spreadsheets/d/1UUtoz6Ofyjlpx5LdqhKcwHFz2SGoTQV2_yekHyMfL9Y/edit#gid=1221485271" rel="noreferer noopener" target="_blank">spreadsheet</a> can help you find the value for <code class="docutils literal notranslate"><span class="pre">variable_id</span></code> and the available time frequencies (<code class="docutils literal notranslate"><span class="pre">table_id</span></code>).</p>
+<p>Lets look at an example for monthly (<code class="docutils literal notranslate"><span class="pre">'table_id'='Omon'</span></code>) sea surface temperature (<code class="docutils literal notranslate"><span class="pre">'variable_id'='tos'</span></code>) for the <code class="docutils literal notranslate"><span class="pre">historical</span></code> experiment:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">variable_id</span><span class="o">=</span><span class="s1">&#39;tos&#39;</span><span class="p">,</span> <span class="c1"># ocean surface temperature</span>
+    <span class="n">table_id</span><span class="o">=</span><span class="s1">&#39;Omon&#39;</span><span class="p">,</span>
+    <span class="n">experiment_id</span><span class="o">=</span><span class="s1">&#39;historical&#39;</span><span class="p">,</span>
+    <span class="n">source_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GFDL-ESM4&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>(In a notebook, displaying <code class="docutils literal notranslate"><span class="pre">cat</span></code> shows another HTML summary — the same kind of catalog object, now filtered down to just the GFDL-ESM4 historical monthly SST holdings.)</p>
+<p>The last facet we need to discuss is <code class="docutils literal notranslate"><span class="pre">member_id</span></code> and <code class="docutils literal notranslate"><span class="pre">grid_label</span></code>:
+You can see here that we have 3 <code class="docutils literal notranslate"><span class="pre">member_id</span></code> values for the given query.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;member_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;r3i1p1f1&#39;</span><span class="p">,</span> <span class="s1">&#39;r2i1p1f1&#39;</span><span class="p">,</span> <span class="s1">&#39;r1i1p1f1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>This indicates that for this particular model/experiment 3 ensemble members were run with varing realizations/initial_condiditions/physics/forcing or a combination thereof. The naming is explained in <a class="reference external" href="https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit" rel="noreferer noopener" target="_blank">this</a> document:</p>
+<blockquote>
+<div><p>Example of a variant_label:  if realization_index=2, initialization_index=1, physics_index=3, and forcing_index=233, then variant_label = “r2i1p3f233”.</p>
+</div></blockquote>
+<p>There can be many more members for some particular models, which provides an opportunity to investigate internal variability of the climate system as compared to forced signals.</p>
+<p>Finally there are two values of <code class="docutils literal notranslate"><span class="pre">grid_label</span></code></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grid_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;gr&#39;</span><span class="p">,</span> <span class="s1">&#39;gn&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The value <code class="docutils literal notranslate"><span class="pre">gn</span></code> always stands for the native model grid (which can be quite complex but preserves the most detail) and <code class="docutils literal notranslate"><span class="pre">gr</span></code> indicates data that has been regridded on regular lon/lat intervals.</p>
+<p>Now that you know how to query and subset the collection, it is time to actually load in some model data as xarray datasets!</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a smaller catalog from the full collection using faceted search</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">variable_id</span><span class="o">=</span><span class="s1">&#39;tos&#39;</span><span class="p">,</span> <span class="c1"># Ocean surface temperature</span>
+    <span class="n">experiment_id</span><span class="o">=</span><span class="s1">&#39;historical&#39;</span><span class="p">,</span> <span class="c1"># only runs for the historical forcing period</span>
+    <span class="n">table_id</span><span class="o">=</span><span class="s1">&#39;Omon&#39;</span><span class="p">,</span> <span class="c1"># monthly oceanic data</span>
+    <span class="n">grid_label</span><span class="o">=</span><span class="s1">&#39;gn&#39;</span><span class="p">,</span> <span class="c1">#native model grid only</span>
+    <span class="n">source_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;IPSL-CM6A-LR&#39;</span><span class="p">,</span> <span class="s1">&#39;MRI-ESM2-0&#39;</span><span class="p">,</span> <span class="s1">&#39;GFDL-ESM4&#39;</span><span class="p">],</span> <span class="c1"># only choosing a few models here, there are many more!</span>
+    <span class="n">member_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r1i1p1f1&#39;</span><span class="p">,</span> <span class="s1">&#39;r2i1p1f1&#39;</span><span class="p">,</span> <span class="s1">&#39;r3i1p1f1&#39;</span><span class="p">],</span> <span class="c1">#lets restrict us here to only a few members, you can modify this later to experiment.</span>
+<span class="p">)</span>
+
+<span class="c1"># read all datasets into a dictionary but apply the xmip preprocessing before</span>
+<span class="n">ddict</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span>
+    <span class="n">preprocess</span><span class="o">=</span><span class="n">combined_preprocessing</span><span class="p">,</span>
+    <span class="n">xarray_open_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;use_cftime&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>This prints a note about how the dictionary keys are built (plus, in a notebook, a progress bar):</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">--&gt;</span> <span class="n">The</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">returned</span> <span class="n">dictionary</span> <span class="n">of</span> <span class="n">datasets</span> <span class="n">are</span> <span class="n">constructed</span> <span class="k">as</span> <span class="n">follows</span><span class="p">:</span>
+    <span class="s1">&#39;activity_id.institution_id.source_id.experiment_id.table_id.grid_label&#39;</span>
+
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>You will also hear several <code class="docutils literal notranslate"><span class="pre">UserWarning</span></code> lines from xmip about the MRI model, of the form “While renaming to target <code class="docutils literal notranslate"><span class="pre">lon_bounds</span></code>, more than one candidate was found [‘x_bnds’, ‘vertices_longitude’]. … Please double check results.” — that is xmip’s data-cleaning at work on inconsistently named variables, and is expected here.</p>
+<p>Here we did two things:</p>
+<ul class="simple">
+<li><p>We searched the full collection based on a combination of facets like the variable, the experiment and only a test set of models.</p></li>
+<li><p>We loaded the datasets into a dictionary of xarray datasets (note they are not loaded into memory, but instead these are lazyly loaded dask arrays – more on this in the following lectures).</p></li>
+</ul>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ddict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;CMIP.NOAA-GFDL.GFDL-ESM4.historical.Omon.gn&#39;</span><span class="p">,</span> <span class="s1">&#39;CMIP.IPSL.IPSL-CM6A-LR.historical.Omon.gn&#39;</span><span class="p">,</span> <span class="s1">&#39;CMIP.MRI.MRI-ESM2-0.historical.Omon.gn&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Let’s print one of the three datasets in full — this is the richest xarray object in the course so far, so it’s worth a guided listen:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ddict</span><span class="p">[</span><span class="s1">&#39;CMIP.IPSL.IPSL-CM6A-LR.historical.Omon.gn&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">3</span><span class="n">GB</span>
+<span class="n">Dimensions</span><span class="p">:</span>         <span class="p">(</span><span class="n">member_id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dcpp_init_year</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mi">1980</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">332</span><span class="p">,</span>
+                     <span class="n">x</span><span class="p">:</span> <span class="mi">362</span><span class="p">,</span> <span class="n">vertex</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bnds</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Coordinates</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="o">/</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">area</span>            <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">481</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="n">lat</span>             <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">481</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="n">lon</span>             <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">481</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+  <span class="o">*</span> <span class="n">time</span>            <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="nb">object</span> <span class="mi">16</span><span class="n">kB</span> <span class="mi">1850</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">16</span> <span class="mi">12</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="o">...</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">16</span> <span class="mi">12</span><span class="p">:</span><span class="o">...</span>
+    <span class="n">lon_verticies</span>   <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">vertex</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">2</span><span class="n">MB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="n">lat_verticies</span>   <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">vertex</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">2</span><span class="n">MB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="o">...</span>              <span class="o">...</span>
+  <span class="o">*</span> <span class="n">y</span>               <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="n">int64</span> <span class="mi">3</span><span class="n">kB</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="o">...</span> <span class="mi">325</span> <span class="mi">326</span> <span class="mi">327</span> <span class="mi">328</span> <span class="mi">329</span> <span class="mi">330</span> <span class="mi">331</span>
+  <span class="o">*</span> <span class="n">x</span>               <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">int64</span> <span class="mi">3</span><span class="n">kB</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="o">...</span> <span class="mi">355</span> <span class="mi">356</span> <span class="mi">357</span> <span class="mi">358</span> <span class="mi">359</span> <span class="mi">360</span> <span class="mi">361</span>
+    <span class="n">lon_bounds</span>      <span class="p">(</span><span class="n">bnds</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">961</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+    <span class="n">lat_bounds</span>      <span class="p">(</span><span class="n">bnds</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">961</span><span class="n">kB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+  <span class="o">*</span> <span class="n">member_id</span>       <span class="p">(</span><span class="n">member_id</span><span class="p">)</span> <span class="nb">object</span> <span class="mi">24</span><span class="n">B</span> <span class="s1">&#39;r1i1p1f1&#39;</span> <span class="s1">&#39;r2i1p1f1&#39;</span> <span class="s1">&#39;r3i1p1f1&#39;</span>
+  <span class="o">*</span> <span class="n">dcpp_init_year</span>  <span class="p">(</span><span class="n">dcpp_init_year</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">8</span><span class="n">B</span> <span class="n">nan</span>
+<span class="n">Dimensions</span> <span class="n">without</span> <span class="n">coordinates</span><span class="p">:</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">bnds</span>
+<span class="n">Data</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">tos</span>             <span class="p">(</span><span class="n">member_id</span><span class="p">,</span> <span class="n">dcpp_init_year</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">3</span><span class="n">GB</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">&lt;</span><span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">332</span><span class="p">,</span> <span class="mi">362</span><span class="p">),</span> <span class="n">meta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">&gt;</span>
+<span class="n">Attributes</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="o">/</span><span class="mi">51</span><span class="p">)</span>
+    <span class="n">CMIP6_CV_version</span><span class="p">:</span>                 <span class="n">cv</span><span class="o">=</span><span class="mf">6.2.3.5</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">g63b123e</span>
+    <span class="n">Conventions</span><span class="p">:</span>                      <span class="n">CF</span><span class="o">-</span><span class="mf">1.7</span> <span class="n">CMIP</span><span class="o">-</span><span class="mf">6.2</span>
+    <span class="n">EXPID</span><span class="p">:</span>                            <span class="n">historical</span>
+    <span class="n">NCO</span><span class="p">:</span>                              <span class="s2">&quot;4.6.0&quot;</span>
+    <span class="n">activity_id</span><span class="p">:</span>                      <span class="n">CMIP</span>
+    <span class="n">branch_method</span><span class="p">:</span>                    <span class="n">standard</span>
+    <span class="o">...</span>                               <span class="o">...</span>
+    <span class="n">intake_esm_attrs</span><span class="p">:</span><span class="n">variable_id</span><span class="p">:</span>     <span class="n">tos</span>
+    <span class="n">intake_esm_attrs</span><span class="p">:</span><span class="n">grid_label</span><span class="p">:</span>      <span class="n">gn</span>
+    <span class="n">intake_esm_attrs</span><span class="p">:</span><span class="n">version</span><span class="p">:</span>         <span class="mi">20180803</span>
+    <span class="n">intake_esm_attrs</span><span class="p">:</span><span class="n">_data_format_</span><span class="p">:</span>   <span class="n">zarr</span>
+    <span class="n">variant_info</span><span class="p">:</span>                     <span class="n">Restart</span> <span class="kn">from</span><span class="w"> </span><span class="nn">another</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">piControl</span><span class="o">...</span>
+    <span class="n">intake_esm_dataset_key</span><span class="p">:</span>           <span class="n">CMIP</span><span class="o">.</span><span class="n">IPSL</span><span class="o">.</span><span class="n">IPSL</span><span class="o">-</span><span class="n">CM6A</span><span class="o">-</span><span class="n">LR</span><span class="o">.</span><span class="n">historical</span><span class="o">.</span><span class="n">Omon</span><span class="o">.</span><span class="n">gn</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Walking through it by ear: the <strong>first line</strong> says the whole dataset is 3 gigabytes — which is exactly why it stays lazy. The <strong>Dimensions</strong> line: 3 ensemble members, 1980 monthly time steps (1850 through 2014, i.e. 165 years times 12), and a native ocean grid of 332 by 362 points indexed by plain integers <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> — <em>not</em> by latitude and longitude, because this is a curvilinear grid: the real <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> are 2-D coordinate fields of shape <code class="docutils literal notranslate"><span class="pre">(y,</span> <span class="pre">x)</span></code>, listed under <strong>Coordinates</strong> along with cell areas and cell-corner (<code class="docutils literal notranslate"><span class="pre">verticies</span></code>, <code class="docutils literal notranslate"><span class="pre">bounds</span></code>) arrays. There is exactly <strong>one data variable</strong>, <code class="docutils literal notranslate"><span class="pre">tos</span></code> (sea surface temperature), a 5-dimensional dask array. The 51 <strong>Attributes</strong> carry CMIP metadata — model, experiment, conventions, and the intake-esm bookkeeping. Notice everything says <code class="docutils literal notranslate"><span class="pre">dask.array</span></code> with chunk sizes: nothing has been downloaded yet.</p>
+<p>You can see that both datasets have the same names for many of the coordinates (e.g. ‘x’ and ‘y’ for the logical indices in zonal and meridional direction). This is actually not always the case for the raw CMIP6 data, which is why <a class="reference external" href="https://github.com/jbusecke/xMIP" rel="noreferer noopener" target="_blank">xMIP</a> was developed in an effort to crowdsource these common data-cleaning tasks. For this example we only use the <code class="docutils literal notranslate"><span class="pre">combined_preprocessing</span></code> function which fixes some of the naming, but check out the <a class="reference external" href="https://cmip6-preprocessing.readthedocs.io/en/latest/?badge=latest" rel="noreferer noopener" target="_blank">docs</a> to see more helpful code for CMIP analysis.</p>
+<p>Ok but now lets analyze the data! Using what we know about xarray we can get a timeseries of the global sea surface temperature:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">ddict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># construct yearly global mean timeseries</span>
+    <span class="n">mean_temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">coarsen</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">mean_temp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;member_id&#39;</span><span class="p">)</span>
+    <span class="c1"># lets also plot the average over all members</span>
+    <span class="n">mean_temp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;member_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;source_id&#39;</span><span class="p">])</span> <span class="c1">#Extract the model name right from the dataset metadata</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Three separate figures, one per model, all with the same layout: the x-axis is time from 1850 to 2014; the y-axis is <code class="docutils literal notranslate"><span class="pre">tos</span></code>, the (unweighted) global-mean sea surface temperature in degrees Celsius; three thin colored lines — blue, orange, green for members <code class="docutils literal notranslate"><span class="pre">r1i1p1f1</span></code>, <code class="docutils literal notranslate"><span class="pre">r2i1p1f1</span></code>, <code class="docutils literal notranslate"><span class="pre">r3i1p1f1</span></code>, named in a legend titled <code class="docutils literal notranslate"><span class="pre">member_id</span></code> — jitter within roughly 0.1–0.2 °C of one another, and a thick black line (the average over the members) cuts through the middle. Model by model:</p>
+<ul class="simple">
+<li><p><strong>GFDL-ESM4</strong> (first figure): y-axis from about 11.8 to 12.85. The black mean hovers near 12.0–12.3 °C from 1850 to about 1970, with brief sharp dips near 1885 and the mid-1960s, then climbs steeply after about 1980 to roughly 12.65 °C by 2014.</p></li>
+<li><p><strong>IPSL-CM6A-LR</strong> (second figure): y-axis from about 13.0 to 14.3. The mean rises gradually from about 13.35 °C to 13.7 °C by the 1970s, then steeply to about 14.1 °C by 2014. (Small metadata quirk you can hear: this model’s x-axis is labelled “Time axis” rather than “time” — the label comes from the time coordinate’s attributes, which differ between modeling centers.)</p></li>
+<li><p><strong>MRI-ESM2-0</strong> (third figure): y-axis from about 14.8 to 15.7. The mean stays nearly flat around 15.0–15.1 °C until roughly 1930, rises slowly, then accelerates after about 1975 to roughly 15.6 °C by 2014.</p></li>
+</ul>
+<p>Two things to take away. Each model has its own <em>absolute</em> temperature — the three curves sit whole degrees apart (about 12, 13.5, and 15 °C), which is normal for unweighted means over different native grids. Yet all three tell the same story: roughly flat through the nineteenth century, then warming that accelerates sharply after about 1975. The colored members disagree in any individual year (that spread is internal variability — the model’s “weather”), while sharing the forced long-term trend; the brief cold dips that several models show around 1885 and the early 1960s follow major volcanic eruptions, which are part of the historical forcing. These are ordinary line plots, so you can also explore them point-by-point with <a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a>.</p>
+<p>The above result is roughly correct, but as discussed in earlier lectures we need to do proper area weighting to ensure that different parts of the globe are weighted properly. You can look at the <a class="reference external" href="https://earth-env-data-science.github.io/lectures/models/cmip.html" rel="noreferer noopener" target="_blank">original notebook</a> to see how to do things correctly.</p>
+</section>
+</section>
+<section id="other-ideas-to-explore">
+<h2>Other ideas to explore:<a class="headerlink" href="#other-ideas-to-explore" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ESMs are not always on simple or similar grids:</p>
+<ul>
+<li><p>For intercomparison, the most common choice is to regrid everything to a common grid. There is a package called <a class="reference external" href="https://xesmf.readthedocs.io/en/latest/" rel="noreferer noopener" target="_blank">xesmf</a> for this. See <a class="reference external" href="https://earth-env-data-science.github.io/lectures/models/regridding.html" rel="noreferer noopener" target="_blank">this example</a>.</p></li>
+<li><p>Sometimes one needs to work with the native grid, and there is a package called <a class="reference external" href="https://xgcm.readthedocs.io/en/latest/index.html" rel="noreferer noopener" target="_blank">xgcm</a> for this. See <a class="reference external" href="https://earth-env-data-science.github.io/lectures/models/xgcm.html" rel="noreferer noopener" target="_blank">this example</a>.</p></li>
+</ul>
+</li>
+<li><p>Datasets can sometimes (often) get quite big, making it challenging even for the largest computers to handle their analysis. One solution to this is to use multiple computers in parallel. There are a few different Python frameworks to do this, where <a class="reference external" href="https://docs.dask.org/en/latest/" rel="noreferer noopener" target="_blank">dask</a> is probably the most adopted framework at this point. See <a class="reference external" href="https://earth-env-data-science.github.io/lectures/dask/intro.html" rel="noreferer noopener" target="_blank">this example</a>. One advantage to dask is that <a class="reference external" href="https://docs.xarray.dev/en/stable/user-guide/dask.html" rel="noreferer noopener" target="_blank">integrates natively with xarray</a>, and with some forethought much of the parallelization can take place automatically.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/geoscience"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../project_require.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Final Project Requirements</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../advanced/packaging.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Going Further with Computing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projections-most-of-our-media-for-visualization-are-flat">Projections: Most of our media for visualization <em>are</em> flat</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map-projections-taking-us-from-spherical-to-flat">[Map] Projections: Taking us from spherical to flat</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-major-problem-with-map-projections">The major problem with map projections</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-cartopy">Introducing Cartopy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-real-data-on-a-map-sst-with-xarray">Putting real data on a map: SST with xarray</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earth-system-model-esm-output">Earth System Model (ESM) Output</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-general-circulation-model">What is a General Circulation Model?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-globe-divided-into-boxes">The globe divided into boxes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-resolution">Grid resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cmip-climate-model-intercomparison-project">CMIP - Climate Model Intercomparison Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ideas-to-explore">Other ideas to explore:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

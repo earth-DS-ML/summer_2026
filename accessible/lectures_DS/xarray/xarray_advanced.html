@@ -1,0 +1,1423 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Xarray Advanced &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/xarray/xarray_advanced';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 6: Xarray with Sea Surface Temperature (SST) data" href="assignment6.html" />
+    <link rel="prev" title="Xarray Fundamentals" href="xarray_fundamentals.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/xarray/xarray_advanced.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Xarray Advanced</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation">Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">Groupby</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-step">Split Step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-combine">Map &amp; Combine</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">Aggregations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-related-resample-rolling-coarsen">Groupby-Related: Resample, Rolling, Coarsen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">Resample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling">Rolling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coarsen">Coarsen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-advanced-example">An Advanced Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="xarray-advanced">
+<h1>Xarray Advanced<a class="headerlink" href="#xarray-advanced" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output.</p>
+<p>Two page-specific notes. First, the packages: this lecture needs <code class="docutils literal notranslate"><span class="pre">xarray</span></code> plus the pieces that let it read data over the network — if you haven’t already, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">xarray</span> <span class="pre">netcdf4</span> <span class="pre">dask</span> <span class="pre">matplotlib</span></code>. Second, <strong>be online</strong>: the sea-surface-temperature examples stream real data from NOAA and IRI servers, and the loading step can take a minute or more depending on your connection. Once loaded, everything else runs fast — so build up one script cumulatively rather than re-running the download for every experiment.</p>
+</div>
+<p>In this lesson we go beyond the basics — <strong>interpolation, <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">resample</span></code>, <code class="docutils literal notranslate"><span class="pre">rolling</span></code>, and <code class="docutils literal notranslate"><span class="pre">coarsen</span></code></strong> — and apply them to a real sea-surface-temperature dataset to build climatologies and anomalies, the bread and butter of climate analysis.</p>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>The <strong>“Try it”</strong> exercises on this page are part of your in-class assignment for this section. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment. (One 10-point assignment covers all the lecture pages in this section.)</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Checking data and figures without seeing them</p>
+<p>Three habits, used throughout this page:</p>
+<ol class="arabic simple">
+<li><p>In a notebook, a bare expression at the end of a cell displays itself; in a script it displays nothing — so we <strong>wrap those expressions in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code></strong> throughout. Printed xarray objects are plain linear text that a screen reader handles well.</p></li>
+<li><p><strong>Every plot is followed by a “What this shows” note</strong> describing the rendered figure in words and numbers, and short <strong>“Check it”</strong> blocks confirm the same facts by printing values instead of looking.</p></li>
+<li><p>The 1-D line plots on this page (timeseries, climatology curves) can also be explored point by point with <strong><a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a></strong>. The 2-D maps (<code class="docutils literal notranslate"><span class="pre">pcolormesh</span></code>-style plots) can’t — for those, use the slicing trick from the NumPy lecture: pull out one point, row, or column and print it. The “Check it” blocks after the maps below do exactly that.</p></li>
+</ol>
+<p>If you want to keep a figure, add <code class="docutils literal notranslate"><span class="pre">plt.savefig('somename.png')</span></code> just before <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>.</p>
+</div>
+<p>Start a script (say, <code class="docutils literal notranslate"><span class="pre">xarray_advanced.py</span></code>) with the imports used throughout:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<section id="interpolation">
+<h2>Interpolation<a class="headerlink" href="#interpolation" title="Link to this heading">#</a></h2>
+<p>In the previous lesson on Xarray, we learned how to select data based on its dimension coordinates and align data with different coordinates.
+But what if we want to estimate the value of the data variables at <em>different coordinates</em>.
+This is where interpolation comes in.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># we write it out explicitly so we can see each point.</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x_data</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_data</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="mi">11</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">88</span><span class="n">B</span>
+<span class="n">array</span><span class="p">([</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">4</span><span class="p">,</span>   <span class="mi">9</span><span class="p">,</span>  <span class="mi">16</span><span class="p">,</span>  <span class="mi">25</span><span class="p">,</span>  <span class="mi">36</span><span class="p">,</span>  <span class="mi">49</span><span class="p">,</span>  <span class="mi">64</span><span class="p">,</span>  <span class="mi">81</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">x</span>        <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">int64</span> <span class="mi">88</span><span class="n">B</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>: a DataArray with one dimension <code class="docutils literal notranslate"><span class="pre">x</span></code> of length 11, the eleven squared values 0 through 100, and the coordinate <code class="docutils literal notranslate"><span class="pre">x</span></code> running 0 to 10. Let’s plot it:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Eleven round dots connected by straight line segments, tracing the right half of a parabola: from (0, 0) the curve rises gently at first, then ever more steeply, up to (10, 100). The x-axis is labelled <code class="docutils literal notranslate"><span class="pre">x</span></code> (0 to 10); the y-axis runs 0 to 100 with no label.</p>
+<p>We can select the value at any point that exists in the coordinate:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">16</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We only have data on the integer points in x.
+But what if we wanted to estimate the value at, say, 4.5? Trying to <code class="docutils literal notranslate"><span class="pre">.sel</span></code> it raises an error — here we catch it so the script keeps running, and print the message:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;KeyError:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span><span class="p">:</span> <span class="s2">&quot;not all values found in index &#39;x&#39;. Try setting the `method` keyword argument (example: method=&#39;nearest&#39;).&quot;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Interpolation to the rescue! The two neighboring points are:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">16</span> <span class="mi">25</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (halfway between 16 and 25):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">20.5</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Interpolation uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html" rel="noreferer noopener" target="_blank">scipy.interpolate</a> under the hood.
+There are different modes of interpolation:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># default</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">20.5</span>
+<span class="mf">16.0</span>
+<span class="mf">20.25</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Linear draws a straight line between the neighbors (20.5); nearest just grabs the closest point (16, the value at x=4); cubic fits a smooth curve — and since the data really is x², cubic recovers the exact value 4.5² = 20.25.</p>
+<p>We can interpolate to a whole new coordinate at once:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_new</span> <span class="o">=</span> <span class="n">x_data</span> <span class="o">+</span> <span class="mf">0.5</span>
+
+<span class="n">f_interp_linear</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_new</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">f_interp_cubic</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_new</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<span class="n">f_interp_linear</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">f_interp_cubic</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Three dotted curves lying essentially on top of one another along the same parabola — blue “original” markers at the integers, orange “linear” and green “cubic” markers at the half-integers (0.5, 1.5, … 9.5), with a legend in the top-left. At this scale the tiny difference between linear and cubic (20.5 vs 20.25 at x=4.5) is invisible; the green cubic markers are drawn last and mostly cover the orange. The interpolated curves stop at 9.5 — nothing is drawn at 10.5, for the reason the next block prints.</p>
+<p>Note that values outside of the original range are not supported:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f_interp_linear</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mf">0.5</span>  <span class="mf">2.5</span>  <span class="mf">6.5</span> <span class="mf">12.5</span> <span class="mf">20.5</span> <span class="mf">30.5</span> <span class="mf">42.5</span> <span class="mf">56.5</span> <span class="mf">72.5</span> <span class="mf">90.5</span>  <span class="n">nan</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The last requested point, x = 10.5, is outside the original 0–10 range, so it comes back as <code class="docutils literal notranslate"><span class="pre">nan</span></code> — interpolation does not extrapolate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can apply interpolation to any dimension, and even to multiple dimensions at a time.
+(Multidimensional interpolation only supports <code class="docutils literal notranslate"><span class="pre">mode='nearest'</span></code> and <code class="docutils literal notranslate"><span class="pre">mode='linear'</span></code>.)
+But keep in mind that <em>Xarray has no built-in understanding of geography</em>.
+If you use <code class="docutils literal notranslate"><span class="pre">interp</span></code> on lat / lon coordinates, it will just perform naive interpolation of the lat / lon values.
+More sophisticated treatment of spherical geometry requires another package such as <a class="reference external" href="https://xesmf.readthedocs.io/" rel="noreferer noopener" target="_blank">xesmf</a>.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take the <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">x**2</span></code> DataArray (or build your own). Use <code class="docutils literal notranslate"><span class="pre">.interp()</span></code> to estimate its value at a non-integer point (e.g. <code class="docutils literal notranslate"><span class="pre">x=4.5</span></code>), comparing <code class="docutils literal notranslate"><span class="pre">method='linear'</span></code>, <code class="docutils literal notranslate"><span class="pre">'nearest'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'cubic'</span></code> — print the three values. Then interpolate <code class="docutils literal notranslate"><span class="pre">f</span></code> onto a whole new set of x-values and plot the original vs. interpolated curves (print <code class="docutils literal notranslate"><span class="pre">f_interp.values</span></code> too, to check the numbers without looking at the plot).</p>
+</div>
+</section>
+<section id="groupby">
+<h2>Groupby<a class="headerlink" href="#groupby" title="Link to this heading">#</a></h2>
+<p>Xarray copies Pandas’ very useful groupby functionality, enabling the “split / apply / combine” workflow on xarray DataArrays and Datasets. In the first part of the lesson, we will learn to use groupby by analyzing sea-surface temperature data.</p>
+<p>First we load a dataset. We will use the <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v5" rel="noreferer noopener" target="_blank">NOAA Extended Reconstructed Sea Surface Temperature (ERSST) v5</a> product, a widely used and trusted gridded compilation of of historical data going back to 1854.</p>
+<p>Since the data is provided via an <a class="reference external" href="https://en.wikipedia.org/wiki/OPeNDAP" rel="noreferer noopener" target="_blank">OPeNDAP</a> server, we can load it directly without downloading anything. <strong>This is the slow step</strong> — a minute or more — and the <code class="docutils literal notranslate"><span class="pre">chunks</span></code> argument matters, as the comment explains:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://psl.noaa.gov/thredds/dodsC/Datasets/noaa.ersst.v5/sst.mnmean.nc&#39;</span>
+<span class="c1"># Read the data in small time-chunks (uses dask). Pulling the whole array in</span>
+<span class="c1"># one OPeNDAP request makes this THREDDS server return all-zeros (blank maps);</span>
+<span class="c1"># chunking fetches it piece-by-piece, then .load() brings it into memory.</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time_bnds&#39;</span><span class="p">],</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;1960&#39;</span><span class="p">,</span> <span class="s1">&#39;2018&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">45</span><span class="n">MB</span>
+<span class="n">Dimensions</span><span class="p">:</span>  <span class="p">(</span><span class="n">time</span><span class="p">:</span> <span class="mi">708</span><span class="p">,</span> <span class="n">lat</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">time</span>     <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">datetime64</span><span class="p">[</span><span class="n">ns</span><span class="p">]</span> <span class="mi">6</span><span class="n">kB</span> <span class="mi">1960</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">1960</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">01</span> <span class="o">...</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">01</span>
+  <span class="o">*</span> <span class="n">lat</span>      <span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">356</span><span class="n">B</span> <span class="mf">88.0</span> <span class="mf">86.0</span> <span class="mf">84.0</span> <span class="mf">82.0</span> <span class="o">...</span> <span class="o">-</span><span class="mf">82.0</span> <span class="o">-</span><span class="mf">84.0</span> <span class="o">-</span><span class="mf">86.0</span> <span class="o">-</span><span class="mf">88.0</span>
+  <span class="o">*</span> <span class="n">lon</span>      <span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">720</span><span class="n">B</span> <span class="mf">0.0</span> <span class="mf">2.0</span> <span class="mf">4.0</span> <span class="mf">6.0</span> <span class="mf">8.0</span> <span class="o">...</span> <span class="mf">352.0</span> <span class="mf">354.0</span> <span class="mf">356.0</span> <span class="mf">358.0</span>
+<span class="n">Data</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">sst</span>      <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float32</span> <span class="mi">45</span><span class="n">MB</span> <span class="o">-</span><span class="mf">1.8</span> <span class="o">-</span><span class="mf">1.8</span> <span class="o">-</span><span class="mf">1.8</span> <span class="o">-</span><span class="mf">1.8</span> <span class="o">...</span> <span class="n">nan</span> <span class="n">nan</span> <span class="n">nan</span>
+<span class="n">Attributes</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="o">/</span><span class="mi">39</span><span class="p">)</span>
+    <span class="n">climatology</span><span class="p">:</span>                     <span class="n">Climatology</span> <span class="ow">is</span> <span class="n">based</span> <span class="n">on</span> <span class="mi">1971</span><span class="o">-</span><span class="mi">2000</span> <span class="n">SST</span><span class="p">,</span> <span class="n">X</span><span class="o">...</span>
+    <span class="n">description</span><span class="p">:</span>                     <span class="n">In</span> <span class="n">situ</span> <span class="n">data</span><span class="p">:</span> <span class="n">ICOADS2</span><span class="mf">.5</span> <span class="n">before</span> <span class="mi">2007</span> <span class="ow">and</span> <span class="o">...</span>
+    <span class="n">keywords_vocabulary</span><span class="p">:</span>             <span class="n">NASA</span> <span class="n">Global</span> <span class="n">Change</span> <span class="n">Master</span> <span class="n">Directory</span> <span class="p">(</span><span class="n">GCM</span><span class="o">...</span>
+    <span class="n">keywords</span><span class="p">:</span>                        <span class="n">Earth</span> <span class="n">Science</span> <span class="o">&gt;</span> <span class="n">Oceans</span> <span class="o">&gt;</span> <span class="n">Ocean</span> <span class="n">Temperatu</span><span class="o">...</span>
+    <span class="n">instrument</span><span class="p">:</span>                      <span class="n">Conventional</span> <span class="n">thermometers</span>
+    <span class="n">source_comment</span><span class="p">:</span>                  <span class="n">SSTs</span> <span class="n">were</span> <span class="n">observed</span> <span class="n">by</span> <span class="n">conventional</span> <span class="n">therm</span><span class="o">...</span>
+    <span class="o">...</span>                              <span class="o">...</span>
+    <span class="n">comment</span><span class="p">:</span>                         <span class="n">SSTs</span> <span class="n">were</span> <span class="n">observed</span> <span class="n">by</span> <span class="n">conventional</span> <span class="n">therm</span><span class="o">...</span>
+    <span class="n">summary</span><span class="p">:</span>                         <span class="n">ERSST</span><span class="o">.</span><span class="n">v5</span> <span class="ow">is</span> <span class="n">developed</span> <span class="n">based</span> <span class="n">on</span> <span class="n">v4</span> <span class="n">after</span> <span class="o">...</span>
+    <span class="n">dataset_title</span><span class="p">:</span>                   <span class="n">NOAA</span> <span class="n">Extended</span> <span class="n">Reconstructed</span> <span class="n">SST</span> <span class="n">V5</span>
+    <span class="n">_NCProperties</span><span class="p">:</span>                   <span class="n">version</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">netcdf</span><span class="o">=</span><span class="mf">4.6.3</span><span class="p">,</span><span class="n">hdf5</span><span class="o">=</span><span class="mf">1.10.5</span>
+    <span class="n">data_modified</span><span class="p">:</span>                   <span class="mi">2026</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">03</span>
+    <span class="n">DODS_EXTRA</span><span class="o">.</span><span class="n">Unlimited_Dimension</span><span class="p">:</span>  <span class="n">time</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>This is the one place on this page where we print a whole <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>, so here is how to listen to it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>, block by block. Line 1 gives the object type and its total size (45 MB). The <strong>Dimensions</strong> line is the skeleton: <code class="docutils literal notranslate"><span class="pre">time:</span> <span class="pre">708</span></code> (monthly steps, 59 years × 12 months), <code class="docutils literal notranslate"><span class="pre">lat:</span> <span class="pre">89</span></code>, <code class="docutils literal notranslate"><span class="pre">lon:</span> <span class="pre">180</span></code>. Under <strong>Coordinates</strong>, each line starts with a star (meaning it’s an index you can <code class="docutils literal notranslate"><span class="pre">.sel</span></code> on), then the name, its dimension, dtype, and the first and last few values: <code class="docutils literal notranslate"><span class="pre">time</span></code> runs 1960-01-01 to 2018-12-01, <code class="docutils literal notranslate"><span class="pre">lat</span></code> from 88 down to −88 in 2-degree steps, <code class="docutils literal notranslate"><span class="pre">lon</span></code> from 0 to 358. Under <strong>Data variables</strong> there is a single variable, <code class="docutils literal notranslate"><span class="pre">sst</span></code>, with dims <code class="docutils literal notranslate"><span class="pre">(time,</span> <span class="pre">lat,</span> <span class="pre">lon)</span></code> in float32, and a preview of values — it starts at −1.8 (polar water at the freezing point) and ends in <code class="docutils literal notranslate"><span class="pre">nan</span></code> (land). Last come the <strong>Attributes</strong> — free-text metadata; there are 39, and the printout shows the first six and last six with <code class="docutils literal notranslate"><span class="pre">...</span></code> in between. (One of them, <code class="docutils literal notranslate"><span class="pre">data_modified</span></code>, will show whatever date NOAA last updated the file — yours may be later than the one printed here.)</p>
+<p>Let’s do some basic visualizations of the data, just to make sure it looks reasonable.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A global map, titled <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">=</span> <span class="pre">1960-01-01</span></code>, on axes labelled Longitude [degrees_east] (0 to 358) and Latitude [degrees_north] (−88 to 88). Color encodes SST from −2 °C (dark purple) to 30 °C (bright yellow), with the colorbar labelled “Monthly Means of Sea Surface Temperature [degC]”. A broad yellow band of 28–30 °C water straddles the equator — widest in the western Pacific warm pool — cooling through green (15–20 °C) in the mid-latitudes to dark purple near both poles, where the ocean sits at its freezing point of about −1.8 °C. The continents are blank white: SST is only defined over the ocean, and land is <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+<p>The same plot can be made with <code class="docutils literal notranslate"><span class="pre">isel</span></code> — <code class="docutils literal notranslate"><span class="pre">ds.sst[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">ds.sst.isel(time=0)</span></code> are two spellings of the same selection:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The identical map.</p>
+<p><strong>Check it.</strong> A map you can’t hear — but you can interrogate the exact same field with point values and statistics (warm at the equator, freezing at the pole, and the overall range):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">200</span><span class="p">)),</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="mi">200</span><span class="p">)),</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">26.4</span>
+<span class="o">-</span><span class="mf">1.8</span>
+<span class="mf">30.9</span> <span class="o">-</span><span class="mf">1.8</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Note that xarray correctly parsed the time index, resulting in a Pandas datetime index on the time dimension:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">datetime64</span><span class="p">[</span><span class="n">ns</span><span class="p">]</span>
+<span class="mi">1960</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000000</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">01</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000000</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The full 708-month temperature history of one grid point in the northwest Atlantic (50°N, 300°E — south of Newfoundland; xarray auto-titles the plot with the selection, <code class="docutils literal notranslate"><span class="pre">lat</span> <span class="pre">=</span> <span class="pre">50.0</span> <span class="pre">[degrees_north],</span> <span class="pre">lon</span> <span class="pre">=</span> <span class="pre">300.0</span> <span class="pre">[degree…</span></code>). The line is a dense, regular sawtooth: every single year it swings from about −1.8 °C in winter up to summer peaks of roughly 12–17 °C and back. The annual cycle so completely dominates the plot that you cannot see any long-term change in it.</p>
+<p>As we can see from the plot, the timeseries at any one point is totally dominated by the seasonal cycle. We would like to remove this seasonal cycle (called the “climatology”) in order to better see the long-term variations in temperature. We will accomplish this using <strong>groupby</strong>.</p>
+<p>The syntax of Xarray’s groupby is almost identical to Pandas. We will first apply groupby to a single DataArray. (In a notebook you would type <code class="docutils literal notranslate"><span class="pre">ds.sst.groupby?</span></code> to read its documentation; in a script, <code class="docutils literal notranslate"><span class="pre">help(ds.sst.groupby)</span></code> prints the same text to the terminal.)</p>
+<section id="split-step">
+<h3>Split Step<a class="headerlink" href="#split-step" title="Link to this heading">#</a></h3>
+<p>The most important argument is <code class="docutils literal notranslate"><span class="pre">group</span></code>: this defines the unique values we will use to “split” the data for grouped analysis. We can pass either a DataArray or a name of a variable in the dataset. Lets first use a DataArray. Just like with Pandas, we can use the time index to extract specific components of dates and times. Xarray uses a special syntax for this <code class="docutils literal notranslate"><span class="pre">.dt</span></code>, called the <code class="docutils literal notranslate"><span class="pre">DatetimeAccessor</span></code>.</p>
+<p>The full <code class="docutils literal notranslate"><span class="pre">ds.time.dt.month</span></code> array has 708 entries — instead of printing it all, listen to the first fourteen of each, enough to hear the pattern:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">14</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">14</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">3</span>  <span class="mi">4</span>  <span class="mi">5</span>  <span class="mi">6</span>  <span class="mi">7</span>  <span class="mi">8</span>  <span class="mi">9</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span>  <span class="mi">1</span>  <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1960</span> <span class="mi">1961</span> <span class="mi">1961</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><code class="docutils literal notranslate"><span class="pre">month</span></code> counts 1 through 12 and then wraps back to 1; <code class="docutils literal notranslate"><span class="pre">year</span></code> repeats 1960 twelve times and then moves on to 1961. Every one of the 708 time steps gets a month label — that label is what we will group on.</p>
+<p>We can use these arrays in a groupby operation:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">DataArrayGroupBy</span><span class="p">,</span> <span class="n">grouped</span> <span class="n">over</span> <span class="mi">1</span> <span class="n">grouper</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">12</span> <span class="n">groups</span> <span class="ow">in</span> <span class="n">total</span><span class="p">:</span>
+    <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="n">UniqueGrouper</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">),</span> <span class="mi">12</span><span class="o">/</span><span class="mi">12</span> <span class="n">groups</span> <span class="k">with</span> <span class="n">labels</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Xarray also offers a more concise syntax when the variable you’re grouping on is already present in the dataset. This is identical to the previous line:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time.month&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">DataArrayGroupBy</span><span class="p">,</span> <span class="n">grouped</span> <span class="n">over</span> <span class="mi">1</span> <span class="n">grouper</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">12</span> <span class="n">groups</span> <span class="ow">in</span> <span class="n">total</span><span class="p">:</span>
+    <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="n">UniqueGrouper</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">),</span> <span class="mi">12</span><span class="o">/</span><span class="mi">12</span> <span class="n">groups</span> <span class="k">with</span> <span class="n">labels</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Now that the data are split, we can manually iterate over the group. The iterator returns the key (group name) and the value (the actual dataset corresponding to that group) for each group.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">group_da</span> <span class="ow">in</span> <span class="n">gb</span><span class="p">:</span>
+    <span class="c1"># stop iterating after the first loop</span>
+    <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">group_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">group_da</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The first group’s name is <code class="docutils literal notranslate"><span class="pre">1</span></code> — January — and its data is every January in the record: 59 time steps (one per year, 1960–2018), on the full 89 × 180 spatial grid.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">group_da</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A world map of the average of all 59 Januaries. Because we didn’t fix <code class="docutils literal notranslate"><span class="pre">vmin</span></code>/<code class="docutils literal notranslate"><span class="pre">vmax</span></code> this time, xarray noticed the data spans both signs and switched to a red–blue <em>diverging</em> colormap centered on zero, with the colorbar running −30 to +30 °C. The ocean is therefore painted almost entirely in reds: deep red through the tropics (mid-to-upper 20s — about 26.8 °C at the equator in the mid-Pacific), lighter red in mid-latitudes (about 8.7 °C at 60°N in the far-north Atlantic), fading to near-white and faintly blue at the poles, just below 0 °C.</p>
+</section>
+<section id="map-combine">
+<h3>Map &amp; Combine<a class="headerlink" href="#map-combine" title="Link to this heading">#</a></h3>
+<p>Now that we have groups defined, it’s time to “apply” a calculation to the group. Like in Pandas, these calculations can either be:</p>
+<ul class="simple">
+<li><p><em>aggregation</em>: reduces the size of the group</p></li>
+<li><p><em>transformation</em>: preserves the group’s full size</p></li>
+</ul>
+<p>At the end of the apply step, xarray will automatically combine the aggregated / transformed groups back into a single object.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Xarray calls the “apply” step <code class="docutils literal notranslate"><span class="pre">map</span></code>. This is different from Pandas!</p>
+</div>
+<p>The most fundamental way to apply is with the <code class="docutils literal notranslate"><span class="pre">.map</span></code> method (again, <code class="docutils literal notranslate"><span class="pre">help(gb.map)</span></code> prints its documentation).</p>
+<section id="aggregations">
+<h4>Aggregations<a class="headerlink" href="#aggregations" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">.map</span></code> accepts as its argument a function. We can pass an existing function:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_global</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_global</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_global</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+<span class="p">[</span><span class="mf">13.659839</span> <span class="mf">13.768812</span> <span class="mf">13.765059</span> <span class="mf">13.68421</span>  <span class="mf">13.642344</span> <span class="mf">13.712949</span> <span class="mf">13.921948</span>
+ <span class="mf">14.094091</span> <span class="mf">13.982345</span> <span class="mf">13.691327</span> <span class="mf">13.506662</span> <span class="mf">13.529607</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Twelve numbers, one per month — the global-mean SST of all Januaries, all Februaries, and so on, each around 13.5–14.1 °C. Because we specified no extra arguments (like <code class="docutils literal notranslate"><span class="pre">axis</span></code>) the function was applied over all space and time dimensions. This is not what we wanted. Instead, we could define a custom function. This function takes a single argument–the group dataset–and returns a new dataset to be combined:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">time_mean</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">time_mean</span><span class="p">)</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Now the 708-month time axis has collapsed to a 12-month <code class="docutils literal notranslate"><span class="pre">month</span></code> axis, but the spatial grid survives: a mean map for each calendar month. Let’s plot January’s:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">time_mean</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Exactly the same red-toned January-mean map as before (deep red tropics, pale poles, diverging colorbar −30 to +30), now titled <code class="docutils literal notranslate"><span class="pre">month</span> <span class="pre">=</span> <span class="pre">1</span></code> — confirming that <code class="docutils literal notranslate"><span class="pre">.map(time_mean)</span></code> computed, for each month group, the same mean we took by hand from the first group.</p>
+<p>Like Pandas, xarray’s groupby object has many built-in aggregation operations (e.g. <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, etc):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this does the same thing as the previous code block</span>
+<span class="n">sst_mm</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sst_mm</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>Check it.</strong> The shortcut and the explicit <code class="docutils literal notranslate"><span class="pre">.map</span></code> really are the same object, value for value:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sst_mm</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">time_mean</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>So we did what we wanted to do: calculate the climatology at every point in the dataset. Let’s look at the data a bit.</p>
+<p><em>Climatology at a specific point in the North Atlantic</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sst_mm</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A single smooth curve over months 1–12: the average year at our northwest-Atlantic point. It starts at −0.7 °C in January, bottoms out at −1.5 °C in February–March, climbs steeply through spring and summer to a sharp peak of 14.0 °C in August (month 8), then falls back through 4.0 °C in November to 1.3 °C in December. Note the warmest water comes in August, not at the June solstice — the ocean’s seasons lag the sun by about two months.</p>
+<p><strong>Check it.</strong> Print the twelve climatology values behind the curve:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sst_mm</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="mf">0.7</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">-</span><span class="mf">0.3</span>  <span class="mf">2.2</span>  <span class="mf">6.6</span> <span class="mf">11.6</span> <span class="mf">14.</span>  <span class="mf">11.7</span>  <span class="mf">7.6</span>  <span class="mf">4.</span>   <span class="mf">1.3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><em>Zonal Mean Climatology</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sst_mm</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lon&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A filled-contour plot with month (1–12) across the bottom and latitude (−88 to 88) up the side — every longitude averaged away, so this is “temperature by latitude, through the year”. A bright yellow band of 27–30 °C water (zonal mean ≈ 27.4 °C at the equator) fills the tropics between roughly 20°S and 20°N all year, drifting slightly northward in August–September; nested green and teal bands step down through the mid-latitudes; dark purple (below about 1 °C) caps the far south — everything poleward of about 62°S — year-round, while in the north the dark cap only covers the winter half of the year and retreats poleward in late summer (at 60°N the zonal mean climbs to about 10 °C in August), and a white strip south of about 75°S marks where there is no ocean at all (Antarctica). The northern-hemisphere bands bulge warm in August–September and the southern-hemisphere bands in February–March — the two hemispheres’ seasons in opposite phase.</p>
+<p><em>Difference between January and July Climatology</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">sst_mm</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sst_mm</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A world map on a red–blue scale from −10 to +10 °C with arrow tips on the colorbar (values beyond the limits get the end colors). The entire northern hemisphere is blue — January is colder than July — palest near the equator and deepening past −6 °C in the mid-latitude northwest Pacific (about −6.2 °C at 40°N, 160°E) to off-scale extremes in enclosed marginal seas — nearly −16 °C in the Baltic at 60°N, and the single biggest swing, about −23 °C, in the land-locked Caspian Sea near 46°N. The southern hemisphere is its red mirror image (January is austral summer), reaching about +5 °C at 40°S in the South Atlantic and up to around +10 °C in spots near 40°S. A narrow near-white band hugs the equator: the tropical ocean barely notices the seasons, while mid-latitude oceans swing hugely.</p>
+</section>
+<section id="transformations">
+<h4>Transformations<a class="headerlink" href="#transformations" title="Link to this heading">#</a></h4>
+<p>Now we want to <em>remove</em> this climatology from the dataset, to examine the residual, called the <em>anomaly</em>, which is the interesting part from a climate perspective.
+Removing the seasonal climatology is a perfect example of a transformation: it operates over a group, but doesn’t change the size of the dataset. Here is one way to code it.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_time_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<span class="n">ds_anom</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time.month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">remove_time_mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The dataset kept its full 708-month length — each January had the mean January subtracted from it, each February the mean February, and so on.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the above example, we applied <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>.</p>
+</div>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The same point as before, transformed. The relentless seasonal sawtooth is gone; what remains is an irregular, noisy line wandering around zero between about −2.2 and +2.9 °C. The series sits mostly below zero through the 1960s–1980s, then drifts upward from the late 1990s, with its tallest spikes — near +2.9 °C — in the summers of 2012 and 2014. This is the climate signal the seasonal cycle was hiding.</p>
+<p><strong>Check it.</strong> Compare the first and last decades of the anomaly series:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anom_pt</span> <span class="o">=</span> <span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">anom_pt</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;1960&#39;</span><span class="p">,</span> <span class="s1">&#39;1969&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">anom_pt</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;2009&#39;</span><span class="p">,</span> <span class="s1">&#39;2018&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (this point averaged 1.7 °C warmer in 2009–2018 than in the 1960s):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">0.64</span>
+<span class="mf">1.09</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Xarray makes these sorts of transformations easy by supporting <em>groupby arithmetic</em>.
+This concept is easiest explained with an example:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time.month&#39;</span><span class="p">)</span>
+<span class="n">ds_anom_arith</span> <span class="o">=</span> <span class="n">gb</span> <span class="o">-</span> <span class="n">gb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_anom_arith</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>Check it.</strong> Same size — and the same numbers as the <code class="docutils literal notranslate"><span class="pre">.map</span></code> version, everywhere (groupby arithmetic also attaches a new <code class="docutils literal notranslate"><span class="pre">month</span></code> coordinate along the time axis, which is why we compare values rather than whole objects). We keep the result as our <code class="docutils literal notranslate"><span class="pre">ds_anom</span></code>:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ds_anom_arith</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">ds_anom</span> <span class="o">=</span> <span class="n">ds_anom_arith</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Now we can view the climate signal without the overwhelming influence of the seasonal cycle.</p>
+<p><em>Timeseries at a single point in the North Atlantic</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The identical anomaly timeseries as before — noisy line between about −2.2 and +2.9 °C, drifting upward after 2000 — as it must be, since the two methods agree.</p>
+<p><em>Difference between Jan. 1 2018 and Jan. 1 1960</em></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">ds_anom</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;1960-01-01&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A patchwork world map on a red–blue scale (values span about −2.1 to +5.1 °C; the map mean is +0.5 °C). Most of the ocean is light red, with the strongest reds along a band near 40°S and across the Arctic edge near 80°N, but pale-blue patches — places <em>cooler</em> in January 2018 than January 1960 — are scattered through the central South Pacific and Southern Ocean. Comparing two individual months like this is noisy: single months carry a lot of internal variability, a caution against reading climate change off two snapshots.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Using the SST <code class="docutils literal notranslate"><span class="pre">ds</span></code>, build the monthly <strong>climatology</strong> with <code class="docutils literal notranslate"><span class="pre">ds.sst.groupby('time.month').mean('time')</span></code> and plot it at a point of your choice (also print its 12 values with <code class="docutils literal notranslate"><span class="pre">.values.round(1)</span></code>). Then compute the <strong>anomaly</strong> with groupby arithmetic (<code class="docutils literal notranslate"><span class="pre">gb</span> <span class="pre">-</span> <span class="pre">gb.mean('time')</span></code>) and plot its timeseries at the same point — the seasonal cycle should be gone. To confirm that by ear rather than by eye: print the standard deviation of the raw series and of the anomaly series (<code class="docutils literal notranslate"><span class="pre">round(float(series.std()),</span> <span class="pre">2)</span></code>) — removing the seasonal cycle should shrink it substantially.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="groupby-related-resample-rolling-coarsen">
+<h2>Groupby-Related: Resample, Rolling, Coarsen<a class="headerlink" href="#groupby-related-resample-rolling-coarsen" title="Link to this heading">#</a></h2>
+<section id="resample">
+<h3>Resample<a class="headerlink" href="#resample" title="Link to this heading">#</a></h3>
+<p>Resample in xarray is nearly identical to Pandas.
+<strong>It can be applied only to time-index dimensions.</strong> Here we compute the five-year mean.
+It is effectively a group-by operation, and uses the same basic syntax.
+Note that resampling changes the length of the output arrays: <code class="docutils literal notranslate"><span class="pre">ds_anom</span></code> has 708 monthly steps going in.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom_resample</span> <span class="o">=</span> <span class="n">ds_anom</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;5YE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[D]&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+<span class="p">[</span><span class="s1">&#39;1960-12-31&#39;</span> <span class="s1">&#39;1965-12-31&#39;</span> <span class="s1">&#39;1970-12-31&#39;</span> <span class="s1">&#39;1975-12-31&#39;</span> <span class="s1">&#39;1980-12-31&#39;</span>
+ <span class="s1">&#39;1985-12-31&#39;</span> <span class="s1">&#39;1990-12-31&#39;</span> <span class="s1">&#39;1995-12-31&#39;</span> <span class="s1">&#39;2000-12-31&#39;</span> <span class="s1">&#39;2005-12-31&#39;</span>
+ <span class="s1">&#39;2010-12-31&#39;</span> <span class="s1">&#39;2015-12-31&#39;</span> <span class="s1">&#39;2020-12-31&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>708 months collapsed to 13 five-year averages (<code class="docutils literal notranslate"><span class="pre">'5YE'</span></code> means bins that <strong>e</strong>nd every 5th <strong>y</strong>ear-end). Each label is the end of its bin: the 1965-12-31 entry averages 1961–1965, and the first and last bins are partial (1960 alone; 2016–2018).</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The noisy blue monthly anomaly with a smooth orange line on top, its 13 round markers spaced five years apart. The orange line starts around −0.4 °C, dips to its lowest point, −0.9 °C, in the mid-1960s, wanders between −0.7 and 0 through the 1970s–1990s, then climbs steadily to a peak of +1.26 °C at the 2015 marker, ending at +1.03 °C. The five-year averaging strips away the month-to-month noise and makes the warming after 2000 unmistakable.</p>
+<p><strong>Check it.</strong> The thirteen five-year means at this point:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="mf">0.43</span> <span class="o">-</span><span class="mf">0.9</span>  <span class="o">-</span><span class="mf">0.3</span>  <span class="o">-</span><span class="mf">0.73</span> <span class="o">-</span><span class="mf">0.29</span> <span class="o">-</span><span class="mf">0.04</span> <span class="o">-</span><span class="mf">0.26</span> <span class="o">-</span><span class="mf">0.39</span>  <span class="mf">0.22</span>  <span class="mf">0.17</span>  <span class="mf">0.71</span>  <span class="mf">1.26</span>
+  <span class="mf">1.03</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span> <span class="o">-</span>
+ <span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;1965-01-01&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The five-year-averaged 2011–2015 block minus the 1961–1965 block. Unlike the noisy two-January map earlier, now almost the entire ocean is some shade of red — warming nearly everywhere, map mean about +0.5 °C — with the deepest red blob (about +2.8 °C) in the northwest Atlantic near 45°N (the field’s single largest value, +2.9 °C, is a small patch near the Bering Strait), and only small pale-blue patches (about −1 °C at most) in parts of the Southern Ocean. Averaging in time turns the patchwork into a coherent warming pattern.</p>
+</section>
+<section id="rolling">
+<h3>Rolling<a class="headerlink" href="#rolling" title="Link to this heading">#</a></h3>
+<p>Rolling is also similar to pandas.
+It does not change the length of the arrays.
+Instead, it allows a moving window to be applied to the data at each point.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom_rolling</span> <span class="o">=</span> <span class="n">ds_anom</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_anom_rolling</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>Check it.</strong> Still 708 time steps — but a centered 60-month window needs 30 months of data on each side, so the points too close to the ends come out as <code class="docutils literal notranslate"><span class="pre">nan</span></code>:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ds_anom_rolling</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (30 missing at the start plus 29 at the end):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">59</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_anom</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;monthly anom&#39;</span><span class="p">)</span>
+<span class="n">ds_anom_resample</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;5 year resample&#39;</span><span class="p">)</span>
+<span class="n">ds_anom_rolling</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;12 month rolling mean&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> All three views of the same point on one plot, with a legend in the top-left: the noisy blue monthly series, the orange five-year resample with its 13 markers, and a smooth black curve that hugs the orange line while wiggling a bit more, staying between about −0.9 and +1.3 °C. The black curve starts in mid-1962 and stops in mid-2016 — those are the <code class="docutils literal notranslate"><span class="pre">nan</span></code> edges we just counted. (One thing to notice: the legend text says “12 month rolling mean”, but the window in the code is <code class="docutils literal notranslate"><span class="pre">time=60</span></code> — a 60-month, i.e. 5-year, rolling mean, which is why it is as smooth as the 5-year resample. Trust the code, not the label!) The key contrast: <code class="docutils literal notranslate"><span class="pre">rolling</span></code> keeps the full monthly time axis and slides its window along it, while <code class="docutils literal notranslate"><span class="pre">resample</span></code> collapses each block to a single point.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take the SST anomaly at a single point. <code class="docutils literal notranslate"><span class="pre">resample(time='1YE').mean()</span></code> it to annual means and plot, then overlay a <code class="docutils literal notranslate"><span class="pre">rolling(time=12,</span> <span class="pre">center=True).mean()</span></code> of the monthly series on the same axes. How do the two smoothings differ? (Print <code class="docutils literal notranslate"><span class="pre">.sizes</span></code> of each result: resampling shortens the time axis to 59, rolling keeps 708.)</p>
+</div>
+</section>
+</section>
+<section id="coarsen">
+<h2>Coarsen<a class="headerlink" href="#coarsen" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">coarsen</span></code> is a simple way to reduce the size of your data along one or more axes.
+It is very similar to <code class="docutils literal notranslate"><span class="pre">resample</span></code> when operating on time dimensions; the key difference is that <code class="docutils literal notranslate"><span class="pre">coarsen</span></code> only operates on fixed blocks of data, irrespective of the coordinate values, while <code class="docutils literal notranslate"><span class="pre">resample</span></code> actually looks at the coordinates to figure out, e.g. what month a particular data point is in.</p>
+<p>For regularly-spaced monthly data beginning in January, the following should be equivalent to annual resampling.
+However, results would different for irregularly-spaced data.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_coarse_time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">coarsen</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_coarse_time</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_coarse_time</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ds_coarse_time</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+<span class="mi">1960</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">16</span><span class="n">T08</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000000</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">16</span><span class="n">T12</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000000</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>708 months in fixed blocks of 12 gives 59 annual means, and each block’s time label is the average of its twelve timestamps — mid-June of each year.</p>
+<p>Coarsen also works on spatial coordinates (or any coordinates).</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_coarse</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">coarsen</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s1">&#39;pad&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_coarse</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="n">ds_coarse</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>What this shows.</strong> The January-1960 world map rebuilt from big tiles. Coarsening by 4 in both directions turns the 2°-resolution grid into 8° blocks — 45 across by 23 down — and <code class="docutils literal notranslate"><span class="pre">edgecolor='k'</span></code> outlines every block in black, so the map looks like a mosaic of large squares: yellow tiles along the equator, teal and green through the mid-latitudes, dark purple rows at the top and bottom, with white gaps where land is. Same pattern as the full-resolution map, at a fraction of the size — like turning down an image’s resolution. (<code class="docutils literal notranslate"><span class="pre">boundary='pad'</span></code> handles the fact that 89 latitudes don’t divide evenly by 4.)</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ds.coarsen(lon=4,</span> <span class="pre">lat=4,</span> <span class="pre">boundary='pad').mean()</span></code> to coarsen the SST map and plot one time step. Then use <code class="docutils literal notranslate"><span class="pre">ds.coarsen(time=12).mean()</span></code> to make annual-block means, and compare with the <code class="docutils literal notranslate"><span class="pre">resample</span></code> result above (print the first few <code class="docutils literal notranslate"><span class="pre">time</span></code> values of each — coarsen labels its blocks mid-year, resample labels them at year-end).</p>
+</div>
+</section>
+<section id="an-advanced-example">
+<h2>An Advanced Example<a class="headerlink" href="#an-advanced-example" title="Link to this heading">#</a></h2>
+<p>In this example we will show a realistic workflow with Xarray.
+We will</p>
+<ul class="simple">
+<li><p>Load a “basin mask” dataset</p></li>
+<li><p>Interpolate the basins to our SST dataset coordinates</p></li>
+<li><p>Group the SST by basin</p></li>
+<li><p>Convert to Pandas Dataframe and plot mean SST by basin</p></li>
+</ul>
+<p>The mask comes from the World Ocean Atlas, served over OPeNDAP by the IRI Data Library (another short network pause here):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NODC/.WOA09/.Masks/.basin/dods&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">basin</span><span class="o">.</span><span class="n">data_vars</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="mi">360</span><span class="p">})</span>
+<span class="p">[</span><span class="s1">&#39;basin&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>One data variable, <code class="docutils literal notranslate"><span class="pre">basin</span></code>, on a 1-degree grid (180 × 360) with 33 depth levels <code class="docutils literal notranslate"><span class="pre">Z</span></code> from 0 down to 5500 m. Each grid cell holds a numeric <em>basin code</em> — which ocean basin that cell belongs to. The dimensions are named <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>, so we rename them to match our SST dataset:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin</span> <span class="o">=</span> <span class="n">basin</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="s1">&#39;lat&#39;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">360</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We only need the surface level:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin_surf</span> <span class="o">=</span> <span class="n">basin</span><span class="o">.</span><span class="n">basin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin_surf</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin_surf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;long_name&#39;</span><span class="p">],</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">basin_surf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;units&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">360</span><span class="p">})</span>
+<span class="n">basin</span> <span class="n">code</span> <span class="o">|</span> <span class="n">ids</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin_surf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A world map titled <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">=</span> <span class="pre">0.0</span> <span class="pre">[m]</span></code> whose colorbar (“basin code [ids]”) runs 1 to about 56 — but the colors are <em>categories</em>, not amounts. Because the three big basins have the lowest codes (Atlantic = 1, Pacific = 2, Indian = 3), they all sit at the dark-purple end and are nearly indistinguishable. Two lighter slate-blue bands stand out: the Southern Ocean (code 10) ringing the globe south of about 50°S, and the Arctic Ocean (code 11) along the top. The only bright yellow features are two small high-code seas: the Bay of Bengal (code 56, east of India) and the Caspian Sea (code 53). Land is white. The 1-degree grid makes the coastlines noticeably crisper than our 2-degree SST maps.</p>
+<p><strong>Check it.</strong> How many distinct basin codes actually appear at the surface, and which?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">codes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">basin_surf</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">basin_surf</span><span class="o">.</span><span class="n">values</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">14</span>
+<span class="p">[</span> <span class="mf">1.</span>  <span class="mf">2.</span>  <span class="mf">3.</span>  <span class="mf">4.</span>  <span class="mf">5.</span>  <span class="mf">6.</span>  <span class="mf">7.</span>  <span class="mf">8.</span>  <span class="mf">9.</span> <span class="mf">10.</span> <span class="mf">11.</span> <span class="mf">12.</span> <span class="mf">53.</span> <span class="mf">56.</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The mask is on a different (finer) grid than our SST data, so we interpolate it onto the SST grid — with <code class="docutils literal notranslate"><span class="pre">method='nearest'</span></code>, because basin codes are categories: averaging code 1 (Atlantic) with code 3 (Indian) to get 2 (Pacific!) would be nonsense. <code class="docutils literal notranslate"><span class="pre">interp_like</span></code> is a convenient variant of <code class="docutils literal notranslate"><span class="pre">interp</span></code> that targets another object’s coordinates:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin_surf_interp</span> <span class="o">=</span> <span class="n">basin_surf</span><span class="o">.</span><span class="n">interp_like</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin_surf_interp</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="n">basin_surf_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="mi">180</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>What this shows.</strong> The same basin map, now on the coarser 89 × 180 SST grid, replotted with <code class="docutils literal notranslate"><span class="pre">vmax=10</span></code> so the big basins finally separate: the Atlantic (1) is darkest purple, the Pacific (2) dark blue-purple, the Indian Ocean (3) a clearly lighter blue. The Southern Ocean and Arctic bands now saturate to yellow at the top of the compressed scale (codes 10 and 11), as do the small high-code patches like the Bay of Bengal and Caspian (56 and 53, far off-scale — the colorbar has an arrow tip for values above 10).</p>
+<p>Now we can group the SST by basin code. Any DataArray sharing dimensions with the data can serve as the grouper — here’s <code class="docutils literal notranslate"><span class="pre">.first()</span></code> (the first value in each group), mainly to see the shape of what comes back:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sst_by_basin_first</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">basin_surf_interp</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sst_by_basin_first</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sst_by_basin_first</span><span class="o">.</span><span class="n">basin</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">,</span> <span class="s1">&#39;basin&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
+<span class="p">[</span> <span class="mf">1.</span>  <span class="mf">2.</span>  <span class="mf">3.</span>  <span class="mf">4.</span>  <span class="mf">5.</span>  <span class="mf">6.</span>  <span class="mf">7.</span>  <span class="mf">8.</span>  <span class="mf">9.</span> <span class="mf">10.</span> <span class="mf">11.</span> <span class="mf">12.</span> <span class="mf">53.</span> <span class="mf">56.</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The two spatial dimensions have been replaced by a new <code class="docutils literal notranslate"><span class="pre">basin</span></code> dimension of length 14 — the 14 codes we found at the surface — while time survives. Now the aggregation we actually want, the mean:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">basin_mean_sst</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">basin_surf_interp</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basin_mean_sst</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Frozen</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">708</span><span class="p">,</span> <span class="s1">&#39;basin&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Averaging over time as well gives one number per basin, which we convert to a Pandas DataFrame. (As always in this course, we read a DataFrame by ear: shape, column names, then each row as labelled values — not the printed grid.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">basin_mean_sst</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">basin_id</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">basin_id</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;sst&#39;</span><span class="p">]),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;sst&#39;</span><span class="p">]</span>
+<span class="mf">1.0</span> <span class="mf">19.29</span>
+<span class="mf">2.0</span> <span class="mf">21.18</span>
+<span class="mf">3.0</span> <span class="mf">21.13</span>
+<span class="mf">4.0</span> <span class="mf">19.85</span>
+<span class="mf">5.0</span> <span class="mf">8.13</span>
+<span class="mf">6.0</span> <span class="mf">15.08</span>
+<span class="mf">7.0</span> <span class="mf">28.49</span>
+<span class="mf">8.0</span> <span class="mf">26.62</span>
+<span class="mf">9.0</span> <span class="mf">0.31</span>
+<span class="mf">10.0</span> <span class="mf">1.55</span>
+<span class="mf">11.0</span> <span class="o">-</span><span class="mf">0.82</span>
+<span class="mf">12.0</span> <span class="mf">12.09</span>
+<span class="mf">53.0</span> <span class="mf">14.34</span>
+<span class="mf">56.0</span> <span class="mf">28.47</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Fourteen rows — the basin code as the index, and one column <code class="docutils literal notranslate"><span class="pre">sst</span></code> with each basin’s long-term mean temperature. But which basin is which? The mask’s <code class="docutils literal notranslate"><span class="pre">CLIST</span></code> attribute is a legend: one basin name per line, in code order. We split it into a list and build a Pandas Series indexed by code:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">basin_names</span> <span class="o">=</span> <span class="n">basin_surf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;CLIST&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">basin_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">basin_names</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">basin_names</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">basin_df</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">basin_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (58 names in all; here are the first three):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">58</span>
+<span class="mi">1</span> <span class="n">Atlantic</span> <span class="n">Ocean</span>
+<span class="mi">2</span> <span class="n">Pacific</span> <span class="n">Ocean</span> 
+<span class="mi">3</span> <span class="n">Indian</span> <span class="n">Ocean</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Joining the names onto our table turns the codes into words:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basin_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;basin_name&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">basin_id</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">basin_id</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;basin_name&#39;</span><span class="p">],</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;sst&#39;</span><span class="p">]),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;sst&#39;</span><span class="p">,</span> <span class="s1">&#39;basin_name&#39;</span><span class="p">]</span>
+<span class="mf">1.0</span> <span class="n">Atlantic</span> <span class="n">Ocean</span> <span class="mf">19.29</span>
+<span class="mf">2.0</span> <span class="n">Pacific</span> <span class="n">Ocean</span>  <span class="mf">21.18</span>
+<span class="mf">3.0</span> <span class="n">Indian</span> <span class="n">Ocean</span> <span class="mf">21.13</span>
+<span class="mf">4.0</span> <span class="n">Mediterranean</span> <span class="n">Sea</span> <span class="mf">19.85</span>
+<span class="mf">5.0</span> <span class="n">Baltic</span> <span class="n">Sea</span> <span class="mf">8.13</span>
+<span class="mf">6.0</span> <span class="n">Black</span> <span class="n">Sea</span> <span class="mf">15.08</span>
+<span class="mf">7.0</span> <span class="n">Red</span> <span class="n">Sea</span> <span class="mf">28.49</span>
+<span class="mf">8.0</span> <span class="n">Persian</span> <span class="n">Gulf</span> <span class="mf">26.62</span>
+<span class="mf">9.0</span> <span class="n">Hudson</span> <span class="n">Bay</span> <span class="mf">0.31</span>
+<span class="mf">10.0</span> <span class="n">Southern</span> <span class="n">Ocean</span> <span class="mf">1.55</span>
+<span class="mf">11.0</span> <span class="n">Arctic</span> <span class="n">Ocean</span> <span class="o">-</span><span class="mf">0.82</span>
+<span class="mf">12.0</span> <span class="n">Sea</span> <span class="n">of</span> <span class="n">Japan</span> <span class="mf">12.09</span>
+<span class="mf">53.0</span> <span class="n">Caspian</span> <span class="n">Sea</span> <span class="mf">14.34</span>
+<span class="mf">56.0</span> <span class="n">Bay</span> <span class="n">of</span> <span class="n">Bengal</span> <span class="mf">28.47</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>A physically sensible ranking: the enclosed tropical seas — Red Sea (28.5 °C) and Bay of Bengal (28.5 °C), with the Persian Gulf close behind (26.6) — are the warmest; the three great basins cluster near 19–21 °C; and the polar waters bring up the rear, with Hudson Bay at 0.3 °C, the Southern Ocean at 1.5 °C, and the Arctic Ocean below freezing at −0.8 °C. Finally, the same table as a bar chart:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;sst&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;basin_name&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Fourteen blue vertical bars, one per basin, with the basin names printed at an angle beneath them and a small legend box reading “sst”. The skyline is jagged: near-identical tall bars for Red Sea and Bay of Bengal (28.5) with the Persian Gulf just below, a middle range of bars around 12–21 for the major oceans and mid-latitude seas, a stubby Baltic bar at 8, near-invisible bars for Hudson Bay and the Southern Ocean, and one bar — the Arctic Ocean — dipping <em>below</em> the zero line.</p>
+<p><strong>Check it.</strong> Read the bar heights back off the axes, in plotting order:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">19.3</span><span class="p">,</span> <span class="mf">21.2</span><span class="p">,</span> <span class="mf">21.1</span><span class="p">,</span> <span class="mf">19.8</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">,</span> <span class="mf">15.1</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">26.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mf">14.3</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>This lecture applied xarray to a real SST dataset and covered its more advanced tools:</p>
+<ul class="simple">
+<li><p><strong>Interpolation</strong> — <code class="docutils literal notranslate"><span class="pre">.interp()</span></code> to estimate values at new coordinates (<code class="docutils literal notranslate"><span class="pre">linear</span></code>/<code class="docutils literal notranslate"><span class="pre">nearest</span></code>/<code class="docutils literal notranslate"><span class="pre">cubic</span></code>), in one or more dimensions.</p></li>
+<li><p><strong>Groupby</strong> — split-apply-combine on grids: building a monthly <strong>climatology</strong> and removing it to get <strong>anomalies</strong>, with both <code class="docutils literal notranslate"><span class="pre">.map(...)</span></code> and groupby arithmetic.</p></li>
+<li><p><strong>Resample, rolling, coarsen</strong> — change time resolution by calendar (<code class="docutils literal notranslate"><span class="pre">resample</span></code>), smooth with a moving window (<code class="docutils literal notranslate"><span class="pre">rolling</span></code>), or average fixed blocks (<code class="docutils literal notranslate"><span class="pre">coarsen</span></code>).</p></li>
+<li><p><strong>A full workflow</strong> — masking SST by ocean basin (interpolating a basin mask onto the grid), grouping by basin, and summarizing into a table and bar chart.</p></li>
+<li><p><strong>And the non-visual habit:</strong> every map on this page was double-checked by printing point values, extremes, and group sizes — the same facts the pictures show, in numbers you can hear.</p></li>
+</ul>
+<p>With pandas and xarray you now have the core toolkit for tabular and gridded data. The <a class="reference internal" href="assignment6.html"><span class="std std-doc">SST lab (Assignment 6)</span></a> is your at-home assignment.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/xarray"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="xarray_fundamentals.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Xarray Fundamentals</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="assignment6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 6: Xarray with Sea Surface Temperature (SST) data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation">Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">Groupby</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-step">Split Step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-combine">Map &amp; Combine</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations">Aggregations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-related-resample-rolling-coarsen">Groupby-Related: Resample, Rolling, Coarsen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">Resample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling">Rolling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coarsen">Coarsen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-advanced-example">An Advanced Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

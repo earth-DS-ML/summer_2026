@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 5b: Pandas Groupby with Hurricane Data &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/assignment5b';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Overview" href="../xarray/overview.html" />
+    <link rel="prev" title="Assignment 5a: Pandas Fundamentals with Earthquake Data" href="assignment5a.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_groupby.html">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/pandas/assignment5b.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 5b: Pandas Groupby with Hurricane Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-unique-values-of-the-basin-subbasin-and-nature-columns">1) Get the unique values of the <code class="docutils literal notranslate"><span class="pre">BASIN</span></code>, <code class="docutils literal notranslate"><span class="pre">SUBBASIN</span></code>, and <code class="docutils literal notranslate"><span class="pre">NATURE</span></code> columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-the-wmo-wind-and-wmo-pres-columns-to-wind-and-pres">2) Rename the <code class="docutils literal notranslate"><span class="pre">WMO_WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">WMO_PRES</span></code> columns to <code class="docutils literal notranslate"><span class="pre">WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">PRES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-10-largest-rows-in-the-dataset-by-wind">3) Get the 10 largest rows in the dataset by <code class="docutils literal notranslate"><span class="pre">WIND</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-the-data-on-sid-and-get-the-10-largest-hurricanes-by-wind">4) Group the data on <code class="docutils literal notranslate"><span class="pre">SID</span></code> and get the 10 largest hurricanes by <code class="docutils literal notranslate"><span class="pre">WIND</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-bar-chart-of-the-wind-speed-of-the-20-strongest-wind-hurricanes">5) Make a bar chart of the wind speed of the 20 strongest-wind hurricanes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-all-datapoints-by-basin">6) Plot the count of all datapoints by Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-unique-hurricanes-by-basin">7) Plot the count of unique hurricanes by Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-hexbin-of-the-location-of-datapoints-in-latitude-and-longitude">8) Make a <code class="docutils literal notranslate"><span class="pre">hexbin</span></code> of the location of datapoints in Latitude and Longitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-hurricane-katrina-from-2005-and-plot-its-track-as-a-scatter-plot">9) Find Hurricane Katrina (from 2005) and plot its track as a scatter plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-time-the-index-on-your-dataframe">10) Make time the index on your dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-all-datapoints-per-year-as-a-timeseries">11) Plot the count of all datapoints per year as a timeseries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-all-tracks-from-the-north-atlantic-in-2005">12) Plot all tracks from the North Atlantic in 2005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-filtered-dataframe-that-contains-only-data-since-1970-from-the-north-atlantic-na-basin">13) Create a filtered dataframe that contains only data since 1970 from the North Atlantic (“NA”) Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-number-of-datapoints-per-day-from-this-filtered-dataframe">14) Plot the number of datapoints per day from this filtered dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-climatology-of-datapoint-counts-as-a-function-of-dayofyear">15) Calculate the climatology of datapoint counts as a function of <code class="docutils literal notranslate"><span class="pre">dayofyear</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-transform-to-calculate-the-anomaly-of-daily-counts-from-the-climatology">16) Use <code class="docutils literal notranslate"><span class="pre">transform</span></code> to calculate the anomaly of daily counts from the climatology</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-5b-pandas-groupby-with-hurricane-data">
+<h1>Assignment 5b: Pandas Groupby with Hurricane Data<a class="headerlink" href="#assignment-5b-pandas-groupby-with-hurricane-data" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through this assignment as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output. You need to be online once, to download the dataset (about 322 MB — see the download step below); after that everything runs from the local file.</p>
+</div>
+<p><strong>At-home assignment — worth 10 points.</strong> When you’re done, push your work to your week folder and post a link to your completed work on the matching <strong>Courseworks</strong> assignment.</p>
+<p>In this assignment you’ll apply <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and time-series operations to the NOAA IBTrACS hurricane dataset.</p>
+<div class="tip admonition">
+<p class="admonition-title">Learning goals</p>
+<p>This assignment exercises the groupby and time-series skills from this section:</p>
+<ul class="simple">
+<li><p>Read a large CSV file with custom column-type handling</p></li>
+<li><p>Rename columns and inspect unique values</p></li>
+<li><p>Filter and <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> operations on a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to count, aggregate, and iterate over groups</p></li>
+<li><p>Plot scatter plots, bar charts, and hexbin plots from a DataFrame</p></li>
+<li><p>Set a datetime index and use it for time-based filtering</p></li>
+<li><p>Compute climatologies and anomalies with <code class="docutils literal notranslate"><span class="pre">groupby</span></code> + <code class="docutils literal notranslate"><span class="pre">transform</span></code></p></li>
+</ul>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Working through this assignment with a screen reader</p>
+<p>Work in one script, <code class="docutils literal notranslate"><span class="pre">assignment5b.py</span></code>, and add each numbered task under a comment like <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">Task</span> <span class="pre">3</span></code>. The dataset loads from the local file in roughly 20–30 seconds, so re-running the whole script after each addition is fine. Remember: in a script, a bare expression on its own line (like <code class="docutils literal notranslate"><span class="pre">len(df)</span></code> or <code class="docutils literal notranslate"><span class="pre">df.head()</span></code>) displays nothing — wrap anything you want to read in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>. And to <em>read</em> a DataFrame result, use the ear-friendly pattern from the <a class="reference internal" href="../data/loading_data.html"><span class="std std-doc">Loading data</span></a> page — print the shape, the column names, and then rows as dicts — never a raw table grid.</p>
+<p>For each task, submit three things:</p>
+<ol class="arabic simple">
+<li><p><strong>The code</strong>, with each plot task ending in <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;task05.png&quot;)</span></code> (etc.) so the figure is saved for a sighted grader.</p></li>
+<li><p><strong>Printed checks.</strong> Every task below has a <em>Check yourself</em> note with values I computed from the real data — print the same quantities from your solution and make sure they match.</p></li>
+<li><p><strong>A sentence or two of interpretation</strong> for the plot tasks, in a comment: what does the figure/number pattern show? Tie it to the numbers you printed.</p></li>
+</ol>
+<p>You are graded on the code, the checks, and the understanding — not on pixel-perfect visual matching. When you’re done, follow the <a class="reference internal" href="#submission-instructions-5b">submission instructions</a> at the bottom of the page.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Hearing a plot (optional)</p>
+<p>The bar charts, scatter plots, and line plots you make in this assignment can be explored point-by-point by sound and text with <strong><a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a></strong>. The <code class="docutils literal notranslate"><span class="pre">hexbin</span></code> plot in task 8 is a 2-D density map that MAIDR does not handle — for that one, check yourself with printed counts instead (the task tells you how).</p>
+</div>
+<section id="getting-the-data">
+<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Link to this heading">#</a></h2>
+<p>We’ll use a CSV file of the <a class="reference external" href="https://www.ncdc.noaa.gov/ibtracs/index.php?name=ibtracs-data" rel="noreferer noopener" target="_blank">NOAA IBTrACS</a> hurricane dataset — every recorded tropical-cyclone track position since the 1840s. The original notebook reads it straight from the URL with <code class="docutils literal notranslate"><span class="pre">pd.read_csv(url,</span> <span class="pre">...)</span></code>; that works, but the file is about 322 MB, and in the script workflow every <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">assignment5b.py</span></code> run would re-download it. So download it <strong>once</strong> in the terminal instead, into the folder where your script lives:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-O<span class="w"> </span><span class="s1">&#39;https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/csv/ibtracs.ALL.list.v04r00.csv&#39;</span>
+</pre></div>
+</div>
+<p>End of command.</p>
+<p>This takes a few minutes depending on your connection; you only do it once. (All the <em>Check yourself</em> numbers on this page were computed from the v04r00 file, last updated by NOAA in May 2024. If NOAA refreshes the file, totals could shift slightly.)</p>
+<p>Start your script by importing numpy, pandas, and matplotlib’s pyplot, then load the local file with the following custom options. The trailing lines replace the original notebook’s <code class="docutils literal notranslate"><span class="pre">df.head()</span></code> with the ear-readable inspection pattern:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;ibtracs.ALL.list.v04r00.csv&#39;</span>   <span class="c1"># the file you downloaded with curl</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ISO_TIME&#39;</span><span class="p">],</span> <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+                 <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;NOT_NAMED&#39;</span><span class="p">],</span>
+                 <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">716165</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;SID&#39;</span><span class="p">,</span> <span class="s1">&#39;SEASON&#39;</span><span class="p">,</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">,</span> <span class="s1">&#39;BASIN&#39;</span><span class="p">,</span> <span class="s1">&#39;SUBBASIN&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;ISO_TIME&#39;</span><span class="p">,</span> <span class="s1">&#39;NATURE&#39;</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">,</span> <span class="s1">&#39;WMO_WIND&#39;</span><span class="p">,</span> <span class="s1">&#39;WMO_PRES&#39;</span><span class="p">]</span>
+<span class="p">{</span><span class="s1">&#39;SID&#39;</span><span class="p">:</span> <span class="s1">&#39;1842298N11080&#39;</span><span class="p">,</span> <span class="s1">&#39;SEASON&#39;</span><span class="p">:</span> <span class="mi">1842</span><span class="p">,</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;BASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;NI&#39;</span><span class="p">,</span> <span class="s1">&#39;SUBBASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;ISO_TIME&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;1842-10-25 03:00:00&#39;</span><span class="p">),</span> <span class="s1">&#39;NATURE&#39;</span><span class="p">:</span> <span class="s1">&#39;NR&#39;</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">:</span> <span class="mf">10.9</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">:</span> <span class="mf">80.3</span><span class="p">,</span> <span class="s1">&#39;WMO_WIND&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;WMO_PRES&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;SID&#39;</span><span class="p">:</span> <span class="s1">&#39;1842298N11080&#39;</span><span class="p">,</span> <span class="s1">&#39;SEASON&#39;</span><span class="p">:</span> <span class="mi">1842</span><span class="p">,</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;BASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;NI&#39;</span><span class="p">,</span> <span class="s1">&#39;SUBBASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;ISO_TIME&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;1842-10-25 06:00:00&#39;</span><span class="p">),</span> <span class="s1">&#39;NATURE&#39;</span><span class="p">:</span> <span class="s1">&#39;NR&#39;</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">:</span> <span class="mf">10.8709</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">:</span> <span class="mf">79.8265</span><span class="p">,</span> <span class="s1">&#39;WMO_WIND&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;WMO_PRES&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;SID&#39;</span><span class="p">:</span> <span class="s1">&#39;1842298N11080&#39;</span><span class="p">,</span> <span class="s1">&#39;SEASON&#39;</span><span class="p">:</span> <span class="mi">1842</span><span class="p">,</span> <span class="s1">&#39;NUMBER&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;BASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;NI&#39;</span><span class="p">,</span> <span class="s1">&#39;SUBBASIN&#39;</span><span class="p">:</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;ISO_TIME&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;1842-10-25 09:00:00&#39;</span><span class="p">),</span> <span class="s1">&#39;NATURE&#39;</span><span class="p">:</span> <span class="s1">&#39;NR&#39;</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">:</span> <span class="mf">10.8431</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">:</span> <span class="mf">79.3524</span><span class="p">,</span> <span class="s1">&#39;WMO_WIND&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;WMO_PRES&#39;</span><span class="p">:</span> <span class="n">nan</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>A quick tour of what you just heard: 716,165 rows and 12 columns. Each row is one <em>position report</em> — a storm observed every few hours — not one hurricane; the <code class="docutils literal notranslate"><span class="pre">SID</span></code> column is the storm identifier that ties a track’s rows together. <code class="docutils literal notranslate"><span class="pre">usecols=range(12)</span></code> keeps only the first 12 of the file’s 160-plus columns; <code class="docutils literal notranslate"><span class="pre">skiprows=[1]</span></code> skips a second header row of units (it says <code class="docutils literal notranslate"><span class="pre">WMO_WIND</span></code> is in knots and <code class="docutils literal notranslate"><span class="pre">WMO_PRES</span></code> in millibars); and <code class="docutils literal notranslate"><span class="pre">na_values=['</span> <span class="pre">',</span> <span class="pre">'NOT_NAMED']</span></code> turns blanks and the <code class="docutils literal notranslate"><span class="pre">NOT_NAMED</span></code> placeholder into <code class="docutils literal notranslate"><span class="pre">NaN</span></code> — which is why the oldest storm in the file, an 1842 cyclone in the Bay of Bengal, prints <code class="docutils literal notranslate"><span class="pre">'NAME':</span> <span class="pre">nan</span></code>.</p>
+<p>Basin Key: (NI - North Indian, SI - South Indian, WP - Western Pacific, SP - Southern Pacific, EP - Eastern Pacific, NA - North Atlantic)</p>
+<p>How many rows does this dataset have?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">716165</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>How many North Atlantic hurricanes are in this dataset? (Careful: rows are position reports. To count <em>hurricanes</em>, count the unique storm identifiers.)</p>
+<p><em>Check yourself:</em> the <code class="docutils literal notranslate"><span class="pre">NA</span></code> basin has <strong>126,392 rows</strong> but only <strong>2,344 unique storms</strong> (unique <code class="docutils literal notranslate"><span class="pre">SID</span></code> values). If your two numbers match these, you’ve understood the row-versus-storm distinction that the whole assignment leans on.</p>
+</section>
+<section id="get-the-unique-values-of-the-basin-subbasin-and-nature-columns">
+<h2>1) Get the unique values of the <code class="docutils literal notranslate"><span class="pre">BASIN</span></code>, <code class="docutils literal notranslate"><span class="pre">SUBBASIN</span></code>, and <code class="docutils literal notranslate"><span class="pre">NATURE</span></code> columns<a class="headerlink" href="#get-the-unique-values-of-the-basin-subbasin-and-nature-columns" title="Link to this heading">#</a></h2>
+<p><em>Check yourself:</em> <code class="docutils literal notranslate"><span class="pre">BASIN</span></code> has <strong>7</strong> unique values: <code class="docutils literal notranslate"><span class="pre">NI</span></code>, <code class="docutils literal notranslate"><span class="pre">SI</span></code>, <code class="docutils literal notranslate"><span class="pre">NA</span></code>, <code class="docutils literal notranslate"><span class="pre">EP</span></code>, <code class="docutils literal notranslate"><span class="pre">WP</span></code>, <code class="docutils literal notranslate"><span class="pre">SP</span></code>, and the rare <code class="docutils literal notranslate"><span class="pre">SA</span></code> (South Atlantic — only 3 storms ever recorded there). <code class="docutils literal notranslate"><span class="pre">SUBBASIN</span></code> has <strong>9</strong> unique values and <code class="docutils literal notranslate"><span class="pre">NATURE</span></code> has <strong>6</strong> (<code class="docutils literal notranslate"><span class="pre">NR</span></code>, <code class="docutils literal notranslate"><span class="pre">TS</span></code>, <code class="docutils literal notranslate"><span class="pre">ET</span></code>, <code class="docutils literal notranslate"><span class="pre">SS</span></code>, <code class="docutils literal notranslate"><span class="pre">MX</span></code>, <code class="docutils literal notranslate"><span class="pre">DS</span></code>). Hint: <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> on a column returns an array; wrap it like <code class="docutils literal notranslate"><span class="pre">print(df.BASIN.unique().tolist())</span></code> to hear it as a clean list.</p>
+</section>
+<section id="rename-the-wmo-wind-and-wmo-pres-columns-to-wind-and-pres">
+<h2>2) Rename the <code class="docutils literal notranslate"><span class="pre">WMO_WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">WMO_PRES</span></code> columns to <code class="docutils literal notranslate"><span class="pre">WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">PRES</span></code><a class="headerlink" href="#rename-the-wmo-wind-and-wmo-pres-columns-to-wind-and-pres" title="Link to this heading">#</a></h2>
+<p><em>Check yourself:</em> after renaming, <code class="docutils literal notranslate"><span class="pre">print(df.columns.tolist())</span></code> should end with <code class="docutils literal notranslate"><span class="pre">...,</span> <span class="pre">'LAT',</span> <span class="pre">'LON',</span> <span class="pre">'WIND',</span> <span class="pre">'PRES'</span></code>. Hint: <code class="docutils literal notranslate"><span class="pre">df.rename(columns={...})</span></code> returns a <em>new</em> DataFrame — remember to assign it back to <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+</section>
+<section id="get-the-10-largest-rows-in-the-dataset-by-wind">
+<h2>3) Get the 10 largest rows in the dataset by <code class="docutils literal notranslate"><span class="pre">WIND</span></code><a class="headerlink" href="#get-the-10-largest-rows-in-the-dataset-by-wind" title="Link to this heading">#</a></h2>
+<p>To read the result by ear, don’t print the grid — loop over the rows and print just the columns that matter, for example <code class="docutils literal notranslate"><span class="pre">print(row['NAME'],</span> <span class="pre">row['SEASON'],</span> <span class="pre">row['WIND'])</span></code> inside <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">_,</span> <span class="pre">row</span> <span class="pre">in</span> <span class="pre">result.iterrows():</span></code>.</p>
+<p><em>Check yourself:</em> the strongest single report is <strong>PATRICIA (2015) at 185 knots</strong>; Patricia fills the top 3 rows (185, 180, 180). The rest of the top 10 are ALLEN (1980, 165), three reports from an unnamed 1935 storm (160 each — its name prints as <code class="docutils literal notranslate"><span class="pre">nan</span></code> because <code class="docutils literal notranslate"><span class="pre">NOT_NAMED</span></code> became <code class="docutils literal notranslate"><span class="pre">NaN</span></code>; it’s the famous Labor Day hurricane), GILBERT (1988), LINDA (1997), and WILMA (2005), all at 160. The 10th-largest value is <strong>160.0</strong>.</p>
+<p>You will notice some names are repeated.</p>
+</section>
+<section id="group-the-data-on-sid-and-get-the-10-largest-hurricanes-by-wind">
+<h2>4) Group the data on <code class="docutils literal notranslate"><span class="pre">SID</span></code> and get the 10 largest hurricanes by <code class="docutils literal notranslate"><span class="pre">WIND</span></code><a class="headerlink" href="#group-the-data-on-sid-and-get-the-10-largest-hurricanes-by-wind" title="Link to this heading">#</a></h2>
+<p><em>Check yourself:</em> now each storm appears once (its maximum wind). The top 10 winds are <strong>185, 165, then five storms at 160, then three at 155</strong> knots — in order: PATRICIA (2015), ALLEN (1980), the unnamed 1935 storm, GILBERT (1988), LINDA (1997), WILMA (2005), DORIAN (2019), MITCH (1998), RITA (2005), RICK (2009). Hint: group on <code class="docutils literal notranslate"><span class="pre">SID</span></code>, aggregate <code class="docutils literal notranslate"><span class="pre">WIND</span></code> with <code class="docutils literal notranslate"><span class="pre">max</span></code>, then <code class="docutils literal notranslate"><span class="pre">nlargest</span></code>.</p>
+</section>
+<section id="make-a-bar-chart-of-the-wind-speed-of-the-20-strongest-wind-hurricanes">
+<h2>5) Make a bar chart of the wind speed of the 20 strongest-wind hurricanes<a class="headerlink" href="#make-a-bar-chart-of-the-wind-speed-of-the-20-strongest-wind-hurricanes" title="Link to this heading">#</a></h2>
+<p>Use the name on the x-axis.</p>
+<p>Two real-data traps here, both verified: <strong>(a)</strong> two of the 20 storms (from 1935 and 1932) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> names, and <code class="docutils literal notranslate"><span class="pre">ax.bar</span></code> raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> if a tick label is <code class="docutils literal notranslate"><span class="pre">NaN</span></code> — replace missing names first (e.g. <code class="docutils literal notranslate"><span class="pre">.fillna('UNNAMED')</span></code>). <strong>(b)</strong> If you pass the names directly as the bar positions, matplotlib treats equal labels as the <em>same category</em> and draws both bars at the same x position — a sighted viewer sees only 19 bars, with one hidden behind another. Note <code class="docutils literal notranslate"><span class="pre">len(ax.patches)</span></code> still prints 20 in this buggy version, so the patch count alone won’t catch it; use the range(20) pattern below. The robust pattern is <code class="docutils literal notranslate"><span class="pre">ax.bar(range(20),</span> <span class="pre">winds)</span></code> and then set the tick labels with <code class="docutils literal notranslate"><span class="pre">ax.set_xticks(range(20),</span> <span class="pre">names)</span></code>. Save it with <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;task05.png&quot;)</span></code>.</p>
+<p><em>Check yourself:</em> <code class="docutils literal notranslate"><span class="pre">len(ax.patches)</span></code> should print <code class="docutils literal notranslate"><span class="pre">20</span></code> (one patch per bar). The first bar (PATRICIA) has height <strong>185</strong>, the 20th (KATRINA, 2005) has height <strong>150</strong>. A correct chart, in words: one towering first bar at 185, a step down to 165, bars 3 through 7 level at 160, bars 8 through 11 at 155, and the last nine bars all flat at 150 — a steep drop then a long plateau.</p>
+</section>
+<section id="plot-the-count-of-all-datapoints-by-basin">
+<h2>6) Plot the count of all datapoints by Basin<a class="headerlink" href="#plot-the-count-of-all-datapoints-by-basin" title="Link to this heading">#</a></h2>
+<p>as a bar chart</p>
+<p><em>Check yourself:</em> the counts, largest to smallest, are <code class="docutils literal notranslate"><span class="pre">WP</span></code>: <strong>238,485</strong>, <code class="docutils literal notranslate"><span class="pre">SI</span></code>: <strong>163,710</strong>, <code class="docutils literal notranslate"><span class="pre">NA</span></code>: <strong>126,392</strong>, <code class="docutils literal notranslate"><span class="pre">SP</span></code>: <strong>68,233</strong>, <code class="docutils literal notranslate"><span class="pre">EP</span></code>: <strong>63,434</strong>, <code class="docutils literal notranslate"><span class="pre">NI</span></code>: <strong>55,792</strong>, and <code class="docutils literal notranslate"><span class="pre">SA</span></code>: <strong>119</strong>. In the chart the Western Pacific bar is about one and a half times the South Indian one, and the South Atlantic bar is invisibly small. Save it as <code class="docutils literal notranslate"><span class="pre">task06.png</span></code>.</p>
+</section>
+<section id="plot-the-count-of-unique-hurricanes-by-basin">
+<h2>7) Plot the count of unique hurricanes by Basin<a class="headerlink" href="#plot-the-count-of-unique-hurricanes-by-basin" title="Link to this heading">#</a></h2>
+<p>as a bar chart.</p>
+<p><em>Check yourself:</em> unique storms per basin are <code class="docutils literal notranslate"><span class="pre">WP</span></code>: <strong>4,289</strong>, <code class="docutils literal notranslate"><span class="pre">SI</span></code>: <strong>3,061</strong>, <code class="docutils literal notranslate"><span class="pre">NA</span></code>: <strong>2,344</strong>, <code class="docutils literal notranslate"><span class="pre">NI</span></code>: <strong>1,785</strong>, <code class="docutils literal notranslate"><span class="pre">EP</span></code>: <strong>1,657</strong>, <code class="docutils literal notranslate"><span class="pre">SP</span></code>: <strong>1,321</strong>, <code class="docutils literal notranslate"><span class="pre">SA</span></code>: <strong>3</strong>. Hint: <code class="docutils literal notranslate"><span class="pre">.nunique()</span></code> is an aggregation like any other. Notice the ordering change from task 6 — the North Indian basin jumps ahead of the Eastern and Southern Pacific, because its storms are numerous but its track records are short (fewer position reports per storm). That contrast is worth a sentence in your interpretation comment. Save it as <code class="docutils literal notranslate"><span class="pre">task07.png</span></code>.</p>
+</section>
+<section id="make-a-hexbin-of-the-location-of-datapoints-in-latitude-and-longitude">
+<h2>8) Make a <code class="docutils literal notranslate"><span class="pre">hexbin</span></code> of the location of datapoints in Latitude and Longitude<a class="headerlink" href="#make-a-hexbin-of-the-location-of-datapoints-in-latitude-and-longitude" title="Link to this heading">#</a></h2>
+<p>A tip: pass <code class="docutils literal notranslate"><span class="pre">bins='log'</span></code> to <code class="docutils literal notranslate"><span class="pre">ax.hexbin</span></code> — the busiest hexagon holds about 2,650 points (at hexbin’s default grid size) while most hold a handful, so a linear color scale would leave almost the whole map one dark color.</p>
+<p><em>Check yourself:</em> print the coordinate ranges: <code class="docutils literal notranslate"><span class="pre">LAT</span></code> runs <strong>-68.5 to 83.0</strong> and <code class="docutils literal notranslate"><span class="pre">LON</span></code> runs <strong>-179.8 to 266.9</strong> — yes, past 180: tracks that cross the dateline keep counting upward. Also print <code class="docutils literal notranslate"><span class="pre">(df.LAT.abs()</span> <span class="pre">&lt;</span> <span class="pre">5).sum()</span></code>: only <strong>3,035</strong> of 716,165 points lie within 5 degrees of the equator. A correct figure, in words (verified by rendering): the points fill the tropical and subtropical ocean basins in four big patches — the brightest core sits in the Northwest Pacific east of the Philippines (near 10–25°N, 120–150°E), with other bright regions in the Gulf of Mexico/Caribbean, the Bay of Bengal, and a broad Southern-Hemisphere band from 5–40°S across the Indian and West Pacific oceans. A striking empty stripe runs along the equator (cyclones need the Coriolis force, which vanishes there), and the southeastern Pacific and South Atlantic are almost blank. Since MAIDR can’t read a hexbin, these printed range/count checks <em>are</em> your reading of the map. Save it as <code class="docutils literal notranslate"><span class="pre">task08.png</span></code>.</p>
+</section>
+<section id="find-hurricane-katrina-from-2005-and-plot-its-track-as-a-scatter-plot">
+<h2>9) Find Hurricane Katrina (from 2005) and plot its track as a scatter plot<a class="headerlink" href="#find-hurricane-katrina-from-2005-and-plot-its-track-as-a-scatter-plot" title="Link to this heading">#</a></h2>
+<p>First find the SID of this hurricane.</p>
+<p><em>Check yourself:</em> filtering <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">==</span> <span class="pre">'KATRINA'</span></code> and <code class="docutils literal notranslate"><span class="pre">SEASON</span> <span class="pre">==</span> <span class="pre">2005</span></code> gives exactly one unique SID: <strong><code class="docutils literal notranslate"><span class="pre">'2005236N23285'</span></code></strong>.</p>
+<p>Next get this hurricane’s group and plot its position as a scatter plot. Use wind speed to color the points.</p>
+<p><em>Check yourself:</em> Katrina’s track has <strong>64 points</strong>, from <strong>2005-08-23 18:00 to 2005-08-31 06:00</strong>; longitude spans <strong>-89.6 to -75.1</strong>, latitude <strong>23.1 to 40.1</strong>; maximum <code class="docutils literal notranslate"><span class="pre">WIND</span></code> is <strong>150</strong> knots and minimum <code class="docutils literal notranslate"><span class="pre">PRES</span></code> is <strong>902</strong> millibars. A correct figure, in words (verified by rendering): the track starts as dark, low-wind dots (25–30 knots) near the Bahamas at 75°W, 23°N, crosses south Florida near 80°W, then arcs west-southwest into the Gulf of Mexico, where the dots turn bright yellow — the 150-knot peak near 89°W, 26°N — before hooking due north to the Louisiana–Mississippi coast around 89.6°W, 29.5°N and fading back to dark purple inland, ending near 83°W, 40°N. Save it as <code class="docutils literal notranslate"><span class="pre">task09.png</span></code>, with a colorbar for wind speed.</p>
+</section>
+<section id="make-time-the-index-on-your-dataframe">
+<h2>10) Make time the index on your dataframe<a class="headerlink" href="#make-time-the-index-on-your-dataframe" title="Link to this heading">#</a></h2>
+<p><em>Check yourself:</em> after <code class="docutils literal notranslate"><span class="pre">set_index</span></code>, <code class="docutils literal notranslate"><span class="pre">print(df.index[0])</span></code> gives <code class="docutils literal notranslate"><span class="pre">1842-10-25</span> <span class="pre">03:00:00</span></code> and <code class="docutils literal notranslate"><span class="pre">print(df.index[-1])</span></code> gives <code class="docutils literal notranslate"><span class="pre">2024-05-27</span> <span class="pre">18:00:00</span></code>. One more print worth doing: <code class="docutils literal notranslate"><span class="pre">df.index.is_monotonic_increasing</span></code> is <strong>False</strong> — rows are grouped storm-by-storm and storms overlap in time, so the index is <em>not</em> sorted. (Also note <code class="docutils literal notranslate"><span class="pre">df.index[-1]</span></code> is the last <em>row</em>, not necessarily the latest <em>time</em>, for exactly that reason.)</p>
+</section>
+<section id="plot-the-count-of-all-datapoints-per-year-as-a-timeseries">
+<h2>11) Plot the count of all datapoints per year as a timeseries<a class="headerlink" href="#plot-the-count-of-all-datapoints-per-year-as-a-timeseries" title="Link to this heading">#</a></h2>
+<p>You should use <code class="docutils literal notranslate"><span class="pre">resample</span></code></p>
+<p><em>Check yourself:</em> resampling to year-start (<code class="docutils literal notranslate"><span class="pre">'YS'</span></code>) and counting gives <strong>183</strong> yearly values (1842 through 2024). Anchors to print and compare: 1900 has <strong>1,958</strong> points, the all-time maximum is <strong>9,189 in 1996</strong>, 2020 has <strong>6,407</strong>, and the final partial year 2024 has just 899. A correct figure, in words (verified by rendering): the line climbs from near zero in the mid-1800s to roughly 2,000–3,500 per year in the early 1900s, rises steeply after the 1940s (aircraft and satellite reconnaissance), oscillates on a high plateau of about 6,000–9,000 from 1970 to 2000 with the 1996 spike on top, eases back to 5,000–7,000 in the 2000s–2010s, and plunges at the very end because 2024 is incomplete. Save it as <code class="docutils literal notranslate"><span class="pre">task11.png</span></code>.</p>
+</section>
+<section id="plot-all-tracks-from-the-north-atlantic-in-2005">
+<h2>12) Plot all tracks from the North Atlantic in 2005<a class="headerlink" href="#plot-all-tracks-from-the-north-atlantic-in-2005" title="Link to this heading">#</a></h2>
+<p>You will probably have to iterate through a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object</p>
+<p><em>Check yourself:</em> the North Atlantic in 2005 — the record-breaking Katrina/Rita/Wilma season — has <strong>31 distinct storms</strong> (1,752 rows if you select calendar-year 2005 from the datetime index, e.g. <code class="docutils literal notranslate"><span class="pre">df.loc['2005']</span></code>; filtering <code class="docutils literal notranslate"><span class="pre">SEASON</span> <span class="pre">==</span> <span class="pre">2005</span></code> instead gives 1,807 rows because storm Zeta lasted into January 2006 — either way, 31 storms). (27 storms got names that year; IBTrACS also tracks a few unnamed systems.) A correct figure, in words (verified by rendering): a spaghetti plot of about 31 colored lines, almost all born in the band 10–25°N between 100°W and 40°W, most curving northeastward as they leave the tropics; longitudes span <strong>-101 to +7</strong> and latitudes reach <strong>69°N</strong> — one long track crosses the 0° meridian (and a second just reaches it) — storm remnants reaching Europe. Save it as <code class="docutils literal notranslate"><span class="pre">task12.png</span></code>.</p>
+</section>
+<section id="create-a-filtered-dataframe-that-contains-only-data-since-1970-from-the-north-atlantic-na-basin">
+<h2>13) Create a filtered dataframe that contains only data since 1970 from the North Atlantic (“NA”) Basin<a class="headerlink" href="#create-a-filtered-dataframe-that-contains-only-data-since-1970-from-the-north-atlantic-na-basin" title="Link to this heading">#</a></h2>
+<p>Use this for the rest of the assignment</p>
+<p><em>Check yourself:</em> the filtered DataFrame has shape <strong>(48154, 11)</strong>, spanning 1970-05-17 to 2023-11-18. Hint: a boolean mask works well here — combine <code class="docutils literal notranslate"><span class="pre">df.index.year</span> <span class="pre">&gt;=</span> <span class="pre">1970</span></code> with the basin condition. (A time slice like <code class="docutils literal notranslate"><span class="pre">df.loc['1970':]</span></code> also selects the right rows, verified even on this unsorted index — but you need the basin condition anyway, so the mask is the cleaner route.)</p>
+</section>
+<section id="plot-the-number-of-datapoints-per-day-from-this-filtered-dataframe">
+<h2>14) Plot the number of datapoints per day from this filtered dataframe<a class="headerlink" href="#plot-the-number-of-datapoints-per-day-from-this-filtered-dataframe" title="Link to this heading">#</a></h2>
+<p>Make sure you figure is big enough to actually see the plot</p>
+<p><em>Check yourself:</em> resampling daily gives <strong>19,544</strong> days; the overall mean is about <strong>2.46</strong> points per day, and the busiest day is <strong>2020-09-17 with 54 points</strong> (seven storms tracked in the Atlantic that day, Paulette through Beta). “Big enough” here means something like <code class="docutils literal notranslate"><span class="pre">figsize=(12,</span> <span class="pre">4)</span></code> — the series is a dense comb of late-summer spikes separated by near-zero winters. Save it as <code class="docutils literal notranslate"><span class="pre">task14.png</span></code>.</p>
+</section>
+<section id="calculate-the-climatology-of-datapoint-counts-as-a-function-of-dayofyear">
+<h2>15) Calculate the climatology of datapoint counts as a function of <code class="docutils literal notranslate"><span class="pre">dayofyear</span></code><a class="headerlink" href="#calculate-the-climatology-of-datapoint-counts-as-a-function-of-dayofyear" title="Link to this heading">#</a></h2>
+<p>Plot the mean and standard deviation on a single figure</p>
+<p><em>Check yourself:</em> grouping the daily counts by <code class="docutils literal notranslate"><span class="pre">dayofyear</span></code> gives <strong>366</strong> values. The mean climatology peaks at <strong>day 251 (September 8) with a mean of about 14.3</strong> points per day and a standard deviation of about <strong>8.6</strong> there; from about day 25 to day 100 (February to mid-April) both curves sit at essentially zero. A correct figure, in words (verified by rendering): two curves rising together out of a flat spring, climbing from June onward to a sharp early-September peak and falling back to near zero by late December — with the standard-deviation curve running <em>above</em> the mean through most of the season’s shoulders, because hurricane activity is bursty: many quiet days punctuated by very busy ones. Hint: <code class="docutils literal notranslate"><span class="pre">daily_counts.groupby(daily_counts.index.dayofyear)</span></code>. Save it as <code class="docutils literal notranslate"><span class="pre">task15.png</span></code>.</p>
+</section>
+<section id="use-transform-to-calculate-the-anomaly-of-daily-counts-from-the-climatology">
+<h2>16) Use <code class="docutils literal notranslate"><span class="pre">transform</span></code> to calculate the anomaly of daily counts from the climatology<a class="headerlink" href="#use-transform-to-calculate-the-anomaly-of-daily-counts-from-the-climatology" title="Link to this heading">#</a></h2>
+<p>Resample the anomaly timeseries at annual resolution and plot a line with dots as markers.</p>
+<p><em>Check yourself:</em> the annual-mean anomaly series has <strong>54</strong> points (1970–2023). The three most positive years are <strong>2005 (+2.35), 2020 (+2.20), and 2023 (+2.03)</strong>, followed by 1995 (+1.61); the most negative are <strong>1983 (-1.73), 1982 (-1.63), and 1977 (-1.53)</strong>. A correct figure, in words (verified by rendering): a jagged dotted line oscillating around zero between roughly -1.7 and +2.4, with the quiet early 1980s dipping lowest, isolated tall spikes at 1995, 2005, 2020, and 2023, and generally more positive values after the mid-1990s. Hint: <code class="docutils literal notranslate"><span class="pre">transform('mean')</span></code> on the <code class="docutils literal notranslate"><span class="pre">dayofyear</span></code> groupby returns a series aligned with the daily one, so you can subtract directly. Save it as <code class="docutils literal notranslate"><span class="pre">task16.png</span></code>.</p>
+<p>Which years stand out as having anomalous hurricane activity? Answer in two or three sentences in a comment at the bottom of your script, tied to the numbers above.</p>
+</section>
+<section id="submission-instructions">
+<span id="submission-instructions-5b"></span><h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Link to this heading">#</a></h2>
+<p>When you’re done, save your script <code class="docutils literal notranslate"><span class="pre">assignment5b.py</span></code> and your saved PNG figures inside the current week’s folder in your private <code class="docutils literal notranslate"><span class="pre">clmt5405-assignments</span></code> GitHub repo. Then push the commit:</p>
+<p>The following is a terminal command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>&lt;weekN&gt;/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Submit assignment 5b&quot;</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>End of command.</p>
+<p>Due Sunday night.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="assignment5a.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Assignment 5a: Pandas Fundamentals with Earthquake Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../xarray/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-unique-values-of-the-basin-subbasin-and-nature-columns">1) Get the unique values of the <code class="docutils literal notranslate"><span class="pre">BASIN</span></code>, <code class="docutils literal notranslate"><span class="pre">SUBBASIN</span></code>, and <code class="docutils literal notranslate"><span class="pre">NATURE</span></code> columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-the-wmo-wind-and-wmo-pres-columns-to-wind-and-pres">2) Rename the <code class="docutils literal notranslate"><span class="pre">WMO_WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">WMO_PRES</span></code> columns to <code class="docutils literal notranslate"><span class="pre">WIND</span></code> and <code class="docutils literal notranslate"><span class="pre">PRES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-10-largest-rows-in-the-dataset-by-wind">3) Get the 10 largest rows in the dataset by <code class="docutils literal notranslate"><span class="pre">WIND</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-the-data-on-sid-and-get-the-10-largest-hurricanes-by-wind">4) Group the data on <code class="docutils literal notranslate"><span class="pre">SID</span></code> and get the 10 largest hurricanes by <code class="docutils literal notranslate"><span class="pre">WIND</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-bar-chart-of-the-wind-speed-of-the-20-strongest-wind-hurricanes">5) Make a bar chart of the wind speed of the 20 strongest-wind hurricanes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-all-datapoints-by-basin">6) Plot the count of all datapoints by Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-unique-hurricanes-by-basin">7) Plot the count of unique hurricanes by Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-hexbin-of-the-location-of-datapoints-in-latitude-and-longitude">8) Make a <code class="docutils literal notranslate"><span class="pre">hexbin</span></code> of the location of datapoints in Latitude and Longitude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-hurricane-katrina-from-2005-and-plot-its-track-as-a-scatter-plot">9) Find Hurricane Katrina (from 2005) and plot its track as a scatter plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-time-the-index-on-your-dataframe">10) Make time the index on your dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-count-of-all-datapoints-per-year-as-a-timeseries">11) Plot the count of all datapoints per year as a timeseries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-all-tracks-from-the-north-atlantic-in-2005">12) Plot all tracks from the North Atlantic in 2005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-filtered-dataframe-that-contains-only-data-since-1970-from-the-north-atlantic-na-basin">13) Create a filtered dataframe that contains only data since 1970 from the North Atlantic (“NA”) Basin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-number-of-datapoints-per-day-from-this-filtered-dataframe">14) Plot the number of datapoints per day from this filtered dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-climatology-of-datapoint-counts-as-a-function-of-dayofyear">15) Calculate the climatology of datapoint counts as a function of <code class="docutils literal notranslate"><span class="pre">dayofyear</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-transform-to-calculate-the-anomaly-of-daily-counts-from-the-climatology">16) Use <code class="docutils literal notranslate"><span class="pre">transform</span></code> to calculate the anomaly of daily counts from the climatology</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-instructions">Submission instructions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pandas: Groupby &#8212; Accessible Pilot — The Interactive Computing Environment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures_DS/pandas/pandas_groupby';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assignment 5a: Pandas Fundamentals with Earthquake Data" href="assignment5a.html" />
+    <link rel="prev" title="Pandas Fundamentals" href="basic_pandas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Accessible Pilot — The Interactive Computing Environment</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Accessible course pages
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Interactive Computing Environment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/accessible_setup.html">Setting up an accessible workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/working_with_scripts.html">Working with Python scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_unix.html">Intro to Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/intro_to_git.html">Intro to Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing_env/assignment1.html">Assignment 1: Files, Git, and GitHub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/formats_and_metadata.html">Formats and metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/loading_data.html">Loading data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data/assignment2.html">Assignment 2: Explore a climate dataset</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Core Python Language</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/reading_python_out_loud.html">Reading Python Out Loud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/python_fundamentals.html">Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/functions_classes.html">Python Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/organization_and_packaging.html">Organizing Python Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_python/assignment3.html">Assignment 3: Core Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scientific Python Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/numpy_and_matplotlib.html">NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/more_matplotlib.html">More Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/trying_maidr.html">Trying MAIDR (a pilot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4a.html">Assignment 4a: NumPy and Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sci_python/assignment4b.html">Assignment 4b: More Matplotlib</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_pandas.html">Pandas Fundamentals</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pandas: Groupby</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5a.html">Assignment 5a: Pandas Fundamentals with Earthquake Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment5b.html">Assignment 5b: Pandas Groupby with Hurricane Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Xarray</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xarray/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_fundamentals.html">Xarray Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/xarray_advanced.html">Xarray Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xarray/assignment6.html">Assignment 6: Xarray with Sea Surface Temperature (SST) data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project_require.html">Final Project Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix: Further Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../geoscience/final_lec.html">A quick tour of further topics in geoscience data science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/packaging.html">Going Further with Computing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures_DS/pandas/pandas_groupby.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pandas: Groupby</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-object">The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-and-iterating-over-groups">Selecting and iterating over groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-grouping">Time Grouping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-anomalies">Calculating anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas-groupby">
+<h1>Pandas: Groupby<a class="headerlink" href="#pandas-groupby" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Following along with a screen reader</p>
+<p>Work through the examples as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts in VS Code — see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python scripts</span></a>. Run a script in the Git Bash terminal with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output.</p>
+<p>This page needs the <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, and <code class="docutils literal notranslate"><span class="pre">pooch</span></code> packages (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">matplotlib</span> <span class="pre">pooch</span></code>), and you must be <strong>online</strong>: the earthquake catalog is read straight from a URL, and the weather-station files are downloaded (and cached) from Zenodo the first time you run them.</p>
+</div>
+<p>Often we don’t want a single summary for the whole dataset — we want <strong>one value per group</strong>: the average temperature in each <em>month</em>, the strongest earthquake in each <em>country</em>, the total rainfall in each <em>year</em>. <code class="docutils literal notranslate"><span class="pre">groupby</span></code> is the tool for exactly this, and it’s one of the most useful things pandas does.</p>
+<p>The pattern it follows is called <strong>split–apply–combine</strong>: split the rows into groups, apply a calculation to each group, then combine the results back together. We’ll build that intuition on two datasets — first grouping earthquakes <strong>by country</strong>, then grouping a weather station’s daily record <strong>by time</strong> to build climatologies and anomalies. Along the way we’ll meet <code class="docutils literal notranslate"><span class="pre">groupby</span></code>’s close relatives <strong><code class="docutils literal notranslate"><span class="pre">resample</span></code></strong> (grouping by time interval) and <strong><code class="docutils literal notranslate"><span class="pre">rolling</span></code></strong> (moving-window calculations).</p>
+<p>These notes draw on the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/groupby.html" rel="noreferer noopener" target="_blank">pandas groupby documentation</a>; the split-apply-combine framing comes from a <a class="reference external" href="https://www.jstatsoft.org/article/view/v040i01" rel="noreferer noopener" target="_blank">paper by Hadley Wickham</a>.</p>
+<div class="note admonition">
+<p class="admonition-title">In-class assignment — 10 points</p>
+<p>The <strong>“Try it”</strong> exercises on this page are part of your in-class assignment for this section. Complete them as <code class="docutils literal notranslate"><span class="pre">.py</span></code> scripts, push them to your week folder, and post the link on the matching <strong>Courseworks</strong> assignment. (One 10-point assignment covers all the lecture pages in this section.)</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Reading the results by ear</p>
+<p>Two habits from earlier pages carry through this whole lecture:</p>
+<ol class="arabic simple">
+<li><p><strong>In a script, nothing displays unless you <code class="docutils literal notranslate"><span class="pre">print()</span></code> it.</strong> The original notebook version of this lecture ends many cells with a bare expression like <code class="docutils literal notranslate"><span class="pre">df.head()</span></code>; in a script that shows nothing. Every example below already wraps what you should hear in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code>.</p></li>
+<li><p><strong>Never read a DataFrame as a printed grid.</strong> As on the <a class="reference internal" href="../data/loading_data.html"><span class="std std-doc">Loading data</span></a> page, we inspect tables by printing the <strong>shape</strong>, the <strong>column names</strong>, and then a few rows as dicts (<code class="docutils literal notranslate"><span class="pre">row.to_dict()</span></code>), so each value is spoken next to its column name. Conveniently, most <code class="docutils literal notranslate"><span class="pre">groupby</span></code> results are small Series — and a small Series prints beautifully as a dict with <code class="docutils literal notranslate"><span class="pre">print(s.to_dict())</span></code>. You’ll hear that pattern constantly below.</p></li>
+</ol>
+<p>The bar charts, histograms, and line plots on this page can also be explored point-by-point by sound and text with <strong><a class="reference internal" href="../sci_python/trying_maidr.html"><span class="std std-doc">MAIDR</span></a></strong>, and every plot below is followed by a “<strong>What this shows</strong>” note describing the rendered figure in words and numbers.</p>
+</div>
+<p>We start with our usual imports. The <code class="docutils literal notranslate"><span class="pre">rcParams</span></code> line just makes the default figure canvas larger:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>First we read the earthquake data from the previous assignment. Two extra steps set up the rest of the lesson: we derive a <code class="docutils literal notranslate"><span class="pre">country</span></code> column from the free-text <code class="docutils literal notranslate"><span class="pre">place</span></code> field, and we split the catalog by magnitude into the larger events (<code class="docutils literal notranslate"><span class="pre">df</span></code>, magnitude &gt; 4) and the smaller ones (<code class="docutils literal notranslate"><span class="pre">df_small</span></code>, magnitude &lt; 4), so we can compare the two groups later. Then we inspect the result the screen-reader-friendly way — shape, column names, and the first few rows as dicts (printing just four of the 22 columns so each row reads cleanly):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/earth-DS-ML/summer_2026/refs/heads/main/lectures_DS/data/usgs_earthquakes_2025.csv&#39;</span><span class="p">,</span>
+                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">place</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df_small</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5923</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="s1">&#39;magType&#39;</span><span class="p">,</span> <span class="s1">&#39;nst&#39;</span><span class="p">,</span> <span class="s1">&#39;gap&#39;</span><span class="p">,</span> <span class="s1">&#39;dmin&#39;</span><span class="p">,</span> <span class="s1">&#39;rms&#39;</span><span class="p">,</span> <span class="s1">&#39;net&#39;</span><span class="p">,</span> <span class="s1">&#39;updated&#39;</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;horizontalError&#39;</span><span class="p">,</span> <span class="s1">&#39;depthError&#39;</span><span class="p">,</span> <span class="s1">&#39;magError&#39;</span><span class="p">,</span> <span class="s1">&#39;magNst&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;locationSource&#39;</span><span class="p">,</span> <span class="s1">&#39;magSource&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-17 12:00:22.773000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.9</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;206 km SSW of ‘Ohonua, Tonga&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-17 09:16:30.483000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;196 km S of ‘Ohonua, Tonga&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-17 08:36:22.986000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">5.3</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;42 km ENE of Barcelona, Philippines&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;Philippines&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Notice how the derived <code class="docutils literal notranslate"><span class="pre">country</span></code> column works: <code class="docutils literal notranslate"><span class="pre">'206</span> <span class="pre">km</span> <span class="pre">SSW</span> <span class="pre">of</span> <span class="pre">‘Ohonua,</span> <span class="pre">Tonga'</span></code> becomes <code class="docutils literal notranslate"><span class="pre">'Tonga'</span></code> — the last comma-separated piece of the <code class="docutils literal notranslate"><span class="pre">place</span></code> string.</p>
+<p>Before grouping, let’s get oriented — how many large events are in <code class="docutils literal notranslate"><span class="pre">df</span></code>, and what does the distribution of magnitudes look like?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5923</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A histogram of the <code class="docutils literal notranslate"><span class="pre">mag</span></code> column: ten blue bars spanning magnitudes 4.0 to 7.7, with “Frequency” on the y-axis. The distribution is strongly right-skewed. The two leftmost bars dominate — about 2100 events between magnitude 4.0 and 4.4, and about 2550 between 4.4 and 4.8 — the third bar drops to about 870, and the counts collapse quickly after that: only about twenty events above magnitude 6.2, and just four of magnitude 7 or greater. Small earthquakes are far more common than big ones.</p>
+<p><strong>Check it.</strong> The same facts, straight from the data — the count in each of ten bins, then the bin edges:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mag</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2125</span><span class="p">,</span> <span class="mi">2546</span><span class="p">,</span> <span class="mi">869</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">4.02</span><span class="p">,</span> <span class="mf">4.39</span><span class="p">,</span> <span class="mf">4.76</span><span class="p">,</span> <span class="mf">5.12</span><span class="p">,</span> <span class="mf">5.49</span><span class="p">,</span> <span class="mf">5.86</span><span class="p">,</span> <span class="mf">6.23</span><span class="p">,</span> <span class="mf">6.6</span><span class="p">,</span> <span class="mf">6.96</span><span class="p">,</span> <span class="mf">7.33</span><span class="p">,</span> <span class="mf">7.7</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<section id="an-example">
+<h2>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h2>
+<p>What if we wanted to know which <strong>country</strong> had the most earthquakes? <code class="docutils literal notranslate"><span class="pre">groupby</span></code> does this cleanly — it groups all rows that share a value, then we can apply an aggregation (here, <code class="docutils literal notranslate"><span class="pre">count</span></code>) to summarize each group:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A bar chart of twenty vertical blue bars, tallest first, with country names as rotated labels along the x-axis. Indonesia leads with 602 events, followed by Papua New Guinea (518), Greece (377), Japan (295), the Philippines (238), Tonga (231), and Chile (217); the counts then taper smoothly down to China (76) in twentieth place. Most of the names trace the Pacific “Ring of Fire”.</p>
+<p><strong>Check it.</strong> Print the top of that same Series as a dict:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Indonesia&#39;</span><span class="p">:</span> <span class="mi">602</span><span class="p">,</span> <span class="s1">&#39;Papua New Guinea&#39;</span><span class="p">:</span> <span class="mi">518</span><span class="p">,</span> <span class="s1">&#39;Greece&#39;</span><span class="p">:</span> <span class="mi">377</span><span class="p">,</span> <span class="s1">&#39;Japan&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">,</span> <span class="s1">&#39;Philippines&#39;</span><span class="p">:</span> <span class="mi">238</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>And the same count for the <em>smaller</em> events (<code class="docutils literal notranslate"><span class="pre">df_small</span></code>, magnitude below 4) — notice how the ranking of countries shifts:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_small</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The same layout, but a completely different story: one bar towers over everything — Alaska, with 2244 events, more than four times the runner-up Puerto Rico (487), then “CA” (450), New Mexico (160), and Hawaii (138), trailing off through a list of other US states and territories. Nearly every name is in the United States: quakes below magnitude 4 mostly get <em>cataloged</em> where the dense US seismic network can detect them, so this chart is as much about where the sensors are as about where earthquakes are. (Note also that “CA” and “California” appear as <em>separate</em> bars — the <code class="docutils literal notranslate"><span class="pre">country</span></code> column inherits every inconsistency of the free-text <code class="docutils literal notranslate"><span class="pre">place</span></code> field.)</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df_small</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Alaska&#39;</span><span class="p">:</span> <span class="mi">2244</span><span class="p">,</span> <span class="s1">&#39;Puerto Rico&#39;</span><span class="p">:</span> <span class="mi">487</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">:</span> <span class="mi">450</span><span class="p">,</span> <span class="s1">&#39;New Mexico&#39;</span><span class="p">:</span> <span class="mi">160</span><span class="p">,</span> <span class="s1">&#39;Hawaii&#39;</span><span class="p">:</span> <span class="mi">138</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+</section>
+<section id="what-happened">
+<h2>What Happened?<a class="headerlink" href="#what-happened" title="Link to this heading">#</a></h2>
+<p>Let’s break down what <code class="docutils literal notranslate"><span class="pre">groupby</span></code> actually does. The <code class="docutils literal notranslate"><span class="pre">.groupby(...)</span></code> call doesn’t immediately compute anything — it returns a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object that holds the grouping logic. Computation happens when you call an aggregation method on it (<code class="docutils literal notranslate"><span class="pre">.count()</span></code>, <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">.aggregate(...)</span></code>, etc.). This pattern is sometimes called <strong>split-apply-combine</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Split</strong> the data into groups based on a column or function.</p></li>
+<li><p><strong>Apply</strong> a function (aggregate, transform, or filter) to each group independently.</p></li>
+<li><p><strong>Combine</strong> the results back into a single DataFrame or Series.</p></li>
+</ol>
+<p>We can group by any Series — here, the <code class="docutils literal notranslate"><span class="pre">country</span></code> column itself. (It’s a Series of 5923 country names, indexed by event id; we print its first five entries as a dict.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">country</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;us6000qkt1&#39;</span><span class="p">:</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qksf&#39;</span><span class="p">:</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qks2&#39;</span><span class="p">:</span> <span class="s1">&#39;Philippines&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qkrz&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qks0&#39;</span><span class="p">:</span> <span class="s1">&#39;southern Mid-Atlantic Ridge&#39;</span><span class="p">}</span>
+<span class="mi">5923</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">country</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The hexadecimal address after <code class="docutils literal notranslate"><span class="pre">at</span></code> will be different on your machine — it’s just where the object lives in memory.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">DataFrameGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10677bb00</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>There is a shortcut for doing this with dataframes: you just pass the column name:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (again, your memory address will differ):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">DataFrameGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x104e63320</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<section id="the-groupby-object">
+<h3>The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object<a class="headerlink" href="#the-groupby-object" title="Link to this heading">#</a></h3>
+<p>When we call <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we get back a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object. Note what <em>hasn’t</em> happened: no counting, no averaging — nothing has been computed yet:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (your memory address will differ):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">DataFrameGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x104e63320</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The length tells us how many groups were found:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gb</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">194</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>All of the groups are available as a dictionary via the <code class="docutils literal notranslate"><span class="pre">.groups</span></code> attribute:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">groups</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">194</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Its keys are the 194 group labels — the country names, in alphabetical order. The original notebook prints all of them; here we print the first ten:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">,</span> <span class="s1">&#39;Afghanistan&#39;</span><span class="p">,</span> <span class="s1">&#39;Alaska&#39;</span><span class="p">,</span> <span class="s1">&#39;Algeria&#39;</span><span class="p">,</span> <span class="s1">&#39;Anguilla&#39;</span><span class="p">,</span> <span class="s1">&#39;Antigua and Barbuda&#39;</span><span class="p">,</span> <span class="s1">&#39;Arctic Ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Armenia&#39;</span><span class="p">,</span> <span class="s1">&#39;Ascension Island region&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Listen to those keys: alongside real countries like Afghanistan sit oddities like <code class="docutils literal notranslate"><span class="pre">'2025</span> <span class="pre">Drake</span> <span class="pre">Passage</span> <span class="pre">Earthquake'</span></code> and <code class="docutils literal notranslate"><span class="pre">'Arctic</span> <span class="pre">Ocean'</span></code> — whatever happened to come after the last comma in the <code class="docutils literal notranslate"><span class="pre">place</span></code> string. Real data is messy.</p>
+</section>
+<section id="selecting-and-iterating-over-groups">
+<h3>Selecting and iterating over groups<a class="headerlink" href="#selecting-and-iterating-over-groups" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.groups</span></code> attribute is a regular Python dictionary — its keys are the group labels and its values are the row indices in each group. You can look up a single group by name:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">afghanistan_rows</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="s1">&#39;Afghanistan&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">afghanistan_rows</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">afghanistan_rows</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">51</span>
+<span class="p">[</span><span class="s1">&#39;us6000qkkm&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qjhm&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qiif&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qhyi&#39;</span><span class="p">,</span> <span class="s1">&#39;us6000qh0s&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>So Afghanistan had 51 large earthquakes in this catalog, and the value is an index of their row labels (event ids).</p>
+<p>You can also loop over the groups directly. Each step of the loop gives you the group’s key and the sub-DataFrame of its rows. (The notebook version uses <code class="docutils literal notranslate"><span class="pre">display(group.head())</span></code> here — <code class="docutils literal notranslate"><span class="pre">display</span></code> only exists in Jupyter, so in a script we print the rows as dicts instead. The <code class="docutils literal notranslate"><span class="pre">break</span></code> stops the loop after the first group.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">gb</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The key is &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+    <span class="k">break</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">key</span> <span class="ow">is</span> <span class="s2">&quot;2025 Drake Passage Earthquake&quot;</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-05-02 12:58:26.014000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The first group (alphabetically) is that odd <code class="docutils literal notranslate"><span class="pre">'2025</span> <span class="pre">Drake</span> <span class="pre">Passage</span> <span class="pre">Earthquake'</span></code> key — a “country” containing exactly one row, a magnitude-7.4 event whose <code class="docutils literal notranslate"><span class="pre">place</span></code> string had no comma-separated country at all.</p>
+<p>Finally, you can pull out one group as its own DataFrame with <code class="docutils literal notranslate"><span class="pre">get_group</span></code>:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chile</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;Chile&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chile</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">chile</span><span class="p">[[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">217</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-16 08:19:27.151000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;46 km NE of San Pedro de Atacama, Chile&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-16 00:51:17.310000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;13 km WSW of La Tirana, Chile&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-15 13:30:08.837000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;28 km ENE of Calama, Chile&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-11 23:53:41.988000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;89 km NNW of Calama, Chile&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-09 00:59:17.293000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;place&#39;</span><span class="p">:</span> <span class="s1">&#39;26 km NNE of La Ligua, Chile&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Take <code class="docutils literal notranslate"><span class="pre">df</span></code>. Use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> to count the number of earthquakes per country and plot the top 10 as a bar chart (<code class="docutils literal notranslate"><span class="pre">df.groupby('country').mag.count().nlargest(10).plot.bar()</span></code>, then <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>). To hear the same ranking without the figure, print the ten counts with <code class="docutils literal notranslate"><span class="pre">.to_dict()</span></code>. Then use <code class="docutils literal notranslate"><span class="pre">gb.get_group('Chile')</span></code> to peek at the rows for a specific country — print its <code class="docutils literal notranslate"><span class="pre">shape</span></code> and a few rows as dicts, as above.</p>
+</div>
+</section>
+</section>
+<section id="aggregation">
+<h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h2>
+<p>Now that we know how to create a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object, let’s learn how to do aggregation on it.</p>
+<p>One way is to use the <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> method, which accepts another function as its argument. The result is automatically combined into a new dataframe with the group key as the index — 194 rows, one per country. We print its shape and the first three rows (three columns each, so they read cleanly):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">agg_max</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agg_max</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">agg_max</span><span class="p">[[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">194</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="mi">2025</span> <span class="n">Drake</span> <span class="n">Passage</span> <span class="n">Earthquake</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-05-02 12:58:26.014000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">}</span>
+<span class="n">Afghanistan</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-16 10:34:13.071000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">5.7</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="mf">230.241</span><span class="p">}</span>
+<span class="n">Alaska</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2025-06-14 14:32:06.018000+0000&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;UTC&#39;</span><span class="p">),</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="mf">6.2</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="mf">205.536</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>By default, the operation is applied to every column — the max <em>time</em>, the max <em>magnitude</em>, the max <em>depth</em>, all independently. That’s usually not what we want. We can use both <code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code> syntax to select a specific column to operate on. Then we get back a series.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (a <code class="docutils literal notranslate"><span class="pre">SeriesGroupBy</span></code> — the same grouping, restricted to one column; your memory address will differ):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">SeriesGroupBy</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x112e82f60</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_mag</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">max_mag</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_mag</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">194</span>
+<span class="p">{</span><span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Afghanistan&#39;</span><span class="p">:</span> <span class="mf">5.7</span><span class="p">,</span> <span class="s1">&#39;Alaska&#39;</span><span class="p">:</span> <span class="mf">6.2</span><span class="p">,</span> <span class="s1">&#39;Algeria&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;Anguilla&#39;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>One number per country: the strongest earthquake in each. Any aggregation function works the same way — here <code class="docutils literal notranslate"><span class="pre">'sum'</span></code> and <code class="docutils literal notranslate"><span class="pre">'mean'</span></code> (we <code class="docutils literal notranslate"><span class="pre">round</span></code> before printing so the values read cleanly):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Afghanistan&#39;</span><span class="p">:</span> <span class="mf">221.7</span><span class="p">,</span> <span class="s1">&#39;Alaska&#39;</span><span class="p">:</span> <span class="mf">583.3</span><span class="p">,</span> <span class="s1">&#39;Algeria&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;Anguilla&#39;</span><span class="p">:</span> <span class="mf">13.1</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Afghanistan&#39;</span><span class="p">:</span> <span class="mf">4.35</span><span class="p">,</span> <span class="s1">&#39;Alaska&#39;</span><span class="p">:</span> <span class="mf">4.56</span><span class="p">,</span> <span class="s1">&#39;Algeria&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;Anguilla&#39;</span><span class="p">:</span> <span class="mf">4.37</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Chaining <code class="docutils literal notranslate"><span class="pre">.nlargest(10)</span></code> onto the result sorts it and keeps the top ten — which countries had the strongest single event?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Burma (Myanmar) Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.7</span><span class="p">,</span> <span class="s1">&#39;Cayman Islands&#39;</span><span class="p">:</span> <span class="mf">7.6</span><span class="p">,</span> <span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">:</span> <span class="mf">7.0</span><span class="p">,</span> <span class="s1">&#39;Papua New Guinea&#39;</span><span class="p">:</span> <span class="mf">6.9</span><span class="p">,</span> <span class="s1">&#39;Reykjanes Ridge&#39;</span><span class="p">:</span> <span class="mf">6.9</span><span class="p">,</span> <span class="s1">&#39;Japan&#39;</span><span class="p">:</span> <span class="mf">6.8</span><span class="p">,</span> <span class="s1">&#39;Macquarie Island region&#39;</span><span class="p">:</span> <span class="mf">6.8</span><span class="p">,</span> <span class="s1">&#39;Burma (Myanmar)&#39;</span><span class="p">:</span> <span class="mf">6.7</span><span class="p">,</span> <span class="s1">&#39;New Zealand&#39;</span><span class="p">:</span> <span class="mf">6.7</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The magnitude-7.7 event at the top is the devastating March 2025 Myanmar earthquake — filed under the label <code class="docutils literal notranslate"><span class="pre">'Burma</span> <span class="pre">(Myanmar)</span> <span class="pre">Earthquake'</span></code> (and note <code class="docutils literal notranslate"><span class="pre">'Burma</span> <span class="pre">(Myanmar)'</span></code> appears separately further down: messy place strings again).</p>
+<p>There are shortcuts for common aggregation functions — <code class="docutils literal notranslate"><span class="pre">.max()</span></code>, <code class="docutils literal notranslate"><span class="pre">.min()</span></code>, <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">.std()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">.aggregate('max')</span></code> and so on:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (four dicts: largest maxima, smallest minima, largest means, largest standard deviations):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Burma (Myanmar) Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.7</span><span class="p">,</span> <span class="s1">&#39;Cayman Islands&#39;</span><span class="p">:</span> <span class="mf">7.6</span><span class="p">,</span> <span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">:</span> <span class="mf">7.0</span><span class="p">,</span> <span class="s1">&#39;Papua New Guinea&#39;</span><span class="p">:</span> <span class="mf">6.9</span><span class="p">,</span> <span class="s1">&#39;Reykjanes Ridge&#39;</span><span class="p">:</span> <span class="mf">6.9</span><span class="p">,</span> <span class="s1">&#39;Japan&#39;</span><span class="p">:</span> <span class="mf">6.8</span><span class="p">,</span> <span class="s1">&#39;Macquarie Island region&#39;</span><span class="p">:</span> <span class="mf">6.8</span><span class="p">,</span> <span class="s1">&#39;Burma (Myanmar)&#39;</span><span class="p">:</span> <span class="mf">6.7</span><span class="p">,</span> <span class="s1">&#39;New Zealand&#39;</span><span class="p">:</span> <span class="mf">6.7</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;Puerto Rico&#39;</span><span class="p">:</span> <span class="mf">4.02</span><span class="p">,</span> <span class="s1">&#39;U.S. Virgin Islands&#39;</span><span class="p">:</span> <span class="mf">4.05</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">:</span> <span class="mf">4.06</span><span class="p">,</span> <span class="s1">&#39;Dominican Republic&#39;</span><span class="p">:</span> <span class="mf">4.06</span><span class="p">,</span> <span class="s1">&#39;Afghanistan&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;Alaska&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;Argentina&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;Australia&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;Bahamas&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;Bolivia&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;Burma (Myanmar) Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.7</span><span class="p">,</span> <span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;Western Caribbean Sea&#39;</span><span class="p">:</span> <span class="mf">5.4</span><span class="p">,</span> <span class="s1">&#39;north of Franz Josef Land&#39;</span><span class="p">:</span> <span class="mf">5.3</span><span class="p">,</span> <span class="s1">&#39;Macquarie Island region&#39;</span><span class="p">:</span> <span class="mf">5.23</span><span class="p">,</span> <span class="s1">&#39;southeast central Pacific Ocean&#39;</span><span class="p">:</span> <span class="mf">5.2</span><span class="p">,</span> <span class="s1">&#39;Morocco&#39;</span><span class="p">:</span> <span class="mf">5.1</span><span class="p">,</span> <span class="s1">&#39;Pacific-Antarctic Ridge&#39;</span><span class="p">:</span> <span class="mf">5.07</span><span class="p">,</span> <span class="s1">&#39;South Atlantic Ocean&#39;</span><span class="p">:</span> <span class="mf">5.05</span><span class="p">,</span> <span class="s1">&#39;east of the South Sandwich Islands&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;Cayman Islands&#39;</span><span class="p">:</span> <span class="mf">0.98</span><span class="p">,</span> <span class="s1">&#39;U.S. Virgin Islands&#39;</span><span class="p">:</span> <span class="mf">0.91</span><span class="p">,</span> <span class="s1">&#39;Macquarie Island region&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;southwest of Africa&#39;</span><span class="p">:</span> <span class="mf">0.76</span><span class="p">,</span> <span class="s1">&#39;Revilla Gigedo Islands region&#39;</span><span class="p">:</span> <span class="mf">0.73</span><span class="p">,</span> <span class="s1">&#39;Svalbard and Jan Mayen&#39;</span><span class="p">:</span> <span class="mf">0.68</span><span class="p">,</span> <span class="s1">&#39;India region&#39;</span><span class="p">:</span> <span class="mf">0.64</span><span class="p">,</span> <span class="s1">&#39;northwest of the Kuril Islands&#39;</span><span class="p">:</span> <span class="mf">0.64</span><span class="p">,</span> <span class="s1">&#39;Panama&#39;</span><span class="p">:</span> <span class="mf">0.62</span><span class="p">,</span> <span class="s1">&#39;Reykjanes Ridge&#39;</span><span class="p">:</span> <span class="mf">0.61</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>We can also apply multiple functions at once — the result is a small DataFrame with one column per function:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mag_stats</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mag_stats</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mag_stats</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mag_stats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">194</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">]</span>
+<span class="mi">2025</span> <span class="n">Drake</span> <span class="n">Passage</span> <span class="n">Earthquake</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">7.4</span><span class="p">}</span>
+<span class="n">Afghanistan</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">5.7</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">4.35</span><span class="p">}</span>
+<span class="n">Alaska</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">6.2</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">4.56</span><span class="p">}</span>
+<span class="n">Algeria</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">}</span>
+<span class="n">Anguilla</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">4.37</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mag_stats</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A grouped bar chart: the ten countries with the highest <em>mean</em> magnitude along the x-axis, each with three side-by-side bars — min in blue, max in orange, mean in green — and a legend in the top-right. For the first two groups, “Burma (Myanmar) Earthquake” (all bars at 7.7) and “2025 Drake Passage Earthquake” (all at 7.4), the three bars are identical heights: those “countries” contain a single event, so min = max = mean. Several other groups are single-event oddities too, but “Macquarie Island region” (min 4.4, max 6.8) and “Pacific-Antarctic Ridge” (min 4.5, max 6.3) show a wide gap between their blue and orange bars. A ranking by mean magnitude mostly surfaces places with very few recorded events — a nice lesson in why you should always check group sizes.</p>
+<p><strong>Check it.</strong> The ten group labels on the x-axis, in plotted order:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mag_stats</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Burma (Myanmar) Earthquake&#39;</span><span class="p">,</span> <span class="s1">&#39;2025 Drake Passage Earthquake&#39;</span><span class="p">,</span> <span class="s1">&#39;Western Caribbean Sea&#39;</span><span class="p">,</span> <span class="s1">&#39;north of Franz Josef Land&#39;</span><span class="p">,</span> <span class="s1">&#39;Macquarie Island region&#39;</span><span class="p">,</span> <span class="s1">&#39;southeast central Pacific Ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;Morocco&#39;</span><span class="p">,</span> <span class="s1">&#39;Pacific-Antarctic Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;South Atlantic Ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;east of the South Sandwich Islands&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Group the earthquakes by country and use <code class="docutils literal notranslate"><span class="pre">.aggregate(['min',</span> <span class="pre">'max',</span> <span class="pre">'mean'])</span></code> on the <code class="docutils literal notranslate"><span class="pre">mag</span></code> column to get all three statistics at once. Then sort by the mean magnitude in descending order and grab the top 10 countries. Print the result rows as dicts, as above — you should hear the same ten countries as in the Check-it.</p>
+</div>
+</section>
+<section id="transformation">
+<h2>Transformation<a class="headerlink" href="#transformation" title="Link to this heading">#</a></h2>
+<p>The key difference between aggregation and transformation is that aggregation returns a <em>smaller</em> object than the original, indexed by the group keys, while <em>transformation</em> returns an object with the same index (and same size) as the original object. Groupby + transformation is used when applying an operation that requires information about the whole group.</p>
+<p>In this example, we standardize the earthquakes in each country so that the distribution has zero mean and unit variance. We do this by first defining a function called <code class="docutils literal notranslate"><span class="pre">standardize</span></code> and then passing it to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p>
+<p>I admit that I don’t know why you would want to do this. <code class="docutils literal notranslate"><span class="pre">transform</span></code> makes more sense to me in the context of time grouping operation. See below for another example.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">mag_standardized_by_country</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">mag</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">standardize</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mag_standardized_by_country</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mag_standardized_by_country</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5923</span>
+<span class="p">{</span><span class="s1">&#39;us6000qkt1&#39;</span><span class="p">:</span> <span class="mf">0.668</span><span class="p">,</span> <span class="s1">&#39;us6000qksf&#39;</span><span class="p">:</span> <span class="mf">0.419</span><span class="p">,</span> <span class="s1">&#39;us6000qks2&#39;</span><span class="p">:</span> <span class="mf">2.158</span><span class="p">,</span> <span class="s1">&#39;us6000qkrz&#39;</span><span class="p">:</span> <span class="mf">0.643</span><span class="p">,</span> <span class="s1">&#39;us6000qks0&#39;</span><span class="p">:</span> <span class="mf">0.91</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Same length as <code class="docutils literal notranslate"><span class="pre">df</span></code> (5923 — one value per <em>row</em>, not per group), and the values are now in “standard deviations above/below that country’s mean”: the first event, a magnitude 4.9 in Tonga, is 0.668 standard deviations above the Tongan average.</p>
+<p><strong>Check it.</strong> Within any one country, the transformed values should have mean 0 and standard deviation 1:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chile_std</span> <span class="o">=</span> <span class="n">mag_standardized_by_country</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s1">&#39;Chile&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">chile_std</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">chile_std</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">0.0</span>
+<span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">standardize(x)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">-</span> <span class="pre">x.mean())</span> <span class="pre">/</span> <span class="pre">x.std()</span></code>. Use it with <code class="docutils literal notranslate"><span class="pre">df.groupby('country').mag.transform(standardize)</span></code> and plot a histogram of the result (<code class="docutils literal notranslate"><span class="pre">.plot.hist()</span></code>, then <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>) — magnitudes should now be approximately centered on zero within each country. To confirm without the figure, print the overall <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> (close to 0) and repeat the Chile check above for a country of your choice.</p>
+</div>
+</section>
+<section id="time-grouping">
+<h2>Time Grouping<a class="headerlink" href="#time-grouping" title="Link to this heading">#</a></h2>
+<p>We already saw how pandas has a strong built-in understanding of time. This capability is even more powerful in the context of <code class="docutils literal notranslate"><span class="pre">groupby</span></code>. With datasets indexed by a pandas <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code>, we can easily group and resample the data using common time units.</p>
+<p>To get started, let’s load the timeseries data we already explored in past lessons — three years (2016–2018) of daily weather-station measurements from Millbrook, New York. The first run downloads the four files from Zenodo and caches them (you may hear pooch’s download progress messages); later runs reuse the cache. Note this block reuses the name <code class="docutils literal notranslate"><span class="pre">df</span></code> — from here on, <code class="docutils literal notranslate"><span class="pre">df</span></code> is the weather data, not the earthquakes.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+
+<span class="n">POOCH</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">os_cache</span><span class="p">(</span><span class="s2">&quot;noaa-data&quot;</span><span class="p">),</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;doi:10.5281/zenodo.5553029/&quot;</span><span class="p">,</span>
+    <span class="n">registry</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:2a306ca225fe3ccb72a98953ded2f536&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2016-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:eb69811d14d0573ffa69f70dd9c768d9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2017-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:b911da727ba1bdf26a34a775f25d1088&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CRND0103-2018-NY_Millbrook_3_W.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;md5:5b61bc687261596eba83801d7080dc56&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;HEADERS.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+<span class="n">dframes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CRND0103-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-NY_Millbrook_3_W.txt&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">POOCH</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="n">names</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span>
+                     <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">])</span>
+    <span class="n">dframes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dframes</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;LST_DATE&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output (we print only the first 10 of the 28 column names, and three rows of the four columns we’ll use most — daily mean/max/min temperature in degrees Celsius and daily precipitation in millimeters):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1096</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;WBANNO&#39;</span><span class="p">,</span> <span class="s1">&#39;CRX_VN&#39;</span><span class="p">,</span> <span class="s1">&#39;LONGITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;LATITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_AVG&#39;</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">,</span> <span class="s1">&#39;SOLARAD_DAILY&#39;</span><span class="p">]</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">3.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">2.9</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.6</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">03</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">5.1</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.8</span><span class="p">,</span> <span class="s1">&#39;P_DAILY_CALC&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>This timeseries has daily resolution — 1096 rows is three years of days — and the daily plots are somewhat noisy.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A noisy blue line spanning January 2016 to December 2018 with three clear annual cycles: each summer the daily-mean temperature climbs into the mid-20s °C (topping out at 28.1), and each winter it plunges below zero, bottoming out at −18.4 °C in February 2016. On top of the smooth seasonal swing the line jitters up and down by 5–10 degrees from day to day — that jitter is the weather.</p>
+<p><strong>Check it.</strong></p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">18.4</span> <span class="mf">28.1</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>A common way to analyze such data in climate science is to create a “climatology,” which contains the average values in each month or day of the year. We can do this easily with groupby. Recall that <code class="docutils literal notranslate"><span class="pre">df.index</span></code> is a pandas <code class="docutils literal notranslate"><span class="pre">DateTimeIndex</span></code> object. (Its printed form below is several lines long but linear — listen for the first dates, an ellipsis, the last dates, then <code class="docutils literal notranslate"><span class="pre">dtype</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, and <code class="docutils literal notranslate"><span class="pre">length=1096</span></code>.)</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2016-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-03&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-04&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;2016-01-05&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-06&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-07&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-08&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;2016-01-09&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-10&#39;</span><span class="p">,</span>
+               <span class="o">...</span>
+               <span class="s1">&#39;2018-12-22&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-23&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-24&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-25&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;2018-12-26&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-27&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-28&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-29&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;2018-12-30&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-31&#39;</span><span class="p">],</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[us]&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1096</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> can hand us any component of every date at once — here, the month number of each of the 1096 days:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>
+       <span class="o">...</span>
+       <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;LST_DATE&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1096</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Now we group the numeric columns by that month number and take the mean. The result has just 12 rows — one per month. We print its shape, and then listen to one column as a dict, keyed by month number (1=January, 2=February, etc.):</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_climatology</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_climatology</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">2.46</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mf">8.3</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mf">14.85</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="mf">18.73</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="mf">22.05</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="mf">21.41</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="mf">18.06</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="mf">11.94</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.07</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>There’s the seasonal cycle in twelve numbers: January averages −2.1 °C, July 22.05 °C.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_climatology</span><span class="o">.</span><span class="n">T_DAILY_MAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A single smooth line over an x-axis running from 1 to 12 (the month number): the average daily-maximum temperature starts near 2.9 °C in January, rises steadily through spring, peaks at 28.6 °C in July, and descends to 3.6 °C in December. One clean arch — the 1096 noisy days have collapsed into 12 averaged points.</p>
+<p>Each row in this new dataframe represents the average values for the months (1=January, 2=February, etc.)</p>
+<p>We can apply more customized aggregations, as with any groupby operation. Below we keep the mean of the mean, max of the max, and min of the min for the temperature measurements. This result is small enough to print in full, one month per line:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_T_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+                                                              <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+                                                              <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="s1">&#39;min&#39;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">month</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">monthly_T_climatology</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">16.9</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">26.0</span><span class="p">}</span>
+<span class="mi">2</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">0.71</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">24.9</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">24.7</span><span class="p">}</span>
+<span class="mi">3</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">2.46</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">26.8</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">16.5</span><span class="p">}</span>
+<span class="mi">4</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">8.3</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">30.6</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">11.3</span><span class="p">}</span>
+<span class="mi">5</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">14.85</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">33.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.6</span><span class="p">}</span>
+<span class="mi">6</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">18.73</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">33.8</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">3.4</span><span class="p">}</span>
+<span class="mi">7</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">22.05</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">35.7</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">8.2</span><span class="p">}</span>
+<span class="mi">8</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">21.41</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">34.5</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">}</span>
+<span class="mi">9</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">18.06</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">32.7</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}</span>
+<span class="mi">10</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">11.94</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">29.4</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.1</span><span class="p">}</span>
+<span class="mi">11</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">22.2</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">15.9</span><span class="p">}</span>
+<span class="mi">12</span> <span class="p">{</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.07</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="mf">16.9</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">21.8</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">monthly_T_climatology</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Three lines with circle markers over months 1–12, named in a legend. T_DAILY_MAX (orange, on top) runs from 16.9 °C in January up to 35.7 in July; T_DAILY_MEAN (blue, in the middle) from −2.1 up to 22.05; T_DAILY_MIN (green, at the bottom) from −26.0 up to 8.2. All three arch in phase — warmest in July, coldest in January. The band between the outer curves is wide (over 40 degrees in winter) because we took the max-of-max and min-of-min: these are each month’s record extremes over three years, bracketing the mean, not typical highs and lows.</p>
+<p><strong>Check it.</strong> Interrogate the axes object we captured:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="p">[</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>If we want to do it on a finer scale, we can group by day of year.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">daily_T_climatology</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+                                                                <span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+                                                                <span class="s1">&#39;T_DAILY_MIN&#39;</span><span class="p">:</span> <span class="s1">&#39;min&#39;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">daily_T_climatology</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">daily_T_climatology</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>This first prints the new shape — 366 groups, one per day of the year (including February 29).</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">366</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>What this shows.</strong> The same three-colored curves — orange max on top, blue mean in the middle, green min at the bottom — but now over an x-axis of day-of-year, 1 to 366, drawn with small dot markers. The overall arch is the same (cold at both ends, peaking around day 200, in late July), but each curve zigzags up and down by several degrees from one day to the next: every point averages at most three values (one per year), so the day-of-year climatology is much noisier than the monthly one.</p>
+<section id="calculating-anomalies">
+<h3>Calculating anomalies<a class="headerlink" href="#calculating-anomalies" title="Link to this heading">#</a></h3>
+<p>A common mode of analysis in climate science is to remove the climatology from a signal to focus only on the “anomaly” values. This can be accomplished with transformation — the same <code class="docutils literal notranslate"><span class="pre">transform</span></code> idea as before, now with time as the grouping key: from each day, subtract the mean of its calendar month.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_climatology</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">anomaly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">remove_climatology</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">anomaly</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">anomaly</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1096</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mf">3.6</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span> <span class="mf">1.7</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">03</span> <span class="mf">3.7</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">04</span> <span class="o">-</span><span class="mf">4.8</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span> <span class="o">-</span><span class="mf">8.2</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Again the transform returns one value per <em>row</em> — 1096 daily anomalies. January 1, 2016 (daily mean 1.5 °C) was 3.6 degrees warmer than an average January day (−2.1 °C).</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A noisy blue line oscillating around zero across the full 2016–2018 record. The seasonal arch is gone — no summer humps, no winter dips — leaving day-to-day and week-to-week weather swings that mostly stay within about ±10 °C. The largest excursions are a cold spike to −19.1 °C in early 2016 and a warm spike to +15.6 °C in early 2018, and warm and cold anomalies occur in every season.</p>
+<p><strong>Check it.</strong> Anomalies should average to (essentially) zero, and the extremes match the description:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">anomaly</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">anomaly</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">anomaly</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0</span> <span class="o">-</span><span class="mf">19.11</span> <span class="mf">15.59</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Compute a <strong>daily</strong> climatology of <code class="docutils literal notranslate"><span class="pre">T_DAILY_MEAN</span></code> by grouping on <code class="docutils literal notranslate"><span class="pre">df.index.dayofyear</span></code> and taking the mean. Plot it as a line chart. Compare its shape to the monthly climatology shown above — the daily curve will be noisier but pick up sub-monthly structure. (A non-visual comparison: print the daily climatology’s value for day 1 and day 200 and compare them with the January and July numbers you heard in the monthly climatology dict.)</p>
+</div>
+</section>
+<section id="resampling">
+<h3>Resampling<a class="headerlink" href="#resampling" title="Link to this heading">#</a></h3>
+<p>We met <code class="docutils literal notranslate"><span class="pre">resample</span></code> at the end of the previous page (<em>Pandas Fundamentals</em>) as a way to change a time series’ resolution. Now that we understand <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we can name what <code class="docutils literal notranslate"><span class="pre">resample</span></code> actually is: <strong>a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> over time bins</strong>. Instead of grouping rows by the value in a column, it groups them by which time interval they fall into — each month, each year, and so on — then applies an aggregation. It’s the same split-apply-combine idea, just with time as the grouping key.</p>
+<p>The bin size is given using pandas <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases" rel="noreferer noopener" target="_blank">offset-alias</a> syntax (e.g. <code class="docutils literal notranslate"><span class="pre">'ME'</span></code> = month end, <code class="docutils literal notranslate"><span class="pre">'YE'</span></code> = year end). Below we resample to a monthly frequency, taking the mean over each month. Note the difference from the monthly <em>climatology</em> above: that had 12 rows (all Januaries averaged together); this has 36 — January 2016, February 2016, and so on each get their own row, labelled by the month’s end date.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_means</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_means</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">monthly_means</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+<span class="n">monthly_means</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">31</span> <span class="o">-</span><span class="mf">1.86</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">29</span> <span class="o">-</span><span class="mf">0.26</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">31</span> <span class="mf">6.25</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">30</span> <span class="mf">7.73</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">31</span> <span class="mf">14.58</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">30</span> <span class="mf">18.8</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p><strong>What this shows.</strong> A line with circle markers, one point per month-end, from January 2016 to December 2018 — the seasonal cycle again, but far smoother than the daily plot. Summer peaks reach about 22–23 °C (highest in July 2016 and August 2018), winter minima vary a lot from year to year — from only about −0.7 °C (December 2016) down to the coldest monthly mean, about −4.4 °C, in January 2018. A small legend box labels the line “T_DAILY_MEAN”.</p>
+<p>Just as easily, we can take the standard deviation <em>within</em> each month instead of the mean:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MEAN&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> The same 36 month-end points, but now showing each month’s internal spread, between about 2.4 and 7.6 °C — and the pattern is <em>opposite</em> to the mean: the standard deviation is largest in winter and smallest in summer. Winter temperatures at this station are far more variable than summer ones.</p>
+<p><strong>Check it.</strong> Which months were the most and least variable?</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_std</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_std</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="n">monthly_std</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_std</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="n">monthly_std</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2016</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">29</span> <span class="mf">7.64</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mf">2.43</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Just like with <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we can apply any aggregation function to our <code class="docutils literal notranslate"><span class="pre">resample</span></code> operation.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;T_DAILY_MAX&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> One marker per month: the warmest afternoon of each month. It follows the seasonal cycle — peaking at 35.7 °C in July 2016, with winter values mostly between 13 and 17 °C — but the winter portion is jagged: isolated spikes of 23.5 °C in February 2017 and 24.9 °C in February 2018 mark mid-winter warm spells that a monthly <em>mean</em> would have hidden.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.resample('YE').max()</span></code> to get the yearly maximum and plot <code class="docutils literal notranslate"><span class="pre">T_DAILY_MAX</span></code> against the resulting yearly index. With only three years there are just three values — printing them as a dict is at least as informative as the plot. Compare with the monthly resampling shown above — what trend, if any, do you see?</p>
+</div>
+</section>
+<section id="rolling-operations">
+<h3>Rolling Operations<a class="headerlink" href="#rolling-operations" title="Link to this heading">#</a></h3>
+<p>The final category of operations applies to “rolling windows”. (See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html" rel="noreferer noopener" target="_blank">rolling</a> documentation.) We specify a function to apply over a moving window along the index. We specify the size of the window and, optionally, the weights. We also use the keyword <code class="docutils literal notranslate"><span class="pre">center</span></code> to tell pandas whether to center the operation around the midpoint of the window. Unlike <code class="docutils literal notranslate"><span class="pre">resample</span></code>, rolling keeps one value per original row — each day’s value becomes the average of the 30 days around it.</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;triang&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> Two nearly overlapping smooth curves tracing the three-year seasonal cycle, roughly between −9 and +24 °C: blue for the plain 30-day average, orange for the triangle-weighted version (<code class="docutils literal notranslate"><span class="pre">win_type='triang'</span></code> weights the center of each window most heavily). The triangle-weighted curve is a little smoother and swings slightly wider at the extremes — in the January 2018 cold snap it dips to about −9.5 °C while the plain average bottoms out near −7.4. Both lines also <em>break</em> — short gaps in late 2017 and in autumn 2018 where the curve simply stops and restarts. The Check-it explains why.</p>
+<p><strong>Check it.</strong> Two lines are on the axes; and the record contains 2 missing days of <code class="docutils literal notranslate"><span class="pre">T_DAILY_MEAN</span></code>, which poison every 30-day window that touches them (plus the half-windows at the very start and end of the record) — 89 NaN values in the smoothed series, which plot as gaps:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
+<span class="n">smoothed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">smoothed</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p>The following is the expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="mi">2</span>
+<span class="mi">89</span>
+</pre></div>
+</div>
+<p>End of output.</p>
+<p>Any aggregation works on a rolling window, not just the mean — here, a running 30-day maximum:</p>
+<p>The following is Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">T_DAILY_MEAN</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>End of code.</p>
+<p><strong>What this shows.</strong> A staircase-like line between 5.5 and 28.1 °C: long flat plateaus connected by abrupt jumps, rising each spring and falling each autumn, with the same two short gaps from the missing data. That staircase shape is exactly what a moving maximum does — the value stays constant for as long as the same warm day remains the warmest inside the 30-day window, then jumps when a warmer day enters or the record-holder falls out.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">df.rolling(7,</span> <span class="pre">center=True).T_DAILY_MEAN.mean()</span></code> to compute a 7-day moving average and plot it. Then overlay the raw daily series on the same axes (call <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> twice before <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>, or use <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code> and call <code class="docutils literal notranslate"><span class="pre">.plot(ax=ax)</span></code> for each). Confirm the overlay non-visually with <code class="docutils literal notranslate"><span class="pre">len(ax.lines)</span></code> (should be 2), and compare <code class="docutils literal notranslate"><span class="pre">.std()</span></code> of the smoothed and raw series — what does smoothing reveal that the raw data hides?</p>
+</div>
+</section>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>This page was all about <strong>split–apply–combine</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">groupby</span></code> on a column</strong> — grouping earthquakes by country, then summarizing each group with <strong>aggregation</strong> (<code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">.aggregate([...])</span></code>).</p></li>
+<li><p><strong>Transformation</strong> — returning a value for every row using whole-group information (standardizing within each group; removing a climatology to get anomalies).</p></li>
+<li><p><strong>Time grouping</strong> — grouping by parts of a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> to build a <strong>climatology</strong>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">resample</span></code></strong> — a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> over time bins, for changing time resolution.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rolling</span></code></strong> — moving-window calculations for smoothing.</p></li>
+</ul>
+<p>These same <code class="docutils literal notranslate"><span class="pre">groupby</span></code> / <code class="docutils literal notranslate"><span class="pre">resample</span></code> / <code class="docutils literal notranslate"><span class="pre">rolling</span></code> ideas carry straight into the next section, <strong>Xarray</strong>, where they work on labelled N-dimensional arrays.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures_DS/pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="basic_pandas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pandas Fundamentals</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="assignment5a.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assignment 5a: Pandas Fundamentals with Earthquake Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">What Happened?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-groupby-object">The <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-and-iterating-over-groups">Selecting and iterating over groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-grouping">Time Grouping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-anomalies">Calculating anomalies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling">Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-operations">Rolling Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Earth Data Science & Machine Learning
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
