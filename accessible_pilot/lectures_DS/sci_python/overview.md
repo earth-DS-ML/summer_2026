@@ -34,17 +34,25 @@ By the end of this section, you should be able to:
    (`fig, ax = plt.subplots()`).
 7. **Make common plots** — line, scatter, bar — and understand what each is meant to
    reveal about the data.
+8. **Visualize 2-D fields** — `imshow`, `pcolormesh`, `contour`/`contourf`, and vector
+   fields with `quiver`/`streamplot` — and **verify any figure non-visually**, from the
+   data's statistics and the figure object's own properties.
 
 ## Pages in this section
 
 - [NumPy and Matplotlib](./numpy_and_matplotlib.md) — creating, indexing, and operating on
   arrays, and the Matplotlib basics for visualizing them (with accessible descriptions and
   verify-it-yourself checks along the way).
+- [More Matplotlib](./more_matplotlib.md) — the Figure / Axes model in depth: styling line
+  plots, scatter and bar charts, and the 2-D methods (`imshow`, `pcolormesh`, `contour`,
+  `quiver`, `streamplot`), each figure described in words and checkable from code.
 - [Trying MAIDR](./trying_maidr.md) — a pilot tool for exploring Matplotlib charts by sound,
   text, and braille.
-
-*(The remaining, more visualization-heavy pages — More Matplotlib, and Assignments 4a and
-4b — are being adapted with this same approach and will appear here as they're ready.)*
+- [Assignment 4a](./assignment4a.md) — at-home: NumPy arrays and profiles of real ARGO ocean
+  data, with "check yourself" numbers for every task.
+- [Assignment 4b](./assignment4b.md) — at-home: build three figures from detailed written
+  specifications (weather records, a global temperature map, an earthquake map), verified
+  by code rather than by eye.
 
 ## Working through the lectures
 
