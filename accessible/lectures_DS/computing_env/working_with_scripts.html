@@ -339,6 +339,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-script">What is a script?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-writesaverun-loop">The write–save–run loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-the-editor-do-the-typing-autocomplete">Let the editor do the typing: autocomplete</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-piece-by-piece-optional">Running code piece by piece (optional)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-packages">Python packages</a></li>
@@ -421,7 +422,48 @@ Enter.</p></li>
 </div>
 <p>When something is wrong, Python prints an <strong>error message</strong> (a “traceback”) that ends with
 the type of error and the line number. Read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> — the last line is usually
-the most useful, and the line number tells you where to look.</p>
+the most useful, and the line number tells you where to look. To jump straight to that
+line in the editor, press <code class="docutils literal notranslate"><span class="pre">Ctrl+G</span></code>, type the line number, and press Enter. Similarly,
+<code class="docutils literal notranslate"><span class="pre">Ctrl+F</span></code> searches the file for a word — for example a variable name mentioned in the
+error. <em>(These two keys are still being confirmed on NVDA.)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Tip: open files straight from the terminal</p>
+<p>You can open (or create) a file in the editor without leaving the terminal: run
+<code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">lesson1.py</span></code> and VS Code opens that file in an editor tab. Experienced blind
+programmers often prefer starting from the terminal this way — it avoids navigating
+the visual file explorer entirely.</p>
+</div>
+</section>
+<section id="let-the-editor-do-the-typing-autocomplete">
+<h2>Let the editor do the typing: autocomplete<a class="headerlink" href="#let-the-editor-do-the-typing-autocomplete" title="Link to this heading">#</a></h2>
+<p>As you type Python in VS Code, the editor offers <strong>autocomplete suggestions</strong> — a list of
+ways to finish the word you started, drawn from variable names, functions, and the methods
+of the object you’re working with. With a screen reader this is more than a convenience:
+accepting a suggestion guarantees the name is spelled correctly (typos are hard to catch
+by ear), and browsing the list lets you <em>discover</em> what’s available instead of memorizing
+exact syntax.</p>
+<p>The keys:</p>
+<ol class="arabic simple">
+<li><p>Start typing a name — for example <code class="docutils literal notranslate"><span class="pre">pri</span></code> — and a suggestion list usually opens by
+itself. If it doesn’t, press <code class="docutils literal notranslate"><span class="pre">Ctrl+Space</span></code> to open it.</p></li>
+<li><p>Move through the suggestions with the <code class="docutils literal notranslate"><span class="pre">Up</span></code> and <code class="docutils literal notranslate"><span class="pre">Down</span></code> arrow keys — your screen reader
+announces each one.</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Enter</span></code> to accept the highlighted suggestion, or <code class="docutils literal notranslate"><span class="pre">Escape</span></code> to close the list and
+keep what you typed.</p></li>
+</ol>
+<p>This also works after a dot: once you’ve written <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>, typing <code class="docutils literal notranslate"><span class="pre">math.</span></code> and
+pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+Space</span></code> reads out everything the <code class="docutils literal notranslate"><span class="pre">math</span></code> module offers — an audible version
+of <code class="docutils literal notranslate"><span class="pre">print(dir(math))</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Try it</p>
+<p>In a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file, type <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code> and press Enter. On the next line, type <code class="docutils literal notranslate"><span class="pre">math.</span></code> and
+press <code class="docutils literal notranslate"><span class="pre">Ctrl+Space</span></code>. Arrow through a few suggestions to hear what’s in the module, choose
+<code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, and complete the line to <code class="docutils literal notranslate"><span class="pre">print(math.sqrt(16))</span></code>. Save and run it — you should
+hear <code class="docutils literal notranslate"><span class="pre">4.0</span></code>.</p>
+</div>
+<p><em>(Autocomplete is part of an experienced blind programmer’s daily workflow, but these
+exact keys haven’t been tested on your setup yet — if a step doesn’t behave as described,
+that’s useful to tell us.)</em></p>
 </section>
 <section id="running-code-piece-by-piece-optional">
 <h2>Running code piece by piece (optional)<a class="headerlink" href="#running-code-piece-by-piece-optional" title="Link to this heading">#</a></h2>
@@ -550,6 +592,7 @@ and run it again — this write–save–run loop is the rhythm of the whole cou
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-script">What is a script?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-writesaverun-loop">The write–save–run loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-the-editor-do-the-typing-autocomplete">Let the editor do the typing: autocomplete</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-piece-by-piece-optional">Running code piece by piece (optional)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-packages">Python packages</a></li>
