@@ -31,3 +31,23 @@ parts:
       - file: lectures_DS/sci_python/trying_maidr
       - file: lectures_DS/sci_python/assignment4a
       - file: lectures_DS/sci_python/assignment4b
+  - caption: Pandas
+    chapters:
+      - file: lectures_DS/pandas/overview
+      - file: lectures_DS/pandas/basic_pandas
+      - file: lectures_DS/pandas/pandas_groupby
+      - file: lectures_DS/pandas/assignment5a
+      - file: lectures_DS/pandas/assignment5b
+  - caption: Xarray
+    chapters:
+      - file: lectures_DS/xarray/overview
+      - file: lectures_DS/xarray/xarray_fundamentals
+      - file: lectures_DS/xarray/xarray_advanced
+      - file: lectures_DS/xarray/assignment6
+  - caption: Project
+    chapters:
+      - file: lectures_DS/project_require
+  - caption: "Appendix: Further Topics"
+    chapters:
+      - file: lectures_DS/geoscience/final_lec
+      - file: lectures_DS/advanced/packaging
