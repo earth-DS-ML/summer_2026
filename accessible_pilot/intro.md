@@ -1,10 +1,11 @@
 # Accessible course pages
 
 This is an accessible, screen-reader-friendly version of the course's lecture material.
-It now covers the **entire course**: **The Interactive Computing Environment**, **Data**,
-**The Core Python Language**, **Scientific Python Fundamentals** (including a pilot for
-exploring plots by sound and text), **Pandas**, **Xarray**, the **final project
-requirements**, and the appendix topics. The teaching content matches the
+It now covers **all the lecture sections**: **The Interactive Computing Environment**,
+**Data**, **The Core Python Language**, **Scientific Python Fundamentals** (including a
+pilot for exploring plots by sound and text), **Pandas**, **Xarray**, and the appendix
+topics. (For the final project requirements, see the main course site or ask the
+instructor.) The teaching content matches the
 main course site; the differences are in *how you do the work*:
 
 - a workflow built on **VS Code and Python scripts** instead of the in-browser
