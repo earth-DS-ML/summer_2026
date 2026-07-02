@@ -73,7 +73,52 @@ End of command.
 
 When something is wrong, Python prints an **error message** (a "traceback") that ends with
 the type of error and the line number. Read it with `Ctrl+Up` — the last line is usually
-the most useful, and the line number tells you where to look.
+the most useful, and the line number tells you where to look. To jump straight to that
+line in the editor, press `Ctrl+G`, type the line number, and press Enter. Similarly,
+`Ctrl+F` searches the file for a word — for example a variable name mentioned in the
+error. *(These two keys are still being confirmed on NVDA.)*
+
+:::{admonition} Tip: open files straight from the terminal
+:class: tip
+You can open (or create) a file in the editor without leaving the terminal: run
+`code lesson1.py` and VS Code opens that file in an editor tab. Experienced blind
+programmers often prefer starting from the terminal this way — it avoids navigating
+the visual file explorer entirely.
+:::
+
+## Let the editor do the typing: autocomplete
+
+As you type Python in VS Code, the editor offers **autocomplete suggestions** — a list of
+ways to finish the word you started, drawn from variable names, functions, and the methods
+of the object you're working with. With a screen reader this is more than a convenience:
+accepting a suggestion guarantees the name is spelled correctly (typos are hard to catch
+by ear), and browsing the list lets you *discover* what's available instead of memorizing
+exact syntax.
+
+The keys:
+
+1. Start typing a name — for example `pri` — and a suggestion list usually opens by
+   itself. If it doesn't, press `Ctrl+Space` to open it.
+2. Move through the suggestions with the `Up` and `Down` arrow keys — your screen reader
+   announces each one.
+3. Press `Enter` to accept the highlighted suggestion, or `Escape` to close the list and
+   keep what you typed.
+
+This also works after a dot: once you've written `import math`, typing `math.` and
+pressing `Ctrl+Space` reads out everything the `math` module offers — an audible version
+of `print(dir(math))`.
+
+:::{admonition} Try it
+:class: tip
+In a `.py` file, type `import math` and press Enter. On the next line, type `math.` and
+press `Ctrl+Space`. Arrow through a few suggestions to hear what's in the module, choose
+`sqrt`, and complete the line to `print(math.sqrt(16))`. Save and run it — you should
+hear `4.0`.
+:::
+
+*(Autocomplete is part of an experienced blind programmer's daily workflow, but these
+exact keys haven't been tested on your setup yet — if a step doesn't behave as described,
+that's useful to tell us.)*
 
 ## Running code piece by piece (optional)
 

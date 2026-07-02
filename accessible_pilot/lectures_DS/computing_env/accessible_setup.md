@@ -229,9 +229,19 @@ still being verified — `Fn+...` keys assume a keyboard where the function keys
 - `Ctrl+P` — quick-open a file by name
 - `Ctrl+S` — save the current file
 - `Ctrl+W` — close the current editor tab
+- In the terminal: `code myfile.py` — open (or create) that file in the editor, no file explorer needed
+
+**Editing and navigating code** *(being confirmed)*
+- `Ctrl+Space` — open autocomplete suggestions (`Up`/`Down` to browse — NVDA announces each — `Enter` to accept, `Escape` to close); see [Working with Python scripts](working_with_scripts.md)
+- `Ctrl+G` — go to a specific line number (e.g. the line named in an error message)
+- `Ctrl+F` — find text in the current file
 
 **Errors and code suggestions** *(being confirmed)*
 - `F8` / `Shift+F8` — go to the next / previous error or warning (NVDA announces it)
+
+**Adjusting NVDA's speech** *(being confirmed)*
+- `Caps Lock+Ctrl+Left` / `Caps Lock+Ctrl+Right` — pick a speech setting (rate, pitch, volume, …)
+- `Caps Lock+Ctrl+Up` / `Caps Lock+Ctrl+Down` — increase / decrease the chosen setting — handy for speeding NVDA up while skimming long output, then slowing it back down
 
 To switch a **Markdown** file from preview to editable text: `Ctrl+Shift+P` → **Reopen Editor
 With Text Editor**.
