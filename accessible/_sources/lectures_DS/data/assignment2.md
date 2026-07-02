@@ -10,7 +10,7 @@ with the FAIR + access workflow**, not a commitment to a specific project.
 :::{admonition} Doing this assignment with a screen reader
 :class: important
 Do the steps below in your VS Code setup — the Git Bash terminal for the `git` commands
-(press `Alt+F2` to read output), and the VS Code editor for writing the files. The data
+(press `Ctrl+Up` to read output), and the VS Code editor for writing the files. The data
 loader is a `.py` script you run with `python`. See [Setting up an accessible
 workflow](../computing_env/accessible_setup.md).
 :::
@@ -68,7 +68,7 @@ End of command.
    the dataset using whichever of the three patterns from the [loading
    lecture](./loading_data.md) fits its format (`pandas.read_csv`, `xarray.open_dataset`, or
    `pooch.retrieve`), and `print(...)` something so you can confirm it worked. Run it with
-   `python dataset_load.py` and read the output with `Alt+F2` — you should see *something* (a
+   `python dataset_load.py` and read the output with `Ctrl+Up` — you should see *something* (a
    DataFrame, a Dataset, or a file path). No analysis needed; this just confirms the access
    works.
 

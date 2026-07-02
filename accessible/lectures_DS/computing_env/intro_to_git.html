@@ -369,7 +369,7 @@
 <h1>Intro to Git<a class="headerlink" href="#intro-to-git" title="Link to this heading">#</a></h1>
 <div class="important admonition">
 <p class="admonition-title">Doing this lesson with a screen reader</p>
-<p>Run the commands below in the <strong>Git Bash terminal</strong> in VS Code (the one you set as your default in <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a>). After each command, press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong> (Accessible View) to read the output. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> step below also turns off git’s scrolling pager, so commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> print their output straight into the terminal where your screen reader can read it.</p>
+<p>Run the commands below in the <strong>Git Bash terminal</strong> in VS Code (the one you set as your default in <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a>). After each command, press <strong><code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code></strong> (the terminal’s Accessible View) to read the output. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> step below also turns off git’s scrolling pager, so commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> print their output straight into the terminal where your screen reader can read it.</p>
 </div>
 <section id="why-version-control">
 <h2>Why version control?<a class="headerlink" href="#why-version-control" title="Link to this heading">#</a></h2>
@@ -404,7 +404,7 @@
 </pre></div>
 </div>
 <p>End of command.</p>
-<p>The third line tells git to call the default branch <code class="docutils literal notranslate"><span class="pre">main</span></code> (matching GitHub’s convention). The fourth line turns off git’s <strong>pager</strong>: by default, commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> open their output in a scrolling viewer (<code class="docutils literal notranslate"><span class="pre">less</span></code>) that is awkward with a screen reader; <code class="docutils literal notranslate"><span class="pre">core.pager</span> <span class="pre">cat</span></code> makes git print the output straight into the terminal instead, so you can read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+<p>The third line tells git to call the default branch <code class="docutils literal notranslate"><span class="pre">main</span></code> (matching GitHub’s convention). The fourth line turns off git’s <strong>pager</strong>: by default, commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> open their output in a scrolling viewer (<code class="docutils literal notranslate"><span class="pre">less</span></code>) that is awkward with a screen reader; <code class="docutils literal notranslate"><span class="pre">core.pager</span> <span class="pre">cat</span></code> makes git print the output straight into the terminal instead, so you can read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -453,7 +453,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;filename&gt;</span></code> stages a file for the next commit. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;message&quot;</span></code> records the staged files as a snapshot, with a short message describing the change.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
-<p>We’ll create a file, stage it, and commit it — in three steps. <strong>Run each command, then read the output with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> before moving on.</strong></p>
+<p>We’ll create a file, stage it, and commit it — in three steps. <strong>Run each command, then read the output with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> before moving on.</strong></p>
 <p><strong>1. Create the file:</strong></p>
 <p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="n">hello</span><span class="o">.</span><span class="n">md</span>
@@ -492,7 +492,7 @@
 </div>
 <p>End of command.</p>
 <p>(You can also open <code class="docutils literal notranslate"><span class="pre">hello.md</span></code> in the VS Code editor and type into it if you prefer.)</p>
-<p>To check that the line was written, print the file’s contents in the terminal with <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">hello.md</span></code>, then read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+<p>To check that the line was written, print the file’s contents in the terminal with <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">hello.md</span></code>, then read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>.</p>
 <p>Then stage and commit:</p>
 <p>The following is a terminal command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
@@ -509,7 +509,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> shows the sequence of commits, newest first.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> in <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. You should see your two commits with their messages, timestamps, and author info (the name and email you set with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>). Because you turned off the pager, the output prints directly into the terminal — read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> in <code class="docutils literal notranslate"><span class="pre">git_practice</span></code>. You should see your two commits with their messages, timestamps, and author info (the name and email you set with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>). Because you turned off the pager, the output prints directly into the terminal — read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>.</p>
 </div>
 <blockquote>
 <div><p><em>Reference:</em> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> shows exactly which lines changed between commits, or between your working directory and the last commit. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;commit-hash&gt;</span> <span class="pre">&lt;filename&gt;</span></code> restores a file to an earlier version. You won’t need these often at first, but they exist when you want to dig into changes or roll back.</p>

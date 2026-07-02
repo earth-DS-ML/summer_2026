@@ -360,7 +360,7 @@
 <p>Do each example below as a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script in VS Code (see <a class="reference internal" href="../computing_env/accessible_setup.html"><span class="std std-doc">Setting up an accessible
 workflow</span></a> and <a class="reference internal" href="../computing_env/working_with_scripts.html"><span class="std std-doc">Working with Python
 scripts</span></a>). Run a script in the Git Bash terminal
-with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read what comes back. These examples need
+with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read what comes back. These examples need
 a few packages — if you haven’t already: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">xarray</span> <span class="pre">pooch</span> <span class="pre">netcdf4</span> <span class="pre">pydap</span></code>.</p>
 </div>
 <p>This page walks through <strong>three different ways to get data into Python</strong>, each suited to a
@@ -371,7 +371,7 @@ thing. Different sources call for different approaches.</p>
 code loads data from a URL or DOI directly, anyone running it (including future-you) gets
 the same data — no guessing about which file you used or where you stored it.</p>
 <p>For each example below, put the code in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script, run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">yourfile.py</span></code>,
-and read what comes back with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. Each example already wraps its last line in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> so the result shows in the
+and read what comes back with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>. Each example already wraps its last line in <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> so the result shows in the
 terminal — in a script (unlike a notebook), a bare expression prints nothing.</p>
 <div class="important admonition">
 <p class="admonition-title">Reading a table by ear</p>
@@ -423,7 +423,7 @@ isn’t reachable from every environment (the LEAP hub can’t reach it, for exa
 </pre></div>
 </div>
 <p>End of output.</p>
-<p>Read it with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. The first two lines give the table’s <strong>shape</strong> (828 rows, 4 columns)
+<p>Read it with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>. The first two lines give the table’s <strong>shape</strong> (828 rows, 4 columns)
 and its <strong>column names</strong>; then each row prints as a <code class="docutils literal notranslate"><span class="pre">dict</span></code>, so you hear every value attached
 to its column name instead of a grid of bare numbers. The first two rows show <code class="docutils literal notranslate"><span class="pre">nan</span></code> for
 <code class="docutils literal notranslate"><span class="pre">co2</span></code> — the missing values that <code class="docutils literal notranslate"><span class="pre">na_values=-99.99</span></code> converted. (We pick just these four

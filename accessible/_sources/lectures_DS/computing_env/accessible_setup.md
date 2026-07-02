@@ -176,7 +176,7 @@ Two screen-reader-friendly ways, in order of preference:
 
 1. **Write a script and run it.** Make a file `lesson1.py`, type your code, save
    (`Ctrl+S`), then in the terminal run `python lesson1.py`. The code is linear, NVDA
-   reads it line by line, and the output appears in the terminal (read it with `Alt+F2`).
+   reads it line by line, and the output appears in the terminal (read it with `Ctrl+Up`).
    This is the main way to work.
 2. **Run cells inside a script (optional, needs extra setup).** If you want to run code
    piece by piece, put `# %%` on its own line to mark a "cell" in a `.py` file; VS Code

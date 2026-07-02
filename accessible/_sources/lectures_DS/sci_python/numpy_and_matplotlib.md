@@ -2,7 +2,7 @@
 
 :::{admonition} Following along with a screen reader
 :class: important
-Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
+Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 This lecture introduces **NumPy**, *the fundamental package for scientific computing with Python* — the fast, N-dimensional array library that almost everything else in the scientific Python ecosystem is built on.
@@ -26,7 +26,7 @@ These checks are not a workaround — printing shapes and verifying values is ex
 
 :::{admonition} A note on how output works
 :class: note
-The original lecture is a Jupyter notebook, where the value of the last line of a cell is shown automatically — so it often relies on a bare expression like `a.shape` to display a result. In a script that does **not** happen: nothing is shown unless you `print()` it. So as you copy these examples into `.py` files, **wrap the thing you want to see in `print(...)`**. Each "This prints:" block below shows what you'll hear after running the code and pressing `Alt+F2`.
+The original lecture is a Jupyter notebook, where the value of the last line of a cell is shown automatically — so it often relies on a bare expression like `a.shape` to display a result. In a script that does **not** happen: nothing is shown unless you `print()` it. So as you copy these examples into `.py` files, **wrap the thing you want to see in `print(...)`**. Each "This prints:" block below shows what you'll hear after running the code and pressing `Ctrl+Up`.
 :::
 
 :::{admonition} In-class assignment — 10 points
@@ -96,7 +96,7 @@ There is no way we could explicitly teach each of these functions. The NumPy doc
 
 :::{admonition} Try it
 :class: tip
-Create `examine.py`. Import the `math` module (`import math`). Use `print(dir(math))` to peek at what's inside. Pick a function that looks interesting (e.g., `log`, `factorial`, `sqrt`) and call `help()` on it to read its signature and docstring — add a line like `help(math.sqrt)`, run the script, and read the help text with `Alt+F2`.
+Create `examine.py`. Import the `math` module (`import math`). Use `print(dir(math))` to peek at what's inside. Pick a function that looks interesting (e.g., `log`, `factorial`, `sqrt`) and call `help()` on it to read its signature and docstring — add a line like `help(math.sqrt)`, run the script, and read the help text with `Ctrl+Up`.
 :::
 
 ## NDArrays

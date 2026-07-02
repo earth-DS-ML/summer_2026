@@ -5,7 +5,7 @@
 Do each example below as a `.py` script in VS Code (see [Setting up an accessible
 workflow](../computing_env/accessible_setup.md) and [Working with Python
 scripts](../computing_env/working_with_scripts.md)). Run a script in the Git Bash terminal
-with `python yourfile.py`, and press `Alt+F2` to read what comes back. These examples need
+with `python yourfile.py`, and press `Ctrl+Up` to read what comes back. These examples need
 a few packages — if you haven't already: `pip install pandas xarray pooch netcdf4 pydap`.
 :::
 
@@ -19,7 +19,7 @@ code loads data from a URL or DOI directly, anyone running it (including future-
 the same data — no guessing about which file you used or where you stored it.
 
 For each example below, put the code in a `.py` script, run it with `python yourfile.py`,
-and read what comes back with `Alt+F2`. Each example already wraps its last line in `print(...)` so the result shows in the
+and read what comes back with `Ctrl+Up`. Each example already wraps its last line in `print(...)` so the result shows in the
 terminal — in a script (unlike a notebook), a bare expression prints nothing.
 
 :::{admonition} Reading a table by ear
@@ -82,7 +82,7 @@ Columns: ['year', 'month', 'date', 'co2']
 
 End of output.
 
-Read it with `Alt+F2`. The first two lines give the table's **shape** (828 rows, 4 columns)
+Read it with `Ctrl+Up`. The first two lines give the table's **shape** (828 rows, 4 columns)
 and its **column names**; then each row prints as a `dict`, so you hear every value attached
 to its column name instead of a grid of bare numbers. The first two rows show `nan` for
 `co2` — the missing values that `na_values=-99.99` converted. (We pick just these four

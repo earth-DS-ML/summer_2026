@@ -377,7 +377,7 @@
 <hr class="docutils" />
 <div class="important admonition">
 <p class="admonition-title">Doing this lesson with a screen reader</p>
-<p>Do the <strong>“Try it”</strong> activities in the <strong>Git Bash terminal</strong> in VS Code that you set up in <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> — not the in-browser JupyterLab terminal. After running a command, press <strong><code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong> (Accessible View) to read its output as text. We won’t repeat that reminder on every command; the habit is simply: <em>run the command, then press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read what it printed.</em></p>
+<p>Do the <strong>“Try it”</strong> activities in the <strong>Git Bash terminal</strong> in VS Code that you set up in <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">Setting up an accessible workflow</span></a> — not the in-browser JupyterLab terminal. After running a command, press <strong><code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code></strong> (the terminal’s Accessible View) to read its output as text. We won’t repeat that reminder on every command; the habit is simply: <em>run the command, then press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read what it printed.</em></p>
 </div>
 <section id="unix-and-the-file-system">
 <h2>Unix and the file system<a class="headerlink" href="#unix-and-the-file-system" title="Link to this heading">#</a></h2>
@@ -389,7 +389,7 @@
 <p>A terminal is a <strong>text-based interface to your computer</strong>: you type a command, the computer executes it, and the result appears below. If most of your computer use has been clicking on icons and dragging files around, this will look unfamiliar at first — but it’s much less mysterious than it looks once you’ve opened one. Being pure text, a terminal is also often <em>easier</em> to work with using a screen reader than a graphical interface is, because everything is linear.</p>
 <p>So let’s open one:</p>
 <ul class="simple">
-<li><p><strong>In VS Code (recommended):</strong> open a terminal with <strong>Terminal → New Terminal</strong> (or press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>) — it should be the <strong>Git Bash</strong> terminal you set as your default in the <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">setup page</span></a>. Run the commands below here, and press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the output.</p></li>
+<li><p><strong>In VS Code (recommended):</strong> open a terminal with <strong>Terminal → New Terminal</strong> (or press <code class="docutils literal notranslate"><span class="pre">Ctrl+`</span></code>) — it should be the <strong>Git Bash</strong> terminal you set as your default in the <a class="reference internal" href="accessible_setup.html"><span class="std std-doc">setup page</span></a>. Run the commands below here, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the output.</p></li>
 <li><p><em>Later, on the LEAP hub:</em> once you connect VS Code to the hub, the terminal works exactly the same way — the commands just run in the cloud.</p></li>
 </ul>
 <p>When the terminal is ready, it prints a <strong>prompt</strong> and waits for you to type. The prompt ends with a character such as <code class="docutils literal notranslate"><span class="pre">$</span></code> — for example:</p>
@@ -408,7 +408,7 @@
 <li><p><strong>Speed.</strong> Once you know a few commands, typing them is much faster than clicking through menus and dialogs.</p></li>
 <li><p><strong>Remote machines.</strong> When you connect to many remote servers (HPC clusters, cloud VMs), the only interface available is a terminal.</p></li>
 <li><p><strong>Portability.</strong> The same Unix commands work on Macs, Linux, and the LEAP hub. Learn them once, use them everywhere.</p></li>
-<li><p><strong>Accessibility.</strong> Because it is pure text, the terminal works well with a screen reader once you read its output with the Accessible View (<code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>).</p></li>
+<li><p><strong>Accessibility.</strong> Because it is pure text, the terminal works well with a screen reader once you read its output with the terminal’s Accessible View (<code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>).</p></li>
 </ul>
 <p>You won’t replace your GUI overnight, and there’s nothing wrong with using both. But the terminal will quickly become indispensable.</p>
 </section>
@@ -421,7 +421,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">pwd</span></code> (short for “print working directory”) prints your <strong>current working directory</strong> — the directory the shell assumes you’re in unless you specify otherwise.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">pwd</span></code> in your terminal, then press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the result. You should hear a path — your <strong>current working directory</strong>. On the LEAP hub this looks like <code class="docutils literal notranslate"><span class="pre">/home/jovyan</span></code>; on your own Windows computer it will look different (for example, a path under <code class="docutils literal notranslate"><span class="pre">C:\Users\</span></code>). The <em>idea</em> — “this is the folder I’m currently in” — is the same everywhere.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">pwd</span></code> in your terminal, then press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the result. You should hear a path — your <strong>current working directory</strong>. On the LEAP hub this looks like <code class="docutils literal notranslate"><span class="pre">/home/jovyan</span></code>; on your own Windows computer it will look different (for example, a path under <code class="docutils literal notranslate"><span class="pre">C:\Users\</span></code>). The <em>idea</em> — “this is the folder I’m currently in” — is the same everywhere.</p>
 </div>
 <p>The following is a terminal session:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pwd
@@ -452,7 +452,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">ls</span></code> (“list”) shows the contents of the current directory.</p>
 <div class="tip admonition">
 <p class="admonition-title">Try it</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">ls</span></code> in your home directory, then <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> to read the list. Then run <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-F</span></code> — the <code class="docutils literal notranslate"><span class="pre">-F</span></code> adds a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as <code class="docutils literal notranslate"><span class="pre">*</span></code> for programs you can run.)</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">ls</span></code> in your home directory, then <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> to read the list. Then run <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-F</span></code> — the <code class="docutils literal notranslate"><span class="pre">-F</span></code> adds a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> to directory names, so you can tell directories from files at a glance. (It also marks a few other types, such as <code class="docutils literal notranslate"><span class="pre">*</span></code> for programs you can run.)</p>
 </div>
 <p>The following is a terminal session:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
@@ -468,7 +468,7 @@ config.yaml  examples/  work/
 </div></blockquote>
 <p>The <code class="docutils literal notranslate"><span class="pre">-F</span></code> is a <strong>flag</strong> — an option that modifies how a command behaves. Most commands have many flags; <code class="docutils literal notranslate"><span class="pre">ls</span></code> alone has dozens.</p>
 <blockquote>
-<div><p><em>Reference:</em> To read the manual for a command, you can run <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ls</span></code>. The <code class="docutils literal notranslate"><span class="pre">man</span></code> page opens in a scrolling pager that can be awkward with a screen reader; an easier alternative is <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">--help</span></code>, which prints the same kind of information as plain, linear text you can read with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code>. Most commands accept <code class="docutils literal notranslate"><span class="pre">--help</span></code>.</p>
+<div><p><em>Reference:</em> To read the manual for a command, you can run <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ls</span></code>. The <code class="docutils literal notranslate"><span class="pre">man</span></code> page opens in a scrolling pager that can be awkward with a screen reader; an easier alternative is <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">--help</span></code>, which prints the same kind of information as plain, linear text you can read with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code>. Most commands accept <code class="docutils literal notranslate"><span class="pre">--help</span></code>.</p>
 <p><em>Reference:</em> <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-a</span></code> shows all files including hidden ones (those starting with <code class="docutils literal notranslate"><span class="pre">.</span></code>). You won’t need this often, but it exists.</p>
 </div></blockquote>
 </section>
@@ -489,7 +489,7 @@ $ pwd
 </pre></div>
 </div>
 <p>End of terminal session.</p>
-<p>You’ll also notice the text before the prompt usually updates as you navigate — after <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">examples</span></code>, the part of the prompt that shows your current directory changes from <code class="docutils literal notranslate"><span class="pre">~</span></code> to <code class="docutils literal notranslate"><span class="pre">~/examples</span></code>. This is a quick cue showing where you are (read the prompt with <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code> if you want to confirm it).</p>
+<p>You’ll also notice the text before the prompt usually updates as you navigate — after <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">examples</span></code>, the part of the prompt that shows your current directory changes from <code class="docutils literal notranslate"><span class="pre">~</span></code> to <code class="docutils literal notranslate"><span class="pre">~/examples</span></code>. This is a quick cue showing where you are (read the prompt with <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code> if you want to confirm it).</p>
 <p>A few more <code class="docutils literal notranslate"><span class="pre">cd</span></code> patterns worth knowing:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> with no argument returns you to your home directory.</p></li>
@@ -633,7 +633,7 @@ quotations.txt  quotes.txt
 <li><p><strong>Files and directories:</strong> <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span></code></p></li>
 </ul>
 <p>These are enough to do most file management from the command line. There’s much more to the Unix shell — pipes, redirection, regular expressions, scripting — but you’ll pick those up as you need them. For a fuller tutorial, see the <a class="reference external" href="https://swcarpentry.github.io/shell-novice/" rel="noreferer noopener" target="_blank">Software Carpentry Unix Shell Lesson</a> this material is based on.</p>
-<p>Remember, throughout all of the above: <strong>run the command, then press <code class="docutils literal notranslate"><span class="pre">Alt+F2</span></code></strong> to read what it printed.</p>
+<p>Remember, throughout all of the above: <strong>run the command, then press <code class="docutils literal notranslate"><span class="pre">Ctrl+Up</span></code></strong> to read what it printed.</p>
 </section>
 </section>
 

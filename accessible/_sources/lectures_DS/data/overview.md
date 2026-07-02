@@ -29,7 +29,7 @@ By the end of this section, you should be able to:
 The *Formats and metadata* page is conceptual reading — its diagrams have been replaced
 with text descriptions. The *Loading data* page has hands-on examples: do them as `.py`
 scripts in VS Code, run them in the Git Bash terminal with `python yourfile.py`, and read
-the output with `Alt+F2` (see [Setting up an accessible
+the output with `Ctrl+Up` (see [Setting up an accessible
 workflow](../computing_env/accessible_setup.md)). This section also uses a few extra Python
 packages — install them once with:
 

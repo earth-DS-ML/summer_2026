@@ -4,7 +4,7 @@
 
 :::{admonition} Doing this assignment with a screen reader
 :class: important
-Write your solutions as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
+Write your solutions as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 :::{admonition} Learning goals
@@ -20,7 +20,7 @@ This assignment exercises the core Python skills from this section:
 :class: tip
 The standard version of this assignment is a Jupyter notebook with an empty code cell under each numbered task. In the accessible workflow you'll do the same tasks in a Python **script** instead.
 
-Create a script called `assignment3.py` in VS Code. For each numbered task, write the code that solves it, and use `print(...)` to show the result so you can hear it. It helps to label each part with a comment, for example `# Part I, task 1`. As you work, save with `Ctrl+S`, run with `python assignment3.py` in the Git Bash terminal, and press `Alt+F2` to read the output.
+Create a script called `assignment3.py` in VS Code. For each numbered task, write the code that solves it, and use `print(...)` to show the result so you can hear it. It helps to label each part with a comment, for example `# Part I, task 1`. As you work, save with `Ctrl+S`, run with `python assignment3.py` in the Git Bash terminal, and press `Ctrl+Up` to read the output.
 
 When you're done, follow the **Submission instructions** section at the bottom of the page (you can jump to it by heading).
 :::

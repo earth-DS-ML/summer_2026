@@ -6,7 +6,7 @@ The main goal of this assignment is to set up the GitHub repository where you'll
 
 :::{admonition} Doing this assignment with a screen reader
 :class: important
-Do all the steps below in your **VS Code** setup: the **Git Bash** terminal for the `git` and Unix commands (press `Alt+F2` to read output), and the VS Code editor for writing `resume.md`. See [Setting up an accessible workflow](./accessible_setup.md) if you need to.
+Do all the steps below in your **VS Code** setup: the **Git Bash** terminal for the `git` and Unix commands (press `Ctrl+Up` to read output), and the VS Code editor for writing `resume.md`. See [Setting up an accessible workflow](./accessible_setup.md) if you need to.
 :::
 
 :::{admonition} Learning goals

@@ -4,7 +4,7 @@ This material is mostly adapted from the [official python tutorial](https://docs
 
 :::{admonition} Following along with a screen reader
 :class: important
-Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Alt+F2` to read the output.
+Work through the examples as `.py` scripts in VS Code — see [Setting up an accessible workflow](../computing_env/accessible_setup.md) and [Working with Python scripts](../computing_env/working_with_scripts.md). Run a script in the Git Bash terminal with `python yourfile.py`, and press `Ctrl+Up` to read the output.
 :::
 
 :::{admonition} In-class assignment — 10 points
@@ -20,11 +20,11 @@ There are three main ways to use Python.
 2. Through an interactive console (the Python interpreter or the iPython shell)
 3. In an interactive notebook (e.g. Jupyter)
 
-The standard version of this course mostly uses Jupyter notebooks. In this accessible version you'll use the first approach throughout: you'll write the code into a `.py` file and run it with `python myscript.py`, then read the result with `Alt+F2`.
+The standard version of this course mostly uses Jupyter notebooks. In this accessible version you'll use the first approach throughout: you'll write the code into a `.py` file and run it with `python myscript.py`, then read the result with `Ctrl+Up`.
 
 :::{admonition} A note on how output works
 :class: note
-In a Jupyter notebook, the value of the last line of a cell is shown automatically, so the course material often relies on a bare expression like `1/2` to display a result. In a script that does **not** happen — nothing is shown unless you `print()` it. So as you copy these examples into `.py` files, **wrap the thing you want to see in `print(...)`**. For example, where the lecture writes `1/2` on its own line, write `print(1/2)`. Each "This prints:" block below shows what you'll hear after running the code and pressing `Alt+F2`.
+In a Jupyter notebook, the value of the last line of a cell is shown automatically, so the course material often relies on a bare expression like `1/2` to display a result. In a script that does **not** happen — nothing is shown unless you `print()` it. So as you copy these examples into `.py` files, **wrap the thing you want to see in `print(...)`**. For example, where the lecture writes `1/2` on its own line, write `print(1/2)`. Each "This prints:" block below shows what you'll hear after running the code and pressing `Ctrl+Up`.
 :::
 
 ## Basic Variables: Numbers and Strings
@@ -192,11 +192,11 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 
 End of output.
 
-Reading errors is a normal part of programming. Run the script, press `Alt+F2`, and read the **last line** of the traceback first — it names the type of error (`TypeError`) and explains the problem (you can't `+` an `int` and a `str`).
+Reading errors is a normal part of programming. Run the script, press `Ctrl+Up`, and read the **last line** of the traceback first — it names the type of error (`TypeError`) and explains the problem (you can't `+` an `int` and a `str`).
 
 :::{admonition} Try it
 :class: tip
-Create a file `variables.py` in VS Code. In it, declare your own variables of a few different types — a number, a string, and a boolean — and print each one's type with `type()`, e.g. `print(type(my_number))`. Then add a line that does a binary operation mixing types, like `print("a" + 1)`, save, and run it with `python variables.py`. Press `Alt+F2` and read the error you get.
+Create a file `variables.py` in VS Code. In it, declare your own variables of a few different types — a number, a string, and a boolean — and print each one's type with `type()`, e.g. `print(type(my_number))`. Then add a line that does a binary operation mixing types, like `print("a" + 1)`, save, and run it with `python variables.py`. Press `Ctrl+Up` and read the error you get.
 :::
 
 ## Math
@@ -469,7 +469,7 @@ End of output.
 
 **Important point:** in Python, we always count from 0! Notice that `range(5)` gives the numbers 0, 1, 2, 3, 4 — five numbers starting at 0, and it stops *before* 5.
 
-> *Reference:* In a Jupyter notebook you can type a name followed by `?` (e.g. `range?`) to see the built-in help for it. In a script, use the `help()` function instead: add a line like `help(range)`, run the script, and read the help text with `Alt+F2`. Works for any function, type, or variable.
+> *Reference:* In a Jupyter notebook you can type a name followed by `?` (e.g. `range?`) to see the built-in help for it. In a script, use the `help()` function instead: add a line like `help(range)`, run the script, and read the help text with `Ctrl+Up`. Works for any function, type, or variable.
 
 A `for` loop can iterate over the items of a list directly. Here `len(pet)` gives the number of characters in each string:
 
@@ -494,7 +494,7 @@ End of output.
 
 :::{admonition} Try it
 :class: tip
-Create `loops.py`. Write a `for` loop that prints the squares of the numbers 0 through 9, one per line (hint: loop over `range(10)` and `print(n**2)`). Then, below it, write a `while` loop that prints the same squares. Save and run, and check with `Alt+F2` that both loops produce the same ten lines.
+Create `loops.py`. Write a `for` loop that prints the squares of the numbers 0 through 9, one per line (hint: loop over `range(10)` and `print(n**2)`). Then, below it, write a `while` loop that prints the same squares. Save and run, and check with `Ctrl+Up` that both loops produce the same ten lines.
 :::
 
 ## Lists
@@ -774,7 +774,7 @@ End of output.
 
 :::{admonition} Try it
 :class: tip
-Create `lists.py`. Make a list of your own (any topic) and try a few methods — `.append(...)`, `.sort()`, and `len(...)` — printing the list after each change. Then try slicing: `print(mylist[:2])`, `print(mylist[-1])`, `print(mylist[::2])`. Predict each result before you run the script, then check with `Alt+F2`.
+Create `lists.py`. Make a list of your own (any topic) and try a few methods — `.append(...)`, `.sort()`, and `len(...)` — printing the list after each change. Then try slicing: `print(mylist[:2])`, `print(mylist[-1])`, `print(mylist[::2])`. Predict each result before you run the script, then check with `Ctrl+Up`.
 :::
 
 ## Other Data Structures
@@ -846,7 +846,7 @@ End of output.
 
 :::{admonition} Try it
 :class: tip
-Create `tuples.py`. Make your own tuple with a few different types (e.g., a name string, an age int, and a boolean). Unpack it into three named variables and print each. Then add a line that tries to modify it, such as `t[0] = "new"`, save, and run. Read the error with `Alt+F2` — because tuples are immutable, you'll get a `TypeError: 'tuple' object does not support item assignment`.
+Create `tuples.py`. Make your own tuple with a few different types (e.g., a name string, an age int, and a boolean). Unpack it into three named variables and print each. Then add a line that tries to modify it, such as `t[0] = "new"`, save, and run. Read the error with `Ctrl+Up` — because tuples are immutable, you'll get a `TypeError: 'tuple' object does not support item assignment`.
 :::
 
 ## Dictionaries
@@ -1021,5 +1021,5 @@ End of output.
 
 :::{admonition} Try it
 :class: tip
-Create `dicts.py`. Build a dict mapping a few country names to their capitals. Look up one capital and print it. Then iterate through the dict with `.items()` and print each `key: value` pair. Finally add a line that looks up a country that's *not* in the dict, save, and run — read the `KeyError` with `Alt+F2`.
+Create `dicts.py`. Build a dict mapping a few country names to their capitals. Look up one capital and print it. Then iterate through the dict with `.items()` and print each `key: value` pair. Finally add a line that looks up a country that's *not* in the dict, save, and run — read the `KeyError` with `Ctrl+Up`.
 :::
